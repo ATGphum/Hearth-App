@@ -13,7 +13,7 @@
 ### Requirements
 
 - Npm
-- NodeJS (Mine is v20)
+- NodeJS (Tested on v20)
 - Docker
 
 ### Running api and db
