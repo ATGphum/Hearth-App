@@ -12,7 +12,7 @@
 
 ### Requirements
 
-- Yarn 1.22
+- Npm
 - NodeJS (Mine is v20)
 - Docker
 
