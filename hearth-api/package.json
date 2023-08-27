@@ -12,7 +12,9 @@
   },
   "scripts": {
     "start": "tsc && node ./dist/server.js",
-    "dev": "nodemon ./dist/server.ts"
+    "dev": "nodemon ./dist/server.ts",
+    "lint": "eslint . --ext .ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "fastify": "^4.21.0",
