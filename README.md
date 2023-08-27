@@ -16,9 +16,7 @@
 - NodeJS (Mine is v20)
 - Docker
 
-### Running locally
-
-#### Running server and db
+### Running api and db
 
 run
 
