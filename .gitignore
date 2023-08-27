@@ -2,3 +2,4 @@
 node_modules/
 hearth-api-nest/
 hearth-server-bad/
+dist/

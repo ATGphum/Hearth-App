@@ -5,7 +5,6 @@
  */
 export default async function UserController (fastify, options) {
     fastify.get('/users', async (request, reply) => {
-
       return { hello: 'world' }
     })
   }

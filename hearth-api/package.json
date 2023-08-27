@@ -7,13 +7,19 @@
   "type": "module",
   "license": "MIT",
   "nodemonConfig": {
+    "ext": "ts,json",
+    "exec": "tsc && node ./dist/server.js"
   },
   "scripts": {
-    "start": "node ./src/server.js",
-    "dev": "nodemon ./src/server.js"
+    "start": "tsc && node ./dist/server.js",
+    "dev": "nodemon ./dist/server.ts"
   },
   "dependencies": {
     "fastify": "^4.21.0",
     "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.6",
+    "typescript": "^5.2.2"
   }
 }

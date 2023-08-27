@@ -1,5 +1,5 @@
 import Fastify from 'fastify'
-import UserController from './users_controller.js'
+import UserController from './users/users_controller.js'
 
 /**
  * @type {import('fastify').FastifyInstance} Instance of Fastify
