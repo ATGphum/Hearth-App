@@ -1,0 +1,29 @@
+# docker-compose.yml
+version: "3"
+services:
+  fastify-api:
+    restart: on-failure
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://user:pass@postgres:5432/db
+      NODE_ENV: development
+      PORT: 8000
+    ports:
+      - "8000:8000"
+    command: npm run dev
+    volumes:
+      - ./src:/usr/src/app/src
+      - /app/node_modules
+
+  postgres:
+    image: postgres:11
+    ports:
+      - "35432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: db
