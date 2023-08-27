@@ -16,6 +16,11 @@
 - NodeJS (Tested on v20)
 - Docker
 
+### Recommended vscode extensions
+
+- Prettier
+- ESLint
+
 ### Running api and db
 
 run
@@ -28,7 +33,7 @@ This will spin up the backend and the database. Whenever you install a new node 
 
 ### Gotchas
 
-- if your code isnt formatting via prettier when saving locally, go to your settings.json for your vscode and add the following configuration
+- if your code isnt formatting via prettier when saving locally, install prettier vs code extension and go to your settings.json for your vscode and add the following configuration
 
 ```
 {
