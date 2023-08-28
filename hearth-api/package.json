@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "tsc && node ./dist/server.js",
-    "dev": "nodemon ./dist/server.ts",
+    "dev": "nodemon ./dist/server.js",
     "lint": "eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
