@@ -1,6 +1,7 @@
 import Fastify from "fastify";
-import UserController from "./users/users_controller.js";
+import UserController from "./users/users-controller.js";
 import dotenv from "dotenv";
+import FastifyHooks from "./fastify-hooks.js";
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const fastify = Fastify({
   logger: true,
 });
 
+fastify.register(FastifyHooks);
 fastify.register(UserController);
 
 fastify.listen({ port: 8000, host: "0.0.0.0" }, function (err, address) {

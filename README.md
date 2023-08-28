@@ -45,3 +45,5 @@ This will spin up the backend and the database. Whenever you
     "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
 ```
+
+- Skip Type checking of third party node libraries by adding `"skipLibCheck": true` to tsconfig.json
