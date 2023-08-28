@@ -3,7 +3,7 @@ version: "3"
 services:
   fastify-api:
     restart: on-failure
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     depends_on:
@@ -14,6 +14,7 @@ services:
       PORT: 8000
     ports:
       - "8000:8000"
+      - "9229:9229"
     command: npm run dev
     volumes:
       - ./src:/usr/src/app/src
