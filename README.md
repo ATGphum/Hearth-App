@@ -4,7 +4,7 @@
 
 **Frontend**: React, Typescript, Chakra
 
-**Backend** : Fastify, Typescript, Prism
+**Backend** : Fastify, Typescript, Drizzle
 
 **DB**: Postgres
 
