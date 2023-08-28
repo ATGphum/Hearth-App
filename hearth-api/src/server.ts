@@ -1,5 +1,8 @@
 import Fastify from "fastify";
 import UserController from "./users/users_controller.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 /**
  * @type {import('fastify').FastifyInstance} Instance of Fastify
