@@ -33,7 +33,7 @@ This will spin up the backend and the database. Whenever you
 - update an environment variable
   you will need to run the following command to rebuild the image
 
-`docker-compose up --build -d`
+`docker-compose up --build`
 
 ### Gotchas
 

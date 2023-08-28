@@ -8,5 +8,8 @@
     "outDir": "dist",
     "skipLibCheck": true
   },
-  "lib": ["es2015"]
+  "lib": ["es2015"],
+  "ts-node": {
+    "esm": true // «———— enabling ESM for ts-node
+  }
 }
