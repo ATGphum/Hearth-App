@@ -35,6 +35,20 @@ This will spin up the backend and the database. Whenever you
 
 `docker-compose up --build`
 
+### Running web app
+
+run
+
+`docker-compose up`
+
+This will spin up the backend and the database. Whenever you
+
+- install a new node package
+- update an environment variable
+  you will need to run the following command to rebuild the image
+
+`docker-compose up --build`
+
 ### Gotchas
 
 - if your code isnt formatting via prettier when saving locally, install prettier vs code extension and go to your settings.json for your vscode and add the following configuration

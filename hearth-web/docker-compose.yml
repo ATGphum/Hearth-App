@@ -1,0 +1,17 @@
+# docker-compose.yml
+version: "3"
+services:
+  vite-web:
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - "5173:5173"
+    command: sh -c "npm rebuild esbuild && npm run dev"
+    volumes:
+      - ./src:/usr/src/app/src
+      - /app/node_modules
+      - .:/usr/src/app
