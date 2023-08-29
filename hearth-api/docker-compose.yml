@@ -19,6 +19,7 @@ services:
     volumes:
       - ./src:/usr/src/app/src
       - /app/node_modules
+      - .:/usr/src/app
 
   postgres:
     image: postgres:11
