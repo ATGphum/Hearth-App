@@ -61,4 +61,4 @@ This will spin up the backend and the database. Whenever you
 ```
 
 - Skip Type checking of third party node libraries by adding `"skipLibCheck": true` to tsconfig.json
-- There is an issue with the debugger disconnecting whenever a change is made to typescript code
+- There is an issue with the server debugger disconnecting whenever a change is made to typescript code

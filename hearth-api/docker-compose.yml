@@ -9,9 +9,7 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgres://user:pass@postgres:5432/db
       NODE_ENV: development
-      PORT: 8000
     ports:
       - "8000:8000"
       - "9229:9229"

@@ -1,9 +1,8 @@
 import Fastify from "fastify";
 import UserController from "./users/users-controller.js";
-import dotenv from "dotenv";
-import * as fastifyHooks from "./fastify-hooks.js";
+import * as fastifyHooks from "./config/fastify-hooks.js";
 
-dotenv.config();
+// dotenv.config(); not needed for now as env variables are mapped to exported object
 
 /**
  * @type {import('fastify').FastifyInstance} Instance of Fastify

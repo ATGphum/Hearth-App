@@ -19,6 +19,7 @@
   "dependencies": {
     "drizzle-orm": "^0.28.5",
     "fastify": "^4.21.0",
+    "fastify-auth0-verify": "^1.2.0",
     "nodemon": "^3.0.1",
     "postgres": "^3.3.5"
   },

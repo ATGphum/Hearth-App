@@ -1,4 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
+import fastifyEnv from "../config/fastify-env.js";
 /**
  * Encapsulates the routes
  * @param {FastifyInstance} fastify  Encapsulated Fastify Instance
@@ -9,7 +10,7 @@ export default async function UserController(fastify) {
   fastify.get(
     "/users",
     async (request: FastifyRequest, reply: FastifyReply) => {
-      return "yup";
+      return fastifyEnv.database.uri;
     }
   );
 }
