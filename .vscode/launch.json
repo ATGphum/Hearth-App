@@ -7,7 +7,7 @@
       "name": "Attach to Docker",
       "port": 9229,
       "address": "localhost",
-      "localRoot": "${workspaceFolder}",
+      "localRoot": "${workspaceFolder}/hearth-api",
       "remoteRoot": "/usr/src/app", // Path inside the Docker container
       "protocol": "inspector"
     }
