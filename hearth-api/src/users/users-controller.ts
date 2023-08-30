@@ -9,7 +9,7 @@ export default async function UserController(fastify) {
   fastify.get(
     "/users",
     async (request: FastifyRequest, reply: FastifyReply) => {
-      return process.env.DATABASE_URI;
+      return "yup";
     }
   );
 }

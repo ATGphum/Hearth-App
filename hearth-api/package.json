@@ -8,7 +8,7 @@
   "license": "MIT",
   "nodemonConfig": {
     "ext": "ts,json",
-    "exec": "tsc && node ./dist/server.js"
+    "exec": "tsc && node --inspect=0.0.0.0:9229 ./dist/server.js"
   },
   "scripts": {
     "start": "tsc && node ./dist/server.js",
