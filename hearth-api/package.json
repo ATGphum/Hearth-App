@@ -17,6 +17,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "dotenv": "^16.3.1",
     "drizzle-orm": "^0.28.5",
     "fastify": "^4.21.0",
     "fastify-auth0-verify": "^1.2.0",
@@ -27,7 +28,6 @@
     "@types/node": "^20.5.6",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
-    "dotenv": "^16.3.1",
     "drizzle-kit": "^0.19.13",
     "eslint": "^8.48.0",
     "prettier": "^3.0.2",
