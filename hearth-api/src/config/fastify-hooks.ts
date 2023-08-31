@@ -1,12 +1,17 @@
-import { FastifyRequest } from "fastify";
+import { FastifyReply, FastifyRequest } from "fastify";
 import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
-export const auth0 = async (request: FastifyRequest) => {
-  const queryClient = postgres("postgres://user:pass@localhost:5432/db");
-  const db: PostgresJsDatabase = drizzle(queryClient);
-  request.queryClient = queryClient;
-  request.db = db;
+export const auth0Verify = async (
+  request: FastifyRequest,
+  reply: FastifyReply
+) => {
+  try {
+    // Verify the JWT token using the decorator
+    await request.jwtVerify();
+  } catch (error) {
+    reply.code(401).send({ message: error.message });
+  }
 };
 
 export const drizzleConnecter = async (request: FastifyRequest) => {
