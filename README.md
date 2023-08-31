@@ -25,29 +25,29 @@
 
 run
 
-`docker-compose up`
+`docker compose up`
 
 This will spin up the backend and the database. Whenever you
 
 - install a new node package
 - update an environment variable
-  you will need to run the following command to rebuild the image
+  you will need to run the following command to trigger an image rebuild on launch
 
-`docker-compose up --build`
+`docker compose up --build`
 
 ### Running web app
 
 run
 
-`docker-compose up`
+`docker compose up`
 
 This will spin up the backend and the database. Whenever you
 
 - install a new node package
 - update an environment variable
-  you will need to run the following command to rebuild the image
+  you will need to run the following command to trigger an image rebuild on launch
 
-`docker-compose up --build`
+`docker compose up --build`
 
 ### Gotchas
 
