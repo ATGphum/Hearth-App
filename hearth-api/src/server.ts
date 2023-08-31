@@ -26,7 +26,7 @@ fastify.decorateRequest("db", null);
 fastify.addHook("preHandler", fastifyHooks.drizzleConnecter);
 fastify.addHook("onResponse", fastifyHooks.drizzleDestroyer);
 
-fastify.register(UserController);
+fastify.register(UserController, { prefix: "/v1" });
 
 fastify.listen({ port: 8000, host: "0.0.0.0" }, function (err, address) {
   if (err) {
