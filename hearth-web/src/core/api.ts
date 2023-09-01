@@ -50,5 +50,5 @@ export const request = <T>(
 };
 
 export const getUser = () => {
-  return request<object>(`/v1/users/`, "GET");
+  return request<object>(`/v1/users`, "GET");
 };

@@ -1,5 +1,9 @@
 # Dependency directories
 node_modules/
-hearth-api-nest/
-hearth-server-bad/
+
+# Output js code
 dist/
+
+# Env files
+.env
+**/.env

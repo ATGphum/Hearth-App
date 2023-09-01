@@ -17,6 +17,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@fastify/cors": "^8.3.0",
     "dotenv": "^16.3.1",
     "drizzle-orm": "^0.28.5",
     "fastify": "^4.21.0",

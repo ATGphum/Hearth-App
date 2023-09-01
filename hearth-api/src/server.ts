@@ -2,6 +2,8 @@ import Fastify from "fastify";
 import UserController from "./users/users-controller.js";
 import * as fastifyHooks from "./config/fastify-hooks.js";
 import fastifyAuth0Verify from "fastify-auth0-verify";
+import cors from "@fastify/cors";
+import corsObj from "./config/castify-cors.js";
 
 // dotenv.config(); not needed for now as env variables are mapped to exported object
 
@@ -11,6 +13,9 @@ import fastifyAuth0Verify from "fastify-auth0-verify";
 const fastify = Fastify({
   logger: true,
 });
+
+// register cors
+fastify.register(cors, corsObj);
 
 // Set up the fastify-auth0-verify plugin
 fastify.register(fastifyAuth0Verify, {
