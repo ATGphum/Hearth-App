@@ -4,6 +4,7 @@ import * as fastifyHooks from "./config/fastify-hooks.js";
 import fastifyAuth0Verify from "fastify-auth0-verify";
 import cors from "@fastify/cors";
 import corsObj from "./config/castify-cors.js";
+import fastifyEnv from "./config/fastify-env.js";
 
 // dotenv.config(); not needed for now as env variables are mapped to exported object
 
@@ -19,8 +20,8 @@ fastify.register(cors, corsObj);
 
 // Set up the fastify-auth0-verify plugin
 fastify.register(fastifyAuth0Verify, {
-  domain: "your-auth0-domain",
-  audience: "your-api-audience", // API Identifier from Auth0 dashboard
+  domain: fastifyEnv.auth0.domain,
+  audience: fastifyEnv.auth0.api.audience,
 });
 
 fastify.addHook("onRequest", fastifyHooks.auth0Verify);

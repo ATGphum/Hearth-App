@@ -8,7 +8,13 @@ const fastifyEnv = {
   },
   auth0: {
     domain: process.env.AUTH0_DOMAIN,
-    secret: process.env.AUTH0_API_SECRET,
+    hearthApi: {
+      domain: process.env.AUTH0_DOMAIN,
+      secret: process.env.AUTH0_SERVER_API_SECRET,
+    },
+    api: {
+      audience: process.env.AUTH0_API_AUDIENCE,
+    },
   },
   frontendHost: process.env.FRONTEND_HOST,
 };
