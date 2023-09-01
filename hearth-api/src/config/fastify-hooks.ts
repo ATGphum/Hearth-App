@@ -10,6 +10,7 @@ export const auth0Verify = async (
     // Verify the JWT token using the decorator
     await request.jwtVerify();
   } catch (error) {
+    console.log(error);
     reply.code(401).send({ message: error.message });
   }
 };
