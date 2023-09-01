@@ -6,6 +6,7 @@ import reactEnv from "./config/vite-env";
 import { getUser } from "./core/api";
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 import viteEnv from "./config/vite-env";
+import { AuthProvider } from "./context/authContext";
 
 function App() {
   return (
@@ -18,46 +19,38 @@ function App() {
         scope: viteEnv.auth0.scope,
       }}
     >
-      <>
-        <div>
-          <a href="https://vitejs.dev" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </div>
-        <h1>Vite + React</h1>
-        <div className="card">
-          <LoginButton />
-          <GetButton />
-          <LogoutButton />
-          <p>
-            Edit <code>src/App.tsx</code> and save to test HMR
+      <AuthProvider>
+        <>
+          <div>
+            <a href="https://vitejs.dev" target="_blank">
+              <img src={viteLogo} className="logo" alt="Vite logo" />
+            </a>
+            <a href="https://react.dev" target="_blank">
+              <img src={reactLogo} className="logo react" alt="React logo" />
+            </a>
+          </div>
+          <h1>Vite + React</h1>
+          <div className="card">
+            <LoginButton />
+            <GetButton />
+            <LogoutButton />
+            <p>
+              Edit <code>src/App.tsx</code> and save to test HMR
+            </p>
+          </div>
+          <p className="read-the-docs">
+            Click on the Vite and React logos to learn more
           </p>
-        </div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-      </>
+        </>
+      </AuthProvider>
     </Auth0Provider>
   );
 }
 
 const GetButton = () => {
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-
   const myFunc = async () => {
-    console.log(isAuthenticated);
-    console.log(user);
-    getAccessTokenSilently()
-      .then((token) => {
-        window.localStorage.setItem("acAccessToken", token);
-        console.log(token);
-      })
-      .catch((e) => {
-        console.error("Error fetching access token", e);
-      });
+    const res = await getUser();
+    console.log(res);
   };
   return <button onClick={() => myFunc()}>count isphum</button>;
 };
