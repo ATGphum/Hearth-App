@@ -34,10 +34,13 @@ fastify.addHook("onResponse", fastifyHooks.drizzleDestroyer);
 
 fastify.register(UserController, { prefix: "/v1" });
 
-fastify.listen({ port: 8000, host: "0.0.0.0" }, function (err, address) {
-  if (err) {
-    fastify.log.error(err);
-    process.exit(1);
+fastify.listen(
+  { port: fastifyEnv.port, host: "0.0.0.0" },
+  function (err, address) {
+    if (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
+    fastify.log.info(`server listening on ${address}`);
   }
-  fastify.log.info(`server listening on ${address}`);
-});
+);

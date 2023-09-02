@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const fastifyEnv = {
+  port: isNaN(parseInt(process.env.port)) ? 8000 : parseInt(process.env.port),
   environment: process.env.NODE_ENV,
   database: {
     uri: process.env.DATABASE_URI,
