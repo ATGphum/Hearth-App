@@ -1,13 +1,11 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import reactEnv from "./config/vite-env";
-import { getUser } from "./core/api";
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
+import React from "react";
+import "./App.css";
+import reactLogo from "./assets/react.svg";
 import viteEnv from "./config/vite-env";
 import { AuthProvider } from "./context/authContext";
-import React from "react";
+import { getUser } from "./core/api";
+import viteLogo from "/vite.svg";
 
 function App() {
   return (

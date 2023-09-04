@@ -29,7 +29,7 @@ export const request = <T>(
     throw error;
   }
 
-  const headers = accessToken && { Authorization: `Bearer ${accessToken}` };
+  const headers = { Authorization: `Bearer ${accessToken}` };
 
   const result = client.request<T>({
     url,
@@ -39,11 +39,11 @@ export const request = <T>(
   });
 
   // // log user out if 401
-  // result.catch(
-  //   (e) =>
-  //     e.response.status === 401 &&
-  //     (window.location.href = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/v2/logout?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}`)
-  // );
+  result.catch(
+    (e) =>
+      e.response.status === 401 &&
+      (window.location.href = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/v2/logout?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}`)
+  );
 
   return result;
 };

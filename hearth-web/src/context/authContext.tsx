@@ -14,7 +14,6 @@ const [useAuth, AuthContextProvider] = createCtx<AuthContextProps>();
 const AuthProvider: React.FC<props> = ({ children }) => {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   useEffect(() => {
-    console.log(isAuthenticated);
     if (isAuthenticated) {
       getAccessTokenSilently()
         .then((token) => {
