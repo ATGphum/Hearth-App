@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+.chakra-ui-light {
+  background-color: rgb(249, 225, 193);
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

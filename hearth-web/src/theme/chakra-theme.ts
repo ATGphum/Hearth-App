@@ -38,7 +38,6 @@ const theme = {
     Checkbox: checkbox,
     Switch: switches,
   },
-
   config: {
     useSystemColorMode: false,
   },

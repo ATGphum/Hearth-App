@@ -18,5 +18,8 @@ const colors = {
     brown: "hsla(26, 73%, 19%, 1)",
     navy: "hsla(234, 14%, 29%, 1)",
   },
+  flesh: {
+    background: "rgb(249, 225, 193)",
+  },
 };
 export default colors;
