@@ -1,15 +1,16 @@
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
-import React from "react";
 import "./App.css";
 import reactLogo from "./assets/react.svg";
 import viteEnv from "./config/vite-env";
 import { AuthProvider } from "./context/authContext";
 import { getUser } from "./core/api";
 import viteLogo from "/vite.svg";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "./theme/chakra-theme";
 
 function App() {
   return (
-    <React.StrictMode>
+    <ChakraProvider theme={theme}>
       <Auth0Provider
         domain={viteEnv.auth0.domain}
         clientId={viteEnv.auth0.hearthWeb.id}
@@ -44,7 +45,7 @@ function App() {
           </>
         </AuthProvider>
       </Auth0Provider>
-    </React.StrictMode>
+    </ChakraProvider>
   );
 }
 
