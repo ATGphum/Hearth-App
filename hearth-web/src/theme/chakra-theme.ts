@@ -1,8 +1,9 @@
 // https://chakra-ui.com/docs/features/color-mode#updating-the-theme-configimport
 
 import { extendTheme } from "@chakra-ui/react";
-// import "@fontsource/open-sans";
-// import "@fontsource/oxygen";
+import "@fontsource/inter";
+import "@fontsource/lato";
+import "@fontsource/jost";
 import colors from "./colors";
 import button from "./components/button";
 import link from "./components/link";
@@ -22,7 +23,7 @@ import tooltip from "./components/tooltip";
  */
 
 const theme = {
-  fonts: { heading: `Oxygen, "Open Sans"`, body: `Oxygen, "Open Sans"` },
+  fonts: { heading: `Jost, "Inter"`, body: `Jost, "Inter"` },
   textStyles: textStyles,
   colors: colors,
   components: {

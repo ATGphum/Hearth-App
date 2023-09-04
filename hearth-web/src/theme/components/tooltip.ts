@@ -5,7 +5,7 @@ const arrowBg = cssVar("popper-arrow-bg");
 
 const tooltip = {
   baseStyle: {
-    fontFamily: `"Oxygen", "Open Sans"`,
+    fontFamily: `"Jost", "Inter"`,
     fontStyle: "normal",
     fontSize: "0.75rem",
     color: "grey.g02",
