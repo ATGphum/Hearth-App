@@ -52,6 +52,20 @@ you will need to run the following command to trigger an image rebuild on launch
 
 `docker compose up --build`
 
+### Viewing the db
+
+from the `hearth-api` directory, run
+
+`npx prisma studio`
+
+This will spin up a GUI to view the database. Don't run the command from the root directory, and don't install if prompted!
+
+### Applying migrations
+
+from the `hearth-api` directory, run
+
+npx prisma migrate dev
+
 ### Gotchas
 
 - if your code isnt formatting via prettier when saving locally, install prettier vs code extension and go to your settings.json for your vscode and add the following configuration
