@@ -1,6 +1,4 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
 
 export const auth0Verify = async (
   request: FastifyRequest,
@@ -15,12 +13,7 @@ export const auth0Verify = async (
   }
 };
 
-export const drizzleConnecter = async (request: FastifyRequest) => {
-  const queryClient = postgres("postgres://user:pass@localhost:5432/db");
-  const db: PostgresJsDatabase = drizzle(queryClient);
-  request.queryClient = queryClient;
-  request.db = db;
-};
+export const drizzleConnecter = async (request: FastifyRequest) => {};
 
 // Close Drizzle instance when request is complete
 export const drizzleDestroyer = async (request: FastifyRequest) => {

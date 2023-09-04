@@ -10,6 +10,7 @@ export default async function UserController(fastify) {
   fastify.get(
     "/users",
     async (request: FastifyRequest, reply: FastifyReply) => {
+      console.log(request);
       return fastifyEnv.database.uri;
     }
   );

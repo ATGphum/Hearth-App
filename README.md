@@ -4,7 +4,7 @@
 
 **Frontend**: React, Typescript, Chakra
 
-**Backend** : Fastify, Typescript, Drizzle
+**Backend** : Fastify, Typescript, Prisma
 
 **DB**: Postgres
 
@@ -20,6 +20,7 @@
 
 - Prettier
 - ESLint
+- Prisma
 
 ### Running api and db
 
