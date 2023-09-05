@@ -1,52 +1,17 @@
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
+import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
-import reactLogo from "./assets/react.svg";
 import viteEnv from "./config/vite-env";
 import { AuthProvider } from "./context/authContext";
 import { getUser } from "./core/api";
-import PinkWorld from "./assets/pink-world.svg";
-import {
-  ChakraProvider,
-  Flex,
-  ListItem,
-  Text,
-  UnorderedList,
-  Image,
-} from "@chakra-ui/react";
+import HomePage from "./pages/HomePage";
 import theme from "./theme/chakra-theme";
-import { Layout } from "./components/layout";
+import { Layout } from "./components/Layout";
 
 function App() {
   return (
     <AppContextProviders>
-      <Flex direction="column" justifyContent={"space-between"} flex="1">
-        <Flex direction="column" gridRowGap="2" mt="2rem">
-          <Image src={PinkWorld} />
-          <Text textStyle={"heading.h2"} textAlign={"left"}>
-            Sustain a meaningful connection with your partner.
-          </Text>
-          <Text
-            textStyle={"heading.h3"}
-            textAlign={"left"}
-            mx="0.5rem"
-            mt="0.5rem"
-          >
-            <UnorderedList>
-              <ListItem>Explore your relationship</ListItem>
-              <ListItem>Schedule reminders</ListItem>
-              <ListItem>Get guidance from experts</ListItem>
-            </UnorderedList>
-          </Text>
-        </Flex>
-        <Text
-          textStyle="action"
-          border="1px solid"
-          borderRadius="40px"
-          padding="0.5rem"
-        >
-          Sign up for the free 3-day connection challenge
-        </Text>
-      </Flex>
+      <HomePage />
     </AppContextProviders>
   );
 }
@@ -85,7 +50,7 @@ interface ProviderProps {
   children: React.ReactNode;
 }
 
-const AppContextProviders: React.FC<ProviderProps> = ({ children }) => {
+const AppContextProviders = ({ children }: ProviderProps) => {
   return (
     <ChakraProvider theme={theme}>
       <Auth0Provider

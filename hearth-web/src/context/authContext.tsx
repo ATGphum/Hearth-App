@@ -5,13 +5,13 @@ export interface AuthContextProps {
   isAuthenticated: boolean;
 }
 
-type props = {
+type Props = {
   children: ReactNode;
 };
 
 const [useAuth, AuthContextProvider] = createCtx<AuthContextProps>();
 
-const AuthProvider: React.FC<props> = ({ children }) => {
+const AuthProvider = ({ children }: Props) => {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   useEffect(() => {
     if (isAuthenticated) {

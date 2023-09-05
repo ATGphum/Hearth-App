@@ -33,7 +33,7 @@ const textStyles = {
   categories: {
     fontFamily: `"Lato", "Inter"`,
     fontStyle: "normal",
-    fontWeight: "600",
+    fontWeight: "700",
     fontSize: "1.375rem",
     lineHeight: "1.25rem",
   },

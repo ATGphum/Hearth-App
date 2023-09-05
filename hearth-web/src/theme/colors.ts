@@ -13,13 +13,14 @@ const colors = {
     violet: "hsla(242, 76%, 56%, 1)",
     green: "hsla(89, 50%, 71%, 1)",
     blue: "hsla(212, 49%, 65%, 1)",
+    darkBlue: "#24305E",
     pink: "hsla(296, 94%, 67%, 1)",
     orange: "hsla(17, 99%, 48%, 1)",
     brown: "hsla(26, 73%, 19%, 1)",
     navy: "hsla(234, 14%, 29%, 1)",
   },
-  flesh: {
-    background: "rgb(249, 225, 193)",
+  background: {
+    fleshOpaque: "rgb(249, 225, 193)",
   },
 };
 export default colors;
