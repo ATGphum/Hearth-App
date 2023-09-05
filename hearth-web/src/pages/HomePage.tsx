@@ -11,6 +11,8 @@ function HomePage() {
       justifyContent={"space-between"}
       flex="1"
       gridRowGap={"1rem"}
+      width="100%"
+      maxWidth="30rem"
     >
       <Flex direction="column" gridRowGap="2" mt="2rem">
         <Image src={PinkWorld} />
@@ -31,7 +33,7 @@ function HomePage() {
         </Text>
       </Flex>
       <BlueButton
-        text="Sign up for the free 3-day connection challenge"
+        text="Sign up for the free challenge"
         callback={() => {
           loginWithRedirect();
         }}
