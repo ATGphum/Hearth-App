@@ -27,7 +27,6 @@ model Profile {
   partner_first_name String @db.VarChar(255)
   partner_last_name String @db.VarChar(255)
   // new fields
-  signup_form_complete Boolean @default(false)
   email_reminders Boolean @default(false)
   instagram_username String? @db.VarChar(255)
   connection_time ConnectionTimeChoices? 
