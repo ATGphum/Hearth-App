@@ -13,21 +13,13 @@ datasource db {
 // Auth0 User
 model User {
   id Int @id @default(autoincrement())
-  profile Profile?
-}
-
-// Backend profile 
-model Profile {
-  id Int @id @default(autoincrement())
-  user_id Int @unique
-  user User @relation(fields: [user_id], references: [id])
-  email String @unique @db.VarChar(255)
-  first_name String @db.VarChar(255)
-  last_name String @db.VarChar(255)
-  partner_first_name String @db.VarChar(255)
-  partner_last_name String @db.VarChar(255)
-  // new fields
-  email_reminders Boolean @default(false)
+  username String? @unique @db.VarChar(255)
+  email String? @unique @db.VarChar(255)
+  first_name String? @db.VarChar(255)
+  last_name String? @db.VarChar(255)
+  partner_first_name String? @db.VarChar(255)
+  partner_last_name String? @db.VarChar(255)
+  email_reminders Boolean? @default(false)
   instagram_username String? @db.VarChar(255)
   connection_time ConnectionTimeChoices? 
 }

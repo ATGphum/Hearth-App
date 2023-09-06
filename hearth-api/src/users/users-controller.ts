@@ -10,8 +10,21 @@ export default async function UserController(fastify) {
   fastify.get(
     "/users",
     async (request: FastifyRequest, reply: FastifyReply) => {
-      console.log(request);
-      return fastifyEnv.database.uri;
+      return fastifyEnv.database.url;
+    }
+  );
+  fastify.get(
+    "/users/current-user",
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const sub: string = request["user"]["sub"];
+      let user = await fastify.prisma.user.findUnique({
+        where: { username: sub },
+      });
+      if (!user) {
+        fastify.log.info(`creating new user for user ${sub}`);
+        user = await fastify.prisma.user.create({ data: { username: sub } });
+      }
+      return user;
     }
   );
 }

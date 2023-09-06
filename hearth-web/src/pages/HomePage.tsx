@@ -3,11 +3,36 @@ import PinkWorld from "../svg/pink-world.svg";
 import { useAuth0 } from "@auth0/auth0-react";
 import ShapeOne from "../components/Buttons/shape-one";
 import LoadingPage from "./LoadingPage";
+import BlueButton from "../components/Buttons/BlueButton";
+import { useCurrentUserProfile } from "../core/apiHooks";
+import { useEffect } from "react";
 
 function HomePage() {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
+
+  const { data: user, error } = useCurrentUserProfile();
+
+  console.log(error);
+  console.log(user);
+
+  //   useEffect(() => {
+  //     // force login if not logged in
+  //     error && loginWithRedirect();
+  //   }, [error, loginWithRedirect]);
+
   return (
-    <LoadingPage />
+    // !user ? <LoadingPage /> :
+    <>
+      {" "}
+      <LoadingPage />{" "}
+      <BlueButton
+        text="Sign up for the free challenge"
+        callback={() => {
+          loginWithRedirect();
+        }}
+      />
+    </>
+
     // <Flex
     //   direction="column"
     //   justifyContent={"space-between"}
@@ -34,7 +59,7 @@ function HomePage() {
     //       </UnorderedList>
     //     </Text>
     //   </Flex>
-    //   <BlueButton
+    //  <BlueButton
     //     text="Sign up for the free challenge"
     //     callback={() => {
     //       loginWithRedirect();

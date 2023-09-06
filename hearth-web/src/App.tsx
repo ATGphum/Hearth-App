@@ -3,14 +3,16 @@ import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
 import viteEnv from "./config/vite-env";
 import { AuthProvider } from "./context/authContext";
-import { getUser } from "./core/api";
+import { getUser, request } from "./core/api";
 import HomePage from "./pages/HomePage";
 import theme from "./theme/chakra-theme";
 import { Layout } from "./components/Layout";
+import { SWRConfig } from "swr";
 
 function App() {
   return (
     <AppContextProviders>
+      <LogoutButton />
       <HomePage />
     </AppContextProviders>
   );
@@ -53,19 +55,28 @@ interface ProviderProps {
 const AppContextProviders = ({ children }: ProviderProps) => {
   return (
     <ChakraProvider theme={theme}>
-      <Auth0Provider
-        domain={viteEnv.auth0.domain}
-        clientId={viteEnv.auth0.hearthWeb.id}
-        authorizationParams={{
-          redirect_uri: window.location.origin,
-          audience: viteEnv.auth0.api.audience,
-          scope: viteEnv.auth0.scope,
+      <SWRConfig
+        value={{
+          fetcher: (url: string) =>
+            request<any>(url, "GET").then((res) => {
+              if (res.status >= 300) {
+                const error = new Error(
+                  "An error occurred while fetching the data."
+                );
+                // Attach extra info to the error object.
+                // eslint-disable-next-line
+                // @ts-ignore
+                error.status = res.status;
+                throw error;
+              }
+              return res.data;
+            }),
         }}
       >
         <AuthProvider>
           <Layout>{children}</Layout>
         </AuthProvider>
-      </Auth0Provider>
+      </SWRConfig>
     </ChakraProvider>
   );
 };

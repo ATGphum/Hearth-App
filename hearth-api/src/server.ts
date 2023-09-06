@@ -1,12 +1,13 @@
-import Fastify from "fastify";
+import Fastify, { FastifyReply, FastifyRequest } from "fastify";
 import UserController from "./users/users-controller.js";
-import * as fastifyHooks from "./config/fastify-hooks.js";
+import FastifyHooks from "./config/fastify-hooks.js";
 import fastifyAuth0Verify from "fastify-auth0-verify";
 import cors from "@fastify/cors";
-import corsObj from "./config/castify-cors.js";
+import corsObj from "./config/fastify-cors.js";
 import fastifyEnv from "./config/fastify-env.js";
+import { PrismaClient } from "@prisma/client";
 
-// dotenv.config(); not needed for now as env variables are mapped to exported object
+const prisma = new PrismaClient();
 
 /**
  * @type {import('fastify').FastifyInstance} Instance of Fastify
@@ -14,6 +15,9 @@ import fastifyEnv from "./config/fastify-env.js";
 const fastify = Fastify({
   logger: true,
 });
+
+// attach prisma object to fastify
+fastify.decorate("prisma", prisma);
 
 // register cors
 fastify.register(cors, corsObj);
@@ -24,13 +28,19 @@ fastify.register(fastifyAuth0Verify, {
   audience: fastifyEnv.auth0.api.audience,
 });
 
-fastify.addHook("onRequest", fastifyHooks.auth0Verify);
-
-// add db lifecycle objects to request objects
-fastify.decorateRequest("queryClient", null);
-fastify.decorateRequest("db", null);
-fastify.addHook("preHandler", fastifyHooks.drizzleConnecter);
-fastify.addHook("onResponse", fastifyHooks.drizzleDestroyer);
+// verify auth0 token
+fastify.addHook(
+  "onRequest",
+  async (request: FastifyRequest, reply: FastifyReply) => {
+    try {
+      // Verify the JWT token using the decorator
+      await request.jwtVerify();
+    } catch (error) {
+      fastify.log.error(error);
+      reply.code(401).send({ message: error.message });
+    }
+  }
+);
 
 fastify.register(UserController, { prefix: "/v1" });
 

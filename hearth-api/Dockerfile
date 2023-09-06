@@ -1,5 +1,7 @@
 FROM node:20
 
+# Dockerfile for dev purposes only
+
 # Create app directory
 WORKDIR /usr/src/app
 
@@ -16,4 +18,9 @@ RUN npm install
 COPY . .
 
 EXPOSE 8000
+EXPOSE 5432
+
+# Only used in dev
+# RUN npx prisma migrate dev
+
 CMD [ "npm", "run", "start" ]

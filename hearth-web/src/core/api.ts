@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 import reactEnv from "../config/vite-env";
+import viteEnv from "../config/vite-env";
 
 axios.defaults.baseURL = reactEnv.api_host;
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -39,11 +40,11 @@ export const request = <T>(
   });
 
   // // log user out if 401
-  result.catch(
-    (e) =>
-      e.response.status === 401 &&
-      (window.location.href = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/v2/logout?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}`)
-  );
+  // result.catch(
+  //   (e) =>
+  //     e.response.status === 401 &&
+  //     (window.location.href = `https://${viteEnv.auth0.domain}/v2/logout?client_id=${viteEnv.auth0.hearthWeb.id}`)
+  // );
 
   return result;
 };

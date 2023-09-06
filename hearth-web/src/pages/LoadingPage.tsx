@@ -1,7 +1,11 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Spinner } from "@chakra-ui/react";
 
 function LoadingPage() {
-  return <Flex></Flex>;
+  return (
+    <Flex>
+      <Spinner />
+    </Flex>
+  );
 }
 
 export default LoadingPage;
