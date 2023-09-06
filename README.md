@@ -37,6 +37,10 @@ you will need to run the following command to trigger an image rebuild on launch
 
 `docker compose up --build`
 
+#### Debugging api
+
+Server can be debugged by pressing the play button in vscode to attach the debugger to the running server docker container
+
 ### Running web app
 
 run
