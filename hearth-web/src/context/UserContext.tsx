@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, createContext, useEffect } from "react";
 import { createCtx } from "./createCtx";
 import { User } from "../core/types";
 import React from "react";
@@ -10,7 +10,7 @@ type Props = {
   children: ReactNode;
 };
 
-const UserContext = React.createContext<User | undefined | null>(null);
+const UserContext = createContext<User | undefined | null>(null);
 
 const UserProvider = ({ children }: Props) => {
   const { data: user } = useCurrentUserProfile();

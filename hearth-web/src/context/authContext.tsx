@@ -1,12 +1,12 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode, createContext, useEffect } from "react";
 import { createCtx } from "./createCtx";
 
 type Props = {
   children: ReactNode;
 };
 
-const [useAuth, AuthContextProvider] = createCtx();
+const AuthContext = createContext<boolean>(false);
 
 const AuthProvider = ({ children }: Props) => {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
@@ -25,10 +25,10 @@ const AuthProvider = ({ children }: Props) => {
   }, [isAuthenticated, getAccessTokenSilently]);
 
   return (
-    <AuthContextProvider value={{ isAuthenticated }}>
+    <AuthContext.Provider value={isAuthenticated}>
       {children}
-    </AuthContextProvider>
+    </AuthContext.Provider>
   );
 };
 
-export { useAuth, AuthProvider };
+export { AuthProvider };
