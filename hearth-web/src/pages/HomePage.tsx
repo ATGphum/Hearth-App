@@ -12,7 +12,6 @@ function HomePage() {
 
   const { data: user, error } = useCurrentUserProfile();
 
-  console.log(error);
   console.log(user);
 
   //   useEffect(() => {

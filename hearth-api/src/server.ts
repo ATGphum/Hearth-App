@@ -1,6 +1,5 @@
 import Fastify, { FastifyReply, FastifyRequest } from "fastify";
 import UserController from "./users/users-controller.js";
-import FastifyHooks from "./config/fastify-hooks.js";
 import fastifyAuth0Verify from "fastify-auth0-verify";
 import cors from "@fastify/cors";
 import corsObj from "./config/fastify-cors.js";
