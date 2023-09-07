@@ -83,3 +83,4 @@ npx prisma migrate dev
 
 - Skip Type checking of third party node libraries by adding `"skipLibCheck": true` to tsconfig.json
 - There is an issue with the server debugger disconnecting whenever a change is made to typescript code
+- If your auth0 session keeps disconnecting, you may need to turn off your browser ad blocker
