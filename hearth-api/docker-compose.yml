@@ -10,6 +10,8 @@ services:
       - postgres
     environment:
       NODE_ENV: development
+      # different url required to connect to db from docker container
+      DATABASE_URL: postgres://user:pass@postgres:5432/db
     ports:
       - "8000:8000"
       - "9229:9229"
