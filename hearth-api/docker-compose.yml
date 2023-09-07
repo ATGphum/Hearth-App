@@ -18,6 +18,7 @@ services:
     command: ["sh", "-c", "npx prisma migrate dev && npm run dev"]
     volumes:
       - ./src:/usr/src/app/src
+      - ./dist:/usr/src/app/dist
 
   postgres:
     image: postgres:11
