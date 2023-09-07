@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import theme from "./theme/chakra-theme";
 import { Layout } from "./components/Layout";
 import { SWRConfig } from "swr";
+import { UserProvider } from "./context/UserContext";
 
 function App() {
   return (
@@ -74,7 +75,9 @@ const AppContextProviders = ({ children }: ProviderProps) => {
         }}
       >
         <AuthProvider>
-          <Layout>{children}</Layout>
+          <Layout>
+            <UserProvider>{children}</UserProvider>
+          </Layout>
         </AuthProvider>
       </SWRConfig>
     </ChakraProvider>

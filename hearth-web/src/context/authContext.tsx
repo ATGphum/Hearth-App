@@ -1,15 +1,12 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { ReactNode, useEffect } from "react";
 import { createCtx } from "./createCtx";
-export interface AuthContextProps {
-  isAuthenticated: boolean;
-}
 
 type Props = {
   children: ReactNode;
 };
 
-const [useAuth, AuthContextProvider] = createCtx<AuthContextProps>();
+const [useAuth, AuthContextProvider] = createCtx();
 
 const AuthProvider = ({ children }: Props) => {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
