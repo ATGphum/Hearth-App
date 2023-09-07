@@ -3,7 +3,6 @@ import { SWRConfig } from "swr";
 import "./App.css";
 import { Layout } from "./components/Layout";
 import { UserProvider } from "./context/UserContext";
-import { AuthProvider } from "./context/authContext";
 import { request } from "./core/api";
 import HomePage from "./pages/HomePage";
 import theme from "./theme/chakra-theme";
@@ -43,11 +42,9 @@ const AppContextProviders = ({ children }: ProviderProps) => {
             }),
         }}
       >
-        <AuthProvider>
-          <Layout>
-            <UserProvider>{children}</UserProvider>
-          </Layout>
-        </AuthProvider>
+        <Layout>
+          <UserProvider>{children}</UserProvider>
+        </Layout>
       </SWRConfig>
     </ChakraProvider>
   );

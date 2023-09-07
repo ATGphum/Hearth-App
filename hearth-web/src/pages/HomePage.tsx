@@ -7,6 +7,7 @@ import BlueButton from "../components/Buttons/BlueButton";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
+import LogoutButton from "../components/Buttons/LogoutButton";
 
 function HomePage() {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
@@ -14,8 +15,8 @@ function HomePage() {
   const user = useContext(UserContext);
 
   return (
-    // !user ? <LoadingPage /> :
     <>
+      <LogoutButton />
       <BlueButton
         text="Sign up for the free challenge"
         callback={() => {
