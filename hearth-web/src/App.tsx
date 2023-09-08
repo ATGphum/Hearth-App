@@ -42,9 +42,7 @@ const AppContextProviders = ({ children }: ProviderProps) => {
             }),
         }}
       >
-        <Layout>
-          <UserProvider>{children}</UserProvider>
-        </Layout>
+        <UserProvider>{children}</UserProvider>
       </SWRConfig>
     </ChakraProvider>
   );

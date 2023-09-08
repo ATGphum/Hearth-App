@@ -6,6 +6,7 @@ import React from "react";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import LoadingPage from "../pages/LoadingPage";
 import LoginPage from "../pages/LoginPage";
+import UserCreateForm from "../pages/UserCreateForm";
 
 type Props = {
   children: ReactNode;
@@ -49,9 +50,15 @@ const UserProvider = ({ children }: Props) => {
   if (!user) return <LoadingPage />;
 
   // redirect to initial form if names are missing
-  // if (user && (!user.first_name || !user.last_name || !user.partner_first_name || !user.partner_last_name)){
-  //   return <UserCreateForm/>
-  // }
+  if (
+    user &&
+    (!user.first_name ||
+      !user.last_name ||
+      !user.partner_first_name ||
+      !user.partner_last_name)
+  ) {
+    return <UserCreateForm />;
+  }
 
   return (
     <UserContext.Provider value={{ user, userMutate }}>

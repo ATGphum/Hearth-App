@@ -14,7 +14,7 @@ export const Layout = ({ children }: Props) => {
       minHeight="100vh"
       padding="1rem"
     >
-      <Flex direction="column" justifyContent={"center"}>
+      <Flex direction="column" justifyContent={"center"} pb="1rem">
         <Image src={logo} alt="Hearth" />
       </Flex>
       {children}

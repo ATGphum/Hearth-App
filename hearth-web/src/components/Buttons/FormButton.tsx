@@ -2,22 +2,24 @@ import { Text } from "@chakra-ui/react";
 
 interface Props {
   text: string;
+  color?: string;
+  backgroundColor?: string;
   callback: () => void;
 }
 
-const ClearButton = ({ text, callback }: Props) => {
+const FormButton = ({ text, color, backgroundColor, callback }: Props) => {
   return (
     <Text
       textStyle="action"
       borderRadius="40px"
       padding="0.625rem 2.25rem"
       onClick={callback}
-      backgroundColor={"accent.darkBlue"}
-      color="neutral.white"
+      backgroundColor={backgroundColor ?? "neutral.black"}
+      color={color ?? "neutral.white"}
     >
       {text}
     </Text>
   );
 };
 
-export default ClearButton;
+export default FormButton;

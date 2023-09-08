@@ -3,7 +3,7 @@ import PinkWorld from "../svg/pink-world.svg";
 import { useAuth0 } from "@auth0/auth0-react";
 import ShapeOne from "../components/Buttons/shape-one";
 import LoadingPage from "./LoadingPage";
-import BlueButton from "../components/Buttons/BlueButton";
+import BlueButton from "../components/Buttons/FormButton";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";

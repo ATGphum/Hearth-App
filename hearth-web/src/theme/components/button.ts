@@ -2,6 +2,7 @@ const button = {
   baseStyle: {
     fontStyle: "normal",
     fontWeight: "bold",
+    bg: "orange",
     _focus: {
       boxShadow: "none",
     },
@@ -53,7 +54,7 @@ const button = {
       bg: "neutral.white",
       color: "neutral.black",
       borderColor: "neutral.black",
-      border: "1px",
+      border: "15px",
     },
     transparent: {
       bg: "None",
