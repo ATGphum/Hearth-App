@@ -9,7 +9,7 @@ import { User } from "../core/types";
 import { patchUser } from "../core/api";
 
 function UserCreateForm() {
-  const { user } = useContext(UserContext);
+  const { user, userMutate } = useContext(UserContext);
   const [page, setPage] = useState(0);
 
   const [firstName, setFirstName] = useState<string | undefined>(undefined);
@@ -28,16 +28,19 @@ function UserCreateForm() {
     onSwipedRight: () => setPage(0),
   });
 
-  const onSubmit = async () => {
+  const onSubmit = async (instagram_skip: boolean) => {
     const tempUser: Partial<User> = {
       first_name: firstName,
       last_name: lastName,
       partner_first_name: partnerFirstName,
       partner_last_name: partnerLastName,
-      instagram_username: instagram,
+      instagram_username: instagram_skip ? undefined : instagram,
     };
 
     if (user) {
+      const newUser: User = { ...user, ...tempUser };
+      // mutate current state
+      userMutate(newUser);
       await patchUser(user.id, tempUser);
     }
   };
@@ -203,7 +206,10 @@ function UserCreateForm() {
                   width="100%"
                   mb="0.5rem"
                 >
-                  <Input variant="unstyled" />
+                  <Input
+                    variant="unstyled"
+                    onChange={(e) => setInstagram(e.target.value)}
+                  />
                 </Flex>
               </Flex>
             </Flex>
@@ -217,13 +223,11 @@ function UserCreateForm() {
           >
             <FormButton
               text={"Skip this step →"}
-              callback={() => {
-                setPage(2);
-              }}
+              callback={() => onSubmit(true)}
               color="neutral.black"
               backgroundColor="inherit"
             />
-            <FormButton text={"Continue"} callback={onSubmit} />
+            <FormButton text={"Continue"} callback={() => onSubmit(false)} />
           </Flex>
         </>
       ) : (
@@ -237,7 +241,7 @@ function UserCreateForm() {
             padding="1rem"
           >
             <Text textStyle={"heading.h1"}>
-              Welcome, {user?.username} & {user?.username}
+              Welcome, {user?.first_name} & {user?.partner_first_name}
             </Text>
           </Flex>
         </>

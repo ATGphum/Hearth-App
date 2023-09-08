@@ -1,4 +1,8 @@
-import Fastify, { FastifyReply, FastifyRequest } from "fastify";
+import Fastify, {
+  FastifyInstance,
+  FastifyReply,
+  FastifyRequest,
+} from "fastify";
 import UserController from "./users/users-controller.js";
 import fastifyAuth0Verify from "fastify-auth0-verify";
 import cors from "@fastify/cors";
@@ -11,7 +15,7 @@ const prisma = new PrismaClient();
 /**
  * @type {import('fastify').FastifyInstance} Instance of Fastify
  */
-const fastify = Fastify({
+const fastify: FastifyInstance = Fastify({
   logger: true,
 });
 
