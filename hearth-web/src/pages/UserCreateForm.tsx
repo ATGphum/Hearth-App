@@ -1,6 +1,5 @@
 import { Flex, Input, Text } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
 import { useSwipeable } from "react-swipeable";
 import FormButton from "../components/Buttons/FormButton";
 import { Layout } from "../components/Layout";

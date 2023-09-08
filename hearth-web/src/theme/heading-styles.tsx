@@ -81,7 +81,7 @@ export const Headers: React.FC<Props> = ({
   return (
     <>
       <Heading
-        as={typeOfHeader as As<any> | undefined}
+        as={typeOfHeader as As | undefined}
         fontFamily={getValues().fontFamily}
         fontSize={getValues().fontSize}
         fontWeight={bold ? "bold" : getValues().fontWeight}

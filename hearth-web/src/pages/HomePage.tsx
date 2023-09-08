@@ -1,18 +1,13 @@
-import { UnorderedList, Flex, Image, Text, ListItem } from "@chakra-ui/react";
-import PinkWorld from "../svg/pink-world.svg";
 import { useAuth0 } from "@auth0/auth0-react";
-import ShapeOne from "../components/Buttons/shape-one";
-import LoadingPage from "./LoadingPage";
+// import { useContext } from "react";
 import BlueButton from "../components/Buttons/FormButton";
-import { useCurrentUserProfile } from "../core/apiHooks";
-import { useContext, useEffect } from "react";
-import { UserContext } from "../context/UserContext";
 import LogoutButton from "../components/Buttons/LogoutButton";
+// import { UserContext } from "../context/UserContext";
 
 function HomePage() {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const { loginWithRedirect /*isAuthenticated*/ } = useAuth0();
 
-  const user = useContext(UserContext);
+  // const user = useContext(UserContext);
 
   return (
     <>
