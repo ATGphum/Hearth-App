@@ -1,15 +1,46 @@
 import { Flex, Input, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useSwipeable } from "react-swipeable";
 import FormButton from "../components/Buttons/FormButton";
 import { Layout } from "../components/Layout";
-import { useSwipeable } from "react-swipeable";
+import { UserContext } from "../context/UserContext";
+import { User } from "../core/types";
+import { patchUser } from "../core/api";
 
 function UserCreateForm() {
+  const { user } = useContext(UserContext);
   const [page, setPage] = useState(0);
+
+  const [firstName, setFirstName] = useState<string | undefined>(undefined);
+  const [lastName, setLastName] = useState<string | undefined>(undefined);
+  const [partnerFirstName, setPartnerFirstName] = useState<string | undefined>(
+    undefined
+  );
+  const [partnerLastName, setPartnerLastName] = useState<string | undefined>(
+    undefined
+  );
+  const [instagram, setInstagram] = useState<string | undefined>(undefined);
+
+  const [attemptSubmitNames, setAttemptSubmitNames] = useState(false);
 
   const goBack = useSwipeable({
     onSwipedRight: () => setPage(0),
   });
+
+  const onSubmit = async () => {
+    const tempUser: Partial<User> = {
+      first_name: firstName,
+      last_name: lastName,
+      partner_first_name: partnerFirstName,
+      partner_last_name: partnerLastName,
+      instagram_username: instagram,
+    };
+
+    if (user) {
+      await patchUser(user.id, tempUser);
+    }
+  };
 
   return (
     <Layout>
@@ -39,19 +70,32 @@ function UserCreateForm() {
                     borderColor={"accent.navy"}
                     px="0.5rem"
                     width="100%"
-                    mb="0.5rem"
                   >
-                    <Input variant="unstyled" />
+                    <Input
+                      onChange={(e) => setFirstName(e.target.value)}
+                      variant="unstyled"
+                    />
                   </Flex>
-                  <Text textStyle="body">Last</Text>
+                  {attemptSubmitNames && !firstName && (
+                    <Text textStyle="error">Please enter your first name</Text>
+                  )}
+                  <Text mt="0.5rem" textStyle="body">
+                    Last
+                  </Text>
                   <Flex
                     borderBottom={"0.5px solid"}
                     borderColor={"accent.navy"}
                     px="0.5rem"
                     width="100%"
                   >
-                    <Input variant="unstyled" />
+                    <Input
+                      onChange={(e) => setLastName(e.target.value)}
+                      variant="unstyled"
+                    />
                   </Flex>
+                  {attemptSubmitNames && !lastName && (
+                    <Text textStyle="error">Please enter your last name</Text>
+                  )}
                 </Flex>
               </Flex>
               <Flex direction={"column"} alignItems="start" width="100%">
@@ -69,19 +113,36 @@ function UserCreateForm() {
                     borderColor={"accent.navy"}
                     px="0.5rem"
                     width="100%"
-                    mb="0.5rem"
                   >
-                    <Input variant="unstyled" />
+                    <Input
+                      onChange={(e) => setPartnerFirstName(e.target.value)}
+                      variant="unstyled"
+                    />
                   </Flex>
-                  <Text textStyle="body">Last</Text>
+                  {attemptSubmitNames && !partnerFirstName && (
+                    <Text textStyle="error">
+                      Please enter your partner's first name
+                    </Text>
+                  )}
+                  <Text textStyle="body" mt="0.5rem">
+                    Last
+                  </Text>
                   <Flex
                     borderBottom={"0.5px solid"}
                     borderColor={"accent.navy"}
                     px="0.5rem"
                     width="100%"
                   >
-                    <Input variant="unstyled" />
+                    <Input
+                      onChange={(e) => setPartnerLastName(e.target.value)}
+                      variant="unstyled"
+                    />
                   </Flex>
+                  {attemptSubmitNames && !partnerLastName && (
+                    <Text textStyle="error">
+                      Please enter your partner's last name
+                    </Text>
+                  )}
                 </Flex>
               </Flex>
             </Flex>
@@ -95,7 +156,14 @@ function UserCreateForm() {
             <FormButton
               text={"Continue"}
               callback={() => {
-                setPage(1);
+                setAttemptSubmitNames(true);
+                if (
+                  firstName &&
+                  lastName &&
+                  partnerFirstName &&
+                  partnerLastName
+                )
+                  setPage(1);
               }}
             />
           </Flex>
@@ -155,16 +223,24 @@ function UserCreateForm() {
               color="neutral.black"
               backgroundColor="inherit"
             />
-            <FormButton
-              text={"Continue"}
-              callback={() => {
-                setPage(2);
-              }}
-            />
+            <FormButton text={"Continue"} callback={onSubmit} />
           </Flex>
         </>
       ) : (
-        <></>
+        <>
+          <Flex
+            direction="column"
+            width={"100%"}
+            alignItems={"center"}
+            gridRowGap="1rem"
+            flexGrow={1}
+            padding="1rem"
+          >
+            <Text textStyle={"heading.h1"}>
+              Welcome, {user?.username} & {user?.username}
+            </Text>
+          </Flex>
+        </>
       )}
     </Layout>
   );

@@ -2,6 +2,9 @@ export const userResponseSchema = {
   type: "object",
   required: ["username"],
   properties: {
+    id: {
+      type: "number",
+    },
     username: {
       type: "string",
     },

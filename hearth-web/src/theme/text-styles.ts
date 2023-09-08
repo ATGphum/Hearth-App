@@ -65,6 +65,14 @@ const textStyles = {
     fontSize: "0.75rem",
     lineHeight: "1rem",
   },
+  error: {
+    fontFamily: `"Inter", "Lato"`,
+    fontStyle: "italic",
+    fontWeight: "normal",
+    fontSize: "0.75rem",
+    lineHeight: "1.125rem",
+    color: "hsla(17, 99%, 48%, 1)",
+  },
 };
 
 export default textStyles;

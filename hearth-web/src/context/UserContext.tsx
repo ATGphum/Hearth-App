@@ -22,7 +22,7 @@ const UserContext = createContext<ContextProps>({
 });
 
 const UserProvider = ({ children }: Props) => {
-  const { data: user, error, mutate: userMutate } = useCurrentUserProfile();
+  const { data: user, mutate: userMutate } = useCurrentUserProfile();
   const {
     isAuthenticated,
     getAccessTokenSilently,
@@ -46,23 +46,23 @@ const UserProvider = ({ children }: Props) => {
     }
   }, [isAuthenticated, getAccessTokenSilently, userMutate]);
 
-  // show loading page while user data is retrieving
-  if (!user) return <LoadingPage />;
-
-  // redirect to initial form if names are missing
-  if (
-    user &&
-    (!user.first_name ||
-      !user.last_name ||
-      !user.partner_first_name ||
-      !user.partner_last_name)
-  ) {
-    return <UserCreateForm />;
-  }
-
   return (
     <UserContext.Provider value={{ user, userMutate }}>
-      {children}
+      {
+        // show loading page while user data is retrieving
+        !user ? (
+          <LoadingPage />
+        ) : // show user form if essential fields are not present
+        user &&
+          (!user.first_name ||
+            !user.last_name ||
+            !user.partner_first_name ||
+            !user.partner_last_name) ? (
+          <UserCreateForm />
+        ) : (
+          children
+        )
+      }
     </UserContext.Provider>
   );
 };

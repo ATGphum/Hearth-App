@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 import reactEnv from "../config/vite-env";
 import viteEnv from "../config/vite-env";
+import { User } from "./types";
 
 axios.defaults.baseURL = reactEnv.api_host;
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -50,5 +51,9 @@ export const request = <T>(
 };
 
 export const getUser = () => {
-  return request<object>(`/v1/users`, "GET");
+  return request<User>(`/v1/users`, "GET");
+};
+
+export const patchUser = (id: number, user: Partial<User>) => {
+  return request<User>(`/v1/users/${id}`, "PATCH", { data: user });
 };
