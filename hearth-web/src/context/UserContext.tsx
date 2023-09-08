@@ -45,13 +45,13 @@ const UserProvider = ({ children }: Props) => {
     }
   }, [isAuthenticated, getAccessTokenSilently, userMutate]);
 
-  // show login guard if 401
-  if (!user && error) return <LoginPage />;
-
   // show loading page while user data is retrieving
   if (!user) return <LoadingPage />;
 
-  // if (user && !user.)
+  // redirect to initial form if names are missing
+  // if (user && (!user.first_name || !user.last_name || !user.partner_first_name || !user.partner_last_name)){
+  //   return <UserCreateForm/>
+  // }
 
   return (
     <UserContext.Provider value={{ user, userMutate }}>
