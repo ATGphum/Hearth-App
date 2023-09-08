@@ -2,9 +2,14 @@ import { Flex, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import FormButton from "../components/Buttons/FormButton";
 import { Layout } from "../components/Layout";
+import { useSwipeable } from "react-swipeable";
 
 function UserCreateForm() {
   const [page, setPage] = useState(0);
+
+  const goBack = useSwipeable({
+    onSwipedRight: () => setPage(0),
+  });
 
   return (
     <Layout>
@@ -103,6 +108,7 @@ function UserCreateForm() {
             alignItems={"start"}
             gridRowGap="1rem"
             flexGrow={1}
+            {...goBack}
           >
             <Text textStyle={"heading.h1"}>Let's be social.</Text>
             <Flex
