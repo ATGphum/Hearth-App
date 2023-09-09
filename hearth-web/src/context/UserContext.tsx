@@ -1,9 +1,10 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { ReactNode, createContext, useEffect } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { User } from "../core/types";
 import LoadingPage from "../pages/LoadingPage";
 import UserCreateForm from "../pages/UserCreateForm";
+import { redirect, useNavigate } from "react-router-dom";
 
 type Props = {
   children: ReactNode;
@@ -11,9 +12,7 @@ type Props = {
 
 type ContextProps = {
   user?: User | undefined;
-  userMutate:
-    | (() => Promise<User | undefined>)
-    | ((user: User) => Promise<User | undefined>);
+  userMutate: (user?: User, refetch?: boolean) => Promise<User | undefined>;
 };
 
 const UserContext = createContext<ContextProps>({
@@ -42,21 +41,7 @@ const UserProvider = ({ children }: Props) => {
 
   return (
     <UserContext.Provider value={{ user, userMutate }}>
-      {
-        // show loading page while user data is retrieving
-        !user ? (
-          <LoadingPage />
-        ) : // show user form if essential fields are not present
-        user &&
-          (!user.first_name ||
-            !user.last_name ||
-            !user.partner_first_name ||
-            !user.partner_last_name) ? (
-          <UserCreateForm />
-        ) : (
-          children
-        )
-      }
+      {children}
     </UserContext.Provider>
   );
 };

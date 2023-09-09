@@ -1,16 +1,15 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import "./App.css";
-import { Layout } from "./components/Layout";
 import { UserProvider } from "./context/UserContext";
 import { request } from "./core/api";
-import HomePage from "./pages/HomePage";
+import RenderRoutes from "./routes";
 import theme from "./theme/chakra-theme";
 
 function App() {
   return (
     <AppContextProviders>
-      <HomePage />
+      <RenderRoutes />
     </AppContextProviders>
   );
 }
