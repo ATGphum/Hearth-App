@@ -1,8 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
-// import { useContext } from "react";
-import BlueButton from "../components/Buttons/FormButton";
-import LogoutButton from "../components/Buttons/LogoutButton";
-// import { UserContext } from "../context/UserContext";
+import { Layout } from "../components/Layout";
+import BlueButton from "../components/buttons/FormButton";
+import LogoutButton from "../components/buttons/LogoutButton";
 
 function HomePage() {
   const { loginWithRedirect /*isAuthenticated*/ } = useAuth0();
@@ -10,7 +9,7 @@ function HomePage() {
   // const user = useContext(UserContext);
 
   return (
-    <>
+    <Layout>
       <LogoutButton />
       <BlueButton
         text="Sign up for the free challenge"
@@ -18,7 +17,7 @@ function HomePage() {
           loginWithRedirect();
         }}
       />
-    </>
+    </Layout>
   );
 }
 
