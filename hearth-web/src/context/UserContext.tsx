@@ -1,10 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useEffect } from "react";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { User } from "../core/types";
-import LoadingPage from "../pages/LoadingPage";
-import UserCreateForm from "../pages/UserCreateForm";
-import { redirect, useNavigate } from "react-router-dom";
 
 type Props = {
   children: ReactNode;

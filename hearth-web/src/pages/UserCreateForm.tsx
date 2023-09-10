@@ -1,14 +1,12 @@
-import { Flex, Input, Text, Image } from "@chakra-ui/react";
+import { Flex, Input, Text } from "@chakra-ui/react";
 import { useContext, useState } from "react";
-import { useSwipeable } from "react-swipeable";
-import FormButton from "../components/buttons/FormButton";
-import { Layout } from "../components/Layout";
-import { UserContext } from "../context/UserContext";
-import { User } from "../core/types";
-import { patchUser } from "../core/api";
-import logo from "../svg/logo.svg";
 import { useNavigate } from "react-router-dom";
+import { useSwipeable } from "react-swipeable";
 import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
+import FormButton from "../components/buttons/FormButton";
+import { UserContext } from "../context/UserContext";
+import { patchUser } from "../core/api";
+import { User } from "../core/types";
 
 function UserCreateForm() {
   const navigate = useNavigate();

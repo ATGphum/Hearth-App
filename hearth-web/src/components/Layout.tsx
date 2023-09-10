@@ -1,10 +1,7 @@
-import { Flex, Image } from "@chakra-ui/react";
-import logo from "../svg/logo.svg";
-import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import LoadingPage from "../pages/LoadingPage";
-import UserCreateForm from "../pages/UserCreateForm";
 import { LayoutNoRedirect } from "./LayoutNoRedirect";
 
 interface Props {

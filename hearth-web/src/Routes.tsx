@@ -1,15 +1,4 @@
-import { Fragment, lazy, Suspense } from "react";
-import {
-  createBrowserRouter,
-  Link,
-  Redirect,
-  Route,
-  Router,
-  RouterProvider,
-  Routes,
-  Switch,
-} from "react-router-dom";
-import LoadingPage from "./pages/LoadingPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import UserCreateForm from "./pages/UserCreateForm";
 
