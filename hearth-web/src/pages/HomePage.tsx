@@ -1,18 +1,12 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { Flex, Slide } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { Flex } from "@chakra-ui/react";
+import { useState } from "react";
+import { useSwipeable } from "react-swipeable";
 import { Layout } from "../components/Layout";
+import Library from "../components/Library";
 import NavBar from "./NavBar";
 import Today from "./Today";
-import { UserContext } from "../context/UserContext";
-import { useSwipeable } from "react-swipeable";
-import Library from "../components/Library";
 
 function HomePage() {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
-
-  const user = useContext(UserContext);
-
   const [page, setPage] = useState(0);
 
   const swipeZero = useSwipeable({

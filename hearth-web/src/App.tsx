@@ -3,7 +3,7 @@ import { SWRConfig } from "swr";
 import "./App.css";
 import { UserProvider } from "./context/UserContext";
 import { request } from "./core/api";
-import RenderRoutes from "./routes";
+import RenderRoutes from "./Routes";
 import theme from "./theme/chakra-theme";
 
 function App() {

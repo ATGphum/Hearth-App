@@ -1,8 +1,4 @@
-import { Collapse, Flex, Grid, SimpleGrid, Text } from "@chakra-ui/react";
-import UpIcon from "../icons/UpIcon";
-import { useState } from "react";
-import DownIcon from "../icons/DownIcon";
-import ArrowRightIcon from "../icons/ArrowRightIcon";
+import { Flex, SimpleGrid, Text } from "@chakra-ui/react";
 
 function Library() {
   const flexString = "1 0 8.5rem";
