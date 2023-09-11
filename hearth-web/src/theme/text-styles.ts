@@ -50,6 +50,14 @@ const textStyles = {
     lineHeight: "1.125rem",
     color: "#542C0D",
   },
+  bodySmall: {
+    fontFamily: `"Inter", "Lato"`,
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: "0.75rem",
+    lineHeight: "1.125rem",
+    color: "#542C0D",
+  },
   fieldLabel: {
     fontFamily: `"Inter", "Lato"`,
     fontStyle: "normal",
