@@ -1,0 +1,65 @@
+name: Deploy Frontend to Heroku
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+# Copied below based on the GitHub Action repo: https://github.com/AkhileshNS/heroku-deploy#license
+jobs:
+  deploy:
+    - uses: actions/checkout@v2
+    - uses: akhileshns/heroku-deploy@v3.12.14 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "test-frontend-heroku-app" #Must be unique in Heroku
+        heroku_email: ${{secrets.HEROKU_EMAIL}}
+        appdir: "hearth-web"
+        buildpack: "heroku-community/nginx"
+      env:
+        HD_VITE_API_HOST: http://127.0.0.1:8000/ # Will need to change to the server url when backend has been deployed
+        HD_VITE_ENV: production
+        HD_VITE_AUTH0_DOMAIN: hearth.au.auth0.com
+        HD_VITE_AUTH0_WEB_ID: YX0NCDOAqEbV2hNXoWd7VV1vQAbKOLEQ
+        HD_VITE_AUTH0_API_AUDIENCE: https://hearth.au.auth0.com/api/v2/
+        HD_VITE_AUTH0_SCOPE: read:current_user openid email offline_access
+
+  # deploy:
+  #   if: (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed'))
+  #   runs-on: ubuntu-latest
+  #   name: Build and deploy web app
+
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+
+  #     # Install dependencies
+  #     - name: Install dependencies
+  #       run: npm install
+
+  #     # Build steps
+  #     - name: Build
+  #       run: npm run build
+
+  #     # We should be adding frontend tests here as well
+
+  #     # Deploy to Heroku
+  #     - name: Deploy to Heroku
+  #       uses: AkhileshNS/heroku-deploy@v3.12.14
+
+  # - name: Deploy to Heroku
+  #   run: |
+  #     npm install -g heroku
+  #     heroku login --api-key ${{ secrets.HEROKU_API_KEY }}
+  #     heroku container:login
+  #     heroku container:push web -a test-frontend-heroku-app
+  #     heroku container:release web -a test-frontend-heroku-app
