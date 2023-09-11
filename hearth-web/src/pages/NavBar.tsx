@@ -6,7 +6,13 @@ interface navProps {
 
 const NavBar = ({ tabChange }: navProps) => {
   return (
-    <Flex justifyContent={"space-evenly"} width="100%">
+    <Flex
+      justifyContent={"space-evenly"}
+      width="100%"
+      position="sticky"
+      bottom={0}
+      bg="crimson"
+    >
       <Flex p="1rem" onClick={() => tabChange(0)}>
         1
       </Flex>

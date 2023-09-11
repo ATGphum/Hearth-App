@@ -21,6 +21,7 @@ function Library() {
         background="linear-gradient(166deg, #F058FC 10.17%, rgba(240, 88, 252, 0.00) 90.68%)"
         width="100%"
         borderRadius="2.75rem"
+        borderBottom="1px solid rgba(0, 0, 0, 0.40)"
       >
         <Text textStyle="heading.h1">Next session</Text>
         <Text textStyle="bodySmall">3-Day Connection Challenge</Text>

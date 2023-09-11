@@ -14,11 +14,13 @@ function Today() {
       justifyContent={"space-between"}
     >
       <Flex direction="column" width="100%" padding="2rem" gridRowGap="1rem">
-        <Flex width="100%" justifyContent={"space-between"}>
+        <Flex
+          width="100%"
+          justifyContent={"space-between"}
+          onClick={() => setShowQuote(!showQuote)}
+        >
           <Text textStyle="heading.h2">Daily quote</Text>
-          <Flex onClick={() => setShowQuote(!showQuote)}>
-            {showQuote ? <UpIcon /> : <DownIcon />}
-          </Flex>
+          <Flex>{showQuote ? <UpIcon /> : <DownIcon />}</Flex>
         </Flex>
         <Collapse in={showQuote} animateOpacity>
           <Flex direction="column" textAlign={"left"}>

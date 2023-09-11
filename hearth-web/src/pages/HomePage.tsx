@@ -2,8 +2,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Flex, Slide } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { Layout } from "../components/Layout";
-import NavBar from "../components/NavBar";
-import Today from "../components/Today";
+import NavBar from "./NavBar";
+import Today from "./Today";
 import { UserContext } from "../context/UserContext";
 import { useSwipeable } from "react-swipeable";
 import Library from "../components/Library";
@@ -30,7 +30,7 @@ function HomePage() {
 
   return (
     <Layout hidePadding>
-      <Flex direction="column" flex="1">
+      <Flex direction="column" flex="1" width="100%">
         {page === 0 && (
           <Flex {...swipeZero} direction="column" flex="1" width="100%">
             <Today />
@@ -42,7 +42,7 @@ function HomePage() {
           </Flex>
         )}
         {page === 2 && (
-          <Flex {...swipeTwo} direction="column" flex="1">
+          <Flex {...swipeTwo} direction="column" flex="1" width="100%">
             <Today />
           </Flex>
         )}
