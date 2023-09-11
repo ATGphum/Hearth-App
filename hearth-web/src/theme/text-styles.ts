@@ -7,6 +7,7 @@ const textStyles = {
       fontWeight: "normal",
       fontSize: "1.5rem",
       lineHeight: "2rem",
+      color: "#542C0D",
     },
     h2: {
       fontFamily: `"Jost", "Inter"`,
@@ -14,6 +15,7 @@ const textStyles = {
       fontWeight: "normal",
       fontSize: "1.25rem",
       lineHeight: "1.5rem",
+      color: "#542C0D",
     },
     h3: {
       fontFamily: `"Jost", "Inter"`,
@@ -21,6 +23,7 @@ const textStyles = {
       fontWeight: "normal",
       fontSize: "1rem",
       lineHeight: "1.125rem",
+      color: "#542C0D",
     },
   },
   action: {
@@ -29,6 +32,7 @@ const textStyles = {
     fontWeight: "500",
     fontSize: "1rem",
     lineHeight: "1.25rem",
+    color: "#542C0D",
   },
   categories: {
     fontFamily: `"Lato", "Inter"`,
@@ -36,6 +40,7 @@ const textStyles = {
     fontWeight: "700",
     fontSize: "1.375rem",
     lineHeight: "1.25rem",
+    color: "#542C0D",
   },
   body: {
     fontFamily: `"Inter", "Lato"`,
@@ -43,6 +48,7 @@ const textStyles = {
     fontWeight: "normal",
     fontSize: "0.875rem",
     lineHeight: "1.125rem",
+    color: "#542C0D",
   },
   fieldLabel: {
     fontFamily: `"Inter", "Lato"`,
@@ -50,6 +56,7 @@ const textStyles = {
     fontWeight: "500",
     fontSize: "0.875rem",
     lineHeight: "1.125rem",
+    color: "#542C0D",
   },
   fieldInput: {
     fontFamily: `"Inter", "Lato"`,
@@ -57,13 +64,15 @@ const textStyles = {
     fontWeight: "normal",
     fontSize: "1rem",
     lineHeight: "1.375rem",
+    color: "#542C0D",
   },
   detailText: {
     fontFamily: `"Inter", "Lato"`,
     fontStyle: "normal",
     fontWeight: "normal",
-    fontSize: "0.75rem",
+    fontSize: "0.625rem",
     lineHeight: "1rem",
+    color: "#542C0D",
   },
   error: {
     fontFamily: `"Inter", "Lato"`,
@@ -72,6 +81,14 @@ const textStyles = {
     fontSize: "0.75rem",
     lineHeight: "1.125rem",
     color: "hsla(17, 99%, 48%, 1)",
+  },
+  quote: {
+    fontFamily: `"Inter", "Lato"`,
+    fontStyle: "italic",
+    fontWeight: "300",
+    fontSize: "1rem",
+    lineHeight: "1.5rem",
+    color: "#542C0D",
   },
 };
 

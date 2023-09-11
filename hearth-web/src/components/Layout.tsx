@@ -9,9 +9,10 @@ import { LayoutNoRedirect } from "./LayoutNoRedirect";
 
 interface Props {
   children: React.ReactNode;
+  hidePadding?: boolean;
 }
 
-export const Layout = ({ children }: Props) => {
+export const Layout = ({ children, hidePadding }: Props) => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   // show loading page while user data is retrieving
@@ -26,5 +27,7 @@ export const Layout = ({ children }: Props) => {
   )
     navigate("/create-user");
 
-  return <LayoutNoRedirect>{children}</LayoutNoRedirect>;
+  return (
+    <LayoutNoRedirect hidePadding={hidePadding}>{children}</LayoutNoRedirect>
+  );
 };
