@@ -26,14 +26,13 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Navigate to hearth-web
-        run: cd hearth-web
-
       - name: Install dependencies
+        working-directory: hearth-web
         run: npm install
 
       - name: Build Frontend
         run: npm run build
+        path:
 
       # Below checks if the folder 'dist' exists to check whether the build succeeded
       - name: Check for build success
