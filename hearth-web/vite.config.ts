@@ -10,12 +10,12 @@ export default defineConfig({
       // default settings on build (i.e. fail on error)
       ...eslint(),
       apply: "build",
+      failOnWarning: true,
     },
     {
       // do not fail on serve (i.e. local development)
       ...eslint({
         failOnWarning: false,
-        failOnError: false,
       }),
       apply: "serve",
       enforce: "post",
