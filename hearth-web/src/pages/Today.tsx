@@ -44,7 +44,7 @@ function Today() {
         padding="1.5rem"
         borderTopRadius="3rem"
         gridRowGap="0.5rem"
-        background="linear-gradient(171deg, #C1E6FC 6.76%, rgba(248, 231, 96, 0.00) 93.7%);"
+        background="linear-gradient(171deg, #F058FC 6.76%, rgba(248, 231, 96, 0.00) 93.7%);"
         onClick={drawerOnOpen}
       >
         <Flex justifyContent={"space-between"} alignItems={"center"} pr="1rem">
