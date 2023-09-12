@@ -1,7 +1,6 @@
 import {
   Collapse,
   Flex,
-  Image,
   Slider,
   SliderFilledTrack,
   SliderThumb,
