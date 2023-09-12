@@ -22,6 +22,7 @@ import PlayIcon from "../icons/PlayIcon";
 import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
+import DownIcon from "../icons/DownIcon";
 
 interface Props {
   isOpen: boolean;
@@ -101,13 +102,13 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
           display="flex"
           flexDirection="column"
           justifyContent={"space-between"}
-          background="linear-gradient(175deg, #C1E6FC 3.42%, #F4D9BB 64.78%, #F0D5BA 96.64%)"
+          background="linear-gradient(175deg, #F058FC 3.42%, #F4D9BB 64.78%, #F0D5BA 96.64%)"
           p={0}
           maxHeight={"100vh"}
         >
           <Flex justifyContent={"flex-end"}>
             <Flex onClick={onClose} p="1rem">
-              <CrossIcon />
+              <DownIcon />
             </Flex>
           </Flex>
           <Flex
@@ -138,7 +139,7 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
                 <Text textStyle={"heading.h1"}>Content name</Text>
                 <Text textStyle={"detailTextSmall"}>3 min.</Text>
               </Flex>
-              <UpIcon />
+              {showText ? <DownIcon /> : <UpIcon />}
             </Flex>
             <Collapse in={showText}>
               <Flex direction="column" p="0 1rem 1rem 1rem" gridRowGap="0.5rem">

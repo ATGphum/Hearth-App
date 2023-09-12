@@ -12,8 +12,20 @@ interface Props {
 export const Layout = ({ children, hidePadding }: Props) => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
-  // show loading page while user data is retrieving
+
+  // const [isLoading, setIsLoading] = useState(true);
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 2000); // 2000ms = 2 seconds
+
+  //   return () => clearTimeout(timer);
+  // }, []);
+
+  // show loading page while user data is retrieving or 2 seconds is up
   if (!user) return <LoadingPage />;
+
   // show user form if essential fields are not present
   if (
     !user.first_name ||
