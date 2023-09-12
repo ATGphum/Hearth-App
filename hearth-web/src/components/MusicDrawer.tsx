@@ -1,18 +1,15 @@
 import {
-  Box,
   Collapse,
   Drawer,
   DrawerBody,
   DrawerContent,
   DrawerOverlay,
   Flex,
-  SlideFade,
   Slider,
   SliderFilledTrack,
   SliderThumb,
   SliderTrack,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import CrossIcon from "../icons/CrossIcon";
