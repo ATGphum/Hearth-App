@@ -82,6 +82,14 @@ const textStyles = {
     lineHeight: "1rem",
     color: "#542C0D",
   },
+  detailTextSmall: {
+    fontFamily: `"Inter", "Lato"`,
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: "0.5625rem",
+    lineHeight: "1rem",
+    color: "#542C0D",
+  },
   error: {
     fontFamily: `"Inter", "Lato"`,
     fontStyle: "italic",

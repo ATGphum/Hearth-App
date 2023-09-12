@@ -13,8 +13,7 @@ export const Layout = ({ children, hidePadding }: Props) => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   // show loading page while user data is retrieving
-  if (!user) return;
-  <LoadingPage />;
+  if (!user) return <LoadingPage />;
   // show user form if essential fields are not present
   if (
     !user.first_name ||

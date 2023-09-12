@@ -1,16 +1,16 @@
-const UpIcon = () => {
+const PauseIcon = () => {
   return (
     <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
     >
       <path
-        d="M18 15L12 9L6 15"
+        d="M2 14V2M14 14V2"
         stroke="#210D08"
-        strokeWidth="2"
+        strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -18,4 +18,4 @@ const UpIcon = () => {
   );
 };
 
-export default UpIcon;
+export default PauseIcon;

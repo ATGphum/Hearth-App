@@ -5,6 +5,7 @@ import { Layout } from "../components/Layout";
 import Library from "../components/Library";
 import NavBar from "./NavBar";
 import Today from "./Today";
+import LogoutButton from "../components/buttons/LogoutButton";
 
 function HomePage() {
   const [page, setPage] = useState(0);
@@ -37,7 +38,7 @@ function HomePage() {
         )}
         {page === 2 && (
           <Flex {...swipeTwo} direction="column" flex="1" width="100%">
-            <Today />
+            <LogoutButton />
           </Flex>
         )}
       </Flex>
