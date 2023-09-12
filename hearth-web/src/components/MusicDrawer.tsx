@@ -1,14 +1,18 @@
 import {
+  Box,
+  Collapse,
   Drawer,
   DrawerBody,
   DrawerContent,
   DrawerOverlay,
   Flex,
+  SlideFade,
   Slider,
   SliderFilledTrack,
   SliderThumb,
   SliderTrack,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import CrossIcon from "../icons/CrossIcon";
@@ -16,6 +20,7 @@ import PauseIcon from "../icons/PauseIcon";
 import PlayIcon from "../icons/PlayIcon";
 import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
+import UpIcon from "../icons/UpIcon";
 
 interface Props {
   isOpen: boolean;
@@ -31,6 +36,7 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [showText, setShowText] = useState(true);
 
   const handleLoadedData = () => {
     audioRef.current && setDuration(audioRef.current.duration);
@@ -42,6 +48,7 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
       audioRef.current?.play();
     }
     setIsPlaying(!isPlaying);
+    setShowText(false);
   };
 
   const handleTimeUpdate = () => {
@@ -93,65 +100,95 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
               <CrossIcon />
             </Flex>
           </Flex>
-          <Flex
-            direction="column"
-            background={
-              "linear-gradient(144deg, rgba(250, 137, 4, 0.25) 21.07%, rgba(250, 151, 4, 0.00) 83.54%)"
-            }
-            alignItems="center"
-            p="1rem"
-            gridRowGap="1rem"
-          >
-            <audio
-              ref={audioRef}
-              src={url}
-              onLoadedData={handleLoadedData}
-              onTimeUpdate={handleTimeUpdate}
-            />
-
-            <Slider
-              aria-label="audio-slider"
-              value={currentTime}
-              max={duration}
-              step={0.01}
-              onChange={handleSeekChange}
-              onChangeStart={handleSeekStart}
-              onChangeEnd={handleSeekEnd}
-              size={"sm"}
-            >
-              <SliderTrack width={"3rem"} bg="neutral.black">
-                <SliderFilledTrack bg={"neutral.black"} />
-              </SliderTrack>
-              <SliderThumb boxSize={6} mt="1px" bg="brand.secondary" />
-            </Slider>
+          <Flex direction={"column"}>
             <Flex
+              onClick={() => setShowText(!showText)}
               width={"100%"}
-              justifyContent={"space-between"}
               alignItems={"center"}
+              justifyContent={"space-between"}
+              p="1rem"
             >
-              <Flex
-                height="3rem"
-                alignItems={"center"}
-                direction="column"
-                justifyContent={"center"}
-                onClick={rewind}
-              >
-                <RewindBackIcon />
-                <Text textStyle={"detailTextSmall"}>15 sec.</Text>
+              <Flex direction="column">
+                <Text textStyle={"body.small"}>Collection name</Text>
+                <Text textStyle={"heading.h1"}>Content name</Text>
+                <Text textStyle={"detailTextSmall"}>3 min.</Text>
               </Flex>
-              <Flex onClick={togglePlay} height="3rem" alignItems={"center"}>
-                {isPlaying ? <PauseIcon /> : <PlayIcon />}
+              <UpIcon />
+            </Flex>
+            <Collapse in={showText}>
+              <Flex direction="column" p="0 1rem 1rem 1rem" gridRowGap="0.5rem">
+                <Text textStyle="bodySmall">Description</Text>
+                <Text textStyle="body">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </Text>
+                <Text textStyle="bodySmall">Activity type</Text>
+                <Text textStyle="body">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </Text>
               </Flex>
+            </Collapse>
+            <Flex
+              direction="column"
+              background={
+                "linear-gradient(144deg, rgba(250, 137, 4, 0.25) 21.07%, rgba(250, 151, 4, 0.00) 83.54%)"
+              }
+              alignItems="center"
+              p="1rem"
+              gridRowGap="1rem"
+            >
+              <audio
+                ref={audioRef}
+                src={url}
+                onLoadedData={handleLoadedData}
+                onTimeUpdate={handleTimeUpdate}
+              />
 
-              <Flex
-                height="3rem"
-                alignItems={"center"}
-                direction="column"
-                justifyContent={"center"}
-                onClick={forward}
+              <Slider
+                aria-label="audio-slider"
+                value={currentTime}
+                max={duration}
+                step={0.01}
+                onChange={handleSeekChange}
+                onChangeStart={handleSeekStart}
+                onChangeEnd={handleSeekEnd}
+                size={"sm"}
               >
-                <RewindFowardIcon />
-                <Text textStyle={"detailTextSmall"}>15 sec.</Text>
+                <SliderTrack width={"3rem"} bg="neutral.black">
+                  <SliderFilledTrack bg={"neutral.black"} />
+                </SliderTrack>
+                <SliderThumb boxSize={6} mt="1px" bg="brand.secondary" />
+              </Slider>
+              <Flex
+                width={"100%"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+              >
+                <Flex
+                  height="3rem"
+                  alignItems={"center"}
+                  direction="column"
+                  justifyContent={"center"}
+                  onClick={rewind}
+                >
+                  <RewindBackIcon />
+                  <Text textStyle={"detailTextSmall"}>15 sec.</Text>
+                </Flex>
+                <Flex onClick={togglePlay} height="3rem" alignItems={"center"}>
+                  {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                </Flex>
+
+                <Flex
+                  height="3rem"
+                  alignItems={"center"}
+                  direction="column"
+                  justifyContent={"center"}
+                  onClick={forward}
+                >
+                  <RewindFowardIcon />
+                  <Text textStyle={"detailTextSmall"}>15 sec.</Text>
+                </Flex>
               </Flex>
             </Flex>
           </Flex>
