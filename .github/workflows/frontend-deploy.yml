@@ -27,7 +27,7 @@ jobs:
           node-version: "20"
 
       - name: Navigate to hearth-web
-        run: cd frontendFolder
+        run: cd hearth-web
 
       - name: Install dependencies
         run: npm install
