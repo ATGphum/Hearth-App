@@ -6,6 +6,7 @@ import {
   DrawerContent,
   DrawerOverlay,
   Flex,
+  Image,
   SlideFade,
   Slider,
   SliderFilledTrack,
@@ -14,7 +15,7 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CrossIcon from "../icons/CrossIcon";
 import PauseIcon from "../icons/PauseIcon";
 import PlayIcon from "../icons/PlayIcon";
@@ -84,21 +85,45 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
     setCurrentTime(currentTime + 15);
   };
 
+  useEffect(() => {
+    if (!isOpen) {
+      handleSeekEnd(0);
+      setShowText(true);
+      setIsPlaying(false);
+    }
+  }, [isOpen, handleSeekEnd]);
+
   return (
     <Drawer placement={"bottom"} isOpen={isOpen} onClose={onClose} size="full">
       <DrawerOverlay />
-      <DrawerContent>
+      <DrawerContent maxHeight={"100vh"}>
         <DrawerBody
           display="flex"
           flexDirection="column"
           justifyContent={"space-between"}
           background="linear-gradient(175deg, #C1E6FC 3.42%, #F4D9BB 64.78%, #F0D5BA 96.64%)"
           p={0}
+          maxHeight={"100vh"}
         >
           <Flex justifyContent={"flex-end"}>
             <Flex onClick={onClose} p="1rem">
               <CrossIcon />
             </Flex>
+          </Flex>
+          <Flex
+            px="1rem"
+            minHeight={0}
+            flexShrink={1}
+            justifyContent={"center"}
+          >
+            <Image
+              height="100%"
+              maxHeight={"100%"}
+              src={
+                "https://upload.wikimedia.org/wikipedia/en/9/9a/Trollface_non-free.png"
+              }
+              objectFit={"contain"}
+            />
           </Flex>
           <Flex direction={"column"}>
             <Flex
