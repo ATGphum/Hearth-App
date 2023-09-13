@@ -4,6 +4,7 @@ import { useState } from "react";
 import DownIcon from "../icons/DownIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import MusicDrawer from "../components/MusicDrawer";
+import { AnimatePresence } from "framer-motion";
 
 function Today() {
   const [showQuote, setShowQuote] = useState(true);
@@ -20,6 +21,7 @@ function Today() {
       justifyContent={"space-between"}
     >
       <MusicDrawer onClose={drawerOnClose} isOpen={drawerIsOpen} />
+
       <Flex direction="column" width="100%" padding="2rem" gridRowGap="1rem">
         <Flex
           width="100%"

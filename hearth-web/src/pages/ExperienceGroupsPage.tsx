@@ -82,6 +82,7 @@ const ExperienceGroups = ({
       flexDirection="column"
       background="linear-gradient(175deg, #B694F7 3.42%, #F4D9BB 48.04%, #F0D5BA 96.64%)"
       p={"1rem"}
+      zIndex={5}
     >
       <Flex onClick={onClose}>
         <ArrowLeftIcon />

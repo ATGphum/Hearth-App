@@ -1,5 +1,5 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import MusicDrawer from "../components/MusicDrawer";
@@ -45,7 +45,11 @@ const ExperienceGroupPage = ({ isOpen, onClose }: Props) => {
       display={"flex"}
       direction={"column"}
     >
-      <MusicDrawer onClose={drawerOnClose} isOpen={drawerIsOpen} />
+      <AnimatePresence>
+        {drawerIsOpen && (
+          <MusicDrawer onClose={drawerOnClose} isOpen={drawerIsOpen} />
+        )}
+      </AnimatePresence>
       <Flex onClick={onClose}>
         <ArrowLeftIcon />
       </Flex>

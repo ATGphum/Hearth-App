@@ -20,11 +20,15 @@ import PlayIcon from "../icons/PlayIcon";
 import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
+import ReactDOM from "react-dom";
+import { motion } from "framer-motion";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
+
+const MotionFlex = motion(Flex);
 
 const MusicDrawer = ({ isOpen, onClose }: Props) => {
   const url =
@@ -91,134 +95,147 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
     }
   }, [isOpen, handleSeekEnd]);
 
-  return (
-    <Drawer placement={"bottom"} isOpen={isOpen} onClose={onClose} size="full">
-      <DrawerOverlay />
-      <DrawerContent maxHeight={"100vh"}>
-        <DrawerBody
-          display="flex"
-          flexDirection="column"
+  const mounter = document.getElementById("mounter");
+  if (!mounter) return null;
+  return ReactDOM.createPortal(
+    <MotionFlex
+      initial={{ y: "100%" }}
+      animate={{
+        y: isOpen ? "0%" : "100%",
+      }}
+      exit={{ y: "100%" }}
+      dragConstraints={{ left: 0, right: 0 }}
+      onDragEnd={(event, info) => {
+        if (info.velocity.x > 0) {
+          onClose();
+        }
+      }}
+      transition={{ damping: 0 }}
+      position="absolute"
+      top="0"
+      right="0"
+      bottom="0"
+      left="0"
+      overflowY={"auto"}
+      display="flex"
+      flexDirection="column"
+      justifyContent={"space-between"}
+      background="linear-gradient(175deg, #F058FC 3.42%, #F4D9BB 64.78%, #F0D5BA 96.64%)"
+      p={0}
+      maxHeight={"100vh"}
+      textAlign={"left"}
+      zIndex={15}
+    >
+      <Flex justifyContent={"flex-end"}>
+        <Flex onClick={onClose} p="1rem">
+          <CrossIcon />
+        </Flex>
+      </Flex>
+      <Flex px="1rem" minHeight={0} flexShrink={1} justifyContent={"center"}>
+        <Image
+          height="100%"
+          maxHeight={"100%"}
+          src={
+            "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
+          }
+          objectFit={"contain"}
+        />
+      </Flex>
+      <Flex direction={"column"}>
+        <Flex
+          onClick={() => setShowText(!showText)}
+          width={"100%"}
+          alignItems={"center"}
           justifyContent={"space-between"}
-          background="linear-gradient(175deg, #F058FC 3.42%, #F4D9BB 64.78%, #F0D5BA 96.64%)"
-          p={0}
-          maxHeight={"100vh"}
+          p="1rem"
         >
-          <Flex justifyContent={"flex-end"}>
-            <Flex onClick={onClose} p="1rem">
-              <CrossIcon />
-            </Flex>
+          <Flex direction="column">
+            <Text textStyle={"body.small"}>Collection name</Text>
+            <Text textStyle={"heading.h1"}>Content name</Text>
+            <Text textStyle={"detailTextSmall"}>3 min.</Text>
           </Flex>
-          <Flex
-            px="1rem"
-            minHeight={0}
-            flexShrink={1}
-            justifyContent={"center"}
+          {showText ? <DownIcon /> : <UpIcon />}
+        </Flex>
+        <Collapse in={showText}>
+          <Flex direction="column" p="0 1rem 1rem 1rem" gridRowGap="0.5rem">
+            <Text textStyle="bodySmall">Description</Text>
+            <Text textStyle="body">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </Text>
+            <Text textStyle="bodySmall">Activity type</Text>
+            <Text textStyle="body">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </Text>
+          </Flex>
+        </Collapse>
+        <Flex
+          direction="column"
+          background={
+            "linear-gradient(144deg, rgba(250, 137, 4, 0.25) 21.07%, rgba(250, 151, 4, 0.00) 83.54%)"
+          }
+          alignItems="center"
+          p="1rem"
+          px="1.5rem"
+          gridRowGap="1rem"
+        >
+          <audio
+            ref={audioRef}
+            src={url}
+            onLoadedData={handleLoadedData}
+            onTimeUpdate={handleTimeUpdate}
+          />
+
+          <Slider
+            aria-label="audio-slider"
+            value={currentTime}
+            max={duration}
+            step={0.01}
+            onChange={handleSeekChange}
+            onChangeStart={handleSeekStart}
+            onChangeEnd={handleSeekEnd}
+            size={"sm"}
           >
-            <Image
-              height="100%"
-              maxHeight={"100%"}
-              src={
-                "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
-              }
-              objectFit={"contain"}
-            />
-          </Flex>
-          <Flex direction={"column"}>
+            <SliderTrack width={"3rem"} bg="neutral.black">
+              <SliderFilledTrack bg={"neutral.black"} />
+            </SliderTrack>
+            <SliderThumb boxSize={6} mt="1px" bg="brand.secondary" />
+          </Slider>
+          <Flex
+            width={"100%"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
             <Flex
-              onClick={() => setShowText(!showText)}
-              width={"100%"}
+              height="3rem"
               alignItems={"center"}
-              justifyContent={"space-between"}
-              p="1rem"
-            >
-              <Flex direction="column">
-                <Text textStyle={"body.small"}>Collection name</Text>
-                <Text textStyle={"heading.h1"}>Content name</Text>
-                <Text textStyle={"detailTextSmall"}>3 min.</Text>
-              </Flex>
-              {showText ? <DownIcon /> : <UpIcon />}
-            </Flex>
-            <Collapse in={showText}>
-              <Flex direction="column" p="0 1rem 1rem 1rem" gridRowGap="0.5rem">
-                <Text textStyle="bodySmall">Description</Text>
-                <Text textStyle="body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </Text>
-                <Text textStyle="bodySmall">Activity type</Text>
-                <Text textStyle="body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </Text>
-              </Flex>
-            </Collapse>
-            <Flex
               direction="column"
-              background={
-                "linear-gradient(144deg, rgba(250, 137, 4, 0.25) 21.07%, rgba(250, 151, 4, 0.00) 83.54%)"
-              }
-              alignItems="center"
-              p="1rem"
-              px="1.5rem"
-              gridRowGap="1rem"
+              justifyContent={"center"}
+              onClick={rewind}
             >
-              <audio
-                ref={audioRef}
-                src={url}
-                onLoadedData={handleLoadedData}
-                onTimeUpdate={handleTimeUpdate}
-              />
+              <RewindBackIcon />
+              <Text textStyle={"detailTextSmall"}>15 sec.</Text>
+            </Flex>
+            <Flex onClick={togglePlay} height="3rem" alignItems={"center"}>
+              {isPlaying ? <PauseIcon /> : <PlayIcon />}
+            </Flex>
 
-              <Slider
-                aria-label="audio-slider"
-                value={currentTime}
-                max={duration}
-                step={0.01}
-                onChange={handleSeekChange}
-                onChangeStart={handleSeekStart}
-                onChangeEnd={handleSeekEnd}
-                size={"sm"}
-              >
-                <SliderTrack width={"3rem"} bg="neutral.black">
-                  <SliderFilledTrack bg={"neutral.black"} />
-                </SliderTrack>
-                <SliderThumb boxSize={6} mt="1px" bg="brand.secondary" />
-              </Slider>
-              <Flex
-                width={"100%"}
-                justifyContent={"space-between"}
-                alignItems={"center"}
-              >
-                <Flex
-                  height="3rem"
-                  alignItems={"center"}
-                  direction="column"
-                  justifyContent={"center"}
-                  onClick={rewind}
-                >
-                  <RewindBackIcon />
-                  <Text textStyle={"detailTextSmall"}>15 sec.</Text>
-                </Flex>
-                <Flex onClick={togglePlay} height="3rem" alignItems={"center"}>
-                  {isPlaying ? <PauseIcon /> : <PlayIcon />}
-                </Flex>
-
-                <Flex
-                  height="3rem"
-                  alignItems={"center"}
-                  direction="column"
-                  justifyContent={"center"}
-                  onClick={forward}
-                >
-                  <RewindFowardIcon />
-                  <Text textStyle={"detailTextSmall"}>15 sec.</Text>
-                </Flex>
-              </Flex>
+            <Flex
+              height="3rem"
+              alignItems={"center"}
+              direction="column"
+              justifyContent={"center"}
+              onClick={forward}
+            >
+              <RewindFowardIcon />
+              <Text textStyle={"detailTextSmall"}>15 sec.</Text>
             </Flex>
           </Flex>
-        </DrawerBody>
-      </DrawerContent>
-    </Drawer>
+        </Flex>
+      </Flex>
+    </MotionFlex>,
+    mounter
   );
 };
 
