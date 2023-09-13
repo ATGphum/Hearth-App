@@ -1,6 +1,6 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import MusicDrawer from "./MusicDrawer";
-import JourneyDrawer from "./JourneysDrawer";
+import ExperienceGroupsDrawer from "./ExperienceGroupsDrawer";
 
 function Library() {
   const {
@@ -25,7 +25,7 @@ function Library() {
       {musicDrawerIsOpen && (
         <MusicDrawer onClose={musicDrawerOnClose} isOpen={musicDrawerIsOpen} />
       )}
-      <JourneyDrawer
+      <ExperienceGroupsDrawer
         onClose={journeyDrawerOnClose}
         isOpen={journeyDrawerIsOpen}
       />
