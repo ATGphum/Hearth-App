@@ -75,6 +75,7 @@ const ExperienceGroups = ({
       right="0"
       bottom="0"
       left="0"
+      overflowY={"auto"}
     >
       <Flex
         direction="column"

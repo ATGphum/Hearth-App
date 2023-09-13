@@ -11,37 +11,28 @@ function HomePage() {
 
   return (
     <Layout hidePadding>
-      <Flex
-        id="mounter"
-        overflow={"hidden"}
-        position={"relative"}
-        direction="column"
-        flex="1"
-        width="100%"
-      >
-        <Flex direction="column" flex="1" width="100%">
-          {page === 0 && (
-            <Flex direction="column" flex="1" width="100%">
-              <Today />
-            </Flex>
-          )}
-          {page === 1 && (
-            <Flex direction="column" flex="1" width="100%">
-              <Library />
-            </Flex>
-          )}
-          {page === 2 && (
-            <Flex direction="column" flex="1" width="100%">
-              <LogoutButton />
-            </Flex>
-          )}
-        </Flex>
-        <NavBar
-          tabChange={(pageNumber: number) => {
-            setPage(pageNumber);
-          }}
-        />
+      <Flex direction="column" flex="1" width="100%">
+        {page === 0 && (
+          <Flex direction="column" flex="1" width="100%">
+            <Today />
+          </Flex>
+        )}
+        {page === 1 && (
+          <Flex direction="column" flex="1" width="100%">
+            <Library />
+          </Flex>
+        )}
+        {page === 2 && (
+          <Flex direction="column" flex="1" width="100%">
+            <LogoutButton />
+          </Flex>
+        )}
       </Flex>
+      <NavBar
+        tabChange={(pageNumber: number) => {
+          setPage(pageNumber);
+        }}
+      />
     </Layout>
   );
 }
