@@ -22,6 +22,7 @@ model User {
   email_reminders Boolean? @default(false)
   instagram_username String? @db.VarChar(255)
   connection_time ConnectionTimeChoices? 
+  subscription_status Boolean @default(false)
 }
 
 enum ConnectionTimeChoices {
@@ -29,3 +30,4 @@ enum ConnectionTimeChoices {
   Midday
   Evening
 }
+

@@ -1,5 +1,4 @@
 import {
-  Box,
   Collapse,
   Drawer,
   DrawerBody,
@@ -7,22 +6,20 @@ import {
   DrawerOverlay,
   Flex,
   Image,
-  SlideFade,
   Slider,
   SliderFilledTrack,
   SliderThumb,
   SliderTrack,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import CrossIcon from "../icons/CrossIcon";
+import DownIcon from "../icons/DownIcon";
 import PauseIcon from "../icons/PauseIcon";
 import PlayIcon from "../icons/PlayIcon";
 import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
-import DownIcon from "../icons/DownIcon";
 
 interface Props {
   isOpen: boolean;
@@ -108,7 +105,7 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
         >
           <Flex justifyContent={"flex-end"}>
             <Flex onClick={onClose} p="1rem">
-              <DownIcon />
+              <CrossIcon />
             </Flex>
           </Flex>
           <Flex
@@ -162,6 +159,7 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
               }
               alignItems="center"
               p="1rem"
+              px="1.5rem"
               gridRowGap="1rem"
             >
               <audio

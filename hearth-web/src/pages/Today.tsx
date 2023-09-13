@@ -1,4 +1,4 @@
-import { Collapse, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { Collapse, Flex, Text, useDisclosure, Image } from "@chakra-ui/react";
 import UpIcon from "../icons/UpIcon";
 import { useState } from "react";
 import DownIcon from "../icons/DownIcon";
@@ -51,11 +51,21 @@ function Today() {
           <Text textStyle={"heading.h1"}>Up next</Text>
           <ArrowRightIcon />
         </Flex>
-        <Flex>
-          <Flex direction="column" alignItems={"flex-start"}>
+        <Flex justifyContent={"space-between"}>
+          <Flex direction="column" alignItems={"flex-start"} textAlign={"left"}>
             <Text textStyle="detailText">3-Day Connection Challenge</Text>
             <Text textStyle="heading.h1">Introduction</Text>
             <Text textStyle="detailText">3 minutes</Text>
+          </Flex>
+          <Flex minH={0} flexShrink={1} pl="1rem" maxH={"5rem"} maxW="5.5rem">
+            <Image
+              width="100%"
+              maxWidth={"100%"}
+              src={
+                "https://upload.wikimedia.org/wikipedia/en/9/9a/Trollface_non-free.png"
+              }
+              objectFit={"contain"}
+            />
           </Flex>
         </Flex>
       </Flex>
