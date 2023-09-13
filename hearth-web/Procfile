@@ -1,1 +1,1 @@
-web: bin/start-nginx-static
+web: npm run build && bin/start-nginx-static
