@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Flex, keyframes } from "@chakra-ui/react";
-import { m } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
 
@@ -32,7 +32,7 @@ function LoadingPage() {
       <Flex flex="1" alignItems="center" justifyContent="center">
         <Flex pb="2rem">
           <Flex
-            as={m.div}
+            as={motion.div}
             animation={animation}
             // not work: transition={{ ... }}
             padding="2"
