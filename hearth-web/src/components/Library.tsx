@@ -2,6 +2,7 @@ import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import CoursesPage from "../pages/CoursesPage";
 import MusicDrawer from "./MusicDrawer";
+// import ExperienceGroupsDrawer from "./ExperienceGroupsDrawer";
 
 const MotionFlex = motion(Flex);
 
