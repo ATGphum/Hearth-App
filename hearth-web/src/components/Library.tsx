@@ -47,7 +47,7 @@ function Library() {
           width="100%"
           flex="1"
           p="1rem"
-          pt="0"
+          pt="1rem"
           gridRowGap="1rem"
           overflow={"hidden"}
           position={"relative"}

@@ -18,9 +18,11 @@ const ExperienceGroupPage = ({ isOpen, onClose }: Props) => {
     onOpen: drawerOnOpen,
     onClose: drawerOnClose,
   } = useDisclosure();
+
+  const mounter = document.getElementById("mounter");
+  if (!mounter) return null;
   return ReactDOM.createPortal(
     <MotionFlex
-      visibility={isOpen ? "visible" : "hidden"}
       initial={{ x: "100%" }}
       animate={{ x: isOpen ? "0%" : "100%" }}
       exit={{ x: "100%" }}
@@ -87,7 +89,7 @@ const ExperienceGroupPage = ({ isOpen, onClose }: Props) => {
         </Flex>
       </Flex>
     </MotionFlex>,
-    document.body
+    mounter
   );
 };
 
