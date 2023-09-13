@@ -86,7 +86,6 @@ function Library() {
             gridColumnGap="1rem"
             onClick={journeyDrawerOnOpen}
             justifyContent={"center"}
-            height="50rem"
           >
             <Image
               h={"3rem"}

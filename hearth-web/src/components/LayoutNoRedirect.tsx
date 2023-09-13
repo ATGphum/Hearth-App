@@ -15,6 +15,8 @@ export const LayoutNoRedirect = ({ children, hidePadding }: Props) => {
       minHeight="100vh"
       padding={hidePadding ? "0rem" : "1rem"}
       id="mounter"
+      position="relative"
+      overflow={"hidden"}
     >
       <Flex
         direction="column"
