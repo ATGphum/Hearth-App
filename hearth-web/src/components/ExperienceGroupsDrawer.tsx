@@ -36,7 +36,9 @@ const ExperienceGroupsDrawer = ({ isOpen, onClose }: Props) => {
       </AnimatePresence>
       <MotionFlex
         initial={{ x: "100%" }}
-        animate={{ x: isOpen ? "0%" : "100%" }}
+        animate={{
+          x: experienceGroupDrawerIsOpen ? "-50%" : isOpen ? "0%" : "100%",
+        }}
         exit={{ x: "100%" }}
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}

@@ -1,9 +1,9 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraBaseProvider } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import "./App.css";
+import RenderRoutes from "./Routes";
 import { UserProvider } from "./context/UserContext";
 import { request } from "./core/api";
-import RenderRoutes from "./Routes";
 import theme from "./theme/chakra-theme";
 
 function App() {
@@ -22,7 +22,7 @@ interface ProviderProps {
 
 const AppContextProviders = ({ children }: ProviderProps) => {
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraBaseProvider theme={theme}>
       <SWRConfig
         value={{
           fetcher: (url: string) =>
@@ -43,6 +43,6 @@ const AppContextProviders = ({ children }: ProviderProps) => {
       >
         <UserProvider>{children}</UserProvider>
       </SWRConfig>
-    </ChakraProvider>
+    </ChakraBaseProvider>
   );
 };
