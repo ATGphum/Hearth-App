@@ -15,14 +15,14 @@ export const LayoutNoRedirect = ({ children, hidePadding }: Props) => {
       minHeight="100vh"
       padding={hidePadding ? "0rem" : "1rem"}
     >
-      <Flex
+      {/* <Flex
         direction="column"
         justifyContent={"center"}
         pb="1rem"
         pt={hidePadding ? "1rem" : "0rem"}
       >
         <Image src={logo} alt="Hearth" />
-      </Flex>
+      </Flex> */}
       {children}
     </Flex>
   );

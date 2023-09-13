@@ -1,15 +1,6 @@
-import {
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerOverlay,
-  Flex,
-  Image,
-  Text,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { AnimatePresence, motion } from "framer-motion";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
-import { useSwipeable } from "react-swipeable";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import ExperienceGroupDrawer from "./ExperienceGroupDrawer";
 
@@ -18,30 +9,57 @@ interface Props {
   onClose: () => void;
 }
 
-const ExperienceGroupsDrawer = ({ isOpen, onClose }: Props) => {
-  const swipeClose = useSwipeable({
-    onSwipedRight: () => onClose(),
-  });
+const MotionFlex = motion(Flex);
 
+const ExperienceGroupsDrawer = ({ isOpen, onClose }: Props) => {
   const {
     isOpen: experienceGroupDrawerIsOpen,
     onOpen: experienceGroupDrawerOnOpen,
     onClose: experienceGroupDrawerOnClose,
   } = useDisclosure();
   return (
-    <Drawer placement={"right"} isOpen={isOpen} onClose={onClose} size="full">
-      <DrawerOverlay />
-      <DrawerContent maxHeight={"100vh"} {...swipeClose}>
-        <DrawerBody
+    <Flex
+      direction="column"
+      width="100%"
+      flex="1"
+      overflow={"hidden"}
+      position={"relative"}
+      zIndex={5}
+    >
+      <AnimatePresence>
+        {experienceGroupDrawerIsOpen && (
+          <ExperienceGroupDrawer
+            onClose={experienceGroupDrawerOnClose}
+            isOpen={experienceGroupDrawerIsOpen}
+          />
+        )}
+      </AnimatePresence>
+      <MotionFlex
+        initial={{ x: "100%" }}
+        animate={{ x: isOpen ? "0%" : "100%" }}
+        exit={{ x: "100%" }}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        onDragEnd={(event, info) => {
+          if (info.velocity.x > 0) {
+            onClose();
+          }
+        }}
+        transition={{ damping: 0 }}
+        position="absolute"
+        top="0"
+        right="0"
+        bottom="0"
+        left="0"
+      >
+        <Flex
+          direction="column"
+          width="100%"
           display="flex"
           flexDirection="column"
           background="linear-gradient(175deg, #B694F7 3.42%, #F4D9BB 48.04%, #F0D5BA 96.64%)"
           p={"1rem"}
         >
-          <ExperienceGroupDrawer
-            onClose={experienceGroupDrawerOnClose}
-            isOpen={experienceGroupDrawerIsOpen}
-          />
           <Flex onClick={onClose}>
             <ArrowLeftIcon />
           </Flex>
@@ -81,9 +99,9 @@ const ExperienceGroupsDrawer = ({ isOpen, onClose }: Props) => {
               </Flex>
             </Flex>
           </Flex>
-        </DrawerBody>
-      </DrawerContent>
-    </Drawer>
+        </Flex>
+      </MotionFlex>
+    </Flex>
   );
 };
 

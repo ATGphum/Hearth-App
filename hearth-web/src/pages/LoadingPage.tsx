@@ -1,16 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import {
-  Box,
-  Container,
-  Flex,
-  Image,
-  Spinner,
-  keyframes,
-} from "@chakra-ui/react";
+import { Flex, keyframes } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
-import ShapeOne from "../images/shape-one.png";
-import { motion } from "framer-motion";
 
 function LoadingPage() {
   const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
