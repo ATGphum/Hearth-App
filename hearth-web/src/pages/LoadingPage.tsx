@@ -24,8 +24,8 @@ function LoadingPage() {
 
   const animationKeyframes = keyframes`
   0% { transform: scale(1) rotate(0); border-radius: 20%; }
-  25% { transform: scale(2) rotate(0); border-radius: 20%; }
-  50% { transform: scale(2) rotate(270deg); border-radius: 50%; }
+  25% { transform: scale(3) rotate(0); border-radius: 20%; }
+  50% { transform: scale(3) rotate(270deg); border-radius: 50%; }
   75% { transform: scale(1) rotate(270deg); border-radius: 50%; }
   100% { transform: scale(1) rotate(0); border-radius: 20%; }
 `;
