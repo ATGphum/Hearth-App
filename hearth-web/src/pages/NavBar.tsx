@@ -7,11 +7,11 @@ interface navProps {
 const NavBar = ({ tabChange }: navProps) => {
   return (
     <Flex
-      justifyContent={"space-evenly"}
+      justifyContent={"space-around"}
       width="100%"
       position="sticky"
       bottom={0}
-      bg="crimson"
+      bg="linear-gradient(148deg, rgba(250, 151, 4, 0.25) 19.23%, rgba(250, 151, 4, 0.00) 81.73%)"
     >
       <Flex p="1rem" onClick={() => tabChange(0)}>
         1

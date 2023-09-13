@@ -42,7 +42,7 @@ function Library() {
           m="1rem"
           height="6rem"
           src={
-            "https://upload.wikimedia.org/wikipedia/en/9/9a/Trollface_non-free.png"
+            "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
           }
           objectFit={"contain"}
         />
@@ -55,7 +55,7 @@ function Library() {
       <Flex direction="column" textAlign={"left"} gridRowGap="0.75rem">
         <Text textStyle={"heading.h2"}>Connection Journeys</Text>
         <Text textStyle={"body"}>
-          Directed paths for making conneciton time a habit.
+          Directed paths for making connection time a habit.
         </Text>
         <Flex
           borderRadius="2.75rem"
@@ -65,11 +65,12 @@ function Library() {
           alignItems={"center"}
           gridColumnGap="1rem"
           onClick={journeyDrawerOnOpen}
+          justifyContent={"center"}
         >
           <Image
             h={"3rem"}
             src={
-              "https://upload.wikimedia.org/wikipedia/en/9/9a/Trollface_non-free.png"
+              "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
             }
             objectFit={"contain"}
           />

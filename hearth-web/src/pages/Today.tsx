@@ -62,7 +62,7 @@ function Today() {
               width="100%"
               maxWidth={"100%"}
               src={
-                "https://upload.wikimedia.org/wikipedia/en/9/9a/Trollface_non-free.png"
+                "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
               }
               objectFit={"contain"}
             />
