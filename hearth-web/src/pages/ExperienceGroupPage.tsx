@@ -2,7 +2,8 @@ import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
-import MusicDrawer from "./MusicDrawer";
+import MusicDrawer from "../components/MusicDrawer";
+import ReactDOM from "react-dom";
 
 interface Props {
   isOpen: boolean;
@@ -11,13 +12,13 @@ interface Props {
 
 const MotionFlex = motion(Flex);
 
-const ExperienceGroupDrawer = ({ isOpen, onClose }: Props) => {
+const ExperienceGroupPage = ({ isOpen, onClose }: Props) => {
   const {
     isOpen: drawerIsOpen,
     onOpen: drawerOnOpen,
     onClose: drawerOnClose,
   } = useDisclosure();
-  return (
+  return ReactDOM.createPortal(
     <MotionFlex
       visibility={isOpen ? "visible" : "hidden"}
       initial={{ x: "100%" }}
@@ -85,8 +86,9 @@ const ExperienceGroupDrawer = ({ isOpen, onClose }: Props) => {
           </Flex>
         </Flex>
       </Flex>
-    </MotionFlex>
+    </MotionFlex>,
+    document.body
   );
 };
 
-export default ExperienceGroupDrawer;
+export default ExperienceGroupPage;

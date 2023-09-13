@@ -2,7 +2,8 @@ import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
-import ExperienceGroupDrawer from "./ExperienceGroupDrawer";
+import ExperienceGroupPage from "./ExperienceGroupPage";
+import ReactDOM from "react-dom";
 
 interface Props {
   isOpen: boolean;
@@ -11,7 +12,7 @@ interface Props {
 
 const MotionFlex = motion(Flex);
 
-const ExperienceGroupsDrawer = ({ isOpen, onClose }: Props) => {
+const ExperienceGroupsPage = ({ isOpen, onClose }: Props) => {
   const {
     isOpen: experienceGroupDrawerIsOpen,
     onOpen: experienceGroupDrawerOnOpen,
@@ -28,7 +29,7 @@ const ExperienceGroupsDrawer = ({ isOpen, onClose }: Props) => {
     >
       <AnimatePresence>
         {experienceGroupDrawerIsOpen && (
-          <ExperienceGroupDrawer
+          <ExperienceGroupPage
             onClose={experienceGroupDrawerOnClose}
             isOpen={experienceGroupDrawerIsOpen}
           />
@@ -107,4 +108,4 @@ const ExperienceGroupsDrawer = ({ isOpen, onClose }: Props) => {
   );
 };
 
-export default ExperienceGroupsDrawer;
+export default ExperienceGroupsPage;

@@ -31,3 +31,14 @@ enum ConnectionTimeChoices {
   Evening
 }
 
+model Experience {
+   id Int @id @default(autoincrement())
+   experience_number Int
+   name String @db.VarChar(255)
+   description String 
+   duration String @db.VarChar(255)
+   audio_link String
+   image_link String
+   color String @db.VarChar(255)
+   previous_tutorial Experience?
+}

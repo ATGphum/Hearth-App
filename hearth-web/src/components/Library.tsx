@@ -1,6 +1,6 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import MusicDrawer from "./MusicDrawer";
-import ExperienceGroupsDrawer from "./ExperienceGroupsDrawer";
+import ExperienceGroupsPage from "../pages/ExperienceGroupsPage";
 import { AnimatePresence, motion } from "framer-motion";
 
 const MotionFlex = motion(Flex);
@@ -26,7 +26,7 @@ function Library() {
     >
       <AnimatePresence>
         {journeyDrawerIsOpen && (
-          <ExperienceGroupsDrawer
+          <ExperienceGroupsPage
             onClose={journeyDrawerOnClose}
             isOpen={journeyDrawerIsOpen}
           />
@@ -47,6 +47,7 @@ function Library() {
           width="100%"
           flex="1"
           p="1rem"
+          pt="0"
           gridRowGap="1rem"
           overflow={"hidden"}
           position={"relative"}
