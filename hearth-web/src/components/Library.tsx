@@ -1,11 +1,17 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import MusicDrawer from "./MusicDrawer";
+import JourneyDrawer from "./JourneysDrawer";
 
 function Library() {
   const {
-    isOpen: drawerIsOpen,
-    onOpen: drawerOnOpen,
-    onClose: drawerOnClose,
+    isOpen: musicDrawerIsOpen,
+    onOpen: musicDrawerOnOpen,
+    onClose: musicDrawerOnClose,
+  } = useDisclosure();
+  const {
+    isOpen: journeyDrawerIsOpen,
+    onOpen: journeyDrawerOnOpen,
+    onClose: journeyDrawerOnClose,
   } = useDisclosure();
   return (
     <Flex
@@ -16,7 +22,13 @@ function Library() {
       pt={0}
       gridRowGap="1rem"
     >
-      <MusicDrawer onClose={drawerOnClose} isOpen={drawerIsOpen} />
+      {musicDrawerIsOpen && (
+        <MusicDrawer onClose={musicDrawerOnClose} isOpen={musicDrawerIsOpen} />
+      )}
+      <JourneyDrawer
+        onClose={journeyDrawerOnClose}
+        isOpen={journeyDrawerIsOpen}
+      />
       <Flex
         direction="column"
         p="2rem"
@@ -24,7 +36,7 @@ function Library() {
         width="100%"
         borderRadius="2.75rem"
         borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-        onClick={drawerOnOpen}
+        onClick={musicDrawerOnOpen}
       >
         <Image
           m="1rem"
@@ -47,11 +59,12 @@ function Library() {
         </Text>
         <Flex
           borderRadius="2.75rem"
-          background="linear-gradient(155deg, rgba(251, 107, 105, 0.50) 15.94%, rgba(251, 107, 105, 0.00) 85.29%)"
+          background="linear-gradient(162deg, #B694F7 12.43%, rgba(182, 148, 247, 0.00) 88.3%)"
           borderBottom="1px solid rgba(0, 0, 0, 0.40)"
           p="1rem"
           alignItems={"center"}
           gridColumnGap="1rem"
+          onClick={journeyDrawerOnOpen}
         >
           <Image
             h={"3rem"}
