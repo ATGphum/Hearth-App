@@ -9,15 +9,15 @@ import "@fontsource/jost";
 import colors from "./colors";
 import textStyles from "./text-styles";
 
-import chakraTheme from "@chakra-ui/theme";
-const { Slider } = chakraTheme.components;
+// import chakraTheme from "@chakra-ui/theme";
+// const { Slider } = chakraTheme.components;
 
 const theme = {
   fonts: { heading: `Jost, "Inter"`, body: `Jost, "Inter"` },
   textStyles: textStyles,
   colors: colors,
   components: {
-    Slider,
+    // Slider,
   },
   config: {
     useSystemColorMode: false,
