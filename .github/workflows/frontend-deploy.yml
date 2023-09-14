@@ -62,7 +62,7 @@ jobs:
           heroku_app_name: "test-frontend-heroku-app" #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: "hearth-web"
-          buildpack: "heroku/nodejs, heroku-community/nginx"
+          buildpack: "heroku-community/nginx"
         env:
           HD_VITE_API_HOST: http://127.0.0.1:8000/ # Will need to change to the server url when backend has been deployed
           HD_VITE_ENV: production
