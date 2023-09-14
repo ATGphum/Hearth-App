@@ -6,6 +6,7 @@ import {
   SliderThumb,
   SliderTrack,
   Text,
+  Image,
 } from "@chakra-ui/react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import { useEffect, useRef, useState } from "react";

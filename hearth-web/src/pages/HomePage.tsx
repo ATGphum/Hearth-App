@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Layout } from "../components/Layout";
 
 import Library from "../components/Library";
-import LogoutButton from "../components/buttons/LogoutButton";
+import LogoutButton from "../components/Buttons/LogoutButton";
 import NavBar from "./NavBar";
 import Today from "./Today";
 

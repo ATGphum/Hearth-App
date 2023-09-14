@@ -1,6 +1,6 @@
 import { Collapse, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
-import MusicDrawer from "../components/MusicDrawer";
+// import MusicDrawer from "../components/MusicDrawer";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import DownIcon from "../icons/DownIcon";
 import UpIcon from "../icons/UpIcon";
@@ -8,9 +8,9 @@ import UpIcon from "../icons/UpIcon";
 function Today() {
   const [showQuote, setShowQuote] = useState(true);
   const {
-    isOpen: drawerIsOpen,
+    // isOpen: drawerIsOpen,
     onOpen: drawerOnOpen,
-    onClose: drawerOnClose,
+    // onClose: drawerOnClose,
   } = useDisclosure();
   return (
     <Flex

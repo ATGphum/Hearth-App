@@ -1,4 +1,5 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Image } from "@chakra-ui/react";
+import logo from "../svg/logo.svg";
 
 interface Props {
   children: React.ReactNode;
