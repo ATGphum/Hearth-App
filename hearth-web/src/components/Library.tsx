@@ -1,7 +1,7 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
-import MusicDrawer from "./MusicDrawer";
-import CoursesPage from "../pages/CoursesPage";
 import { AnimatePresence, motion } from "framer-motion";
+import CoursesPage from "../pages/CoursesPage";
+import MusicDrawer from "./MusicDrawer";
 
 const MotionFlex = motion(Flex);
 
@@ -32,7 +32,14 @@ function Library() {
           />
         )}
       </AnimatePresence>
-
+      <AnimatePresence>
+        {musicDrawerIsOpen && (
+          <MusicDrawer
+            onClose={musicDrawerOnClose}
+            isOpen={musicDrawerIsOpen}
+          />
+        )}
+      </AnimatePresence>
       <MotionFlex
         animate={{ x: journeyDrawerIsOpen ? "-50%" : "0%" }}
         transition={{ damping: 300 }}

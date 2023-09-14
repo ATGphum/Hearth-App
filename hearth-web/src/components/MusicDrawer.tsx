@@ -1,9 +1,5 @@
 import {
   Collapse,
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerOverlay,
   Flex,
   Image,
   Slider,
@@ -12,7 +8,9 @@ import {
   SliderTrack,
   Text,
 } from "@chakra-ui/react";
+import { LazyMotion, domAnimation, m } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom";
 import CrossIcon from "../icons/CrossIcon";
 import DownIcon from "../icons/DownIcon";
 import PauseIcon from "../icons/PauseIcon";
@@ -20,8 +18,6 @@ import PlayIcon from "../icons/PlayIcon";
 import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
-import ReactDOM from "react-dom";
-import { LazyMotion, domAnimation, m } from "framer-motion";
 
 interface Props {
   isOpen: boolean;
@@ -106,7 +102,7 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
         }}
         exit={{ y: "100%" }}
         dragConstraints={{ left: 0, right: 0 }}
-        onDragEnd={(event, info) => {
+        onDragEnd={(_, info) => {
           if (info.velocity.x > 0) {
             onClose();
           }

@@ -1,10 +1,9 @@
-import { Collapse, Flex, Text, useDisclosure, Image } from "@chakra-ui/react";
-import UpIcon from "../icons/UpIcon";
+import { Collapse, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
-import DownIcon from "../icons/DownIcon";
-import ArrowRightIcon from "../icons/ArrowRightIcon";
 import MusicDrawer from "../components/MusicDrawer";
-import { AnimatePresence } from "framer-motion";
+import ArrowRightIcon from "../icons/ArrowRightIcon";
+import DownIcon from "../icons/DownIcon";
+import UpIcon from "../icons/UpIcon";
 
 function Today() {
   const [showQuote, setShowQuote] = useState(true);

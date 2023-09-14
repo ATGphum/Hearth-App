@@ -70,7 +70,7 @@ const Courses = ({
         exit={{ x: "100%" }}
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
-        onDragEnd={(event, info) => {
+        onDragEnd={(_, info) => {
           if (info.velocity.x > 0) {
             onClose();
           }
