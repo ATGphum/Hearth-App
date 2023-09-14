@@ -40,7 +40,6 @@ function LoadingPage() {
             width="4rem"
             height="4rem"
             display="flex"
-            drag={true}
           />
         </Flex>
       </Flex>
