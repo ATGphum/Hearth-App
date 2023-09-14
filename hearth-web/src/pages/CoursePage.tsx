@@ -9,21 +9,26 @@ import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import MusicDrawer from "../components/MusicDrawer";
 import ReactDOM from "react-dom";
-import { Journey } from "../core/types";
+import { Experience, Journey } from "../core/types";
+import { useState } from "react";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  openedJourney: Journey;
+  openedCourse: Journey;
 }
 
 const MotionFlex = motion(Flex);
-const CoursePage = ({ isOpen, onClose, openedJourney }: Props) => {
+const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
   const {
     isOpen: drawerIsOpen,
     onOpen: drawerOnOpen,
     onClose: drawerOnClose,
   } = useDisclosure();
+
+  const [openedExperience, setOpenedExperience] = useState<
+    Experience | undefined
+  >(undefined);
 
   const mounter = document.getElementById("mounter");
   if (!mounter) return null;
@@ -47,14 +52,18 @@ const CoursePage = ({ isOpen, onClose, openedJourney }: Props) => {
         bottom="0"
         left="0"
         zIndex={10}
-        background={` linear-gradient(175deg, ${openedJourney.color} 3.42%, #F4D9BB 48.04%, #F0D5BA 96.64%)`}
+        background={` linear-gradient(175deg, ${openedCourse?.color} 3.42%, #F4D9BB 48.04%, #F0D5BA 96.64%)`}
         p="1rem"
         display={"flex"}
         direction={"column"}
       >
         <AnimatePresence>
-          {drawerIsOpen && (
-            <MusicDrawer onClose={drawerOnClose} isOpen={drawerIsOpen} />
+          {drawerIsOpen && openedExperience && (
+            <MusicDrawer
+              onClose={drawerOnClose}
+              isOpen={drawerIsOpen}
+              openedExperience={openedExperience}
+            />
           )}
         </AnimatePresence>
         <Flex onClick={onClose}>
@@ -69,31 +78,26 @@ const CoursePage = ({ isOpen, onClose, openedJourney }: Props) => {
             }
             objectFit={"contain"}
           />
-          <Text textStyle="heading.h1">{openedJourney.name}</Text>
+          <Text textStyle="heading.h1">{openedCourse?.name}</Text>
           <Text textStyle="body" textAlign="center">
-            {openedJourney.description}
+            {openedCourse?.description}
           </Text>
           <Flex direction="column" gridRowGap="0.5rem" mt="0.5rem">
-            <Flex
-              justifyContent={"space-between"}
-              p="1rem"
-              bg="#F5E099"
-              borderBottom="1px solid rgba(0, 0, 0, 0.60)"
-              borderRadius="2.75rem"
-              onClick={drawerOnOpen}
-            >
-              <Text>Introduction</Text> <ArrowRightIcon />
-            </Flex>
-            <Flex
-              justifyContent={"space-between"}
-              p="1rem"
-              bg="#F5E099"
-              borderBottom="1px solid rgba(0, 0, 0, 0.60)"
-              borderRadius="2.75rem"
-              onClick={drawerOnOpen}
-            >
-              <Text>3-Day Connection</Text> <ArrowRightIcon />
-            </Flex>
+            {openedCourse?.experiences.map((exp) => (
+              <Flex
+                justifyContent={"space-between"}
+                p="1rem"
+                bg={exp.color}
+                borderBottom="1px solid rgba(0, 0, 0, 0.60)"
+                borderRadius="2.75rem"
+                onClick={() => {
+                  setOpenedExperience(exp);
+                  drawerOnOpen();
+                }}
+              >
+                <Text>{exp.name}</Text> <ArrowRightIcon />
+              </Flex>
+            ))}
           </Flex>
         </Flex>
       </MotionFlex>

@@ -18,18 +18,17 @@ import PlayIcon from "../icons/PlayIcon";
 import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
+import { Experience } from "../core/types";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  openedExperience: Experience;
 }
 
 const MotionFlex = m(Flex);
 
-const MusicDrawer = ({ isOpen, onClose }: Props) => {
-  const url =
-    "https://ia600907.us.archive.org/0/items/tvtunes_21704/Naruto%20Shippuden%20-%20Sadness%20and%20Sorrow%20-%20Full.mp3";
-
+const MusicDrawer = ({ isOpen, onClose, openedExperience }: Props) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
@@ -117,7 +116,7 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
         display="flex"
         flexDirection="column"
         justifyContent={"space-between"}
-        background="linear-gradient(175deg, #F058FC 3.42%, #F4D9BB 64.78%, #F0D5BA 96.64%)"
+        background={`linear-gradient(175deg, ${openedExperience.color} 3.42%, #F4D9BB 64.78%, #F0D5BA 96.64%)`}
         p={0}
         maxHeight={"100vh"}
         textAlign={"left"}
@@ -132,9 +131,7 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
           <Image
             height="100%"
             maxHeight={"100%"}
-            src={
-              "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
-            }
+            src={openedExperience.image_link}
             objectFit={"contain"}
           />
         </Flex>
@@ -148,23 +145,19 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
           >
             <Flex direction="column">
               <Text textStyle={"body.small"}>Collection name</Text>
-              <Text textStyle={"heading.h1"}>Content name</Text>
-              <Text textStyle={"detailTextSmall"}>3 min.</Text>
+              <Text textStyle={"heading.h1"}>{openedExperience.name}</Text>
+              <Text textStyle={"detailTextSmall"}>
+                {openedExperience.duration} min.
+              </Text>
             </Flex>
             {showText ? <DownIcon /> : <UpIcon />}
           </Flex>
           <Collapse in={showText}>
             <Flex direction="column" p="0 1rem 1rem 1rem" gridRowGap="0.5rem">
               <Text textStyle="bodySmall">Description</Text>
-              <Text textStyle="body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </Text>
+              <Text textStyle="body">{openedExperience.description}</Text>
               <Text textStyle="bodySmall">Activity type</Text>
-              <Text textStyle="body">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </Text>
+              <Text textStyle="body">{openedExperience.activity_type}</Text>
             </Flex>
           </Collapse>
           <Flex
@@ -179,7 +172,7 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
           >
             <audio
               ref={audioRef}
-              src={url}
+              src={openedExperience.audio_link}
               onLoadedData={handleLoadedData}
               onTimeUpdate={handleTimeUpdate}
             />

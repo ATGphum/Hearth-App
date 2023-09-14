@@ -18,4 +18,17 @@ export interface Journey {
   description: string;
   color: string;
   subscription_required: boolean;
+  experiences: Experience[];
+}
+
+export interface Experience {
+  id: number;
+  level: string;
+  name: string;
+  description: string;
+  activity_type: string;
+  duration: string;
+  color: string;
+  audio_link: string;
+  image_link: string;
 }

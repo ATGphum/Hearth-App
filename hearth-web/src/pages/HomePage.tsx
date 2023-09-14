@@ -2,11 +2,10 @@ import { Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import { Layout } from "../components/Layout";
 
+import Library from "../components/Library";
 import LogoutButton from "../components/buttons/LogoutButton";
 import NavBar from "./NavBar";
-import React from "react";
-import Library from "../components/Library";
-const Today = React.lazy(() => import("./Today"));
+import Today from "./Today";
 
 function HomePage() {
   const [page, setPage] = useState(0);

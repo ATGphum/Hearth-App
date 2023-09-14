@@ -19,7 +19,7 @@ function Today() {
       flex="1"
       justifyContent={"space-between"}
     >
-      <MusicDrawer onClose={drawerOnClose} isOpen={drawerIsOpen} />
+      {/* <MusicDrawer onClose={drawerOnClose} isOpen={drawerIsOpen} /> */}
 
       <Flex direction="column" width="100%" padding="2rem" gridRowGap="1rem">
         <Flex

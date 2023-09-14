@@ -42,20 +42,26 @@ model Course {
    next_tutorial Course? @relation("CourseLinkage")
    subscription_required Boolean @default(true)
    category CourseCategoryChoices? 
+   experiences Experience[]
 }
 
 enum CourseCategoryChoices {
   journey
 }
 
-// model Experience {
-//    id Int @id @default(autoincrement())
-//    experience_number Int
-//    name String @db.VarChar(255)
-//    description String 
-//    duration String @db.VarChar(255)
-//    audio_link String
-//    image_link String
-//    color String @db.VarChar(255)
-//    previous_tutorial Experience?
-// }
+model Experience {
+   id Int @id @default(autoincrement())
+   level Int
+   name String @db.VarChar(255)
+   description String 
+   activity_type String 
+   duration String @db.VarChar(255)
+   audio_link String
+   image_link String
+   color String @db.VarChar(255)
+   previous_experience_id Int?  @unique
+   previous_experience Experience? @relation("ExperienceLinkage", fields: [previous_experience_id], references: [id])
+   next_experience Experience? @relation("ExperienceLinkage") 
+   course Course @relation(fields: [course_id], references: [id])
+   course_id Int
+}

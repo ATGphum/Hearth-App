@@ -34,11 +34,11 @@ const CoursesPage = ({ isOpen, onClose }: Props) => {
   return (
     <>
       <AnimatePresence>
-        {courseDrawerIsOpen && (
+        {courseDrawerIsOpen && openedJourney && (
           <CoursePage
             onClose={courseDrawerOnClose}
             isOpen={courseDrawerIsOpen}
-            openedJourney={openedJourney}
+            openedCourse={openedJourney}
           />
         )}
       </AnimatePresence>
