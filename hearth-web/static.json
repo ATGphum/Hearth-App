@@ -1,6 +1,0 @@
-{
-  "root": "hearth-web/dist",
-  "routes": {
-    "/**": "index.html"
-  }
-}
