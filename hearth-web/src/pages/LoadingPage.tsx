@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { Flex, keyframes } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useEffect } from "react";
 import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
 
@@ -30,16 +30,19 @@ function LoadingPage() {
         <Image src={ShapeOne} />
       </Flex> */}
       <Flex flex="1" alignItems="center" justifyContent="center">
-        <Flex
-          as={motion.div}
-          animation={animation}
-          // not work: transition={{ ... }}
-          padding="2"
-          bgGradient="linear(to-l, hsla(296, 94%, 67%, 1), hsla(242, 76%, 56%, 1))"
-          width="4rem"
-          height="4rem"
-          display="flex"
-        />
+        <Flex pb="2rem">
+          <Flex
+            as={m.div}
+            animation={animation}
+            // not work: transition={{ ... }}
+            padding="2"
+            bgGradient="linear(to-l, hsla(296, 94%, 67%, 1), hsla(242, 76%, 56%, 1))"
+            width="4rem"
+            height="4rem"
+            display="flex"
+            drag={true}
+          />
+        </Flex>
       </Flex>
     </LayoutNoRedirect>
   );
