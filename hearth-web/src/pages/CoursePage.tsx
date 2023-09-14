@@ -63,6 +63,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
               onClose={drawerOnClose}
               isOpen={drawerIsOpen}
               openedExperience={openedExperience}
+              parentCourse={openedCourse}
             />
           )}
         </AnimatePresence>

@@ -1,17 +1,16 @@
-import { Collapse, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { Collapse, Flex, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import MusicDrawer from "../components/MusicDrawer";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import DownIcon from "../icons/DownIcon";
 import UpIcon from "../icons/UpIcon";
 
 function Today() {
   const [showQuote, setShowQuote] = useState(true);
-  const {
-    isOpen: drawerIsOpen,
-    onOpen: drawerOnOpen,
-    onClose: drawerOnClose,
-  } = useDisclosure();
+  // const {
+  //   isOpen: drawerIsOpen,
+  //   onOpen: drawerOnOpen,
+  //   onClose: drawerOnClose,
+  // } = useDisclosure();
   return (
     <Flex
       direction="column"
@@ -46,7 +45,7 @@ function Today() {
         borderTopRadius="3rem"
         gridRowGap="0.5rem"
         background="linear-gradient(171deg, #F058FC 6.76%, rgba(248, 231, 96, 0.00) 93.7%);"
-        onClick={drawerOnOpen}
+        // onClick={drawerOnOpen}
       >
         <Flex justifyContent={"space-between"} alignItems={"center"} pr="1rem">
           <Text textStyle={"heading.h1"}>Up next</Text>
