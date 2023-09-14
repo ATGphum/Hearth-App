@@ -1,6 +1,6 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import MusicDrawer from "./MusicDrawer";
-import ExperienceGroupsPage from "../pages/ExperienceGroupsPage";
+import CoursesPage from "../pages/CoursesPage";
 import { AnimatePresence, motion } from "framer-motion";
 
 const MotionFlex = motion(Flex);
@@ -26,7 +26,7 @@ function Library() {
     >
       <AnimatePresence>
         {journeyDrawerIsOpen && (
-          <ExperienceGroupsPage
+          <CoursesPage
             onClose={journeyDrawerOnClose}
             isOpen={journeyDrawerIsOpen}
           />

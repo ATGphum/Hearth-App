@@ -7,7 +7,7 @@ import {
 } from "framer-motion";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
-import ExperienceGroupPage from "./ExperienceGroupPage";
+import CoursePage from "./CoursePage";
 import ReactDOM from "react-dom";
 
 interface Props {
@@ -17,47 +17,47 @@ interface Props {
 
 const MotionFlex = motion(Flex);
 
-const ExperienceGroupsPage = ({ isOpen, onClose }: Props) => {
+const CoursesPage = ({ isOpen, onClose }: Props) => {
   const {
-    isOpen: experienceGroupDrawerIsOpen,
-    onOpen: experienceGroupDrawerOnOpen,
-    onClose: experienceGroupDrawerOnClose,
+    isOpen: courseDrawerIsOpen,
+    onOpen: courseDrawerOnOpen,
+    onClose: courseDrawerOnClose,
   } = useDisclosure();
   return (
     <>
       <AnimatePresence>
-        {experienceGroupDrawerIsOpen && (
-          <ExperienceGroupPage
-            onClose={experienceGroupDrawerOnClose}
-            isOpen={experienceGroupDrawerIsOpen}
+        {courseDrawerIsOpen && (
+          <CoursePage
+            onClose={courseDrawerOnClose}
+            isOpen={courseDrawerIsOpen}
           />
         )}
       </AnimatePresence>
-      <ExperienceGroups
+      <Courses
         isOpen={isOpen}
         onClose={onClose}
-        experienceGroupDrawerIsOpen={experienceGroupDrawerIsOpen}
-        experienceGroupDrawerOnOpen={experienceGroupDrawerOnOpen}
+        courseDrawerIsOpen={courseDrawerIsOpen}
+        courseDrawerOnOpen={courseDrawerOnOpen}
       />
     </>
   );
 };
 
-export default ExperienceGroupsPage;
+export default CoursesPage;
 
-interface ExperienceGroupType {
+interface CourseType {
   isOpen: boolean;
   onClose: () => void;
-  experienceGroupDrawerIsOpen: boolean;
-  experienceGroupDrawerOnOpen: () => void;
+  courseDrawerIsOpen: boolean;
+  courseDrawerOnOpen: () => void;
 }
 
-const ExperienceGroups = ({
+const Courses = ({
   isOpen,
   onClose,
-  experienceGroupDrawerIsOpen,
-  experienceGroupDrawerOnOpen,
-}: ExperienceGroupType) => {
+  courseDrawerIsOpen,
+  courseDrawerOnOpen,
+}: CourseType) => {
   const mounter = document.getElementById("mounter");
   if (!mounter) return null;
   return ReactDOM.createPortal(
@@ -65,7 +65,7 @@ const ExperienceGroups = ({
       <MotionFlex
         initial={{ x: "100%" }}
         animate={{
-          x: experienceGroupDrawerIsOpen ? "-50%" : isOpen ? "0%" : "100%",
+          x: courseDrawerIsOpen ? "-50%" : isOpen ? "0%" : "100%",
         }}
         exit={{ x: "100%" }}
         drag="x"
@@ -111,7 +111,7 @@ const ExperienceGroups = ({
               bg="#F5E099"
               borderBottom="1px solid rgba(0, 0, 0, 0.60)"
               borderRadius="2.75rem"
-              onClick={experienceGroupDrawerOnOpen}
+              onClick={courseDrawerOnOpen}
             >
               <Text>3-Day Connection</Text> <ArrowRightIcon />
             </Flex>
@@ -121,7 +121,7 @@ const ExperienceGroups = ({
               bg="#F5E099"
               borderBottom="1px solid rgba(0, 0, 0, 0.60)"
               borderRadius="2.75rem"
-              onClick={experienceGroupDrawerOnOpen}
+              onClick={courseDrawerOnOpen}
             >
               <Text>3-Day Connection</Text> <ArrowRightIcon />
             </Flex>

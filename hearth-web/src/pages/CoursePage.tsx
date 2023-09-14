@@ -16,7 +16,7 @@ interface Props {
 }
 
 const MotionFlex = motion(Flex);
-const ExperienceGroupPage = ({ isOpen, onClose }: Props) => {
+const CoursePage = ({ isOpen, onClose }: Props) => {
   const {
     isOpen: drawerIsOpen,
     onOpen: drawerOnOpen,
@@ -104,4 +104,4 @@ const ExperienceGroupPage = ({ isOpen, onClose }: Props) => {
   );
 };
 
-export default ExperienceGroupPage;
+export default CoursePage;
