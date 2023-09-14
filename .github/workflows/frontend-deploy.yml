@@ -35,16 +35,6 @@ jobs:
       - name: Build Frontend
         run: npm run build
 
-      # Below checks if the folder 'dist' exists to check whether the build succeeded
-      - name: Check for build success
-        run: |
-          if [ -d "dist" ]; then 
-            echo "Frontend build succeeded!"
-          else
-            echo "Frontend build failed."
-            exit 1
-          fi
-
   # Copied below based on the GitHub Action repo: https://github.com/AkhileshNS/heroku-deploy#license
   deploy:
     needs: frontend-test-build
