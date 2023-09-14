@@ -33,14 +33,19 @@ enum ConnectionTimeChoices {
 
 model Course {
    id Int @id @default(autoincrement())
-   experience_number Int
+   level Int? //only relevant for guided course
    name String @db.VarChar(255)
    description String 
-   duration String @db.VarChar(255)
-   audio_link String
-   image_link String
    color String @db.VarChar(255)
-   previous_tutorial Experience?
+   previous_tutorial_id Int?  @unique
+   previous_tutorial Course? @relation("CourseLinkage", fields: [previous_tutorial_id], references: [id])
+   next_tutorial Course? @relation("CourseLinkage")
+   subscription_required Boolean @default(true)
+   category CourseCategoryChoices? 
+}
+
+enum CourseCategoryChoices {
+  journey
 }
 
 // model Experience {

@@ -1,5 +1,4 @@
-import { FastifyRequest, FastifyReply, FastifyInstance } from "fastify";
-import fastifyEnv from "../config/fastify-env.js";
+import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { userPatchSchema, userResponseSchema } from "./users-serializers.js";
 import { UserPatchParams } from "./users-types.js";
 
