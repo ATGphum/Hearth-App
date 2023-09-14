@@ -1,16 +1,15 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import CoursesPage from "../pages/CoursesPage";
-import MusicDrawer from "./MusicDrawer";
 
 const MotionFlex = motion(Flex);
 
 function Library() {
-  const {
-    isOpen: musicDrawerIsOpen,
-    onOpen: musicDrawerOnOpen,
-    onClose: musicDrawerOnClose,
-  } = useDisclosure();
+  // const {
+  //   isOpen: musicDrawerIsOpen,
+  //   onOpen: musicDrawerOnOpen,
+  //   onClose: musicDrawerOnClose,
+  // } = useDisclosure();
   const {
     isOpen: journeyDrawerIsOpen,
     onOpen: journeyDrawerOnOpen,
@@ -33,12 +32,12 @@ function Library() {
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {musicDrawerIsOpen && (
+        {/* {musicDrawerIsOpen && (
           <MusicDrawer
             onClose={musicDrawerOnClose}
             isOpen={musicDrawerIsOpen}
           />
-        )}
+        )} */}
       </AnimatePresence>
       <MotionFlex
         animate={{ x: journeyDrawerIsOpen ? "-50%" : "0%" }}
@@ -63,7 +62,7 @@ function Library() {
           width="100%"
           borderRadius="2.75rem"
           borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-          onClick={musicDrawerOnOpen}
+          // onClick={musicDrawerOnOpen}
         >
           <Image
             m="1rem"

@@ -18,17 +18,23 @@ import PlayIcon from "../icons/PlayIcon";
 import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
-import { Experience } from "../core/types";
+import { Experience, Journey } from "../core/types";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   openedExperience: Experience;
+  parentCourse: Journey;
 }
 
 const MotionFlex = m(Flex);
 
-const MusicDrawer = ({ isOpen, onClose, openedExperience }: Props) => {
+const MusicDrawer = ({
+  isOpen,
+  onClose,
+  openedExperience,
+  parentCourse,
+}: Props) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
@@ -144,7 +150,7 @@ const MusicDrawer = ({ isOpen, onClose, openedExperience }: Props) => {
             p="1rem"
           >
             <Flex direction="column">
-              <Text textStyle={"body.small"}>Collection name</Text>
+              <Text textStyle={"body.small"}>{parentCourse.name}</Text>
               <Text textStyle={"heading.h1"}>{openedExperience.name}</Text>
               <Text textStyle={"detailTextSmall"}>
                 {openedExperience.duration} min.
