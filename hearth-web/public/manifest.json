@@ -1,15 +1,15 @@
 {
-  "name": "Your App Name",
-  "short_name": "App",
-  "description": "Your App Description",
+  "name": "Hearth",
+  "short_name": "Hearth",
+  "description": "Strengthen your connection to your partner, in only 10 minutes per day",
   "start_url": "https://hearth-app-frontend-84b30cc01305.herokuapp.com",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#542C0D",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "path/to/icon.png",
+      "src": "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png",
       "sizes": "192x192",
       "type": "image/png"
     }
