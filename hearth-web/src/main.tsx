@@ -7,16 +7,18 @@ import viteEnv from "./config/vite-env.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Auth0Provider
-      domain={viteEnv.auth0.domain}
-      clientId={viteEnv.auth0.hearthWeb.id}
-      authorizationParams={{
-        redirect_uri: window.location.origin,
-        audience: viteEnv.auth0.api.audience,
-        scope: viteEnv.auth0.scope,
-      }}
-    >
-      <App />
-    </Auth0Provider>
+    <div className="scrollable-content">
+      <Auth0Provider
+        domain={viteEnv.auth0.domain}
+        clientId={viteEnv.auth0.hearthWeb.id}
+        authorizationParams={{
+          redirect_uri: window.location.origin,
+          audience: viteEnv.auth0.api.audience,
+          scope: viteEnv.auth0.scope,
+        }}
+      >
+        <App />
+      </Auth0Provider>
+    </div>
   </React.StrictMode>
 );
