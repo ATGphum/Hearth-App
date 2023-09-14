@@ -2,7 +2,7 @@ import { Flex, Input, Text } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
-import FormButton from "../components/buttons/FormButton";
+import FormButton from "../components/FormButton";
 import { UserContext } from "../context/UserContext";
 import { patchUser } from "../core/api";
 import { User } from "../core/types";
