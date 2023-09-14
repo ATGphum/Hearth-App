@@ -201,7 +201,16 @@ const MusicDrawer = ({ isOpen, onClose }: Props) => {
               <SliderTrack width={"3rem"} bg="neutral.black">
                 <SliderFilledTrack bg={"neutral.black"} />
               </SliderTrack>
-              <SliderThumb boxSize={6} mt="1px" bg="brand.secondary" />
+              <SliderThumb
+                sx={{
+                  "&:focus-visible": {
+                    boxShadow: "none",
+                  },
+                }}
+                boxSize={6}
+                mt="1px"
+                bg="brand.secondary"
+              />
             </Slider>
             <Flex
               width={"100%"}
