@@ -1,4 +1,4 @@
-import { ChakraBaseProvider } from "@chakra-ui/react";
+import { Box, ChakraBaseProvider, Flex } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import "./App.css";
 import RenderRoutes from "./Routes";
@@ -41,7 +41,9 @@ const AppContextProviders = ({ children }: ProviderProps) => {
             }),
         }}
       >
-        <UserProvider>{children}</UserProvider>
+        <UserProvider>
+          <Box className="scrollable-content">{children}</Box>
+        </UserProvider>
       </SWRConfig>
     </ChakraBaseProvider>
   );
