@@ -1,3 +1,4 @@
+import { CourseCategoryChoices } from "@prisma/client";
 import { FastifyInstance, FastifyRequest } from "fastify";
 // import { courseResponseSchema } from "./courses-serializers.js";
 
@@ -19,7 +20,10 @@ export default async function CoursesController(fastify: FastifyInstance) {
     //   },
     // },
     async (request: FastifyRequest) => {
-      // courses = fastify.prisma.courses.find
+      const courses = fastify.prisma.course.findMany({
+        where: { category: CourseCategoryChoices.journey },
+      });
+      return courses;
     }
   );
 }

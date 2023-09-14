@@ -10,3 +10,12 @@ export interface User {
   instagram_username?: string;
   connection_time?: string;
 }
+
+export interface Journey {
+  id: number;
+  level: string;
+  name: string;
+  description: string;
+  color: string;
+  subscription_required: boolean;
+}

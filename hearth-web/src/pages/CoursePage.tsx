@@ -9,14 +9,16 @@ import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import MusicDrawer from "../components/MusicDrawer";
 import ReactDOM from "react-dom";
+import { Journey } from "../core/types";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  openedJourney: Journey;
 }
 
 const MotionFlex = motion(Flex);
-const CoursePage = ({ isOpen, onClose }: Props) => {
+const CoursePage = ({ isOpen, onClose, openedJourney }: Props) => {
   const {
     isOpen: drawerIsOpen,
     onOpen: drawerOnOpen,
@@ -45,7 +47,7 @@ const CoursePage = ({ isOpen, onClose }: Props) => {
         bottom="0"
         left="0"
         zIndex={10}
-        background=" linear-gradient(175deg, #FAFE0A 3.42%, #F4D9BB 48.04%, #F0D5BA 96.64%)"
+        background={` linear-gradient(175deg, ${openedJourney.color} 3.42%, #F4D9BB 48.04%, #F0D5BA 96.64%)`}
         p="1rem"
         display={"flex"}
         direction={"column"}
@@ -67,13 +69,9 @@ const CoursePage = ({ isOpen, onClose }: Props) => {
             }
             objectFit={"contain"}
           />
-          <Text textStyle="heading.h1">3-Day Connection Challenge</Text>
+          <Text textStyle="heading.h1">{openedJourney.name}</Text>
           <Text textStyle="body" textAlign="center">
-            Set aside 10 minutes for each of these experiences. We recommend
-            completing them over the next three days but if that’s not possible
-            for you right now, that’s okay. Take as long as you need. What
-            matters most is your intention to share these three experiences
-            together.
+            {openedJourney.description}
           </Text>
           <Flex direction="column" gridRowGap="0.5rem" mt="0.5rem">
             <Flex

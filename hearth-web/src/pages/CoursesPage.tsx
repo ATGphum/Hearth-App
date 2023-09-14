@@ -5,10 +5,13 @@ import {
   domAnimation,
   motion,
 } from "framer-motion";
+import { useState } from "react";
+import ReactDOM from "react-dom";
+import { useJourneys } from "../core/apiHooks";
+import { Journey } from "../core/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import CoursePage from "./CoursePage";
-import ReactDOM from "react-dom";
 
 interface Props {
   isOpen: boolean;
@@ -23,6 +26,11 @@ const CoursesPage = ({ isOpen, onClose }: Props) => {
     onOpen: courseDrawerOnOpen,
     onClose: courseDrawerOnClose,
   } = useDisclosure();
+
+  const [openedJourney, setOpenedJourney] = useState<Journey | undefined>(
+    undefined
+  );
+
   return (
     <>
       <AnimatePresence>
@@ -30,6 +38,7 @@ const CoursesPage = ({ isOpen, onClose }: Props) => {
           <CoursePage
             onClose={courseDrawerOnClose}
             isOpen={courseDrawerIsOpen}
+            openedJourney={openedJourney}
           />
         )}
       </AnimatePresence>
@@ -38,6 +47,7 @@ const CoursesPage = ({ isOpen, onClose }: Props) => {
         onClose={onClose}
         courseDrawerIsOpen={courseDrawerIsOpen}
         courseDrawerOnOpen={courseDrawerOnOpen}
+        setOpenedJourney={(journey) => setOpenedJourney(journey)}
       />
     </>
   );
@@ -50,6 +60,7 @@ interface CourseType {
   onClose: () => void;
   courseDrawerIsOpen: boolean;
   courseDrawerOnOpen: () => void;
+  setOpenedJourney: (journey: Journey) => void;
 }
 
 const Courses = ({
@@ -57,8 +68,11 @@ const Courses = ({
   onClose,
   courseDrawerIsOpen,
   courseDrawerOnOpen,
+  setOpenedJourney,
 }: CourseType) => {
   const mounter = document.getElementById("mounter");
+  const { data: journeys } = useJourneys();
+
   if (!mounter) return null;
   return ReactDOM.createPortal(
     <LazyMotion features={domAnimation}>
@@ -105,26 +119,22 @@ const Courses = ({
           <Text textStyle="heading.h1">Connection Journeys</Text>
           <Text textStyle="body">Make connection time a meaningful habit.</Text>
           <Flex direction="column" gridRowGap="0.5rem" mt="0.5rem">
-            <Flex
-              justifyContent={"space-between"}
-              p="1rem"
-              bg="#F5E099"
-              borderBottom="1px solid rgba(0, 0, 0, 0.60)"
-              borderRadius="2.75rem"
-              onClick={courseDrawerOnOpen}
-            >
-              <Text>3-Day Connection</Text> <ArrowRightIcon />
-            </Flex>
-            <Flex
-              justifyContent={"space-between"}
-              p="1rem"
-              bg="#F5E099"
-              borderBottom="1px solid rgba(0, 0, 0, 0.60)"
-              borderRadius="2.75rem"
-              onClick={courseDrawerOnOpen}
-            >
-              <Text>3-Day Connection</Text> <ArrowRightIcon />
-            </Flex>
+            {journeys?.map((journey) => (
+              <Flex
+                key={journey.id}
+                justifyContent={"space-between"}
+                p="1rem"
+                bg={journey.color}
+                borderBottom="1px solid rgba(0, 0, 0, 0.60)"
+                borderRadius="2.75rem"
+                onClick={() => {
+                  setOpenedJourney(journey);
+                  courseDrawerOnOpen();
+                }}
+              >
+                <Text>{journey.name}</Text> <ArrowRightIcon />
+              </Flex>
+            ))}
           </Flex>
         </Flex>
       </MotionFlex>

@@ -25,10 +25,6 @@ function UserCreateForm() {
 
   const [attemptSubmitNames, setAttemptSubmitNames] = useState(false);
 
-  const goBack = useSwipeable({
-    onSwipedRight: () => setPage(0),
-  });
-
   const onSubmit = async (instagram_skip: boolean) => {
     const tempUser: Partial<User> = {
       first_name: firstName,
@@ -44,8 +40,6 @@ function UserCreateForm() {
       await userMutate(newUser, false);
       patchUser(user.id, tempUser);
       setPage(2);
-      console.log(newUser);
-      console.log(user);
     }
   };
 
@@ -182,7 +176,6 @@ function UserCreateForm() {
             alignItems={"start"}
             gridRowGap="1rem"
             flexGrow={1}
-            {...goBack}
             color="accent.brown"
           >
             <Text textStyle={"heading.h1"}>Let's be social.</Text>

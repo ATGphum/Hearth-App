@@ -18,6 +18,7 @@ const UserContext = createContext<ContextProps>({
 
 const UserProvider = ({ children }: Props) => {
   const { data: user, mutate: userMutate } = useCurrentUserProfile();
+
   const { isAuthenticated, getAccessTokenSilently, isLoading } = useAuth0();
 
   // store auth0 access token in memory

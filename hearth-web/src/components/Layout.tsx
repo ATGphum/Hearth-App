@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import LoadingPage from "../pages/LoadingPage";
 import { LayoutNoRedirect } from "./LayoutNoRedirect";
+import { useJourneys } from "../core/apiHooks";
 
 interface Props {
   children: React.ReactNode;
@@ -12,6 +13,8 @@ interface Props {
 export const Layout = ({ children, hidePadding }: Props) => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
+
+  const { data: journeys } = useJourneys();
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,7 +27,7 @@ export const Layout = ({ children, hidePadding }: Props) => {
   }, []);
 
   // show loading page while user data is retrieving or 2 seconds is up
-  if (!user || isLoading) return <LoadingPage />;
+  if (!user || !journeys || isLoading) return <LoadingPage />;
 
   // show user form if essential fields are not present
   if (

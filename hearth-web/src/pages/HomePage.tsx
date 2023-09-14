@@ -5,7 +5,7 @@ import { Layout } from "../components/Layout";
 import LogoutButton from "../components/buttons/LogoutButton";
 import NavBar from "./NavBar";
 import React from "react";
-const Library = React.lazy(() => import("../components/Library"));
+import Library from "../components/Library";
 const Today = React.lazy(() => import("./Today"));
 
 function HomePage() {
