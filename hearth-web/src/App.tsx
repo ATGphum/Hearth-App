@@ -1,4 +1,4 @@
-import { Box, ChakraBaseProvider, Flex } from "@chakra-ui/react";
+import { Box, ChakraBaseProvider } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import "./App.css";
 import RenderRoutes from "./Routes";
