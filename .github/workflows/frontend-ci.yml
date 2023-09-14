@@ -19,7 +19,7 @@ jobs:
         working-directory: hearth-web
 
     env:
-      NODE_OPTIONS: --max_old_space_size=8192
+      NODE_OPTIONS: --max_old_space_size=8192 # Increase node size
 
     steps:
       - name: Checkout code
@@ -52,10 +52,10 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.14 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "test-frontend-heroku-app" #Must be unique in Heroku
+          heroku_app_name: "frontend-heroku-app" #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: "hearth-web"
-          buildpack: "heroku-community/nginx,heroku-community/nginx"
+          buildpack: "heroku/nodejs,heroku-community/nginx"
         env:
           HD_VITE_API_HOST: http://127.0.0.1:8000/ # Will need to change to the server url when backend has been deployed
           HD_VITE_ENV: production
