@@ -2,7 +2,7 @@
   "name": "Your App Name",
   "short_name": "App",
   "description": "Your App Description",
-  "start_url": "./index.html",
+  "start_url": "https://hearth-app-frontend-84b30cc01305.herokuapp.com",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
