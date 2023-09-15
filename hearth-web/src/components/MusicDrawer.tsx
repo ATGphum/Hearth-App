@@ -19,6 +19,7 @@ import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
 import { Experience, Journey } from "../core/types";
+import { formatTime } from "../core/helpers";
 
 interface Props {
   isOpen: boolean;
@@ -185,37 +186,45 @@ const MusicDrawer = ({
             px="1.5rem"
             gridRowGap="1rem"
           >
-            <audio
-              ref={audioRef}
-              src={openedExperience.audio_link}
-              onLoadedData={handleLoadedData}
-              onTimeUpdate={handleTimeUpdate}
-            />
-
-            <Slider
-              aria-label="audio-slider"
-              value={currentTime}
-              max={duration}
-              step={0.01}
-              onChange={handleSeekChange}
-              onChangeStart={handleSeekStart}
-              onChangeEnd={handleSeekEnd}
-              size={"sm"}
-            >
-              <SliderTrack width={"3rem"} bg="neutral.black">
-                <SliderFilledTrack bg={"neutral.black"} />
-              </SliderTrack>
-              <SliderThumb
-                sx={{
-                  "&:focus-visible": {
-                    boxShadow: "none",
-                  },
-                }}
-                boxSize={6}
-                mt="1px"
-                bg="brand.secondary"
+            <Flex direction={"column"} width={"100%"}>
+              <audio
+                ref={audioRef}
+                src={openedExperience.audio_link}
+                onLoadedData={handleLoadedData}
+                onTimeUpdate={handleTimeUpdate}
               />
-            </Slider>
+
+              <Slider
+                aria-label="audio-slider"
+                value={currentTime}
+                max={duration}
+                step={0.01}
+                onChange={handleSeekChange}
+                onChangeStart={handleSeekStart}
+                onChangeEnd={handleSeekEnd}
+                size={"sm"}
+              >
+                <SliderTrack width={"3rem"} bg="neutral.black">
+                  <SliderFilledTrack bg={"neutral.black"} />
+                </SliderTrack>
+                <SliderThumb
+                  sx={{
+                    "&:focus-visible": {
+                      boxShadow: "none",
+                    },
+                  }}
+                  boxSize={6}
+                  mt="1px"
+                  bg="brand.secondary"
+                />
+              </Slider>
+              <Flex width="100%" justifyContent={"space-between"}>
+                <Text textStyle="bodySmall">{formatTime(currentTime)}</Text>
+                <Text textStyle="bodySmall">
+                  {formatTime(duration - currentTime)}
+                </Text>
+              </Flex>
+            </Flex>
             <Flex
               width={"100%"}
               justifyContent={"space-between"}
