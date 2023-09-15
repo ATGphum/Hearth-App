@@ -27,7 +27,7 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t test-build-image -f Dockerfile.production .
-      
+
       - name: Build Migration image
         run: docker build -t test-migration-image -f Dockerfile.release .
 
@@ -50,8 +50,8 @@ jobs:
         run: |
           curl https://cli-assets.heroku.com/install.sh | sh
 
-       - name: Login to Heroku
-          run: heroku login --apikey $HEROKU_API_KEY
+      - name: Login to Heroku
+        run: heroku login --apikey $HEROKU_API_KEY
 
       - name: Log in to Heroku Container Registry
         run: docker login --username=$HEROKU_EMAIL --password=$HEROKU_API_KEY registry.heroku.com
@@ -62,6 +62,8 @@ jobs:
         run: |
           docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile.production .
           docker push registry.heroku.com/$HEROKU_APP_NAME/web
+        
+        # The Release phase which is running the migration command
           docker build -t registry.heroku.com/$HEROKU_APP_NAME/release -f Dockerfile.release .
           docker push registry.heroku.com/$HEROKU_APP_NAME/release
 
