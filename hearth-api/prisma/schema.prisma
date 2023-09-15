@@ -23,6 +23,8 @@ model User {
   instagram_username String? @db.VarChar(255)
   connection_time ConnectionTimeChoices? 
   subscription_status Boolean @default(false)
+  user_course UserCourse[]
+  user_experience UserExperience[]
 }
 
 enum ConnectionTimeChoices {
@@ -37,12 +39,13 @@ model Course {
    name String @db.VarChar(255)
    description String 
    color String @db.VarChar(255)
-   previous_tutorial_id Int?  @unique
-   previous_tutorial Course? @relation("CourseLinkage", fields: [previous_tutorial_id], references: [id])
-   next_tutorial Course? @relation("CourseLinkage")
+   previous_course_id Int?  @unique
+   previous_course Course? @relation("CourseLinkage", fields: [previous_course_id], references: [id])
+   next_course Course? @relation("CourseLinkage")
    subscription_required Boolean @default(true)
    category CourseCategoryChoices? 
    experiences Experience[]
+   user_course UserCourse[]
 }
 
 enum CourseCategoryChoices {
@@ -64,4 +67,23 @@ model Experience {
    next_experience Experience? @relation("ExperienceLinkage") 
    course Course @relation(fields: [course_id], references: [id])
    course_id Int
+   user_experience UserExperience[]
+}
+
+model UserCourse {
+     id Int @id @default(autoincrement())
+     completion_date DateTime
+     course Course @relation(fields: [course_id], references: [id])
+     course_id Int
+     user User @relation(fields: [user_id], references: [id])
+     user_id Int
+}
+
+model UserExperience {
+     id Int @id @default(autoincrement())
+     completion_date DateTime
+     experience Experience @relation(fields: [ experience_id], references: [id])
+     experience_id Int
+    user User @relation(fields: [user_id], references: [id])
+     user_id Int
 }
