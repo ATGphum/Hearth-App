@@ -19,6 +19,7 @@ export interface Journey {
   color: string;
   subscription_required: boolean;
   experiences: Experience[];
+  is_available: boolean;
 }
 
 export interface Experience {

@@ -1,8 +1,10 @@
-import { Collapse, Flex, Image, Text } from "@chakra-ui/react";
+import { Collapse, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import DownIcon from "../icons/DownIcon";
 import UpIcon from "../icons/UpIcon";
+import MusicDrawer from "../components/MusicDrawer";
+import { useJourneys } from "../core/apiHooks";
 
 function Today() {
   const [showQuote, setShowQuote] = useState(true);
@@ -18,7 +20,7 @@ function Today() {
       flex="1"
       justifyContent={"space-between"}
     >
-      {/* <MusicDrawer onClose={drawerOnClose} isOpen={drawerIsOpen} /> */}
+      {/* <MusicDrawer onClose={drawerOnClose} isOpen={drawerIsOpen} openedExperience={journeys} /> */}
 
       <Flex direction="column" width="100%" padding="2rem" gridRowGap="1rem">
         <Flex

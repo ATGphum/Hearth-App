@@ -7,6 +7,7 @@ import { Journey } from "../core/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import CoursePage from "./CoursePage";
+import { rgbaString } from "../core/helpers";
 
 interface Props {
   isOpen: boolean;
@@ -67,6 +68,7 @@ const Courses = ({
 }: CourseType) => {
   const mounter = document.getElementById("mounter");
   const { data: journeys } = useJourneys();
+  const backgroundColor = "#B694F7";
 
   if (!mounter) return null;
   return ReactDOM.createPortal(
@@ -95,7 +97,7 @@ const Courses = ({
         width="100%"
         display="flex"
         flexDirection="column"
-        background="linear-gradient(175deg, #B694F7 3.42%, #F4D9BB 48.04%, #F0D5BA 96.64%)"
+        background={`linear-gradient(175deg, ${backgroundColor} 3.42%, #F4D9BB 48.04%, #F0D5BA 96.64%)`}
         p={"1rem"}
         zIndex={5}
       >
@@ -119,13 +121,15 @@ const Courses = ({
                 key={journey.id}
                 justifyContent={"space-between"}
                 p="1rem"
-                bg={journey.color}
+                bg={journey.is_available ? journey.color : backgroundColor}
                 borderBottom="1px solid rgba(0, 0, 0, 0.60)"
                 borderRadius="2.75rem"
                 onClick={() => {
                   setOpenedJourney(journey);
                   courseDrawerOnOpen();
                 }}
+                opacity={journey.is_available ? 1 : 0.4}
+                pointerEvents={!journey.is_available ? "none" : undefined}
               >
                 <Text>{journey.name}</Text> <ArrowRightIcon />
               </Flex>

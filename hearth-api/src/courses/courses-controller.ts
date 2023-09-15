@@ -1,4 +1,4 @@
-import { CourseCategoryChoices } from "@prisma/client";
+import { Course, CourseCategoryChoices, UserCourse } from "@prisma/client";
 import { FastifyInstance, FastifyRequest } from "fastify";
 // import { courseResponseSchema } from "./courses-serializers.js";
 
@@ -20,13 +20,39 @@ export default async function CoursesController(fastify: FastifyInstance) {
     //   },
     // },
     async (request: FastifyRequest) => {
-      const courses = fastify.prisma.course.findMany({
+      const sub: string = request["user"]["sub"];
+      const user = await fastify.prisma.user.findUnique({
+        where: { username: sub },
+      });
+
+      const completedCourses: Partial<UserCourse>[] =
+        await fastify.prisma.userCourse.findMany({
+          where: {
+            user_id: user.id,
+          },
+          select: {
+            course_id: true,
+          },
+        });
+
+      const completedCourseIds: number[] = completedCourses.map(
+        (course) => course.id
+      );
+
+      const courses: Course[] = await fastify.prisma.course.findMany({
         where: { category: CourseCategoryChoices.journey },
         include: {
           experiences: { orderBy: { level: "asc" } },
         },
       });
-      return courses;
+
+      const coursesMapped = courses.map((course) => ({
+        ...course,
+        is_available:
+          !course.previous_course_id || completedCourseIds.includes(course.id),
+      }));
+
+      return coursesMapped;
     }
   );
 }

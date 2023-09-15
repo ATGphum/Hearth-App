@@ -82,6 +82,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
           <Flex direction="column" gridRowGap="0.5rem" mt="0.5rem">
             {openedCourse?.experiences.map((exp) => (
               <Flex
+                key={exp.id}
                 justifyContent={"space-between"}
                 p="1rem"
                 bg={exp.color}
