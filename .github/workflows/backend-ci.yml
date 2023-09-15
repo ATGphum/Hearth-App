@@ -54,7 +54,9 @@ jobs:
           curl https://cli-assets.heroku.com/install.sh | sh
 
       - name: Login to Heroku
-        run: heroku login --apikey $HEROKU_API_KEY
+        run: |
+          echo "HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }}" >> $GITHUB_ENV
+          heroku whoami
 
       - name: Log in to Heroku Container Registry
         run: docker login --username=$HEROKU_EMAIL --password=$HEROKU_API_KEY registry.heroku.com
