@@ -60,6 +60,7 @@ export default async function CoursesController(fastify: FastifyInstance) {
       );
 
       const courses: ProgressCourse[] = await fastify.prisma.course.findMany({
+        orderBy: { level: "asc" },
         where: { category: CourseCategoryChoices.journey },
         include: {
           experiences: { orderBy: { level: "asc" } },
