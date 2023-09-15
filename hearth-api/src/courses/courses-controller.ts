@@ -36,7 +36,7 @@ export default async function CoursesController(fastify: FastifyInstance) {
         });
 
       const completedCourseIds: number[] = completedCourses.map(
-        (course) => course.id
+        (course) => course.course_id
       );
 
       const courses: Course[] = await fastify.prisma.course.findMany({
@@ -49,7 +49,8 @@ export default async function CoursesController(fastify: FastifyInstance) {
       const coursesMapped = courses.map((course) => ({
         ...course,
         is_available:
-          !course.previous_course_id || completedCourseIds.includes(course.id),
+          !course.previous_course_id ||
+          completedCourseIds.includes(course.previous_course_id),
       }));
 
       return coursesMapped;
