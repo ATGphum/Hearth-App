@@ -1,15 +1,19 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import CoursesPage from "../pages/CoursesPage";
+import MusicDrawer from "./MusicDrawer";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const MotionFlex = m(Flex);
 
 function Library() {
-  // const {
-  //   isOpen: musicDrawerIsOpen,
-  //   onOpen: musicDrawerOnOpen,
-  //   onClose: musicDrawerOnClose,
-  // } = useDisclosure();
+  const { experienceToDo, journeyToDo } = useContext(UserContext);
+  const {
+    isOpen: musicDrawerIsOpen,
+    onOpen: musicDrawerOnOpen,
+    onClose: musicDrawerOnClose,
+  } = useDisclosure();
   const {
     isOpen: journeyDrawerIsOpen,
     onOpen: journeyDrawerOnOpen,
@@ -32,12 +36,14 @@ function Library() {
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {/* {musicDrawerIsOpen && (
+        {musicDrawerIsOpen && journeyToDo && experienceToDo && (
           <MusicDrawer
             onClose={musicDrawerOnClose}
             isOpen={musicDrawerIsOpen}
+            parentCourse={journeyToDo}
+            openedExperience={experienceToDo}
           />
-        )} */}
+        )}
       </AnimatePresence>
       <LazyMotion features={domAnimation}>
         <MotionFlex
@@ -59,25 +65,23 @@ function Library() {
           <Flex
             direction="column"
             p="2rem"
-            background="linear-gradient(166deg, #F058FC 10.17%, rgba(240, 88, 252, 0.00) 90.68%)"
+            background={`linear-gradient(166deg, ${experienceToDo?.color} 10.17%, rgba(240, 88, 252, 0.00) 90.68%)`}
             width="100%"
             borderRadius="2.75rem"
             borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-            // onClick={musicDrawerOnOpen}
+            onClick={musicDrawerOnOpen}
           >
             <Image
               m="1rem"
               height="6rem"
-              src={
-                "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
-              }
+              src={experienceToDo?.image_link}
               objectFit={"contain"}
             />
 
             <Text textStyle="heading.h1">Up next</Text>
-            <Text textStyle="bodySmall">3-Day Connection Challenge</Text>
-            <Text textStyle="heading.h2">Introduction</Text>
-            <Text textStyle="body">3 min</Text>
+            <Text textStyle="bodySmall">{journeyToDo?.name}</Text>
+            <Text textStyle="heading.h2">{experienceToDo?.name}</Text>
+            <Text textStyle="body">{experienceToDo?.duration} min</Text>
           </Flex>
           <Flex direction="column" textAlign={"left"} gridRowGap="0.75rem">
             <Text textStyle={"heading.h2"}>Connection Journeys</Text>
