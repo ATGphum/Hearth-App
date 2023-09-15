@@ -70,9 +70,9 @@ const MusicDrawer = ({
       audioRef.current?.pause();
     } else {
       audioRef.current?.play();
+      setShowText(false);
     }
     setIsPlaying(!isPlaying);
-    setShowText(false);
   };
 
   const handleTimeUpdate = () => {
