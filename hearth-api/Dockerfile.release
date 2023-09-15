@@ -9,9 +9,6 @@ WORKDIR /usr/src/app
 # Install openssl
 # RUN apt-get update && apt-get install -y openssl
 
-# Install relevent postgres client binaries
-RUN apt-get update && apt-get install -y openssl postgresql-client
-
 # Copy the package.json and package-lock.json. This is for better caching of node modules.
 COPY package*.json ./
 
@@ -27,6 +24,9 @@ FROM node:20-slim
 
 # Set the working directory in the new image
 WORKDIR /usr/src/app
+
+# Install relevent postgres client binaries
+RUN apt-get update && apt-get install -y openssl postgresql-client
 
 # Copy node modules and built code from the previous stage
 COPY --from=build-stage /usr/src/app/node_modules ./node_modules
