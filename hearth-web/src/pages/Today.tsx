@@ -29,7 +29,7 @@ function Today() {
 
       if (availableJourney) {
         // Find the highest-level experience that's available in the found journey
-        const sortedExperiences = availableJourney.experiences.reverse();
+        const sortedExperiences = [...availableJourney.experiences].reverse();
         const experience = sortedExperiences.find((e) => e.is_available);
         setJourneyToDo(availableJourney);
         setExpToDo(experience);
