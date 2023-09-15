@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import CrossIcon from "../icons/CrossIcon";
 import DownIcon from "../icons/DownIcon";
@@ -70,13 +70,16 @@ const MusicDrawer = ({
     }
   };
 
-  const handleSeekEnd = (value: number) => {
-    if (audioRef.current) audioRef.current.currentTime = value;
-    setCurrentTime(value);
-    if (isPlaying) {
-      audioRef.current?.play();
-    }
-  };
+  const handleSeekEnd = useCallback(
+    (value: number) => {
+      if (audioRef.current) audioRef.current.currentTime = value;
+      setCurrentTime(value);
+      if (isPlaying) {
+        audioRef.current?.play();
+      }
+    },
+    [isPlaying]
+  );
 
   const rewind = () => {
     if (audioRef.current) audioRef.current.currentTime = currentTime - 15;
