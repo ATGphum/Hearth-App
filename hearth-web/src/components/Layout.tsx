@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
 import LoadingPage from "../pages/LoadingPage";
 import { LayoutNoRedirect } from "./LayoutNoRedirect";
-import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
 
 interface Props {
   children: React.ReactNode;
