@@ -1,23 +1,24 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { ReactNode, createContext, useEffect } from "react";
-import { useCurrentUserProfile } from "../core/apiHooks";
-import { User } from "../core/types";
+import { ReactNode, createContext, useEffect, useState } from "react";
+import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
+import { Experience, Journey } from "../core/types";
 
 type Props = {
   children: ReactNode;
 };
 
 type ContextProps = {
-  user?: User | undefined;
-  userMutate: (user?: User, refetch?: boolean) => Promise<User | undefined>;
+  journeyToDo: Journey | undefined;
+  experienceToDo: Experience | undefined;
 };
 
 const UserContext = createContext<ContextProps>({
-  userMutate: async () => undefined,
+  journeyToDo: undefined,
+  experienceToDo: undefined,
 });
 
 const UserProvider = ({ children }: Props) => {
-  const { data: user, mutate: userMutate } = useCurrentUserProfile();
+  const { mutate: userMutate } = useCurrentUserProfile();
 
   const { isAuthenticated, getAccessTokenSilently, isLoading } = useAuth0();
 
@@ -37,8 +38,31 @@ const UserProvider = ({ children }: Props) => {
     }
   }, [isAuthenticated, getAccessTokenSilently, userMutate, isLoading]);
 
+  const { data: journeys } = useJourneys();
+  const [experienceToDo, setExperienceToDo] = useState<
+    Experience | undefined
+  >();
+  const [journeyToDo, setJourneyToDo] = useState<Journey | undefined>();
+
+  useEffect(() => {
+    if (journeys) {
+      const sortedJourneys = [...journeys].reverse();
+
+      // Find the highest-level journey that's available
+      const availableJourney = sortedJourneys.find((j) => j.is_available);
+
+      if (availableJourney) {
+        // Find the highest-level experience that's available in the found journey
+        const sortedExperiences = [...availableJourney.experiences].reverse();
+        const experience = sortedExperiences.find((e) => e.is_available);
+        setJourneyToDo(availableJourney);
+        setExperienceToDo(experience);
+      }
+    }
+  }, [journeys]);
+
   return (
-    <UserContext.Provider value={{ user, userMutate }}>
+    <UserContext.Provider value={{ experienceToDo, journeyToDo }}>
       {children}
     </UserContext.Provider>
   );

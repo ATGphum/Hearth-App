@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import LoadingPage from "../pages/LoadingPage";
 import { LayoutNoRedirect } from "./LayoutNoRedirect";
-import { useJourneys } from "../core/apiHooks";
+import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
 
 interface Props {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ interface Props {
 
 export const Layout = ({ children, hidePadding }: Props) => {
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const { data: user } = useCurrentUserProfile();
 
   const { data: journeys } = useJourneys();
 

@@ -43,6 +43,25 @@ const MusicDrawer = ({
   const [currentTime, setCurrentTime] = useState(0);
   const [showText, setShowText] = useState(true);
 
+  // logic for when audio ends
+  useEffect(() => {
+    const audioEl = audioRef.current;
+
+    const handleAudioEnded = () => {
+      console.log("Audio has ended!");
+      // Trigger any other function or logic you need here
+    };
+
+    if (audioEl) {
+      audioEl.addEventListener("ended", handleAudioEnded);
+
+      // Cleanup listener when component unmounts
+      return () => {
+        audioEl.removeEventListener("ended", handleAudioEnded);
+      };
+    }
+  }, []);
+
   const handleLoadedData = () => {
     audioRef.current && setDuration(audioRef.current.duration);
   };
