@@ -1,10 +1,5 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
-import {
-  AnimatePresence,
-  LazyMotion,
-  domAnimation,
-  motion,
-} from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import MusicDrawer from "../components/MusicDrawer";
@@ -18,7 +13,7 @@ interface Props {
   openedCourse: Journey;
 }
 
-const MotionFlex = motion(Flex);
+const MotionFlex = m(Flex);
 const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
   const {
     isOpen: drawerIsOpen,
@@ -56,6 +51,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
         p="1rem"
         display={"flex"}
         direction={"column"}
+        overflowY={"auto"}
       >
         <AnimatePresence>
           {drawerIsOpen && openedExperience && (

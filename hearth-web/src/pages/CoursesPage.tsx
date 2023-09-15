@@ -1,10 +1,5 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
-import {
-  AnimatePresence,
-  LazyMotion,
-  domAnimation,
-  motion,
-} from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import { useJourneys } from "../core/apiHooks";
@@ -18,7 +13,7 @@ interface Props {
   onClose: () => void;
 }
 
-const MotionFlex = motion(Flex);
+const MotionFlex = m(Flex);
 
 const CoursesPage = ({ isOpen, onClose }: Props) => {
   const {

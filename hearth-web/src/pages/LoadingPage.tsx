@@ -26,20 +26,17 @@ function LoadingPage() {
 
   return (
     <LayoutNoRedirect>
-      {/* <Flex>
-        <Image src={ShapeOne} />
-      </Flex> */}
       <Flex flex="1" alignItems="center" justifyContent="center">
         <Flex pb="2rem">
           <Flex
             as={m.div}
             animation={animation}
-            // not work: transition={{ ... }}
             padding="2"
             bgGradient="linear(to-l, hsla(296, 94%, 67%, 1), hsla(242, 76%, 56%, 1))"
             width="4rem"
             height="4rem"
             display="flex"
+            drag={true}
           />
         </Flex>
       </Flex>

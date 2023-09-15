@@ -23,7 +23,7 @@ export default async function CoursesController(fastify: FastifyInstance) {
       const courses = fastify.prisma.course.findMany({
         where: { category: CourseCategoryChoices.journey },
         include: {
-          experiences: true,
+          experiences: { orderBy: { level: "asc" } },
         },
       });
       return courses;

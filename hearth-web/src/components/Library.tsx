@@ -1,8 +1,8 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import CoursesPage from "../pages/CoursesPage";
 
-const MotionFlex = motion(Flex);
+const MotionFlex = m(Flex);
 
 function Library() {
   // const {
@@ -39,71 +39,73 @@ function Library() {
           />
         )} */}
       </AnimatePresence>
-      <MotionFlex
-        animate={{ x: journeyDrawerIsOpen ? "-50%" : "0%" }}
-        transition={{ damping: 300 }}
-        position="absolute"
-        top="0"
-        left="0"
-        right="0"
-        bottom="0"
-        overflowY={"auto"}
-        direction="column"
-        width="100%"
-        flex="1"
-        p="1rem"
-        pt="0rem"
-        gridRowGap="1rem"
-      >
-        <Flex
+      <LazyMotion features={domAnimation}>
+        <MotionFlex
+          animate={{ x: journeyDrawerIsOpen ? "-50%" : "0%" }}
+          transition={{ damping: 300 }}
+          position="absolute"
+          top="0"
+          left="0"
+          right="0"
+          bottom="0"
+          overflowY={"auto"}
           direction="column"
-          p="2rem"
-          background="linear-gradient(166deg, #F058FC 10.17%, rgba(240, 88, 252, 0.00) 90.68%)"
           width="100%"
-          borderRadius="2.75rem"
-          borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-          // onClick={musicDrawerOnOpen}
+          flex="1"
+          p="1rem"
+          pt="0rem"
+          gridRowGap="1rem"
         >
-          <Image
-            m="1rem"
-            height="6rem"
-            src={
-              "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
-            }
-            objectFit={"contain"}
-          />
-
-          <Text textStyle="heading.h1">Up next</Text>
-          <Text textStyle="bodySmall">3-Day Connection Challenge</Text>
-          <Text textStyle="heading.h2">Introduction</Text>
-          <Text textStyle="body">3 min</Text>
-        </Flex>
-        <Flex direction="column" textAlign={"left"} gridRowGap="0.75rem">
-          <Text textStyle={"heading.h2"}>Connection Journeys</Text>
-          <Text textStyle={"body"}>
-            Directed paths for making connection time a habit.
-          </Text>
           <Flex
+            direction="column"
+            p="2rem"
+            background="linear-gradient(166deg, #F058FC 10.17%, rgba(240, 88, 252, 0.00) 90.68%)"
+            width="100%"
             borderRadius="2.75rem"
-            background="linear-gradient(162deg, #B694F7 12.43%, rgba(182, 148, 247, 0.00) 88.3%)"
             borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-            p="1rem"
-            alignItems={"center"}
-            gridColumnGap="1rem"
-            onClick={journeyDrawerOnOpen}
-            justifyContent={"center"}
+            // onClick={musicDrawerOnOpen}
           >
             <Image
-              h={"3rem"}
+              m="1rem"
+              height="6rem"
               src={
                 "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
               }
               objectFit={"contain"}
             />
-            <Text textStyle={"heading.h2"}>Connection Journeys</Text>
+
+            <Text textStyle="heading.h1">Up next</Text>
+            <Text textStyle="bodySmall">3-Day Connection Challenge</Text>
+            <Text textStyle="heading.h2">Introduction</Text>
+            <Text textStyle="body">3 min</Text>
           </Flex>
-        </Flex>
-      </MotionFlex>
+          <Flex direction="column" textAlign={"left"} gridRowGap="0.75rem">
+            <Text textStyle={"heading.h2"}>Connection Journeys</Text>
+            <Text textStyle={"body"}>
+              Directed paths for making connection time a habit.
+            </Text>
+            <Flex
+              borderRadius="2.75rem"
+              background="linear-gradient(162deg, #B694F7 12.43%, rgba(182, 148, 247, 0.00) 88.3%)"
+              borderBottom="1px solid rgba(0, 0, 0, 0.40)"
+              p="1rem"
+              alignItems={"center"}
+              gridColumnGap="1rem"
+              onClick={journeyDrawerOnOpen}
+              justifyContent={"center"}
+            >
+              <Image
+                h={"3rem"}
+                src={
+                  "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
+                }
+                objectFit={"contain"}
+              />
+              <Text textStyle={"heading.h2"}>Connection Journeys</Text>
+            </Flex>
+          </Flex>
+        </MotionFlex>
+      </LazyMotion>
     </Flex>
   );
 }
