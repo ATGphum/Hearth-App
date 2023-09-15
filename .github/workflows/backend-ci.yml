@@ -14,6 +14,9 @@ jobs:
     if: (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed'))
     name: Test Backend
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hearth-api
 
     steps:
       - name: Checkout code
@@ -24,137 +27,44 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t test-build-image -f Dockerfile.production .
-      
+
       - name: Build Migration image
         run: docker build -t test-migration-image -f Dockerfile.release .
-
-  deploy:
-    # if: github.ref == 'refs/heads/main'
-    needs: backend-test-build
-    name: Deploy backend to Heroku
-    runs-on: ubuntu-latest
-
-    env:
-      HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
-      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      HEROKU_APP_NAME: test-backend-hearth-app
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Install Heroku CLI
-        run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
-
-       - name: Login to Heroku
-          run: heroku login --apikey $HEROKU_API_KEY
-
-      - name: Log in to Heroku Container Registry
-        run: docker login --username=$HEROKU_EMAIL --password=$HEROKU_API_KEY registry.heroku.com
-
-      - name: Build and Push Docker Images
-        # Web Dockerfile
-        run: |
-          docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile.production .
-          docker push registry.heroku.com/$HEROKU_APP_NAME/web
-
-        # Release Dockerfile (migrations)
-          docker build -t registry.heroku.com/$HEROKU_APP_NAME/release -f Dockerfile.release .
-          docker push registry.heroku.com/$HEROKU_APP_NAME/release
-
-      - name: Release Docker images to Heroku
-        run: heroku container:release web release -a $HEROKU_APP_NAME
-
-
+  # Commented out for now
   # deploy:
   #   # if: github.ref == 'refs/heads/main'
-  #   needs: docker-build
+  #   needs: backend-test-build
   #   name: Deploy backend to Heroku
   #   runs-on: ubuntu-latest
 
+  #   env:
+  #     HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+  #     HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  #     HEROKU_APP_NAME: test-backend-hearth-app
+
   #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
+  #     - name: Check out repository
+  #       uses: actions/checkout@v4
 
-  #     -
+  #     - name: Install Heroku CLI
+  #       run: |
+  #         curl https://cli-assets.heroku.com/install.sh | sh
 
-  #     - name: Deploy to Heroku
-  #       uses: akhileshns/heroku-deploy@v3.12.14
-  #       with:
-  #         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-  #         heroku_app_name: "test-backend-hearth-app"
-  #         heroku_email: ${{secrets.HEROKU_EMAIL}}
-  #         usedocker: true
-  #         appdir: "hearth-api/docker-deployments/production"
-  #       env:
-  #         HD_AUTH_API_AUDIENCE: https://hearth.au.auth0.com/api/v2/
-  #         HD_AUTH0_SERVER_API_SECRET: ${{secrets.AUTH0_SERVER_API_SECRET}}
-  #         HD_AUTH0_DOMAIN: hearth.au.auth0.com
-  #         HD_FRONTEND_HOST: https://hearth-app-frontend-84b30cc01305.herokuapp.com/
-  #         HD_NODE_ENV: production
-# name: Deploy Frontend to Heroku
+  #      - name: Login to Heroku
+  #         run: heroku login --apikey $HEROKU_API_KEY
 
-# on:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
-#     types: [opened, synchronize, reopened]
-#     branches:
-#       - main
+  #     - name: Log in to Heroku Container Registry
+  #       run: docker login --username=$HEROKU_EMAIL --password=$HEROKU_API_KEY registry.heroku.com
 
-# jobs:
-#   frontend-test-build:
-#     if: (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed'))
-#     name: Test Backend
-#     runs-on: ubuntu-latest
-#     defaults:
-#       run:
-#         working-directory: hearth-web
+  #     - name: Build and Push Docker Images
+  #       # Web Dockerfile
+  #       run: |
+  #         docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile.production .
+  #         docker push registry.heroku.com/$HEROKU_APP_NAME/web
 
-#     env:
-#       NODE_OPTIONS: --max_old_space_size=8192 # Increase node size
+  #       # Release Dockerfile (migrations)
+  #         docker build -t registry.heroku.com/$HEROKU_APP_NAME/release -f Dockerfile.release .
+  #         docker push registry.heroku.com/$HEROKU_APP_NAME/release
 
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v4
-
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: "20"
-
-#       - name: Install dependencies
-#         run: npm ci
-
-#       # In the future, if you want to add frontend tests here before the build process, can do so
-#       - name: Build Frontend
-#         run: npm run build
-
-#   # Copied below based on the GitHub Action repo: https://github.com/AkhileshNS/heroku-deploy#license
-#   deploy:
-#     if: github.ref == 'refs/heads/main'
-#     needs: frontend-test-build
-#     name: Deploy frontend to Heroku
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v4
-
-#       - name: Deploy to Heroku
-#         uses: akhileshns/heroku-deploy@v3.12.14 # This is the action
-#         with:
-#           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-#           heroku_app_name: "hearth-app-frontend" #Must be unique in Heroku
-#           heroku_email: ${{secrets.HEROKU_EMAIL}}
-#           appdir: "hearth-web"
-#           buildpack: "heroku/nodejs,heroku-community/nginx"
-#         env:
-#           HD_VITE_API_HOST: http://127.0.0.1:8000/ # Will need to change to the server url when backend has been deployed
-#           HD_VITE_ENV: production
-#           HD_VITE_AUTH0_DOMAIN: hearth.au.auth0.com
-#           HD_VITE_AUTH0_WEB_ID: ${{secrets.VITE_AUTH0_WEB_ID}}
-#           HD_VITE_AUTH0_API_AUDIENCE: https://hearth.au.auth0.com/api/v2/
-#           HD_VITE_AUTH0_SCOPE: read:current_user openid email offline_access
+  #     - name: Release Docker images to Heroku
+  #       run: heroku container:release web release -a $HEROKU_APP_NAME
