@@ -36,6 +36,9 @@ jobs:
     needs: backend-test-build
     name: Deploy backend to Heroku
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hearth-api
 
     env:
       HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
@@ -62,8 +65,6 @@ jobs:
         run: |
           docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile.production .
           docker push registry.heroku.com/$HEROKU_APP_NAME/web
-        
-        # The Release phase which is running the migration command
           docker build -t registry.heroku.com/$HEROKU_APP_NAME/release -f Dockerfile.release .
           docker push registry.heroku.com/$HEROKU_APP_NAME/release
 
