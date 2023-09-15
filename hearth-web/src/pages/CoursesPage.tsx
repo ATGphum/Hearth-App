@@ -7,7 +7,6 @@ import { Journey } from "../core/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import CoursePage from "./CoursePage";
-import { rgbaString } from "../core/helpers";
 
 interface Props {
   isOpen: boolean;
