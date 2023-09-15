@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
 
 jobs:
   backend-test-build:
@@ -24,7 +28,6 @@ jobs:
       - name: Build Migration image
         run: docker build -t test-migration-image -f Dockerfile.release .
 
-
   deploy:
     # if: github.ref == 'refs/heads/main'
     needs: backend-test-build
@@ -37,7 +40,6 @@ jobs:
       HEROKU_APP_NAME: test-backend-hearth-app
 
     steps:
-
       - name: Check out repository
         uses: actions/checkout@v4
 
