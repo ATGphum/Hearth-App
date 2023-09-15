@@ -85,6 +85,7 @@ const MusicDrawer = ({
   const rewind = () => {
     if (audioRef.current) audioRef.current.currentTime = currentTime - 15;
     setCurrentTime(currentTime - 15);
+    if (isPlaying) audioRef.current?.play();
   };
 
   const forward = () => {
