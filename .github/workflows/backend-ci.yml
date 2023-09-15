@@ -71,4 +71,4 @@ jobs:
           docker push registry.heroku.com/$HEROKU_APP_NAME/release
 
       - name: Release Docker images to Heroku
-        run: heroku container:release web release -a $HEROKU_APP_NAME --verbose
+        run: heroku container:release release web -a $HEROKU_APP_NAME --verbose
