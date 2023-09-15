@@ -92,6 +92,8 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
                   setOpenedExperience(exp);
                   drawerOnOpen();
                 }}
+                opacity={exp.is_available ? 1 : 0.4}
+                pointerEvents={!exp.is_available ? "none" : undefined}
               >
                 <Text>{exp.name}</Text> <ArrowRightIcon />
               </Flex>

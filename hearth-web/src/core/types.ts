@@ -32,4 +32,5 @@ export interface Experience {
   color: string;
   audio_link: string;
   image_link: string;
+  is_available: false;
 }
