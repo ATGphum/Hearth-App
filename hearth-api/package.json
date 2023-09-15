@@ -22,7 +22,8 @@
     "dotenv": "^16.3.1",
     "fastify": "^4.21.0",
     "fastify-auth0-verify": "^1.2.0",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
     "@types/node": "^20.5.6",
@@ -30,7 +31,6 @@
     "@typescript-eslint/parser": "^6.4.1",
     "eslint": "^8.48.0",
     "prettier": "^3.0.2",
-    "prisma": "^5.2.0",
-    "typescript": "^5.2.2"
+    "prisma": "^5.2.0"
   }
 }
