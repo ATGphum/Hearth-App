@@ -7,10 +7,10 @@ FROM node:20 as build-stage
 WORKDIR /usr/src/app
 
 # Install openssl
-RUN apt-get update && apt-get install -y openssl
+# RUN apt-get update && apt-get install -y openssl
 
 # Install relevent postgres client binaries
-# RUN apt-get update && apt-get install -y openssl postgresql-client
+RUN apt-get update && apt-get install -y openssl postgresql-client
 
 # Copy the package.json and package-lock.json. This is for better caching of node modules.
 COPY package*.json ./
