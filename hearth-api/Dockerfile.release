@@ -26,5 +26,7 @@ WORKDIR /usr/src/app
 COPY --from=build-stage /usr/src/app/node_modules ./node_modules
 COPY --from=build-stage /usr/src/app .
 
+RUN npx prisma generate
+
 # Command to run the app
 CMD ["npx", "prisma", "migrate", "deploy"]
