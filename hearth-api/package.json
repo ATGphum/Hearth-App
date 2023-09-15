@@ -11,7 +11,9 @@
     "exec": "tsc && node --inspect=0.0.0.0:9229 ./dist/server.js"
   },
   "scripts": {
+    "build": "tsc",
     "start": "node ./dist/server.js",
+    "postinstall": "npm run build",
     "dev": "nodemon --inspect=0.0.0.0:9229 ./dist/server.js",
     "lint": "eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"
