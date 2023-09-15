@@ -1,15 +1,15 @@
 import { Flex, Input, Text } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
 import FormButton from "../components/FormButton";
-import { UserContext } from "../context/UserContext";
+import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
 import { patchUser } from "../core/api";
 import { User } from "../core/types";
+import { useCurrentUserProfile } from "../core/apiHooks";
 
 function UserCreateForm() {
   const navigate = useNavigate();
-  const { user, userMutate } = useContext(UserContext);
+  const { data: user, mutate: userMutate } = useCurrentUserProfile();
   const [page, setPage] = useState(0);
 
   const [firstName, setFirstName] = useState<string | undefined>(undefined);
