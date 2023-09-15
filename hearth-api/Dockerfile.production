@@ -1,0 +1,28 @@
+# Use an official node runtime as the parent image
+FROM node:20 as build-stage
+
+# Set the working directory in the image
+WORKDIR /usr/src/app
+
+# Copy the package.json and package-lock.json. This is for better caching of node modules.
+COPY package*.json ./
+
+# Install production dependencies only
+RUN npm ci --only=production
+
+# Copy the rest of the application code
+COPY . .
+
+# Create a new image from a smaller base image. Only copy over the necessary files, resulting in a smaller image size.
+# This helps reduce the size of the final image.
+FROM node:20-slim
+
+# Set the working directory in the new image
+WORKDIR /usr/src/app
+
+# Copy node modules and built code from the previous stage
+COPY --from=build-stage /usr/src/app/node_modules ./node_modules
+COPY --from=build-stage /usr/src/app .
+
+# Command to run the app
+CMD [ "npm", "run", "start" ]
