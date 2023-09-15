@@ -132,7 +132,13 @@ const MusicDrawer = ({
         zIndex={15}
       >
         <Flex justifyContent={"flex-end"}>
-          <Flex onClick={onClose} p="1rem">
+          <Flex
+            onClick={() => {
+              if (isPlaying) togglePlay();
+              onClose();
+            }}
+            p="1rem"
+          >
             <CrossIcon />
           </Flex>
         </Flex>
