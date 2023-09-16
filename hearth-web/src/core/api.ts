@@ -19,6 +19,7 @@ export const request = <T>(
   config?: Partial<AxiosRequestConfig>
 ): Promise<AxiosResponse<T>> => {
   const accessToken = window.localStorage.getItem("acAccessToken") ?? "";
+  console.log("token is " + accessToken);
 
   if (accessToken == null) {
     const error = Error("No access token available");
