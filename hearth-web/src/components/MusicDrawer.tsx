@@ -57,14 +57,12 @@ const MusicDrawer = ({
     const handleAudioEnded = () => {
       // handle ux scenario where last experience in course is completed
 
-      console.log(experienceToDo);
       // if it is latest experience in progress, create new link
       if (openedExperience.id === experienceToDo?.id && user) {
         const userExperience: Partial<UserExperience> = {
           experience_id: openedExperience.id,
           user_id: user.id,
         };
-        console.log("what");
         // check if the experience was last in course
         if (journeyToDo) {
           const allExps = journeyToDo.experiences;

@@ -20,6 +20,7 @@ export interface Journey {
   subscription_required: boolean;
   experiences: Experience[];
   is_available: boolean;
+  completed: boolean;
 }
 
 export interface Experience {
@@ -33,6 +34,7 @@ export interface Experience {
   audio_link: string;
   image_link: string;
   is_available: false;
+  completed: boolean;
 }
 
 export interface UserExperience {

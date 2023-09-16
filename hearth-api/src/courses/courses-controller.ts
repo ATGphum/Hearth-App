@@ -58,17 +58,19 @@ export default async function CoursesController(fastify: FastifyInstance) {
     });
 
     // logic to add an is_available flag to both courses and experiences to show if the previous course/experience has been completed or not
-    // is_available set to true if it has been completed, else set to false
+    // is_available set to true if previous course has been completed, else set to false
     const coursesMapped = courses.map((course) => ({
       ...course,
       is_available:
         !course.previous_course_id ||
         completedCourseIds.includes(course.previous_course_id),
+      completed: completedCourseIds.includes(course.id),
       experiences: course.experiences.map((exp) => ({
         ...exp,
         is_available:
           !exp.previous_experience_id ||
           completedExperienceIds.includes(exp.previous_experience_id),
+        completed: completedExperienceIds.includes(exp.id),
       })),
     }));
 
