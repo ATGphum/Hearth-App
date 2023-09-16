@@ -5,6 +5,7 @@ import { UserContext } from "../context/UserContext";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import DownIcon from "../icons/DownIcon";
 import UpIcon from "../icons/UpIcon";
+import { AnimatePresence } from "framer-motion";
 
 function Today() {
   const [showQuote, setShowQuote] = useState(true);
@@ -23,14 +24,16 @@ function Today() {
       flex="1"
       justifyContent={"space-between"}
     >
-      {drawerIsOpen && experienceToDo && journeyToDo && (
-        <MusicDrawer
-          onClose={drawerOnClose}
-          isOpen={drawerIsOpen}
-          openedExperience={experienceToDo}
-          parentCourse={journeyToDo}
-        />
-      )}
+      <AnimatePresence>
+        {drawerIsOpen && experienceToDo && journeyToDo && (
+          <MusicDrawer
+            onClose={drawerOnClose}
+            isOpen={drawerIsOpen}
+            openedExperience={experienceToDo}
+            parentCourse={journeyToDo}
+          />
+        )}
+      </AnimatePresence>
       <Flex direction="column" width="100%" padding="2rem" gridRowGap="1rem">
         <Flex
           width="100%"
