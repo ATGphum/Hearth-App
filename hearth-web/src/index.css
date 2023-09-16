@@ -42,12 +42,12 @@ body {
 }
 
 /* to remove rubberband effect on ios devices */
-.scrollable-content {
+/* .scrollable-content {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
   height: 100%;
   width: 100%;
-}
+} */
 
 h1 {
   font-size: 3.2em;
