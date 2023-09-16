@@ -20,6 +20,9 @@ FROM node:20-slim
 # Set the working directory in the new image
 WORKDIR /usr/src/app
 
+# Install relevent postgres client binaries & prisma libraries needed to run
+RUN apt-get update && apt-get install -y openssl curl postgresql-client
+
 # Copy node modules and built code from the previous stage
 COPY --from=build-stage /usr/src/app/node_modules ./node_modules
 COPY --from=build-stage /usr/src/app .
