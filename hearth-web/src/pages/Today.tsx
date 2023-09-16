@@ -5,8 +5,6 @@ import { UserContext } from "../context/UserContext";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import DownIcon from "../icons/DownIcon";
 import UpIcon from "../icons/UpIcon";
-// import MusicDrawer from "../components/MusicDrawer";
-// import { useJourneys } from "../core/apiHooks";
 
 function Today() {
   const [showQuote, setShowQuote] = useState(true);

@@ -6,5 +6,9 @@ export function useCurrentUserProfile() {
 }
 
 export function useJourneys() {
-  return useSWR<Journey[]>(`/v1/courses/journeys`);
+  return useSWR<Journey[]>(`/v1/courses/journeys`, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 }

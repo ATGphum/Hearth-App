@@ -9,8 +9,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
+import { UserContext } from "../context/UserContext";
+import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
+import { formatTime } from "../core/helpers";
+import { UserExperience, Experience, Journey } from "../core/types";
 import CrossIcon from "../icons/CrossIcon";
 import DownIcon from "../icons/DownIcon";
 import PauseIcon from "../icons/PauseIcon";
@@ -18,8 +22,7 @@ import PlayIcon from "../icons/PlayIcon";
 import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
-import { Experience, Journey } from "../core/types";
-import { formatTime } from "../core/helpers";
+import { createUserExperience } from "../core/api";
 
 interface Props {
   isOpen: boolean;
@@ -36,6 +39,7 @@ const MusicDrawer = ({
   openedExperience,
   parentCourse,
 }: Props) => {
+  const { mutate: journeyMutate } = useJourneys();
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const [isPlaying, setIsPlaying] = useState(false);
@@ -43,13 +47,35 @@ const MusicDrawer = ({
   const [currentTime, setCurrentTime] = useState(0);
   const [showText, setShowText] = useState(true);
 
+  const { experienceToDo, journeyToDo } = useContext(UserContext);
+
+  const { data: user } = useCurrentUserProfile();
   // logic for when audio ends
   useEffect(() => {
     const audioEl = audioRef.current;
 
     const handleAudioEnded = () => {
-      console.log("Audio has ended!");
-      // Trigger any other function or logic you need here
+      // handle ux scenario where last experience in course is completed
+
+      console.log(experienceToDo);
+      // if it is latest experience in progress, create new link
+      if (openedExperience.id === experienceToDo?.id && user) {
+        const userExperience: Partial<UserExperience> = {
+          experience_id: openedExperience.id,
+          user_id: user.id,
+        };
+        console.log("what");
+        // check if the experience was last in course
+        if (journeyToDo) {
+          const allExps = journeyToDo.experiences;
+          const lastExp = allExps[allExps.length - 1];
+          if (lastExp.id === openedExperience.id) {
+            createUserExperience(userExperience, true, journeyToDo.id);
+          } else {
+            createUserExperience(userExperience);
+          }
+        }
+      }
     };
 
     if (audioEl) {

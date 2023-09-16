@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest } from "fastify";
 import { userPatchSchema, userResponseSchema } from "./users-serializers.js";
-import { UserPatchParams } from "./users-types.js";
+import { User } from "@prisma/client";
 
 /**
  * Encapsulates the routes
@@ -40,7 +40,12 @@ export default async function UserController(fastify: FastifyInstance) {
         },
       },
     },
-    async (request: FastifyRequest<{ Params: { userId: string } }>) => {
+    async (
+      request: FastifyRequest<{
+        Params: { userId: string };
+        Body: Partial<User>;
+      }>
+    ) => {
       const { userId } = request.params;
       const body = request.body;
       request.getValidationFunction("body")(body);

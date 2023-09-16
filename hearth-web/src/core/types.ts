@@ -34,3 +34,11 @@ export interface Experience {
   image_link: string;
   is_available: false;
 }
+
+export interface CreateUserExperience {
+  id: number;
+  completion_date: Date;
+  experience_id: number;
+  user_id: number;
+  parent_course_id: number;
+}

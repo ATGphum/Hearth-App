@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 import viteEnv from "../config/vite-env";
-import { User } from "./types";
+import { User, UserExperience } from "./types";
 
 axios.defaults.baseURL = viteEnv.api_host;
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -55,4 +55,17 @@ export const getUser = () => {
 
 export const patchUser = (id: number, user: Partial<User>) => {
   return request<User>(`/v1/users/${id}`, "PATCH", { data: user });
+};
+
+export const createUserExperience = (
+  userExperience: Partial<UserExperience>,
+  last_in_course?: boolean,
+  parent_course_id?: number
+) => {
+  let urlSuffix = "";
+  if (last_in_course && parent_course_id)
+    urlSuffix = `?last_in_course=true&parent_course_id=${parent_course_id}`;
+  return request<User>(`/v1/courses/experiences${urlSuffix}`, "POST", {
+    data: userExperience,
+  });
 };
