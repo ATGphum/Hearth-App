@@ -21,6 +21,7 @@ const UserProvider = ({ children }: Props) => {
   const { mutate: userMutate } = useCurrentUserProfile();
 
   const { isAuthenticated, getAccessTokenSilently, isLoading } = useAuth0();
+  const { data: journeys, mutate: journeysMutate } = useJourneys();
 
   // store auth0 access token in memory
   useEffect(() => {
@@ -29,6 +30,7 @@ const UserProvider = ({ children }: Props) => {
         .then((token) => {
           window.localStorage.setItem("acAccessToken", token);
           userMutate();
+          journeysMutate();
         })
         .catch((e) => {
           console.error("Error fetching access token", e);
@@ -36,9 +38,14 @@ const UserProvider = ({ children }: Props) => {
     } else if (!isLoading) {
       window.localStorage.removeItem("acAccessToken");
     }
-  }, [isAuthenticated, getAccessTokenSilently, userMutate, isLoading]);
+  }, [
+    isAuthenticated,
+    getAccessTokenSilently,
+    userMutate,
+    journeysMutate,
+    isLoading,
+  ]);
 
-  const { data: journeys } = useJourneys();
   const [experienceToDo, setExperienceToDo] = useState<
     Experience | undefined
   >();
