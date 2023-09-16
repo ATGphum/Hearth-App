@@ -26,6 +26,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
   >(undefined);
 
   const mounter = document.getElementById("mounter");
+
   if (!mounter) return null;
   return ReactDOM.createPortal(
     <LazyMotion features={domAnimation}>
@@ -36,7 +37,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         onDragEnd={(_, info) => {
-          if (info.velocity.x > 0) {
+          if (info.velocity.x > 0 && info.velocity.y < 5) {
             onClose();
           }
         }}

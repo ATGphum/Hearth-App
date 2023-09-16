@@ -13,7 +13,7 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { UserContext } from "../context/UserContext";
 import { createUserExperience } from "../core/api";
-import { useCurrentUserProfile } from "../core/apiHooks";
+import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
 import { formatTime } from "../core/helpers";
 import { Experience, Journey, UserExperience } from "../core/types";
 import CrossIcon from "../icons/CrossIcon";
@@ -39,8 +39,10 @@ const MusicDrawer = ({
   openedExperience,
   parentCourse,
 }: Props) => {
-  // const { mutate: journeyMutate } = useJourneys();
+  const { mutate: journeyMutate } = useJourneys();
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const [isCompletedNewExp, setIsCompletedNewExp] = useState(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -54,7 +56,7 @@ const MusicDrawer = ({
   useEffect(() => {
     const audioEl = audioRef.current;
 
-    const handleAudioEnded = () => {
+    const handleAudioEnded = async () => {
       // handle ux scenario where last experience in course is completed
 
       // if it is latest experience in progress, create new link
@@ -72,6 +74,7 @@ const MusicDrawer = ({
           } else {
             createUserExperience(userExperience);
           }
+          setIsCompletedNewExp(true);
         }
       }
     };
@@ -144,6 +147,13 @@ const MusicDrawer = ({
     }
   }, [isOpen, handleSeekEnd]);
 
+  const closeFunction = async () => {
+    if (isPlaying) togglePlay();
+    // if this is slow in production, add function to optimistically update
+    if (isCompletedNewExp) await journeyMutate();
+    onClose();
+  };
+
   const mounter = document.getElementById("mounter");
   if (!mounter) return null;
   return ReactDOM.createPortal(
@@ -177,13 +187,7 @@ const MusicDrawer = ({
         zIndex={15}
       >
         <Flex justifyContent={"flex-end"}>
-          <Flex
-            onClick={() => {
-              if (isPlaying) togglePlay();
-              onClose();
-            }}
-            p="1rem"
-          >
+          <Flex onClick={closeFunction} p="1rem">
             <CrossIcon />
           </Flex>
         </Flex>
