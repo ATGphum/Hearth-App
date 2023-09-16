@@ -12,7 +12,6 @@ import { LazyMotion, domAnimation, m } from "framer-motion";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { UserContext } from "../context/UserContext";
-import { createUserExperience } from "../core/api";
 import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
 import { formatTime } from "../core/helpers";
 import { Experience, Journey, UserExperience } from "../core/types";
@@ -23,6 +22,7 @@ import PlayIcon from "../icons/PlayIcon";
 import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
+import { createUserExperience } from "../core/api";
 
 interface Props {
   isOpen: boolean;
@@ -67,13 +67,13 @@ const MusicDrawer = ({
         };
         // check if the experience was last in course
         if (journeyToDo) {
-          // const allExps = journeyToDo.experiences;
-          // const lastExp = allExps[allExps.length - 1];
-          // if (lastExp.id === openedExperience.id) {
-          //   createUserExperience(userExperience, true, journeyToDo.id);
-          // } else {
-          //   createUserExperience(userExperience);
-          // }
+          const allExps = journeyToDo.experiences;
+          const lastExp = allExps[allExps.length - 1];
+          if (lastExp.id === openedExperience.id) {
+            createUserExperience(userExperience, true, journeyToDo.id);
+          } else {
+            createUserExperience(userExperience);
+          }
           setIsCompletedNewExp(true);
         }
       }
