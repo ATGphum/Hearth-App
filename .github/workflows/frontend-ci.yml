@@ -57,7 +57,7 @@ jobs:
           appdir: "hearth-web"
           buildpack: "heroku/nodejs,heroku-community/nginx"
         env:
-          HD_VITE_API_HOST: https://test-backend-hearth-app-2052c656e13e.herokuapp.com/ # Will need to change to the server url when backend has been deployed
+          HD_VITE_API_HOST: https://hearth-app-backend-17443fe6c6fb.herokuapp.com/ # Will need to change to the server url when backend has been deployed
           HD_VITE_ENV: production
           HD_VITE_AUTH0_DOMAIN: hearth.au.auth0.com
           HD_VITE_AUTH0_WEB_ID: ${{secrets.VITE_AUTH0_WEB_ID}}
