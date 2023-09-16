@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
 import LoadingPage from "../pages/LoadingPage";
@@ -15,18 +14,8 @@ export const Layout = ({ children, hidePadding }: Props) => {
 
   const { data: journeys } = useJourneys();
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000); // 2000ms = 2 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
-
   // show loading page while user data is retrieving or 2 seconds is up
-  if (!user || !journeys || isLoading) return <LoadingPage />;
+  if (!user || !journeys) return <LoadingPage />;
 
   // show user form if essential fields are not present
   if (
