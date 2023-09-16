@@ -1,0 +1,75 @@
+name: Deploy Backend to Heroku
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  backend-test-build:
+    if: (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed'))
+    name: Test Backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hearth-api
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: docker build -t test-build-image -f Dockerfile.production .
+
+      - name: Build Migration image
+        run: docker build -t test-migration-image -f Dockerfile.release .
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: backend-test-build
+    name: Deploy backend to Heroku
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hearth-api
+
+    env:
+      HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      HEROKU_APP_NAME: hearth-app-backend
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Heroku CLI
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
+
+      - name: Login to Heroku
+        run: |
+          echo "HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }}" >> $GITHUB_ENV
+          heroku whoami
+
+      - name: Log in to Heroku Container Registry
+        run: docker login --username=$HEROKU_EMAIL --password=$HEROKU_API_KEY registry.heroku.com
+
+      # First set of build and push, the Web Dockerfile (deployed to Heroku)
+      # Second set is the Release phase which is running the migration command in order to check that's working
+      # before deploying and running the actual web docker image
+      - name: Build and Push Docker Images
+        run: |
+          docker build -t registry.heroku.com/$HEROKU_APP_NAME/web -f Dockerfile.production .
+          docker push registry.heroku.com/$HEROKU_APP_NAME/web
+          docker build -t registry.heroku.com/$HEROKU_APP_NAME/release -f Dockerfile.release .
+          docker push registry.heroku.com/$HEROKU_APP_NAME/release
+
+      - name: Release Docker images to Heroku
+        run: heroku container:release release web -a $HEROKU_APP_NAME --verbose
