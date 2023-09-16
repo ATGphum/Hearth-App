@@ -43,6 +43,7 @@ const MusicDrawer = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const [isCompletedNewExp, setIsCompletedNewExp] = useState(false);
+  const [isLastExpInJourney, setIsLastExpInJourney] = useState(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -57,8 +58,6 @@ const MusicDrawer = ({
     const audioEl = audioRef.current;
 
     const handleAudioEnded = async () => {
-      // handle ux scenario where last experience in course is completed
-
       // if it is latest experience in progress, create new link
       if (openedExperience.id === experienceToDo?.id && user) {
         const userExperience: Partial<UserExperience> = {
@@ -71,6 +70,7 @@ const MusicDrawer = ({
           const lastExp = allExps[allExps.length - 1];
           if (lastExp.id === openedExperience.id) {
             createUserExperience(userExperience, true, journeyToDo.id);
+            setIsLastExpInJourney(true);
           } else {
             createUserExperience(userExperience);
           }
@@ -254,8 +254,9 @@ const MusicDrawer = ({
             >
               <Text textStyle="heading.h1">Congratulations!</Text>
               <Text textStyle="body" mt="0.5rem">
-                You completed level {experienceToDo?.level} of the{" "}
-                {journeyToDo?.name}!
+                {isLastExpInJourney
+                  ? `You completed the ${journeyToDo?.name}!`
+                  : `You completed level ${experienceToDo?.level} of the ${journeyToDo?.name}!`}
               </Text>
             </MotionFlex>
           )}

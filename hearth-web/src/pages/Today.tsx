@@ -23,7 +23,7 @@ function Today() {
       flex="1"
       justifyContent={"space-between"}
     >
-      {experienceToDo && journeyToDo && (
+      {drawerIsOpen && experienceToDo && journeyToDo && (
         <MusicDrawer
           onClose={drawerOnClose}
           isOpen={drawerIsOpen}

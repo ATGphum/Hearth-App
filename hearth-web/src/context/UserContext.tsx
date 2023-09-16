@@ -62,8 +62,16 @@ const UserProvider = ({ children }: Props) => {
         // Find the highest-level experience that's available in the found journey
         const sortedExperiences = [...availableJourney.experiences].reverse();
         const experience = sortedExperiences.find((e) => e.is_available);
-        if (!availableJourney.completed) setJourneyToDo(availableJourney);
-        if (!experience?.completed) setExperienceToDo(experience);
+        if (!availableJourney.completed) {
+          setJourneyToDo(availableJourney);
+        } else {
+          setJourneyToDo(undefined);
+        }
+        if (!experience?.completed) {
+          setExperienceToDo(experience);
+        } else {
+          setExperienceToDo(undefined);
+        }
       }
     }
   }, [journeys]);
