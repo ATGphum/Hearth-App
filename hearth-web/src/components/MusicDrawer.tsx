@@ -39,7 +39,7 @@ const MusicDrawer = ({
   openedExperience,
   parentCourse,
 }: Props) => {
-  const { mutate: journeyMutate } = useJourneys();
+  // const { mutate: journeyMutate } = useJourneys();
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const [isPlaying, setIsPlaying] = useState(false);

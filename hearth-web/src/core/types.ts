@@ -35,7 +35,7 @@ export interface Experience {
   is_available: false;
 }
 
-export interface CreateUserExperience {
+export interface UserExperience {
   id: number;
   completion_date: Date;
   experience_id: number;
