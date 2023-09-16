@@ -67,13 +67,13 @@ const MusicDrawer = ({
         };
         // check if the experience was last in course
         if (journeyToDo) {
-          const allExps = journeyToDo.experiences;
-          const lastExp = allExps[allExps.length - 1];
-          if (lastExp.id === openedExperience.id) {
-            createUserExperience(userExperience, true, journeyToDo.id);
-          } else {
-            createUserExperience(userExperience);
-          }
+          // const allExps = journeyToDo.experiences;
+          // const lastExp = allExps[allExps.length - 1];
+          // if (lastExp.id === openedExperience.id) {
+          //   createUserExperience(userExperience, true, journeyToDo.id);
+          // } else {
+          //   createUserExperience(userExperience);
+          // }
           setIsCompletedNewExp(true);
         }
       }
@@ -154,6 +154,30 @@ const MusicDrawer = ({
     onClose();
   };
 
+  const pictureVariants = {
+    expanded: {
+      paddingLeft: "2rem",
+      paddingRight: "2rem",
+    },
+    shrunk: {
+      paddingRight: "0rem",
+      paddingLeft: "0rem",
+    },
+  };
+
+  const textVariants = {
+    hidden: {
+      opacity: 0,
+      display: "none",
+    },
+    visible: {
+      opacity: 1,
+      marginTop: "0rem",
+      paddingTop: "1rem",
+      display: "block",
+    },
+  };
+
   const mounter = document.getElementById("mounter");
   if (!mounter) return null;
   return ReactDOM.createPortal(
@@ -191,13 +215,50 @@ const MusicDrawer = ({
             <CrossIcon />
           </Flex>
         </Flex>
-        <Flex px="1rem" minHeight={0} flexShrink={1} justifyContent={"center"}>
-          <Image
-            height="100%"
-            maxHeight={"100%"}
-            src={openedExperience.image_link}
-            objectFit={"contain"}
-          />
+        <Flex
+          direction="column"
+          flexShrink={1}
+          minHeight={0}
+          alignItems={"center"}
+          p="1rem"
+          m="1rem"
+          bg={
+            isCompletedNewExp
+              ? `linear-gradient(167deg, ${journeyToDo?.color} 9.42%, rgba(240, 88, 252, 0.00) 100.4%)`
+              : "#ffffff00"
+          }
+          borderRadius="1.5625rem"
+        >
+          <MotionFlex
+            minHeight={0}
+            flexShrink={1}
+            justifyContent={"center"}
+            initial="expanded"
+            animate={isCompletedNewExp ? "shrunk" : "expanded"}
+            variants={pictureVariants}
+          >
+            <Image
+              height="100%"
+              maxHeight={"100%"}
+              src={openedExperience.image_link}
+              objectFit={"contain"}
+            />
+          </MotionFlex>
+          {isCompletedNewExp && (
+            <MotionFlex
+              initial="hidden"
+              animate={isCompletedNewExp ? "visible" : "hidden"}
+              variants={textVariants}
+              transition={{ duration: 0.5 }}
+              textAlign={"center"}
+            >
+              <Text textStyle="heading.h1">Congratulations!</Text>
+              <Text textStyle="body" mt="0.5rem">
+                You completed level {experienceToDo?.level} of the{" "}
+                {journeyToDo?.name}!
+              </Text>
+            </MotionFlex>
+          )}
         </Flex>
         <Flex direction={"column"}>
           <Flex
