@@ -62,27 +62,30 @@ function Library() {
           pt="0rem"
           gridRowGap="1rem"
         >
-          <Flex
-            direction="column"
-            p="2rem"
-            background={`linear-gradient(166deg, ${experienceToDo?.color} 10.17%, rgba(240, 88, 252, 0.00) 90.68%)`}
-            width="100%"
-            borderRadius="2.75rem"
-            borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-            onClick={musicDrawerOnOpen}
-          >
-            <Image
-              m="1rem"
-              height="6rem"
-              src={experienceToDo?.image_link}
-              objectFit={"contain"}
-            />
+          {experienceToDo && (
+            <Flex
+              direction="column"
+              p="2rem"
+              background={`linear-gradient(166deg, ${experienceToDo?.color} 10.17%, rgba(240, 88, 252, 0.00) 90.68%)`}
+              width="100%"
+              borderRadius="2.75rem"
+              borderBottom="1px solid rgba(0, 0, 0, 0.40)"
+              onClick={musicDrawerOnOpen}
+            >
+              <Image
+                m="1rem"
+                height="6rem"
+                src={experienceToDo?.image_link}
+                objectFit={"contain"}
+              />
 
-            <Text textStyle="heading.h1">Up next</Text>
-            <Text textStyle="bodySmall">{journeyToDo?.name}</Text>
-            <Text textStyle="heading.h2">{experienceToDo?.name}</Text>
-            <Text textStyle="body">{experienceToDo?.duration} min</Text>
-          </Flex>
+              <Text textStyle="heading.h1">Up next</Text>
+              <Text textStyle="bodySmall">{journeyToDo?.name}</Text>
+              <Text textStyle="heading.h2">{experienceToDo?.name}</Text>
+              <Text textStyle="body">{experienceToDo?.duration} min</Text>
+            </Flex>
+          )}
+
           <Flex direction="column" textAlign={"left"} gridRowGap="0.75rem">
             <Text textStyle={"heading.h2"}>Connection Journeys</Text>
             <Text textStyle={"body"}>
