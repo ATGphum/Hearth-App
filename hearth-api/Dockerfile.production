@@ -24,5 +24,8 @@ WORKDIR /usr/src/app
 COPY --from=build-stage /usr/src/app/node_modules ./node_modules
 COPY --from=build-stage /usr/src/app .
 
+# Making the shell script where it contains the prisma commands and start
+RUN chmod +x run-deploy-production.sh
+
 # Command to run the app
-CMD [ "npm", "run", "start" ]
+CMD [ "./run-deploy-production.sh" ]
