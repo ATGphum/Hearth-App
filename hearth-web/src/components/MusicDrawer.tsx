@@ -12,9 +12,10 @@ import { LazyMotion, domAnimation, m } from "framer-motion";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { UserContext } from "../context/UserContext";
-import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
+import { createUserExperience } from "../core/api";
+import { useCurrentUserProfile } from "../core/apiHooks";
 import { formatTime } from "../core/helpers";
-import { UserExperience, Experience, Journey } from "../core/types";
+import { Experience, Journey, UserExperience } from "../core/types";
 import CrossIcon from "../icons/CrossIcon";
 import DownIcon from "../icons/DownIcon";
 import PauseIcon from "../icons/PauseIcon";
@@ -22,7 +23,6 @@ import PlayIcon from "../icons/PlayIcon";
 import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
-import { createUserExperience } from "../core/api";
 
 interface Props {
   isOpen: boolean;
