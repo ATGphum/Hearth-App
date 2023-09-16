@@ -26,13 +26,14 @@ FROM node:20-slim
 WORKDIR /usr/src/app
 
 # Install relevent postgres client binaries
-RUN apt-get update && apt-get install -y openssl postgresql-client
+RUN apt-get update && apt-get install -y openssl curl postgresql-client
 
 # Copy node modules and built code from the previous stage
 COPY --from=build-stage /usr/src/app/node_modules ./node_modules
 COPY --from=build-stage /usr/src/app .
 
-RUN npx prisma generate
+# Making the shell script where it contains the prisma commands
+RUN chmod +x run-deploy-release-phase.sh
 
 # Command to run the app
-CMD ["npx", "prisma", "migrate", "deploy"]
+CMD ["./run-deploy-release-phase.sh"]
