@@ -1,4 +1,4 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
+import { FastifyInstance, FastifyRequest } from "fastify";
 import { userPatchSchema, userResponseSchema } from "./users-serializers.js";
 import { UserPatchParams } from "./users-types.js";
 
@@ -40,10 +40,7 @@ export default async function UserController(fastify: FastifyInstance) {
         },
       },
     },
-    async (
-      request: FastifyRequest<{ Params: UserPatchParams }>,
-      reply: FastifyReply
-    ) => {
+    async (request: FastifyRequest<{ Params: { userId: string } }>) => {
       const { userId } = request.params;
       const body = request.body;
       request.getValidationFunction("body")(body);
