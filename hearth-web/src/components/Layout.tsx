@@ -15,11 +15,11 @@ export const Layout = ({ children, hidePadding }: Props) => {
   const { data: journeys } = useJourneys();
 
   // show loading page while user data is retrieving or 2 seconds is up
-  if (!journeys) return <LoadingPage />;
+  if (!user || !journeys) return <LoadingPage />;
 
   // show user form if essential fields are not present
   if (
-    !user?.first_name ||
+    !user.first_name ||
     !user.last_name ||
     !user.partner_first_name ||
     !user.partner_last_name
