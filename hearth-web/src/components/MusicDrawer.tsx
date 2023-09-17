@@ -346,6 +346,8 @@ const MusicDrawer = ({
                 direction="column"
                 justifyContent={"center"}
                 onClick={rewind}
+                outline="none"
+                userSelect={"none"}
               >
                 <RewindBackIcon />
                 <Text textStyle={"detailTextSmall"}>15 sec.</Text>
@@ -356,6 +358,8 @@ const MusicDrawer = ({
                 mb="1rem"
                 height="2rem"
                 width="2rem"
+                outline="none"
+                userSelect={"none"}
               >
                 {isPlaying ? <PauseIcon /> : <PlayIcon />}
               </Flex>
@@ -366,6 +370,8 @@ const MusicDrawer = ({
                 direction="column"
                 justifyContent={"center"}
                 onClick={forward}
+                outline="none"
+                userSelect={"none"}
               >
                 <RewindFowardIcon />
                 <Text textStyle={"detailTextSmall"}>15 sec.</Text>
