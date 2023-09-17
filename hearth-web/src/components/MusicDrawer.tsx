@@ -59,13 +59,15 @@ const MusicDrawer = ({
 
   const { data: user } = useCurrentUserProfile();
 
-  if ("mediaSession" in navigator)
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: openedExperience.name,
-      artist: "Hearth",
-      album: journeyToDo?.name,
-      artwork: [{ src: openedExperience.image_link }],
-    });
+  useEffect(() => {
+    if ("mediaSession" in navigator && journeyToDo)
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: openedExperience.name,
+        artist: "Hearth",
+        album: journeyToDo?.name,
+        artwork: [{ src: openedExperience.image_link }],
+      });
+  }, [journeyToDo]);
 
   // logic for when audio ends
   const handleAudioEnded = async () => {
