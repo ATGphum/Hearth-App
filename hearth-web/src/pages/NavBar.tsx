@@ -26,9 +26,10 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
         <Image
           src={
             selectedPage === 0
-              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1694936395/Untitled_Artwork_43_2_xcsubw.png"
-              : "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937405/Untitled_Artwork_34_1_rzvu57.png"
+              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937891/Property_1_Menu_color_black_dnimey.svg"
+              : "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937787/Untitled_Artwork_43_2_o7ucj5.svg"
           }
+          maxHeight={"2rem"}
         />
       </Flex>
       <Flex
@@ -40,9 +41,10 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
         <Image
           src={
             selectedPage === 1
-              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1694936395/Untitled_Artwork_43_2_xcsubw.png"
-              : "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937405/Untitled_Artwork_34_1_rzvu57.png"
+              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937891/Property_1_Menu_color_black_dnimey.svg"
+              : "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937787/Untitled_Artwork_43_2_o7ucj5.svg"
           }
+          maxHeight={"2rem"}
         />
       </Flex>
       <Flex
@@ -54,9 +56,10 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
         <Image
           src={
             selectedPage === 2
-              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1694936395/Untitled_Artwork_43_2_xcsubw.png"
-              : "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937405/Untitled_Artwork_34_1_rzvu57.png"
+              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937891/Property_1_Menu_color_black_dnimey.svg"
+              : "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937787/Untitled_Artwork_43_2_o7ucj5.svg"
           }
+          maxHeight={"2rem"}
         />
       </Flex>
     </Flex>
