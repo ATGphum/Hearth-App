@@ -39,7 +39,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
         dragElastic={{ left: 0, right: 0.75 }}
         onDragEnd={(_, info) => {
           if (
-            info.velocity.x > 10 &&
+            info.velocity.x > 0 &&
             info.offset.x > 50 &&
             Math.abs(info.offset.y) < 70
           ) {
