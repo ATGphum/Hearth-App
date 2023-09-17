@@ -29,7 +29,7 @@ const AppContextProviders = ({ children }: ProviderProps) => {
         value={{
           fetcher: async (url: string) => {
             const token = await getAccessTokenSilently();
-            return request<any>(url, "GET", token).then((res) => {
+            return request<any>(url, "GET", undefined, token).then((res) => {
               if (res.status >= 300) {
                 const error = new Error(
                   "An error occurred while fetching the data."

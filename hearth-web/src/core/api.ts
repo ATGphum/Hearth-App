@@ -16,8 +16,8 @@ const client = axios.create();
 export const request = async <T>(
   url: string,
   method: Method,
-  token?: string,
-  config?: Partial<AxiosRequestConfig>
+  config?: Partial<AxiosRequestConfig>,
+  token?: string
 ): Promise<AxiosResponse<T>> => {
   const accessToken = token
     ? token
