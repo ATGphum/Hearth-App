@@ -47,6 +47,9 @@ function Library() {
       </AnimatePresence>
       <LazyMotion features={domAnimation}>
         <MotionFlex
+          drag={"y"}
+          dragDirectionLock
+          dragConstraints={{ top: 0, bottom: 0 }}
           animate={{ x: journeyDrawerIsOpen ? "-50%" : "0%" }}
           transition={{ damping: 300 }}
           position="absolute"
