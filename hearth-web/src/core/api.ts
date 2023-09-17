@@ -13,12 +13,15 @@ const client = axios.create();
 
 // A wrapper for axios.requests, which adds auth
 
-export const request = <T>(
+export const request = async <T>(
   url: string,
   method: Method,
+  token?: string,
   config?: Partial<AxiosRequestConfig>
 ): Promise<AxiosResponse<T>> => {
-  const accessToken = window.localStorage.getItem("acAccessToken") ?? "";
+  const accessToken = token
+    ? token
+    : window.localStorage.getItem("acAccessToken") ?? "";
 
   if (accessToken == null || accessToken === "") {
     const error = Error("No access token available");
