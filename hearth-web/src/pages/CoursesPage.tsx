@@ -85,7 +85,7 @@ const Courses = ({
           if (
             info.velocity.x > 10 &&
             info.offset.x > 50 &&
-            Math.abs(info.offset.y) < 50
+            Math.abs(info.offset.y) < 70
           ) {
             onClose();
           }
