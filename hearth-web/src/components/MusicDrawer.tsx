@@ -58,8 +58,16 @@ const MusicDrawer = ({
   const { experienceToDo, journeyToDo } = useContext(UserContext);
 
   const { data: user } = useCurrentUserProfile();
-  // logic for when audio ends
 
+  if ("mediaSession" in navigator)
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: openedExperience.name,
+      artist: "Hearth",
+      album: journeyToDo?.name,
+      artwork: [{ src: openedExperience.image_link }],
+    });
+
+  // logic for when audio ends
   const handleAudioEnded = async () => {
     // if it is latest experience in progress, create new link
     if (openedExperience.id === experienceToDo?.id && user) {
