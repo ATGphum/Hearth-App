@@ -82,7 +82,7 @@ const Courses = ({
         dragDirectionLock
         dragConstraints={{ left: 0, right: 0 }}
         onDragEnd={(_, info) => {
-          if (info.velocity.x > 0 && info.velocity.y < 5) {
+          if (info.velocity.x > 10 && info.offset.x > 100) {
             onClose();
           }
         }}
