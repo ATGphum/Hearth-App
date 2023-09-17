@@ -1,19 +1,8 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import { Flex, keyframes } from "@chakra-ui/react";
 import { m } from "framer-motion";
-import { useEffect } from "react";
 import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
 
 function LoadingPage() {
-  const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
-
-  // login guard
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      loginWithRedirect().catch((e) => console.error("Error occurred", e));
-    }
-  }, [loginWithRedirect, isLoading, isAuthenticated]);
-
   const animationKeyframes = keyframes`
   0% { transform: scale(1) rotate(0); border-radius: 20%; }
   25% { transform: scale(3) rotate(0); border-radius: 20%; }
