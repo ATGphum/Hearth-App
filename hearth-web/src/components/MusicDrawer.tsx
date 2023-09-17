@@ -129,14 +129,14 @@ const MusicDrawer = ({
   );
 
   const rewind = () => {
-    if (audioRef.current) audioRef.current.currentTime = currentTime - 15;
-    setCurrentTime(currentTime - 15);
+    if (audioRef.current) audioRef.current.currentTime = currentTime - 10;
+    setCurrentTime(currentTime - 10);
     if (isPlaying) audioRef.current?.play();
   };
 
   const forward = () => {
-    if (audioRef.current) audioRef.current.currentTime = currentTime + 15;
-    setCurrentTime(currentTime + 15);
+    if (audioRef.current) audioRef.current.currentTime = currentTime + 10;
+    setCurrentTime(currentTime + 10);
   };
 
   useEffect(() => {
@@ -350,7 +350,7 @@ const MusicDrawer = ({
                 userSelect={"none"}
               >
                 <RewindBackIcon />
-                <Text textStyle={"detailTextSmall"}>15 sec.</Text>
+                <Text textStyle={"detailTextSmall"}>10 sec.</Text>
               </Flex>
               <Flex
                 onClick={togglePlay}
@@ -374,7 +374,7 @@ const MusicDrawer = ({
                 userSelect={"none"}
               >
                 <RewindFowardIcon />
-                <Text textStyle={"detailTextSmall"}>15 sec.</Text>
+                <Text textStyle={"detailTextSmall"}>10 sec.</Text>
               </Flex>
             </Flex>
           </Flex>
