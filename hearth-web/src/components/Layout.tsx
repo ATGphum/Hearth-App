@@ -20,7 +20,7 @@ export const Layout = ({ children, hidePadding }: Props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 2000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
