@@ -22,7 +22,9 @@ function Today() {
       direction="column"
       width="100%"
       flex="1"
-      justifyContent={"space-between"}
+      justifyContent={"flex-end"}
+      overflow={"hidden"}
+      position={"relative"}
     >
       <AnimatePresence>
         {drawerIsOpen && experienceToDo && journeyToDo && (
@@ -34,7 +36,18 @@ function Today() {
           />
         )}
       </AnimatePresence>
-      <Flex direction="column" width="100%" padding="2rem" gridRowGap="1rem">
+      <Flex
+        direction="column"
+        width="100%"
+        padding="2rem"
+        gridRowGap="1rem"
+        position="absolute"
+        top="0"
+        left="0"
+        right="0"
+        bottom="0"
+        overflowY={"auto"}
+      >
         <Flex
           width="100%"
           justifyContent={"space-between"}
@@ -55,6 +68,7 @@ function Today() {
       </Flex>
       {experienceToDo && (
         <Flex
+          zIndex={1}
           direction="column"
           padding="1.5rem"
           borderTopRadius="3rem"
