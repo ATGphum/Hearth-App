@@ -43,7 +43,7 @@ function Today() {
           drag={"y"}
           dragDirectionLock
           dragConstraints={{ top: 0, bottom: 0 }}
-          dragElastic={{ top: 0.51, bottom: 0.51 }}
+          dragElastic={{ top: 0.5, bottom: 0.5 }}
           transition={{ damping: 300 }}
           direction="column"
           width="100%"
@@ -53,7 +53,7 @@ function Today() {
           top="0"
           left="0"
           right="0"
-          bottom="0"
+          bottom="4rem"
           overflowY={"auto"}
         >
           <Flex
