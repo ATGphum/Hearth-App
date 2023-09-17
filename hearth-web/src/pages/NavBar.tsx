@@ -15,7 +15,7 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
       maxW="40rem"
       alignSelf={"flex-start"}
       alignItems={"center"}
-      pb="1rem"
+      pb="1.5rem"
     >
       <Flex
         p="0.75rem"
