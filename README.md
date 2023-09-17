@@ -8,6 +8,12 @@
 
 **DB**: Postgres
 
+## Workflow Status
+
+**Frontend:** [![Deploy Frontend to Heroku](https://github.com/ATGphum/Hearth-App/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/ATGphum/Hearth-App/actions/workflows/frontend-ci.yml)
+
+**Backend:** [![Deploy Backend to Heroku](https://github.com/ATGphum/Hearth-App/actions/workflows/backend-ci.yml/badge.svg)](https://github.com/ATGphum/Hearth-App/actions/workflows/backend-ci.yml)
+
 ## Getting started
 
 ### Requirements
@@ -43,18 +49,24 @@ Server can be debugged by pressing the play button in vscode to attach the debug
 
 ### Running web app
 
-run
+Ensure your terminal is in the `hearth-web` directory, then run:
 
-`docker compose up`
+`npm run dev`
 
-This will spin up the backend and the database. Whenever you:
+This will spin up the frontend. Whenever you:
 
 - install a new node package
-- update an environment variable
+- install dependencies that were added but not yet to local
 
-you will need to run the following command to trigger an image rebuild on launch
+you will need to run the following command:
 
-`docker compose up --build`
+`npm install`
+
+If you want to test building a production build run:
+
+`npm run build`
+
+You will see a `dist` folder in the hearth-web directory.
 
 ### Viewing the db
 
