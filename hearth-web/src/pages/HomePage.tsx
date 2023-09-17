@@ -30,6 +30,7 @@ function HomePage() {
         )}
       </Flex>
       <NavBar
+        selectedPage={page}
         tabChange={(pageNumber: number) => {
           setPage(pageNumber);
         }}
