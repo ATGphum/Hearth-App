@@ -5,7 +5,9 @@ import { UserContext } from "../context/UserContext";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import DownIcon from "../icons/DownIcon";
 import UpIcon from "../icons/UpIcon";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
+
+const MotionFlex = m(Flex);
 
 function Today() {
   const [showQuote, setShowQuote] = useState(true);
@@ -36,36 +38,42 @@ function Today() {
           />
         )}
       </AnimatePresence>
-      <Flex
-        direction="column"
-        width="100%"
-        padding="2rem"
-        gridRowGap="1rem"
-        position="absolute"
-        top="0"
-        left="0"
-        right="0"
-        bottom="0"
-        overflowY={"auto"}
-      >
-        <Flex
+      <LazyMotion features={domAnimation}>
+        <MotionFlex
+          drag={"y"}
+          dragDirectionLock
+          dragConstraints={{ top: 0, bottom: 0 }}
+          transition={{ damping: 300 }}
+          direction="column"
           width="100%"
-          justifyContent={"space-between"}
-          onClick={() => setShowQuote(!showQuote)}
+          padding="2rem"
+          gridRowGap="1rem"
+          position="absolute"
+          top="0"
+          left="0"
+          right="0"
+          bottom="0"
+          overflowY={"auto"}
         >
-          <Text textStyle="heading.h2">Daily quote</Text>
-          <Flex>{showQuote ? <UpIcon /> : <DownIcon />}</Flex>
-        </Flex>
-        <Collapse in={showQuote} animateOpacity>
-          <Flex direction="column" textAlign={"left"}>
-            <Text textStyle="quote">
-              "To love someone is to learn the song in their heart and sing it
-              to them when they have forgotten.”
-            </Text>
-            <Text>- Arne Garborg</Text>
+          <Flex
+            width="100%"
+            justifyContent={"space-between"}
+            onClick={() => setShowQuote(!showQuote)}
+          >
+            <Text textStyle="heading.h2">Daily quote</Text>
+            <Flex>{showQuote ? <UpIcon /> : <DownIcon />}</Flex>
           </Flex>
-        </Collapse>
-      </Flex>
+          <Collapse in={showQuote} animateOpacity>
+            <Flex direction="column" textAlign={"left"}>
+              <Text textStyle="quote">
+                "To love someone is to learn the song in their heart and sing it
+                to them when they have forgotten.”
+              </Text>
+              <Text>- Arne Garborg</Text>
+            </Flex>
+          </Collapse>
+        </MotionFlex>
+      </LazyMotion>
       {experienceToDo && (
         <Flex
           zIndex={1}
