@@ -305,7 +305,7 @@ const MusicDrawer = ({
                 src={openedExperience.audio_link}
                 onLoadedData={handleLoadedData}
                 onTimeUpdate={handleTimeUpdate}
-                preload="metadata"
+                preload="auto"
               />
 
               <Slider
