@@ -1,5 +1,4 @@
 import { Flex, Image } from "@chakra-ui/react";
-import logo from "../svg/logo.svg";
 
 interface Props {
   children: React.ReactNode;
@@ -24,7 +23,12 @@ export const LayoutNoRedirect = ({ children, hidePadding }: Props) => {
         pb="1rem"
         pt={hidePadding ? "1rem" : "0rem"}
       >
-        <Image src={logo} alt="Hearth" />
+        <Image
+          src={
+            "https://res.cloudinary.com/ddh1fblle/image/upload/v1694933705/Web_ilczox.svg"
+          }
+          alt="Hearth"
+        />
       </Flex>
       {children}
     </Flex>
