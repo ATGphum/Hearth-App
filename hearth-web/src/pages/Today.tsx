@@ -43,6 +43,7 @@ function Today() {
           drag={"y"}
           dragDirectionLock
           dragConstraints={{ top: 0, bottom: 0 }}
+          dragElastic={{ top: 0.51, bottom: 0.51 }}
           transition={{ damping: 300 }}
           direction="column"
           width="100%"
