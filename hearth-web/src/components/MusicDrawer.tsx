@@ -46,6 +46,10 @@ const MusicDrawer = ({
   const [isLastExpInJourney, setIsLastExpInJourney] = useState(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
+  // isToggling only used to determine if dragging is being undergone
+  // to protect from pausing the music when it is being dragged in app
+  // as when the music is paused from ios controls we need to update
+  // the component playing state as done in the audio component
   const [isToggling, setIsToggling] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
