@@ -26,7 +26,7 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
         <Image
           src={
             selectedPage === 0
-              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937891/Property_1_Menu_color_black_dnimey.svg"
+              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1694938037/Untitled_Artwork_43_2_ng62of.svg"
               : "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937787/Untitled_Artwork_43_2_o7ucj5.svg"
           }
           maxHeight={"2rem"}
@@ -41,7 +41,7 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
         <Image
           src={
             selectedPage === 1
-              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937891/Property_1_Menu_color_black_dnimey.svg"
+              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1694938037/Untitled_Artwork_43_2_ng62of.svg"
               : "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937787/Untitled_Artwork_43_2_o7ucj5.svg"
           }
           maxHeight={"2rem"}
@@ -56,7 +56,7 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
         <Image
           src={
             selectedPage === 2
-              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937891/Property_1_Menu_color_black_dnimey.svg"
+              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1694938037/Untitled_Artwork_43_2_ng62of.svg"
               : "https://res.cloudinary.com/ddh1fblle/image/upload/v1694937787/Untitled_Artwork_43_2_o7ucj5.svg"
           }
           maxHeight={"2rem"}
