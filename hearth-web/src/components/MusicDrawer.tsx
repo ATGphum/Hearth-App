@@ -294,8 +294,9 @@ const MusicDrawer = ({
               "linear-gradient(144deg, rgba(250, 137, 4, 0.25) 21.07%, rgba(250, 151, 4, 0.00) 83.54%)"
             }
             alignItems="center"
-            p="1rem"
-            px="1.5rem"
+            pt="1rem"
+            px="1rem"
+            pb="2rem"
             gridRowGap="1rem"
           >
             <Flex direction={"column"} width={"100%"}>
@@ -337,11 +338,7 @@ const MusicDrawer = ({
                 </Text>
               </Flex>
             </Flex>
-            <Flex
-              width={"100%"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-            >
+            <Flex width={"100%"} justifyContent={"space-around"}>
               <Flex
                 height="3rem"
                 alignItems={"center"}
@@ -352,7 +349,13 @@ const MusicDrawer = ({
                 <RewindBackIcon />
                 <Text textStyle={"detailTextSmall"}>15 sec.</Text>
               </Flex>
-              <Flex onClick={togglePlay} height="3rem" alignItems={"center"}>
+              <Flex
+                onClick={togglePlay}
+                alignItems={"center"}
+                mb="1rem"
+                height="2rem"
+                width="2rem"
+              >
                 {isPlaying ? <PauseIcon /> : <PlayIcon />}
               </Flex>
 
