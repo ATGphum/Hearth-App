@@ -46,6 +46,7 @@ const MusicDrawer = ({
   const [isLastExpInJourney, setIsLastExpInJourney] = useState(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isToggling, setIsToggling] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [showText, setShowText] = useState(true);
@@ -104,6 +105,7 @@ const MusicDrawer = ({
     if (isPlaying) {
       audioRef.current?.pause();
     }
+    setIsToggling(true);
   };
 
   const handleSeekEnd = useCallback(
@@ -113,6 +115,7 @@ const MusicDrawer = ({
       if (isPlaying) {
         audioRef.current?.play();
       }
+      setIsToggling(false);
     },
     [isPlaying]
   );
@@ -296,8 +299,13 @@ const MusicDrawer = ({
                 onTimeUpdate={handleTimeUpdate}
                 onEnded={handleAudioEnded}
                 preload="auto"
+                onPlay={() => {
+                  setIsPlaying(true);
+                }}
+                onPause={() => {
+                  if (!isToggling) setIsPlaying(false);
+                }}
               />
-
               <Slider
                 aria-label="audio-slider"
                 value={currentTime}
