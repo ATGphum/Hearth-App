@@ -54,44 +54,33 @@ const MusicDrawer = ({
 
   const { data: user } = useCurrentUserProfile();
   // logic for when audio ends
-  useEffect(() => {
-    const audioEl = audioRef.current;
 
-    const handleAudioEnded = async () => {
-      // if it is latest experience in progress, create new link
-      if (openedExperience.id === experienceToDo?.id && user) {
-        const userExperience: Partial<UserExperience> = {
-          experience_id: openedExperience.id,
-          user_id: user.id,
-        };
-        // check if the experience was last in course
-        if (journeyToDo) {
-          const allExps = journeyToDo.experiences;
-          const lastExp = allExps[allExps.length - 1];
-          if (lastExp.id === openedExperience.id) {
-            createUserExperience(userExperience, true, journeyToDo.id);
-            setIsLastExpInJourney(true);
-          } else {
-            createUserExperience(userExperience);
-          }
-          setIsCompletedNewExp(true);
-        }
-      }
-    };
-
-    if (audioEl) {
-      audioEl.addEventListener("ended", handleAudioEnded);
-
-      // Cleanup listener when component unmounts
-      return () => {
-        audioEl.removeEventListener("ended", handleAudioEnded);
+  const handleAudioEnded = async () => {
+    // if it is latest experience in progress, create new link
+    if (openedExperience.id === experienceToDo?.id && user) {
+      const userExperience: Partial<UserExperience> = {
+        experience_id: openedExperience.id,
+        user_id: user.id,
       };
+      // check if the experience was last in course
+      if (journeyToDo) {
+        const allExps = journeyToDo.experiences;
+        const lastExp = allExps[allExps.length - 1];
+        if (lastExp.id === openedExperience.id) {
+          createUserExperience(userExperience, true, journeyToDo.id);
+          setIsLastExpInJourney(true);
+        } else {
+          createUserExperience(userExperience);
+        }
+        setIsCompletedNewExp(true);
+      }
     }
-  }, []);
+  };
 
   const handleLoadedData = () => {
     audioRef.current && setDuration(audioRef.current.duration);
   };
+
   const togglePlay = () => {
     if (isPlaying) {
       audioRef.current?.pause();
@@ -305,6 +294,7 @@ const MusicDrawer = ({
                 src={openedExperience.audio_link}
                 onLoadedData={handleLoadedData}
                 onTimeUpdate={handleTimeUpdate}
+                onEnded={handleAudioEnded}
                 preload="auto"
               />
 
