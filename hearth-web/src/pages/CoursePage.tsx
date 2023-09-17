@@ -37,7 +37,11 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         onDragEnd={(_, info) => {
-          if (info.velocity.x > 10 && info.offset.x > 100) {
+          if (
+            info.velocity.x > 10 &&
+            info.offset.x > 50 &&
+            Math.abs(info.offset.y) < 50
+          ) {
             onClose();
           }
         }}
