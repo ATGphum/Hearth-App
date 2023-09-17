@@ -5,7 +5,6 @@ import RenderRoutes from "./Routes";
 import { UserProvider } from "./context/UserContext";
 import { request } from "./core/api";
 import theme from "./theme/chakra-theme";
-import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
   return (
@@ -22,14 +21,12 @@ interface ProviderProps {
 }
 
 const AppContextProviders = ({ children }: ProviderProps) => {
-  const { getAccessTokenSilently } = useAuth0();
   return (
     <ChakraBaseProvider theme={theme}>
       <SWRConfig
         value={{
           fetcher: async (url: string) => {
-            const token = await getAccessTokenSilently();
-            return request<any>(url, "GET", undefined, token).then((res) => {
+            return request<any>(url, "GET").then((res) => {
               if (res.status >= 300) {
                 const error = new Error(
                   "An error occurred while fetching the data."

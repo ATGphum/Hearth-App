@@ -16,12 +16,9 @@ const client = axios.create();
 export const request = async <T>(
   url: string,
   method: Method,
-  config?: Partial<AxiosRequestConfig>,
-  token?: string
+  config?: Partial<AxiosRequestConfig>
 ): Promise<AxiosResponse<T>> => {
-  const accessToken = token
-    ? token
-    : window.localStorage.getItem("acAccessToken") ?? "";
+  const accessToken = window.localStorage.getItem("acAccessToken") ?? "";
 
   if (accessToken == null || accessToken === "") {
     const error = Error("No access token available");
