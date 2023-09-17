@@ -11,7 +11,7 @@ function LoadingPage() {
   100% { transform: scale(1) rotate(0); border-radius: 20%; }
 `;
 
-  const animation = `${animationKeyframes} 2s ease-in-out infinite`;
+  const animation = `${animationKeyframes} 2s ease-in-out infinite 1s`;
 
   return (
     <LayoutNoRedirect>
@@ -26,6 +26,7 @@ function LoadingPage() {
             height="4rem"
             display="flex"
             drag={true}
+            borderRadius={"20%"}
           />
         </Flex>
       </Flex>
