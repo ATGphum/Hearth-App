@@ -11,7 +11,7 @@ function LoadingPage() {
   100% { transform: scale(1) rotate(0); border-radius: 20%; }
 `;
 
-  const animation = `${animationKeyframes} 2s ease-in-out infinite 0.5s`;
+  const animation = `${animationKeyframes} 2s ease-in-out infinite 0.8s`;
 
   return (
     <LayoutNoRedirect>
