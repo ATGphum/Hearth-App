@@ -188,12 +188,14 @@ const MusicDrawer = ({
           y: isOpen ? "0%" : "100%",
         }}
         exit={{ y: "100%" }}
-        dragConstraints={{ left: 0, right: 0 }}
+        dragConstraints={{ top: 0, bottom: 0 }}
+        dragElastic={{ top: 0, bottom: 0.9 }}
         onDragEnd={(_, info) => {
-          if (info.velocity.x > 0) {
+          if (info.velocity.y > 0) {
             onClose();
           }
         }}
+        drag="y"
         transition={{ damping: 0 }}
         position="absolute"
         top="0"
