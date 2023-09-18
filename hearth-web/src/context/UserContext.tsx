@@ -20,20 +20,8 @@ const UserContext = createContext<ContextProps>({
 const UserProvider = ({ children }: Props) => {
   const { mutate: userMutate } = useCurrentUserProfile();
 
-  const {
-    isAuthenticated,
-    getAccessTokenSilently,
-    isLoading,
-    loginWithRedirect,
-  } = useAuth0();
+  const { isAuthenticated, getAccessTokenSilently, isLoading } = useAuth0();
   const { data: journeys, mutate: journeysMutate } = useJourneys();
-
-  // login guard
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      loginWithRedirect().catch((e) => console.error("Error occurred", e));
-    }
-  }, [loginWithRedirect, isLoading, isAuthenticated]);
 
   // store auth0 access token in memory
   useEffect(() => {

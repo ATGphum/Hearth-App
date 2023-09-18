@@ -3,6 +3,7 @@ import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
 import LoadingPage from "../pages/LoadingPage";
 import { LayoutNoRedirect } from "./LayoutNoRedirect";
 import { useEffect, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface Props {
   children: React.ReactNode;
@@ -16,6 +17,13 @@ export const Layout = ({ children, hidePadding }: Props) => {
   const { data: journeys } = useJourneys();
 
   const [isVisible, setIsVisible] = useState(true);
+  const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+  // login guard
+  useEffect(() => {
+    if (!isLoading && !isAuthenticated) {
+      loginWithRedirect().catch((e) => console.error("Error occurred", e));
+    }
+  }, [loginWithRedirect, isLoading, isAuthenticated]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
