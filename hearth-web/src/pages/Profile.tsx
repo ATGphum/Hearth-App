@@ -50,7 +50,7 @@ function Profile() {
         >
           <Flex justifyContent={"space-between"} alignItems={"flex-start"}>
             {user && (
-              <Flex direction="column" textAlign={"left"}>
+              <Flex direction="column" textAlign={"left"} gridRowGap="0.5rem">
                 <Text textStyle="heading.h1">
                   {user.first_name} & {user.partner_first_name}
                 </Text>
