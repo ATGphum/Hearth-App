@@ -82,7 +82,6 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
           <Text
             textStyle="action"
             p="0.75rem 1rem"
-            fontWeight="bold"
             borderBottom="1px solid"
             borderColor="divider.flesh"
           >
@@ -91,7 +90,6 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
           <Text
             textStyle="action"
             p="0.75rem 1rem"
-            fontWeight="bold"
             borderBottom="1px solid"
             borderColor="divider.flesh"
           >
@@ -100,7 +98,6 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
           <Text
             textStyle="action"
             p="0.75rem 1rem"
-            fontWeight="bold"
             borderBottom="1px solid"
             borderColor="divider.flesh"
             onClick={closeDrawerOnOpen}
