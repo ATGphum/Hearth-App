@@ -41,7 +41,6 @@ function Today() {
       <LazyMotion features={domAnimation}>
         <MotionFlex
           drag={"y"}
-          dragDirectionLock
           dragConstraints={{ top: 0, bottom: 0 }}
           dragElastic={{ top: 0.5, bottom: 0.5 }}
           transition={{ damping: 300 }}
