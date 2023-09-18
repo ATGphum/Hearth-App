@@ -365,7 +365,6 @@ const MusicDrawer = ({
                 mb="1rem"
                 height="2rem"
                 width="2rem"
-                userSelect={"none"}
               >
                 {isPlaying ? <PauseIcon /> : <PlayIcon />}
               </Flex>
