@@ -26,7 +26,6 @@ function Today() {
       flex="1"
       justifyContent={"flex-end"}
       overflow={"hidden"}
-      position={"relative"}
     >
       <AnimatePresence>
         {drawerIsOpen && experienceToDo && journeyToDo && (
@@ -53,7 +52,7 @@ function Today() {
           top="0"
           left="0"
           right="0"
-          bottom="4rem"
+          bottom="0"
           overflowY={"auto"}
         >
           <Flex
