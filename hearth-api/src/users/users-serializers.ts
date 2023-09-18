@@ -32,6 +32,9 @@ export const userResponseSchema = {
     connection_time: {
       type: ["string", "null"],
     },
+    date_joined: {
+      type: "string",
+    },
   },
 };
 

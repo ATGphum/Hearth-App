@@ -20,7 +20,7 @@ export default async function UserController(fastify: FastifyInstance) {
     },
     async (request: FastifyRequest) => {
       const sub: string = request["user"]["sub"];
-      let user = await fastify.prisma.user.findUnique({
+      let user: User = await fastify.prisma.user.findUnique({
         where: { username: sub },
       });
       if (!user) {

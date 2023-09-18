@@ -25,6 +25,14 @@ const textStyles = {
       lineHeight: "1.125rem",
       color: "#542C0D",
     },
+    h4: {
+      fontFamily: `"Jost", "Inter"`,
+      fontStyle: "normal",
+      fontWeight: "normal",
+      fontSize: "0.875rem",
+      lineHeight: "1.125rem",
+      color: "#542C0D",
+    },
   },
   action: {
     fontFamily: `"Inter", "Lato"`,

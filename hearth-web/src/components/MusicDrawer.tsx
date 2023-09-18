@@ -348,7 +348,13 @@ const MusicDrawer = ({
                 </Text>
               </Flex>
             </Flex>
-            <Flex width={"100%"} justifyContent={"space-around"}>
+            <Flex
+              width={"100%"}
+              justifyContent={"space-around"}
+              css={{
+                touchAction: "manipulation",
+              }}
+            >
               <Flex
                 height="3rem"
                 alignItems={"center"}
