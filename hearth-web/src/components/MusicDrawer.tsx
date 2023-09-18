@@ -50,7 +50,6 @@ const MusicDrawer = ({
   // to protect from pausing the music when it is being dragged in app
   // as when the music is paused from ios controls we need to update
   // the component playing state as done in the audio component
-  const [isToggling, setIsToggling] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [showText, setShowText] = useState(true);
@@ -59,16 +58,22 @@ const MusicDrawer = ({
 
   const { data: user } = useCurrentUserProfile();
 
-  useEffect(() => {
-    if ("mediaSession" in navigator && journeyToDo)
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: openedExperience.name,
-        artist: "Hearth",
-        album: journeyToDo?.name,
-        artwork: [{ src: openedExperience.image_link }],
-      });
-  }, [journeyToDo]);
-
+  if ("mediaSession" in navigator && journeyToDo) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: openedExperience.name,
+      artist: "Hearth",
+      album: journeyToDo?.name,
+      artwork: [{ src: openedExperience.image_link }],
+    });
+    navigator.mediaSession.setActionHandler("play", () => {
+      setIsPlaying(true);
+      audioRef.current?.play();
+    });
+    navigator.mediaSession.setActionHandler("pause", () => {
+      setIsPlaying(false);
+      audioRef.current?.pause();
+    });
+  }
   // logic for when audio ends
   const handleAudioEnded = async () => {
     // if it is latest experience in progress, create new link
@@ -119,7 +124,6 @@ const MusicDrawer = ({
     if (isPlaying) {
       audioRef.current?.pause();
     }
-    setIsToggling(true);
   };
 
   const handleSeekEnd = useCallback(
@@ -129,7 +133,6 @@ const MusicDrawer = ({
       if (isPlaying) {
         audioRef.current?.play();
       }
-      setIsToggling(false);
     },
     [isPlaying]
   );
@@ -313,12 +316,6 @@ const MusicDrawer = ({
                 onTimeUpdate={handleTimeUpdate}
                 onEnded={handleAudioEnded}
                 preload="auto"
-                onPlay={() => {
-                  setIsPlaying(true);
-                }}
-                onPause={() => {
-                  if (!isToggling) setIsPlaying(false);
-                }}
               />
               <Slider
                 aria-label="audio-slider"
