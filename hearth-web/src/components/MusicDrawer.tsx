@@ -222,7 +222,7 @@ const MusicDrawer = ({
         zIndex={15}
       >
         <Flex justifyContent={"flex-end"}>
-          <Flex onClick={closeFunction} p="1rem">
+          <Flex onClick={() => closeFunction()} p="1rem">
             <CrossIcon />
           </Flex>
         </Flex>
@@ -354,13 +354,13 @@ const MusicDrawer = ({
                 alignItems={"center"}
                 direction="column"
                 justifyContent={"center"}
-                onClick={rewind}
+                onClick={() => rewind()}
               >
                 <RewindBackIcon />
                 <Text textStyle={"detailTextSmall"}>10 sec.</Text>
               </Flex>
               <Flex
-                onClick={togglePlay}
+                onClick={() => togglePlay()}
                 alignItems={"center"}
                 mb="1rem"
                 height="2rem"
@@ -374,7 +374,7 @@ const MusicDrawer = ({
                 alignItems={"center"}
                 direction="column"
                 justifyContent={"center"}
-                onClick={forward}
+                onClick={() => forward()}
               >
                 <RewindFowardIcon />
                 <Text textStyle={"detailTextSmall"}>10 sec.</Text>
