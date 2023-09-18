@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           scope: viteEnv.auth0.scope,
         }}
         useRefreshTokens={true}
-        cacheLocation="memory"
+        cacheLocation="localstorage"
       >
         <App />
       </Auth0Provider>
