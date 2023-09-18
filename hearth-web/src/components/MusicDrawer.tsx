@@ -352,7 +352,7 @@ const MusicDrawer = ({
               width={"100%"}
               justifyContent={"space-around"}
               css={{
-                touchAction: "manipulation",
+                touchAction: "none",
               }}
             >
               <Flex
