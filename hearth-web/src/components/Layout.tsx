@@ -18,7 +18,7 @@ export const Layout = ({ children, hidePadding }: Props) => {
 
   const [isVisible, setIsVisible] = useState(true);
   // const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
-  // login guard
+  // // login guard
   // useEffect(() => {
   //   if (!isLoading && !isAuthenticated) {
   //     loginWithRedirect().catch((e) => console.error("Error occurred", e));
