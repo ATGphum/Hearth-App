@@ -1,7 +1,9 @@
-import { Flex, useOutsideClick, Text } from "@chakra-ui/react";
-import { LazyMotion, domAnimation, m } from "framer-motion";
+import { Flex, useOutsideClick, Text, useDisclosure } from "@chakra-ui/react";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import { useRef } from "react";
 import ReactDOM from "react-dom";
+import BottomPopupDrawer from "./BottomPopupDrawer";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface Props {
   isOpen: boolean;
@@ -11,15 +13,32 @@ interface Props {
 const MotionFlex = m(Flex);
 
 const SettingsDrawer = ({ isOpen, onClose }: Props) => {
+  const { logout } = useAuth0();
   const ref = useRef<HTMLDivElement | null>(null);
   useOutsideClick({
     ref: ref,
     handler: onClose,
   });
+  const {
+    isOpen: closeDrawerIsOpen,
+    onOpen: closeDrawerOnOpen,
+    onClose: closeDrawerOnClose,
+  } = useDisclosure();
   const mounter = document.getElementById("appContainer");
   if (!mounter) return null;
   return ReactDOM.createPortal(
     <LazyMotion features={domAnimation}>
+      <AnimatePresence>
+        {closeDrawerIsOpen && (
+          <BottomPopupDrawer
+            onClose={closeDrawerOnClose}
+            isOpen={closeDrawerIsOpen}
+            callback={() =>
+              logout({ logoutParams: { returnTo: window.location.origin } })
+            }
+          />
+        )}
+      </AnimatePresence>
       <MotionFlex
         ref={ref}
         initial={{ y: "100%" }}
@@ -28,7 +47,7 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
         }}
         exit={{ y: "100%" }}
         dragConstraints={{ top: 0, bottom: 0 }}
-        dragElastic={{ top: 0.3, bottom: 0.9 }}
+        dragElastic={{ top: 0.3, bottom: 1 }}
         onDragEnd={(_, info) => {
           if (info.velocity.y > 0) {
             onClose();
@@ -39,17 +58,15 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
         position="absolute"
         top="0"
         right="0"
-        bottom="0rem"
+        bottom="-20rem"
         left="0"
-        pb="10rem"
         overflowY={"auto"}
         display="flex"
         flexDirection="column"
         background="background.fleshOpaque"
         p={0}
-        maxHeight={"100vh"}
         textAlign={"left"}
-        zIndex={15}
+        zIndex={10}
         borderTopRadius="2rem"
         alignItems="center"
       >
@@ -86,6 +103,7 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
             fontWeight="bold"
             borderBottom="1px solid"
             borderColor="divider.flesh"
+            onClick={closeDrawerOnOpen}
           >
             Log out
           </Text>
