@@ -19,7 +19,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         useRefreshTokens={true}
         cacheLocation="memory"
       >
-        <App />
+        <div className="scrollable-content">
+          <App />
+        </div>
       </Auth0Provider>
     </div>
   </StrictMode>
