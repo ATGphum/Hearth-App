@@ -25,6 +25,7 @@ model User {
   subscription_status Boolean @default(false)
   user_course UserCourse[]
   user_experience UserExperience[]
+  date_joined DateTime @default(now())
 }
 
 enum ConnectionTimeChoices {

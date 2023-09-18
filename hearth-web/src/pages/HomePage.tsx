@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Layout } from "../components/Layout";
 
 import Library from "../components/Library";
-import LogoutButton from "../components/LogoutButton";
+import Profile from "../components/Profile";
 import NavBar from "./NavBar";
 import Today from "./Today";
 
@@ -25,7 +25,7 @@ function HomePage() {
         )}
         {page === 2 && (
           <Flex direction="column" flex="1" width="100%">
-            <LogoutButton />
+            <Profile />
           </Flex>
         )}
       </Flex>

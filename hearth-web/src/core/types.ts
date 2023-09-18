@@ -9,6 +9,7 @@ export interface User {
   email_reminders?: boolean;
   instagram_username?: string;
   connection_time?: string;
+  date_joined: string;
 }
 
 export interface Journey {
