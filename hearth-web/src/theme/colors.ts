@@ -22,5 +22,8 @@ const colors = {
   background: {
     fleshOpaque: "rgb(249, 225, 193)",
   },
+  divider: {
+    flesh: "rgb(255 199 124)",
+  },
 };
 export default colors;

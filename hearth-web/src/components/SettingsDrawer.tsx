@@ -1,4 +1,4 @@
-import { Flex, useOutsideClick } from "@chakra-ui/react";
+import { Flex, useOutsideClick, Text } from "@chakra-ui/react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import { useRef } from "react";
 import ReactDOM from "react-dom";
@@ -16,7 +16,7 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
     ref: ref,
     handler: onClose,
   });
-  const mounter = document.getElementById("mounter");
+  const mounter = document.getElementById("appContainer");
   if (!mounter) return null;
   return ReactDOM.createPortal(
     <LazyMotion features={domAnimation}>
@@ -37,20 +37,60 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
         drag="y"
         transition={{ damping: 0 }}
         position="absolute"
-        top="17%"
+        top="0"
         right="0"
-        bottom="-10rem"
+        bottom="0rem"
         left="0"
+        pb="10rem"
         overflowY={"auto"}
         display="flex"
         flexDirection="column"
-        justifyContent={"space-between"}
         background="background.fleshOpaque"
         p={0}
         maxHeight={"100vh"}
         textAlign={"left"}
         zIndex={15}
-      ></MotionFlex>
+        borderTopRadius="2rem"
+        alignItems="center"
+      >
+        <Flex
+          mt="0.5rem"
+          mb="1rem"
+          h="0.3rem"
+          w="2rem"
+          bg="accent.brown"
+          borderRadius="10px"
+        />
+        <Flex direction="column" textAlign={"left"} width="100%">
+          <Text
+            textStyle="body"
+            p="0.75rem 1rem"
+            fontWeight="bold"
+            borderBottom="1px solid"
+            borderColor="divider.flesh"
+          >
+            Manage Subscriptions
+          </Text>
+          <Text
+            textStyle="body"
+            p="0.75rem 1rem"
+            fontWeight="bold"
+            borderBottom="1px solid"
+            borderColor="divider.flesh"
+          >
+            Terms and conditions
+          </Text>
+          <Text
+            textStyle="body"
+            p="0.75rem 1rem"
+            fontWeight="bold"
+            borderBottom="1px solid"
+            borderColor="divider.flesh"
+          >
+            Log out
+          </Text>
+        </Flex>
+      </MotionFlex>
     </LazyMotion>,
     mounter
   );

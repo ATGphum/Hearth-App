@@ -30,7 +30,15 @@ export const LayoutNoRedirect = ({ children, hidePadding }: Props) => {
           alt="Hearth"
         />
       </Flex>
-      {children}
+      <Flex
+        direction="column"
+        flex="1"
+        width="100%"
+        id="appContainer"
+        position="relative"
+      >
+        {children}
+      </Flex>
     </Flex>
   );
 };

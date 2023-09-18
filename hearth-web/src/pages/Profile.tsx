@@ -68,17 +68,6 @@ function Profile() {
               />
             </Flex>
           </Flex>
-          <Flex direction="column" textAlign={"left"}>
-            <Text textStyle="body" py="0.5rem" fontWeight="bold">
-              Settings
-            </Text>
-            <Text textStyle="body" py="0.5rem" fontWeight="bold">
-              Manage Subscriptions
-            </Text>
-            <Text textStyle="body" py="0.5rem" fontWeight="bold">
-              Terms and conditions
-            </Text>
-          </Flex>
         </MotionFlex>
       </LazyMotion>
     </Flex>
