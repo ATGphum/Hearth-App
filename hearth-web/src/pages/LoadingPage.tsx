@@ -16,7 +16,6 @@ function LoadingPage() {
         src={
           "https://res.cloudinary.com/ddh1fblle/image/upload/v1694933705/Web_ilczox.svg"
         }
-        alt="Hearth"
       />
     </Flex>
   );
