@@ -59,7 +59,11 @@ function Profile() {
                 </Text>
               </Flex>
             )}
-            <Flex onClick={settingsDrawerOnOpen} justifyContent={"center"}>
+            <Flex
+              onClick={settingsDrawerOnOpen}
+              justifyContent={"center"}
+              className="ios-disable-highlight"
+            >
               <Image
                 src={
                   "https://res.cloudinary.com/ddh1fblle/image/upload/v1694938037/Untitled_Artwork_43_2_ng62of.svg"

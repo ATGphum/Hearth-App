@@ -222,7 +222,11 @@ const MusicDrawer = ({
         zIndex={15}
       >
         <Flex justifyContent={"flex-end"}>
-          <Flex onClick={closeFunction} p="1rem">
+          <Flex
+            className="ios-disable-highlight"
+            onClick={closeFunction}
+            p="1rem"
+          >
             <CrossIcon />
           </Flex>
         </Flex>
@@ -350,6 +354,7 @@ const MusicDrawer = ({
             </Flex>
             <Flex width={"100%"} justifyContent={"space-around"}>
               <Flex
+                className="ios-disable-highlight"
                 height="3rem"
                 alignItems={"center"}
                 direction="column"
@@ -360,6 +365,7 @@ const MusicDrawer = ({
                 <Text textStyle={"detailTextSmall"}>10 sec.</Text>
               </Flex>
               <Flex
+                className="ios-disable-highlight"
                 onClick={togglePlay}
                 alignItems={"center"}
                 mb="1rem"
@@ -370,6 +376,7 @@ const MusicDrawer = ({
               </Flex>
 
               <Flex
+                className="ios-disable-highlight"
                 height="3rem"
                 alignItems={"center"}
                 direction="column"

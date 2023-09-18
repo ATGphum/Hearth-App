@@ -48,7 +48,7 @@ const BottomPopupDrawer = ({ isOpen, onClose, callback }: Props) => {
         p={"2rem"}
         textAlign={"left"}
         zIndex={15}
-        borderTopRadius="2rem"
+        borderTopRadius="3rem"
         alignItems="center"
       >
         <Flex width="100%" direction={"column"} textAlign="center">
