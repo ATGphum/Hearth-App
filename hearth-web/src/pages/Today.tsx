@@ -26,6 +26,7 @@ function Today() {
       flex="1"
       justifyContent={"flex-end"}
       overflow={"hidden"}
+      position={"relative"}
     >
       <AnimatePresence>
         {drawerIsOpen && experienceToDo && journeyToDo && (
@@ -44,6 +45,7 @@ function Today() {
           dragConstraints={{ top: 0, bottom: 0 }}
           dragElastic={{ top: 0.5, bottom: 0.5 }}
           transition={{ damping: 300 }}
+          animate={{ y: "0%" }}
           direction="column"
           width="100%"
           padding="2rem"
@@ -53,7 +55,6 @@ function Today() {
           left="0"
           right="0"
           bottom="0"
-          overflowY={"auto"}
         >
           <Flex
             width="100%"
