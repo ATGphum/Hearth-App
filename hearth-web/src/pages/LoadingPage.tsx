@@ -10,6 +10,7 @@ function LoadingPage() {
       position="relative"
       overflow={"hidden"}
       justifyContent={"center"}
+      pb="4rem"
     >
       <Image
         src={
