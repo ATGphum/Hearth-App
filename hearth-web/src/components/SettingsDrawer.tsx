@@ -80,7 +80,7 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
         />
         <Flex direction="column" textAlign={"left"} width="100%">
           <Text
-            textStyle="body"
+            textStyle="action"
             p="0.75rem 1rem"
             fontWeight="bold"
             borderBottom="1px solid"
@@ -89,7 +89,7 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
             Manage Subscriptions
           </Text>
           <Text
-            textStyle="body"
+            textStyle="action"
             p="0.75rem 1rem"
             fontWeight="bold"
             borderBottom="1px solid"
@@ -98,7 +98,7 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
             Terms and conditions
           </Text>
           <Text
-            textStyle="body"
+            textStyle="action"
             p="0.75rem 1rem"
             fontWeight="bold"
             borderBottom="1px solid"
