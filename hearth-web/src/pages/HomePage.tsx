@@ -2,8 +2,8 @@ import { Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import { Layout } from "../components/Layout";
 
-import Library from "../components/Library";
-import Profile from "../components/Profile";
+import Library from "./Library";
+import Profile from "./Profile";
 import NavBar from "./NavBar";
 import Today from "./Today";
 

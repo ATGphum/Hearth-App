@@ -1,7 +1,7 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
-import CoursesPage from "../pages/CoursesPage";
-import MusicDrawer from "./MusicDrawer";
+import CoursesPage from "./CoursesPage";
+import MusicDrawer from "../components/MusicDrawer";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 

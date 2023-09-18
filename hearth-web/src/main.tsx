@@ -1,12 +1,12 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
 import viteEnv from "./config/vite-env.ts";
+import { StrictMode } from "react";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+  <StrictMode>
     <div className="scrollable-content">
       <Auth0Provider
         domain={viteEnv.auth0.domain}
@@ -22,5 +22,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <App />
       </Auth0Provider>
     </div>
-  </React.StrictMode>
+  </StrictMode>
 );
