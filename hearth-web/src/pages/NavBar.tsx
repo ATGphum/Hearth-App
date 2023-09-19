@@ -22,12 +22,15 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
         onClick={() => tabChange(0)}
         flex={1}
         justifyContent={"center"}
+        background={
+          selectedPage === 0
+            ? "radial-gradient(11.69% 16.69% at 50% 33.85%, #FF4D00 0%, rgba(255, 255, 255, 0.00) 100%)"
+            : "none"
+        }
       >
         <Image
           src={
-            selectedPage === 0
-              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1695097750/NavBarIcons/TodayIconSelected.svg"
-              : "https://res.cloudinary.com/ddh1fblle/image/upload/v1695097749/NavBarIcons/TodayIcon.svg"
+            "https://res.cloudinary.com/ddh1fblle/image/upload/v1695097749/NavBarIcons/TodayIcon.svg"
           }
         />
       </Flex>
@@ -36,12 +39,15 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
         onClick={() => tabChange(1)}
         flex={1}
         justifyContent={"center"}
+        background={
+          selectedPage === 1
+            ? "radial-gradient(11.69% 16.69% at 50% 33.85%, #FF4D00 0%, rgba(255, 255, 255, 0.00) 100%)"
+            : "none"
+        }
       >
         <Image
           src={
-            selectedPage === 1
-              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1695097749/NavBarIcons/LibraryIconSelected.svg"
-              : "https://res.cloudinary.com/ddh1fblle/image/upload/v1695097750/NavBarIcons/LibraryIcon.svg"
+            "https://res.cloudinary.com/ddh1fblle/image/upload/v1695097750/NavBarIcons/LibraryIcon.svg"
           }
         />
       </Flex>
@@ -50,12 +56,15 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
         onClick={() => tabChange(2)}
         flex={1}
         justifyContent={"center"}
+        background={
+          selectedPage === 2
+            ? "radial-gradient(11.69% 16.69% at 50% 33.85%, #FF4D00 0%, rgba(255, 255, 255, 0.00) 100%)"
+            : "none"
+        }
       >
         <Image
           src={
-            selectedPage === 2
-              ? "https://res.cloudinary.com/ddh1fblle/image/upload/v1695097750/NavBarIcons/ProfileIcon.svg"
-              : "https://res.cloudinary.com/ddh1fblle/image/upload/v1695097750/NavBarIcons/ProfileIcon.svg"
+            "https://res.cloudinary.com/ddh1fblle/image/upload/v1695097750/NavBarIcons/ProfileIcon.svg"
           }
         />
       </Flex>
