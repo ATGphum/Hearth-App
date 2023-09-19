@@ -1,4 +1,4 @@
-import { ChakraBaseProvider } from "@chakra-ui/react";
+import { ChakraBaseProvider, ChakraProvider } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import "./App.css";
 import RenderRoutes from "./Routes";
@@ -7,12 +7,22 @@ import { request } from "./core/api";
 import theme from "./theme/chakra-theme";
 import { Auth0Provider } from "@auth0/auth0-react";
 import viteEnv from "./config/vite-env";
+import DesktopPage from "./pages/DesktopPage";
+import { getInstallableStatus } from "./core/helpers";
 
 function App() {
+  if (getInstallableStatus() === "installable") {
+    return (
+      <AppContextProviders>
+        <RenderRoutes />
+      </AppContextProviders>
+    );
+  }
+
   return (
-    <AppContextProviders>
-      <RenderRoutes />
-    </AppContextProviders>
+    <ChakraProvider theme={theme}>
+      <DesktopPage />
+    </ChakraProvider>
   );
 }
 
