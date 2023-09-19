@@ -63,7 +63,13 @@ const MusicDrawer = ({
       title: openedExperience.name,
       artist: "Hearth",
       album: journeyToDo?.name,
-      artwork: [{ src: openedExperience.image_link }],
+      artwork: [
+        {
+          src: openedExperience.image_link,
+          sizes: "512x512",
+          type: "image/png",
+        },
+      ],
     });
     navigator.mediaSession.setActionHandler("play", () => {
       setIsPlaying(true);
