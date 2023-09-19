@@ -44,7 +44,7 @@ const BottomPopupDrawer = ({ isOpen, onClose, callback }: Props) => {
         overflowY={"auto"}
         display="flex"
         flexDirection="column"
-        background="linear-gradient(180deg, hsla(17, 99%, 48%, 1) 0%, rgba(190, 230, 255, 0.00) 100%);"
+        background="#FFBB79"
         p={"2rem"}
         textAlign={"left"}
         zIndex={15}
