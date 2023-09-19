@@ -4,8 +4,8 @@
   "description": "Strengthen your connection to your partner, in only 10 minutes per day",
   "start_url": "https://hearth-app-frontend-84b30cc01305.herokuapp.com",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#542C0D",
+  "background_color": "#FFBB79",
+  "theme_color": "#FFBB79",
   "orientation": "portrait",
   "icons": [
     {
