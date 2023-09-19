@@ -81,7 +81,7 @@ const Courses = ({
         drag={"x"}
         dragDirectionLock
         dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={{ left: 0, right: 0.75 }}
+        dragElastic={{ left: 0, right: 0.85 }}
         onDragEnd={(_, info) => {
           if (
             info.velocity.x > 0 &&
