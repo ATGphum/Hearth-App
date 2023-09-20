@@ -44,7 +44,7 @@ function Today() {
           dragConstraints={{ top: 0, bottom: 0 }}
           dragElastic={{ top: 0.5, bottom: 0.5 }}
           transition={{ damping: 300 }}
-          animate={{ y: drawerIsOpen ? "1%" : "0%" }}
+          animate={{ y: "0%" }}
           direction="column"
           width="100%"
           padding="2rem"
