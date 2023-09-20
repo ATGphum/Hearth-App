@@ -185,13 +185,8 @@ function UserCreateForm() {
               text={"Continue"}
               callback={() => {
                 setAttemptSubmitNames(true);
-                if (
-                  firstName &&
-                  lastName &&
-                  partnerFirstName &&
-                  partnerLastName
-                )
-                  setPage(1);
+
+                setPage(1);
               }}
             />
           </Flex>
