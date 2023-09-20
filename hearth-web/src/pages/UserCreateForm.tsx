@@ -1,7 +1,7 @@
 import { Flex, Input, Text } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import FormButton from "../components/FormButton";
 import { patchUser } from "../core/api";
 import { useCurrentUserProfile } from "../core/apiHooks";
@@ -10,7 +10,7 @@ import { User } from "../core/types";
 const MotionFlex = m(Flex);
 
 function UserCreateForm() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { data: user, mutate: userMutate } = useCurrentUserProfile();
   const [page, setPage] = useState(0);
 
@@ -294,7 +294,7 @@ function UserCreateForm() {
           </LazyMotion>
         </AnimatePresence>
       )}
-      {page === 2 && (
+      {/* {page === 2 && (
         <AnimatePresence>
           <LazyMotion features={domAnimation}>
             <MotionFlex
@@ -334,7 +334,7 @@ function UserCreateForm() {
             </MotionFlex>
           </LazyMotion>
         </AnimatePresence>
-      )}
+      )} */}
     </>
   );
 }
