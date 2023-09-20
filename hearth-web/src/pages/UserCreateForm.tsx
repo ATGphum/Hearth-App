@@ -315,7 +315,7 @@ function UserCreateForm() {
               onClick={() => navigate("/")}
               color="accent.brown"
               zIndex={15}
-              bg="background.fleshOpaque"
+              // bg="background.fleshOpaque"
             >
               <Flex
                 h="100%"
