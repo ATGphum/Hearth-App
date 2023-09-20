@@ -9,8 +9,14 @@ import { request } from "./core/api";
 import { getInstallableStatus } from "./core/helpers";
 import DesktopPage from "./pages/DesktopPage";
 import theme from "./theme/chakra-theme";
+import { useEffect } from "react";
+import { initialiseAnalytics } from "./core/analytics";
 
 function App() {
+  useEffect(() => {
+    initialiseAnalytics();
+  }, []);
+
   if (getInstallableStatus() === "installable") {
     return (
       <AppContextProviders>
