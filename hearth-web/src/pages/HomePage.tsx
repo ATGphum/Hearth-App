@@ -6,9 +6,26 @@ import Library from "./Library";
 import Profile from "./Profile";
 import NavBar from "./NavBar";
 import Today from "./Today";
+import { trackEvent } from "../core/analytics";
 
 function HomePage() {
   const [page, setPage] = useState(0);
+
+  const trackPageSwitch = (pageNumber: number) => {
+    switch (pageNumber) {
+      case 0:
+        trackEvent({ type: "View Today Page" });
+        break;
+      case 1:
+        trackEvent({ type: "View Library Page" });
+        break;
+      case 2:
+        trackEvent({ type: "View Profile Page" });
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <Layout hidePadding>
@@ -33,6 +50,7 @@ function HomePage() {
         selectedPage={page}
         tabChange={(pageNumber: number) => {
           setPage(pageNumber);
+          trackPageSwitch(pageNumber);
         }}
       />
     </Layout>

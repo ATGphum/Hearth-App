@@ -26,7 +26,7 @@ export interface ViewProfile {
   type: "View Profile Page";
 }
 
-export type AnalyticsEvent = SignedUp;
+export type AnalyticsEvent = SignedUp | ViewToday | ViewLibrary | ViewProfile;
 
 // Function to track the event to use across the app
 export const trackEvent = (event: AnalyticsEvent) => {
