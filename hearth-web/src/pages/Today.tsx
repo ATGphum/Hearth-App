@@ -1,11 +1,11 @@
-import { Collapse, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import { useContext, useState } from "react";
 import MusicDrawer from "../components/MusicDrawer";
 import { UserContext } from "../context/UserContext";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import DownIcon from "../icons/DownIcon";
 import UpIcon from "../icons/UpIcon";
-import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 
 const MotionFlex = m(Flex);
 
@@ -63,7 +63,7 @@ function Today() {
             <Text textStyle="heading.h2">Daily quote</Text>
             <Flex>{showQuote ? <UpIcon /> : <DownIcon />}</Flex>
           </Flex>
-          <Collapse in={showQuote} animateOpacity>
+          {/* <Collapse in={showQuote} animateOpacity>
             <Flex direction="column" textAlign={"left"}>
               <Text textStyle="quote">
                 "To love someone is to learn the song in their heart and sing it
@@ -71,7 +71,7 @@ function Today() {
               </Text>
               <Text>- Arne Garborg</Text>
             </Flex>
-          </Collapse>
+          </Collapse> */}
         </MotionFlex>
       </LazyMotion>
       {experienceToDo && (
