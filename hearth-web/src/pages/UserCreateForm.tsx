@@ -46,7 +46,6 @@ function UserCreateForm() {
 
   return (
     <>
-      test words
       <LazyMotion features={domAnimation}>
         <MotionFlex
           animate={{ x: page !== 0 ? "-50%" : "0%" }}
@@ -295,7 +294,7 @@ function UserCreateForm() {
           </LazyMotion>
         </AnimatePresence>
       )}
-      {page == 2 && (
+      {page === 2 && (
         <AnimatePresence>
           <LazyMotion features={domAnimation}>
             <MotionFlex
