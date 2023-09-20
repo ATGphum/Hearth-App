@@ -72,6 +72,7 @@ function UserCreateForm() {
                   width="100%"
                 >
                   <Input
+                    className="ios-disable-highlight"
                     onChange={(e) => setFirstName(e.target.value)}
                     width="100%"
                     background="none"
@@ -90,6 +91,7 @@ function UserCreateForm() {
                   width="100%"
                 >
                   <Input
+                    className="ios-disable-highlight"
                     onChange={(e) => setLastName(e.target.value)}
                     variant="unstyled"
                     width="100%"
@@ -118,6 +120,7 @@ function UserCreateForm() {
                   width="100%"
                 >
                   <Input
+                    className="ios-disable-highlight"
                     onChange={(e) => setPartnerFirstName(e.target.value)}
                     variant="unstyled"
                     width="100%"
@@ -139,6 +142,7 @@ function UserCreateForm() {
                   width="100%"
                 >
                   <Input
+                    className="ios-disable-highlight"
                     onChange={(e) => setPartnerLastName(e.target.value)}
                     variant="unstyled"
                     width="100%"
@@ -204,6 +208,7 @@ function UserCreateForm() {
                 mb="0.5rem"
               >
                 <Input
+                  className="ios-disable-highlight"
                   variant="unstyled"
                   onChange={(e) => setInstagram(e.target.value)}
                   width="100%"
