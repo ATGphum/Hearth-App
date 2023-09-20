@@ -1,4 +1,4 @@
-import { Flex, Input, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,15 +14,11 @@ function UserCreateForm() {
   const { data: user, mutate: userMutate } = useCurrentUserProfile();
   const [page, setPage] = useState(0);
 
-  const [firstName, setFirstName] = useState<string | undefined>(undefined);
-  const [lastName, setLastName] = useState<string | undefined>(undefined);
-  const [partnerFirstName, setPartnerFirstName] = useState<string | undefined>(
-    undefined
-  );
-  const [partnerLastName, setPartnerLastName] = useState<string | undefined>(
-    undefined
-  );
-  const [instagram, setInstagram] = useState<string | undefined>(undefined);
+  const [firstName] = useState<string | undefined>(undefined);
+  const [lastName] = useState<string | undefined>(undefined);
+  const [partnerFirstName] = useState<string | undefined>(undefined);
+  const [partnerLastName] = useState<string | undefined>(undefined);
+  const [instagram] = useState<string | undefined>(undefined);
 
   const [attemptSubmitNames, setAttemptSubmitNames] = useState(false);
 
@@ -89,13 +85,13 @@ function UserCreateForm() {
                   px="0.5rem"
                   width="100%"
                 >
-                  <Input
+                  {/* <Input
                     className="ios-disable-highlight"
                     onChange={(e) => setFirstName(e.target.value)}
                     width="100%"
                     background="none"
                     textStyle="fieldInput"
-                  />
+                  /> */}
                 </Flex>
                 {attemptSubmitNames && !firstName && (
                   <Text textStyle="error">Please enter your first name</Text>
@@ -109,14 +105,14 @@ function UserCreateForm() {
                   px="0.5rem"
                   width="100%"
                 >
-                  <Input
+                  {/* <Input
                     className="ios-disable-highlight"
                     onChange={(e) => setLastName(e.target.value)}
                     variant="unstyled"
                     width="100%"
                     background="none"
                     textStyle="fieldInput"
-                  />
+                  /> */}
                 </Flex>
                 {attemptSubmitNames && !lastName && (
                   <Text textStyle="error">Please enter your last name</Text>
@@ -139,14 +135,14 @@ function UserCreateForm() {
                   px="0.5rem"
                   width="100%"
                 >
-                  <Input
+                  {/* <Input
                     className="ios-disable-highlight"
                     onChange={(e) => setPartnerFirstName(e.target.value)}
                     variant="unstyled"
                     width="100%"
                     background="none"
                     textStyle="fieldInput"
-                  />
+                  /> */}
                 </Flex>
                 {attemptSubmitNames && !partnerFirstName && (
                   <Text textStyle="error">
@@ -162,14 +158,14 @@ function UserCreateForm() {
                   px="0.5rem"
                   width="100%"
                 >
-                  <Input
+                  {/* <Input
                     className="ios-disable-highlight"
                     onChange={(e) => setPartnerLastName(e.target.value)}
                     variant="unstyled"
                     width="100%"
                     background="none"
                     textStyle="fieldInput"
-                  />
+                  /> */}
                 </Flex>
                 {attemptSubmitNames && !partnerLastName && (
                   <Text textStyle="error">
@@ -261,14 +257,14 @@ function UserCreateForm() {
                     width="100%"
                     mb="0.5rem"
                   >
-                    <Input
+                    {/* <Input
                       className="ios-disable-highlight"
                       variant="unstyled"
                       onChange={(e) => setInstagram(e.target.value)}
                       width="100%"
                       background="none"
                       textStyle="fieldInput"
-                    />
+                    /> */}
                   </Flex>
                 </Flex>
               </Flex>
