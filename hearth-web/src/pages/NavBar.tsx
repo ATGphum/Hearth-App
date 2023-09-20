@@ -1,4 +1,7 @@
 import { Flex, Image } from "@chakra-ui/react";
+import ProfileIcon from "../svg/ProfileIcon.svg";
+import TodayIcon from "../svg/TodayIcon.svg";
+import LibraryIcon from "../svg/LibraryIcon.svg";
 
 interface navProps {
   tabChange: (pageNumber: number) => void;
@@ -28,11 +31,7 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
             : "none"
         }
       >
-        <Image
-          src={
-            "https://res.cloudinary.com/ddh1fblle/image/upload/v1695097749/NavBarIcons/TodayIcon.svg"
-          }
-        />
+        <Image src={TodayIcon} />
       </Flex>
       <Flex
         p="0.75rem"
@@ -45,11 +44,7 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
             : "none"
         }
       >
-        <Image
-          src={
-            "https://res.cloudinary.com/ddh1fblle/image/upload/v1695097750/NavBarIcons/LibraryIcon.svg"
-          }
-        />
+        <Image src={LibraryIcon} />
       </Flex>
       <Flex
         p="0.75rem"
@@ -62,11 +57,7 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
             : "none"
         }
       >
-        <Image
-          src={
-            "https://res.cloudinary.com/ddh1fblle/image/upload/v1695097750/NavBarIcons/ProfileIcon.svg"
-          }
-        />
+        <Image src={ProfileIcon} />
       </Flex>
     </Flex>
   );
