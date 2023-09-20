@@ -45,7 +45,12 @@ function UserCreateForm() {
   };
 
   return (
-    <Flex minHeight="100vh" position="relative" overflow={"hidden"}>
+    <Flex
+      minHeight="100vh"
+      position="relative"
+      overflow={"hidden"}
+      bg="linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
+    >
       <LazyMotion features={domAnimation}>
         <MotionFlex
           animate={{ x: page !== 0 ? "-50%" : "0%" }}
