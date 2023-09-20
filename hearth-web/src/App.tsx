@@ -43,7 +43,6 @@ const AppContextProviders = ({ children }: ProviderProps) => {
           audience: viteEnv.auth0.api.audience,
           scope: viteEnv.auth0.scope,
         }}
-        useRefreshTokens={true}
         cacheLocation="localstorage"
       >
         <div className="scrollable-content">
