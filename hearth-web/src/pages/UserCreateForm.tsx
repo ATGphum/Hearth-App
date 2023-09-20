@@ -63,6 +63,7 @@ function UserCreateForm() {
           p="1rem"
           height="100vh"
           background="linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
+          zIndex={5}
         >
           <Flex
             direction="column"
@@ -226,7 +227,7 @@ function UserCreateForm() {
               right="0"
               bottom="0"
               left="0"
-              zIndex={5}
+              zIndex={10}
               height="100vh"
               background="linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
               p="1rem"
@@ -314,7 +315,7 @@ function UserCreateForm() {
               flexGrow={1}
               onClick={() => navigate("/")}
               color="accent.brown"
-              zIndex={10}
+              zIndex={15}
               bg="background.fleshOpaque"
             >
               <Flex
