@@ -44,7 +44,7 @@ function Today() {
           dragConstraints={{ top: 0, bottom: 0 }}
           dragElastic={{ top: 0.5, bottom: 0.5 }}
           transition={{ damping: 300 }}
-          animate={{ y: "0%" }}
+          animate={{ y: drawerIsOpen ? "1%" : "0%" }}
           direction="column"
           width="100%"
           padding="2rem"
@@ -75,47 +75,64 @@ function Today() {
         </MotionFlex>
       </LazyMotion>
       {experienceToDo && (
-        <Flex
-          zIndex={1}
-          direction="column"
-          padding="1.5rem"
-          borderTopRadius="3rem"
-          gridRowGap="0.5rem"
-          background={`linear-gradient(171deg, ${experienceToDo?.color} 6.76%, rgba(248, 231, 96, 0.00) 93.7%)`}
-          onClick={drawerOnOpen}
-        >
-          <Flex
-            justifyContent={"space-between"}
-            alignItems={"center"}
-            pr="1rem"
+        <LazyMotion features={domAnimation}>
+          <MotionFlex
+            drag={"y"}
+            dragConstraints={{ top: 0, bottom: 0 }}
+            dragElastic={{ top: 0.5, bottom: 0.5 }}
+            transition={{ damping: 300 }}
+            animate={{ y: drawerIsOpen ? "1%" : "0%" }}
+            onDragEnd={async (_, info) => {
+              if (info.velocity.y < 0) {
+                drawerOnOpen();
+              }
+            }}
+            direction="column"
+            padding="1.5rem"
+            borderTopRadius="3rem"
+            gridRowGap="0.5rem"
+            background={`linear-gradient(171deg, ${experienceToDo?.color} 6.76%, rgba(248, 231, 96, 0.00) 93.7%)`}
+            onClick={drawerOnOpen}
           >
-            <Text textStyle={"heading.h1"}>Up next</Text>
-            <ArrowRightIcon />
-          </Flex>
-          <Flex justifyContent={"space-between"}>
             <Flex
-              direction="column"
-              alignItems={"flex-start"}
-              textAlign={"left"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+              pr="1rem"
             >
-              <Text textStyle="detailText">{journeyToDo?.name}</Text>
-              <Text textStyle="heading.h1">{experienceToDo?.name}</Text>
-              <Text textStyle="detailText">
-                {experienceToDo?.duration} minutes
-              </Text>
+              <Text textStyle={"heading.h1"}>Up next</Text>
+              <ArrowRightIcon />
             </Flex>
-            <Flex minH={0} flexShrink={1} pl="1rem" maxH={"5rem"} maxW="5.5rem">
-              <Image
-                width="100%"
-                maxWidth={"100%"}
-                src={
-                  "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
-                }
-                objectFit={"contain"}
-              />
+            <Flex justifyContent={"space-between"}>
+              <Flex
+                direction="column"
+                alignItems={"flex-start"}
+                textAlign={"left"}
+              >
+                <Text textStyle="detailText">{journeyToDo?.name}</Text>
+                <Text textStyle="heading.h1">{experienceToDo?.name}</Text>
+                <Text textStyle="detailText">
+                  {experienceToDo?.duration} minutes
+                </Text>
+              </Flex>
+              <Flex
+                minH={0}
+                flexShrink={1}
+                pl="1rem"
+                maxH={"5rem"}
+                maxW="5.5rem"
+              >
+                <Image
+                  width="100%"
+                  maxWidth={"100%"}
+                  src={
+                    "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
+                  }
+                  objectFit={"contain"}
+                />
+              </Flex>
             </Flex>
-          </Flex>
-        </Flex>
+          </MotionFlex>
+        </LazyMotion>
       )}
     </Flex>
   );
