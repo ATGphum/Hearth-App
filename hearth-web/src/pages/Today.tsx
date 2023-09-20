@@ -5,7 +5,7 @@ import { UserContext } from "../context/UserContext";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import DownIcon from "../icons/DownIcon";
 import UpIcon from "../icons/UpIcon";
-import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
+import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 
 const MotionFlex = m(Flex);
 
@@ -38,7 +38,7 @@ function Today() {
           />
         )}
       </AnimatePresence>
-      <LazyMotion features={domAnimation}>
+      <LazyMotion features={domMax}>
         <MotionFlex
           drag={"y"}
           dragConstraints={{ top: 0, bottom: 0 }}
@@ -75,7 +75,7 @@ function Today() {
         </MotionFlex>
       </LazyMotion>
       {experienceToDo && (
-        <LazyMotion features={domAnimation}>
+        <LazyMotion features={domMax}>
           <MotionFlex
             drag={"y"}
             dragConstraints={{ top: 0, bottom: 0 }}

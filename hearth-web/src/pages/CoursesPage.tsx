@@ -1,5 +1,5 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
-import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
+import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import { useJourneys } from "../core/apiHooks";
@@ -71,7 +71,7 @@ const Courses = ({
 
   if (!mounter) return null;
   return ReactDOM.createPortal(
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={domMax}>
       <MotionFlex
         initial={{ x: "100%" }}
         animate={{

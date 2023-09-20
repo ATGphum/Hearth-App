@@ -1,5 +1,5 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
-import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
+import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import CoursesPage from "./CoursesPage";
 import MusicDrawer from "../components/MusicDrawer";
 import { useContext } from "react";
@@ -45,7 +45,7 @@ function Library() {
           />
         )}
       </AnimatePresence>
-      <LazyMotion features={domAnimation}>
+      <LazyMotion features={domMax}>
         <MotionFlex
           drag={"y"}
           dragDirectionLock

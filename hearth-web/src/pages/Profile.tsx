@@ -1,5 +1,5 @@
 import { Flex, Text, Image, useDisclosure } from "@chakra-ui/react";
-import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
+import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { formatDate } from "../core/helpers";
 import SettingsDrawer from "../components/SettingsDrawer";
@@ -29,7 +29,7 @@ function Profile() {
           />
         )}
       </AnimatePresence>
-      <LazyMotion features={domAnimation}>
+      <LazyMotion features={domMax}>
         <MotionFlex
           drag={"y"}
           dragDirectionLock

@@ -1,5 +1,5 @@
 import { Flex, useOutsideClick, Text, useDisclosure } from "@chakra-ui/react";
-import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
+import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useRef } from "react";
 import ReactDOM from "react-dom";
 import BottomPopupDrawer from "./BottomPopupDrawer";
@@ -27,7 +27,7 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
   const mounter = document.getElementById("appContainer");
   if (!mounter) return null;
   return ReactDOM.createPortal(
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={domMax}>
       <AnimatePresence>
         {closeDrawerIsOpen && (
           <BottomPopupDrawer

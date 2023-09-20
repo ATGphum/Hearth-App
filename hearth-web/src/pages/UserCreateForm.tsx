@@ -1,5 +1,5 @@
 import { Flex, Input, Text } from "@chakra-ui/react";
-import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
+import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useState } from "react";
 import FormButton from "../components/FormButton";
 import { patchUser } from "../core/api";
@@ -61,7 +61,7 @@ function UserCreateForm() {
       overflow={"hidden"}
       bg="linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
     >
-      <LazyMotion features={domAnimation}>
+      <LazyMotion features={domMax}>
         <MotionFlex
           animate={{ x: page !== 0 ? "-50%" : "0%" }}
           transition={{ damping: 300 }}
@@ -218,7 +218,7 @@ function UserCreateForm() {
       </LazyMotion>
       <AnimatePresence>
         {page > 0 && (
-          <LazyMotion features={domAnimation}>
+          <LazyMotion features={domMax}>
             <MotionFlex
               initial={{ x: "100%" }}
               animate={{ x: page > 0 ? "0%" : "100%" }}
@@ -311,7 +311,7 @@ function UserCreateForm() {
       </AnimatePresence>
       <AnimatePresence>
         {page === 2 && (
-          <LazyMotion features={domAnimation}>
+          <LazyMotion features={domMax}>
             <MotionFlex
               initial={{ opacity: 0 }}
               animate={{ opacity: page === 2 ? 1 : 0 }}

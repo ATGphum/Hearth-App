@@ -1,5 +1,5 @@
 import { Flex, useOutsideClick } from "@chakra-ui/react";
-import { LazyMotion, domAnimation, m } from "framer-motion";
+import { LazyMotion, domMax, m } from "framer-motion";
 import { useRef } from "react";
 import ReactDOM from "react-dom";
 import FormButton from "./FormButton";
@@ -23,7 +23,7 @@ const BottomPopupDrawer = ({ isOpen, onClose, callback }: Props) => {
   const mounter = document.getElementById("appContainer");
   if (!mounter) return null;
   return ReactDOM.createPortal(
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={domMax}>
       <MotionFlex
         ref={ref}
         initial={{ y: "100%" }}

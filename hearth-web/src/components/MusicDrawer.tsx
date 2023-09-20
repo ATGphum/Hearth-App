@@ -8,7 +8,7 @@ import {
   SliderTrack,
   Text,
 } from "@chakra-ui/react";
-import { LazyMotion, domAnimation, m } from "framer-motion";
+import { LazyMotion, domMax, m } from "framer-motion";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { UserContext } from "../context/UserContext";
@@ -196,7 +196,7 @@ const MusicDrawer = ({
   const mounter = document.getElementById("mounter");
   if (!mounter) return null;
   return ReactDOM.createPortal(
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={domMax}>
       <MotionFlex
         initial={{ y: "100%" }}
         animate={{
