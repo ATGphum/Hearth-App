@@ -1,6 +1,22 @@
 const textStyles = {
   // Headings will be removed once finished changing the whole text for the app
   heading: {
+    h1XL: {
+      fontFamily: `"Jost", "Inter"`,
+      fontStyle: "normal",
+      fontWeight: "normal",
+      fontSize: "2.5rem",
+      lineHeight: "2rem",
+      color: "#542C0D",
+    },
+    h2XL: {
+      fontFamily: `"Jost", "Inter"`,
+      fontStyle: "normal",
+      fontWeight: "300",
+      fontSize: "2rem",
+      lineHeight: "3rem",
+      color: "#542C0D",
+    },
     h1: {
       fontFamily: `"Jost", "Inter"`,
       fontStyle: "normal",

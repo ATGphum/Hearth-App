@@ -1,11 +1,13 @@
 import { Flex, Input, Text } from "@chakra-ui/react";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormButton from "../components/FormButton";
-import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
 import { patchUser } from "../core/api";
-import { User } from "../core/types";
 import { useCurrentUserProfile } from "../core/apiHooks";
+import { User } from "../core/types";
+
+const MotionFlex = m(Flex);
 
 function UserCreateForm() {
   const navigate = useNavigate();
@@ -43,9 +45,27 @@ function UserCreateForm() {
   };
 
   return (
-    <LayoutNoRedirect>
-      {page === 0 ? (
-        <>
+    <>
+      <LazyMotion features={domAnimation}>
+        <MotionFlex
+          drag={"y"}
+          dragDirectionLock
+          dragConstraints={{ top: 0, bottom: 0 }}
+          animate={{ x: page !== 0 ? "-50%" : "0%" }}
+          transition={{ damping: 300 }}
+          position="absolute"
+          top="0"
+          left="0"
+          right="0"
+          bottom="0"
+          overflowY={"auto"}
+          direction="column"
+          width="100%"
+          flex="1"
+          p="1rem"
+          height="100vh"
+          background="linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
+        >
           <Flex
             direction="column"
             width={"100%"}
@@ -76,6 +96,7 @@ function UserCreateForm() {
                     onChange={(e) => setFirstName(e.target.value)}
                     width="100%"
                     background="none"
+                    textStyle="fieldInput"
                   />
                 </Flex>
                 {attemptSubmitNames && !firstName && (
@@ -96,6 +117,7 @@ function UserCreateForm() {
                     variant="unstyled"
                     width="100%"
                     background="none"
+                    textStyle="fieldInput"
                   />
                 </Flex>
                 {attemptSubmitNames && !lastName && (
@@ -125,6 +147,7 @@ function UserCreateForm() {
                     variant="unstyled"
                     width="100%"
                     background="none"
+                    textStyle="fieldInput"
                   />
                 </Flex>
                 {attemptSubmitNames && !partnerFirstName && (
@@ -147,6 +170,7 @@ function UserCreateForm() {
                     variant="unstyled"
                     width="100%"
                     background="none"
+                    textStyle="fieldInput"
                   />
                 </Flex>
                 {attemptSubmitNames && !partnerLastName && (
@@ -177,81 +201,143 @@ function UserCreateForm() {
               }}
             />
           </Flex>
-        </>
-      ) : page === 1 ? (
-        <>
-          <Flex
-            direction="column"
-            width={"100%"}
-            alignItems={"start"}
-            gridRowGap="1rem"
-            flexGrow={1}
-            color="accent.brown"
-          >
-            <Text textStyle={"heading.h1"}>Let's be social.</Text>
-
-            <Text textStyle="heading.h2" textAlign={"left"}>
-              We'd love to follow you on Instagram!
-            </Text>
-            <Flex
-              direction="column"
-              alignItems={"start"}
-              gridRowGap="0.5rem"
-              width="100%"
+        </MotionFlex>
+      </LazyMotion>
+      {page > 0 && (
+        <AnimatePresence>
+          <LazyMotion features={domAnimation}>
+            <MotionFlex
+              initial={{ x: "100%" }}
+              animate={{ x: page > 0 ? "0%" : "100%" }}
+              exit={{ x: "100%" }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={{ left: 0, right: 0.85 }}
+              onDragEnd={(_, info) => {
+                if (
+                  info.velocity.x > 0 &&
+                  info.offset.x > 50 &&
+                  Math.abs(info.offset.y) < 70
+                ) {
+                  setPage(0);
+                }
+              }}
+              transition={{ damping: 0 }}
+              position="absolute"
+              top="0"
+              right="0"
+              bottom="0"
+              left="0"
+              zIndex={5}
+              height="100vh"
+              background="linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
+              p="1rem"
+              display={"flex"}
+              direction={"column"}
+              overflowY={"auto"}
             >
-              <Text textStyle="body">Your Instagram username</Text>
               <Flex
-                borderBottom={"0.5px solid"}
-                borderColor={"accent.navy"}
-                px="0.5rem"
-                width="100%"
-                mb="0.5rem"
+                direction="column"
+                width={"100%"}
+                alignItems={"start"}
+                gridRowGap="1rem"
+                flexGrow={1}
+                color="accent.brown"
               >
-                <Input
-                  className="ios-disable-highlight"
-                  variant="unstyled"
-                  onChange={(e) => setInstagram(e.target.value)}
+                <Text textStyle={"heading.h1"}>Let's be social.</Text>
+
+                <Text textStyle="heading.h2" textAlign={"left"}>
+                  Can wel follow you on Instagram?
+                </Text>
+                <Flex
+                  direction="column"
+                  alignItems={"start"}
+                  gridRowGap="0.5rem"
                   width="100%"
-                  background="none"
+                >
+                  <Text textStyle="body">Your Instagram username</Text>
+                  <Flex
+                    borderBottom={"0.5px solid"}
+                    borderColor={"accent.navy"}
+                    px="0.5rem"
+                    width="100%"
+                    mb="0.5rem"
+                  >
+                    <Input
+                      className="ios-disable-highlight"
+                      variant="unstyled"
+                      onChange={(e) => setInstagram(e.target.value)}
+                      width="100%"
+                      background="none"
+                      textStyle="fieldInput"
+                    />
+                  </Flex>
+                </Flex>
+              </Flex>
+              <Flex
+                width={"100%"}
+                direction={"column"}
+                position={"sticky"}
+                bottom="1rem"
+                gridRowGap="1rem"
+              >
+                <FormButton
+                  text={"Skip this step →"}
+                  callback={() => onSubmit(true)}
+                  color="neutral.black"
+                  backgroundColor="inherit"
+                />
+                <FormButton
+                  text={"Continue"}
+                  callback={() => onSubmit(false)}
                 />
               </Flex>
-            </Flex>
-          </Flex>
-          <Flex
-            width={"100%"}
-            direction={"column"}
-            position={"sticky"}
-            bottom="1rem"
-            gridRowGap="1rem"
-          >
-            <FormButton
-              text={"Skip this step →"}
-              callback={() => onSubmit(true)}
-              color="neutral.black"
-              backgroundColor="inherit"
-            />
-            <FormButton text={"Continue"} callback={() => onSubmit(false)} />
-          </Flex>
-        </>
-      ) : (
-        <>
-          <Flex
-            direction="column"
-            width={"100%"}
-            alignItems={"center"}
-            gridRowGap="1rem"
-            flexGrow={1}
-            padding="1rem"
-            onClick={() => navigate("/")}
-            color="accent.brown"
-          >
-            <Text textStyle={"heading.h1"}>
-              Welcome, {user?.first_name} & {user?.partner_first_name}
-            </Text>
-          </Flex>
-        </>
+            </MotionFlex>
+          </LazyMotion>
+        </AnimatePresence>
       )}
-    </LayoutNoRedirect>
+      {page == 2 && (
+        <AnimatePresence>
+          <LazyMotion features={domAnimation}>
+            <MotionFlex
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              position="absolute"
+              top="0"
+              right="0"
+              bottom="0"
+              left="0"
+              direction="column"
+              height="100vh"
+              width={"100%"}
+              alignItems={"center"}
+              gridRowGap="1rem"
+              flexGrow={1}
+              onClick={() => navigate("/")}
+              color="accent.brown"
+              zIndex={10}
+              bg="background.fleshOpaque"
+            >
+              <Flex
+                h="100%"
+                w="100%"
+                bg="radial-gradient(41.92% 85.12% at 100% 68.31%, rgba(0, 240, 255, 0.20) 0%, rgba(0, 240, 255, 0.00) 100%), radial-gradient(48.49% 83.29% at 0% 100%, rgba(255, 199, 0, 0.50) 0%, rgba(255, 199, 0, 0.00) 100%), radial-gradient(55.85% 107.38% at 100% 0%, rgba(112, 0, 255, 0.30) 0%, rgba(0, 102, 255, 0.00) 100%), radial-gradient(50% 50% at 50% 50%, rgba(255, 0, 0, 0.32) 0%, rgba(216, 0, 0, 0.00) 100%), linear-gradient(0deg, rgba(252, 112, 68, 0.10) 0%, rgba(252, 112, 68, 0.10) 100%), linear-gradient(180deg, rgba(255, 190, 126, 0.80) 0%, rgba(255, 223, 192, 0.80) 100%);"
+                alignItems={"center"}
+                justifyContent={"center"}
+                direction={"column"}
+                gridRowGap="2rem"
+              >
+                <Text textStyle={"heading.h1XL"}>Welcome,</Text>
+                <Text textStyle="heading.h2XL" px="3rem">
+                  {user?.first_name} and {user?.partner_first_name}
+                </Text>
+              </Flex>
+            </MotionFlex>
+          </LazyMotion>
+        </AnimatePresence>
+      )}
+    </>
   );
 }
 
