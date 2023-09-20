@@ -1,7 +1,6 @@
 import { Flex, Input, Text } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import FormButton from "../components/FormButton";
 import { patchUser } from "../core/api";
 import { useCurrentUserProfile } from "../core/apiHooks";
@@ -10,7 +9,6 @@ import { User } from "../core/types";
 const MotionFlex = m(Flex);
 
 function UserCreateForm() {
-  const navigate = useNavigate();
   const { data: user, mutate: userMutate } = useCurrentUserProfile();
   const [page, setPage] = useState(0);
 
@@ -36,11 +34,23 @@ function UserCreateForm() {
     };
 
     if (user) {
-      const newUser: User = { ...user, ...tempUser };
       // mutate current state
-      await userMutate(newUser, false);
       patchUser(user.id, tempUser);
       setPage(2);
+      //dont mutate until last page has been tapped!
+    }
+  };
+
+  const mutateUser = async () => {
+    if (user) {
+      const tempUser: Partial<User> = {
+        first_name: firstName,
+        last_name: lastName,
+        partner_first_name: partnerFirstName,
+        partner_last_name: partnerLastName,
+      };
+      const newUser: User = { ...user, ...tempUser };
+      await userMutate(newUser);
     }
   };
 
@@ -317,7 +327,7 @@ function UserCreateForm() {
               alignItems={"center"}
               gridRowGap="1rem"
               flexGrow={1}
-              onClick={() => navigate("/")}
+              onClick={mutateUser}
               color="accent.brown"
               zIndex={15}
               bg="background.fleshOpaque"

@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
 import LoadingPage from "../pages/LoadingPage";
 import { LayoutNoRedirect } from "./LayoutNoRedirect";
 import { useEffect, useState } from "react";
+import UserCreateForm from "../pages/UserCreateForm";
 // import { useAuth0 } from "@auth0/auth0-react";
 
 interface Props {
@@ -11,7 +11,6 @@ interface Props {
 }
 
 export const Layout = ({ children, hidePadding }: Props) => {
-  const navigate = useNavigate();
   const { data: user } = useCurrentUserProfile();
 
   const { data: journeys } = useJourneys();
@@ -43,7 +42,7 @@ export const Layout = ({ children, hidePadding }: Props) => {
     !user.partner_first_name ||
     !user.partner_last_name
   )
-    navigate("/create-user");
+    return <UserCreateForm />;
 
   return (
     <LayoutNoRedirect hidePadding={hidePadding}>{children}</LayoutNoRedirect>
