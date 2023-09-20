@@ -330,6 +330,7 @@ function UserCreateForm() {
                 justifyContent={"center"}
                 direction={"column"}
                 gridRowGap="2rem"
+                pb="4rem"
               >
                 <Text textStyle={"heading.h1XL"}>Welcome,</Text>
                 <Text textStyle="heading.h2XL" px="3rem">
