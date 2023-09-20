@@ -57,10 +57,10 @@ const MusicDrawer = ({
   const { experienceToDo, journeyToDo } = useContext(UserContext);
 
   const { data: user } = useCurrentUserProfile();
-
-  //force play then pause audio on ios devices
-  audioRef.current?.play();
-  audioRef.current?.pause();
+  //force audio to load on ios devices
+  useEffect(() => {
+    audioRef.current && audioRef.current.load();
+  }, []);
 
   if ("mediaSession" in navigator && journeyToDo) {
     navigator.mediaSession.metadata = new MediaMetadata({
