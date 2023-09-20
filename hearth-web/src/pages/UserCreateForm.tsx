@@ -41,7 +41,7 @@ function UserCreateForm() {
   };
 
   return (
-    <>
+    <Flex minHeight="100vh" position="relative" overflow={"hidden"}>
       <LazyMotion features={domAnimation}>
         <Flex
           // animate={{ x: page !== 0 ? "-50%" : "0%" }}
@@ -326,7 +326,7 @@ function UserCreateForm() {
           </LazyMotion>
         )}
       </AnimatePresence>
-    </>
+    </Flex>
   );
 }
 
