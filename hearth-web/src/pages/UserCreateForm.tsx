@@ -48,9 +48,6 @@ function UserCreateForm() {
     <>
       <LazyMotion features={domAnimation}>
         <MotionFlex
-          drag={"y"}
-          dragDirectionLock
-          dragConstraints={{ top: 0, bottom: 0 }}
           animate={{ x: page !== 0 ? "-50%" : "0%" }}
           transition={{ damping: 300 }}
           position="absolute"
