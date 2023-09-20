@@ -1,4 +1,5 @@
 import {
+  Collapse,
   Flex,
   Image,
   Slider,
@@ -11,7 +12,6 @@ import { LazyMotion, domAnimation, m } from "framer-motion";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { UserContext } from "../context/UserContext";
-import { createUserExperience } from "../core/api";
 import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
 import { formatTime } from "../core/helpers";
 import { Experience, Journey, UserExperience } from "../core/types";
@@ -22,6 +22,7 @@ import PlayIcon from "../icons/PlayIcon";
 import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
+import { createUserExperience } from "../core/api";
 
 interface Props {
   isOpen: boolean;
@@ -298,14 +299,14 @@ const MusicDrawer = ({
             </Flex>
             {showText ? <DownIcon /> : <UpIcon />}
           </Flex>
-          {/* <Collapse in={showText}>
+          <Collapse in={showText}>
             <Flex direction="column" p="0 1rem 1rem 1rem" gridRowGap="0.5rem">
               <Text textStyle="bodySmall">Description</Text>
               <Text textStyle="body">{openedExperience.description}</Text>
               <Text textStyle="bodySmall">Activity type</Text>
               <Text textStyle="body">{openedExperience.activity_type}</Text>
             </Flex>
-          </Collapse> */}
+          </Collapse>
           <Flex
             direction="column"
             background={
