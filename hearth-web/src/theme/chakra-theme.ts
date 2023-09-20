@@ -19,6 +19,14 @@ const theme = {
   config: {
     useSystemColorMode: false,
   },
+  styles: {
+    global: {
+      "input:focus, textarea:focus, select:focus, button:focus": {
+        boxShadow: "none",
+        outline: "none",
+      },
+    },
+  },
 };
 
 export default extendBaseTheme(theme);

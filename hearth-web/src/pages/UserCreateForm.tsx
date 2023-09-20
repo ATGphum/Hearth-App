@@ -73,7 +73,8 @@ function UserCreateForm() {
                 >
                   <Input
                     onChange={(e) => setFirstName(e.target.value)}
-                    variant="unstyled"
+                    width="100%"
+                    background="none"
                   />
                 </Flex>
                 {attemptSubmitNames && !firstName && (
@@ -91,6 +92,8 @@ function UserCreateForm() {
                   <Input
                     onChange={(e) => setLastName(e.target.value)}
                     variant="unstyled"
+                    width="100%"
+                    background="none"
                   />
                 </Flex>
                 {attemptSubmitNames && !lastName && (
@@ -117,6 +120,8 @@ function UserCreateForm() {
                   <Input
                     onChange={(e) => setPartnerFirstName(e.target.value)}
                     variant="unstyled"
+                    width="100%"
+                    background="none"
                   />
                 </Flex>
                 {attemptSubmitNames && !partnerFirstName && (
@@ -136,6 +141,8 @@ function UserCreateForm() {
                   <Input
                     onChange={(e) => setPartnerLastName(e.target.value)}
                     variant="unstyled"
+                    width="100%"
+                    background="none"
                   />
                 </Flex>
                 {attemptSubmitNames && !partnerLastName && (
@@ -199,6 +206,8 @@ function UserCreateForm() {
                 <Input
                   variant="unstyled"
                   onChange={(e) => setInstagram(e.target.value)}
+                  width="100%"
+                  background="none"
                 />
               </Flex>
             </Flex>
