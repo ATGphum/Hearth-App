@@ -58,6 +58,10 @@ const MusicDrawer = ({
 
   const { data: user } = useCurrentUserProfile();
 
+  //force play then pause audio on ios devices
+  audioRef.current?.play();
+  audioRef.current?.pause();
+
   if ("mediaSession" in navigator && journeyToDo) {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: openedExperience.name,
