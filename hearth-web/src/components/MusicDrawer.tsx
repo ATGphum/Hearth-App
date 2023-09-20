@@ -254,6 +254,7 @@ const MusicDrawer = ({
             flexShrink={1}
             minHeight={0}
             alignItems={"center"}
+            justifyContent={"center"}
             flexGrow={1}
             p="1rem"
             m="1rem"
