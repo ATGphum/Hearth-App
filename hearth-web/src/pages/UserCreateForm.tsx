@@ -244,7 +244,7 @@ function UserCreateForm() {
                 <Text textStyle={"heading.h1"}>Let's be social.</Text>
 
                 <Text textStyle="heading.h2" textAlign={"left"}>
-                  Can wel follow you on Instagram?
+                  Can we follow you on Instagram?
                 </Text>
                 <Flex
                   direction="column"
