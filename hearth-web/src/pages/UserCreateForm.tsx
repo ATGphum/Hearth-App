@@ -299,7 +299,7 @@ function UserCreateForm() {
           <LazyMotion features={domAnimation}>
             <MotionFlex
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              animate={{ opacity: page === 2 ? 1 : 0 }}
               transition={{ duration: 0.5 }}
               position="absolute"
               top="0"
