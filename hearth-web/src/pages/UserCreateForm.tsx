@@ -201,8 +201,8 @@ function UserCreateForm() {
           </Flex>
         </Flex>
       </LazyMotion>
-      {page > 0 && (
-        <AnimatePresence>
+      <AnimatePresence>
+        {page > 0 && (
           <LazyMotion features={domAnimation}>
             <MotionFlex
               initial={{ x: "100%" }}
@@ -292,10 +292,10 @@ function UserCreateForm() {
               </Flex>
             </MotionFlex>
           </LazyMotion>
-        </AnimatePresence>
-      )}
-      {page === 2 && (
-        <AnimatePresence>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {page === 2 && (
           <LazyMotion features={domAnimation}>
             <MotionFlex
               initial={{ opacity: 0 }}
@@ -333,8 +333,8 @@ function UserCreateForm() {
               </Flex>
             </MotionFlex>
           </LazyMotion>
-        </AnimatePresence>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 }
