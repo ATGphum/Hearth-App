@@ -3,6 +3,7 @@
   "short_name": "Hearth",
   "description": "Strengthen your connection to your partner, in only 10 minutes per day",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#FFBB79",
   "theme_color": "#FFBB79",
