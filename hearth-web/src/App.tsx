@@ -2,19 +2,19 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { ChakraBaseProvider } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import "./App.css";
+import { Tree } from "./components/Tree";
 import viteEnv from "./config/vite-env";
 import { UserProvider } from "./context/UserContext";
 import { request } from "./core/api";
 import { getInstallableStatus } from "./core/helpers";
 import DesktopPage from "./pages/DesktopPage";
 import theme from "./theme/chakra-theme";
-import HomePage from "./pages/HomePage";
 
 function App() {
   if (getInstallableStatus() === "installable") {
     return (
       <AppContextProviders>
-        <HomePage />
+        <Tree />
       </AppContextProviders>
     );
   }

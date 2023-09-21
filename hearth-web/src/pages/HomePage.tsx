@@ -1,17 +1,17 @@
 import { Flex } from "@chakra-ui/react";
 import { useState } from "react";
-import { Layout } from "../components/Layout";
 
+import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
 import Library from "./Library";
-import Profile from "./Profile";
 import NavBar from "./NavBar";
+import Profile from "./Profile";
 import Today from "./Today";
 
 function HomePage() {
   const [page, setPage] = useState(0);
 
   return (
-    <Layout hidePadding>
+    <LayoutNoRedirect hidePadding>
       <Flex direction="column" flex="1" width="100%">
         {page === 0 && (
           <Flex direction="column" flex="1" width="100%">
@@ -35,7 +35,7 @@ function HomePage() {
           setPage(pageNumber);
         }}
       />
-    </Layout>
+    </LayoutNoRedirect>
   );
 }
 
