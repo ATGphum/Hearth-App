@@ -4,6 +4,7 @@ import { useRef } from "react";
 import ReactDOM from "react-dom";
 import BottomPopupDrawer from "./BottomPopupDrawer";
 import { useAuth0 } from "@auth0/auth0-react";
+import { trackEvent } from "../core/analytics";
 
 interface Props {
   isOpen: boolean;
@@ -33,9 +34,12 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
           <BottomPopupDrawer
             onClose={closeDrawerOnClose}
             isOpen={closeDrawerIsOpen}
-            callback={() =>
-              logout({ logoutParams: { returnTo: window.location.origin } })
-            }
+            callback={() => {
+              logout({ logoutParams: { returnTo: window.location.origin } });
+
+              // Amplitude track event
+              trackEvent({ type: "Logout" });
+            }}
           />
         )}
       </AnimatePresence>

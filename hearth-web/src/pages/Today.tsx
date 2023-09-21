@@ -6,6 +6,7 @@ import ArrowRightIcon from "../icons/ArrowRightIcon";
 import DownIcon from "../icons/DownIcon";
 import UpIcon from "../icons/UpIcon";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
+import { trackEvent } from "../core/analytics";
 
 const MotionFlex = m(Flex);
 
@@ -18,6 +19,18 @@ function Today() {
   } = useDisclosure();
 
   const { experienceToDo, journeyToDo } = useContext(UserContext);
+
+  const openMusicDrawer = (journeyName: string, experienceName: string) => {
+    drawerOnOpen();
+
+    // Amplitude track event
+    trackEvent({
+      type: "Click Up Next",
+      journey_name: journeyName,
+      experience_name: experienceName,
+      from: "Today Page",
+    });
+  };
 
   return (
     <Flex
@@ -92,7 +105,12 @@ function Today() {
             borderTopRadius="3rem"
             gridRowGap="0.5rem"
             background={`linear-gradient(171deg, ${experienceToDo?.color} 6.76%, rgba(248, 231, 96, 0.00) 93.7%)`}
-            onClick={drawerOnOpen}
+            onClick={() =>
+              openMusicDrawer(
+                journeyToDo?.name ?? "",
+                experienceToDo?.name ?? ""
+              )
+            }
           >
             <Flex
               justifyContent={"space-between"}

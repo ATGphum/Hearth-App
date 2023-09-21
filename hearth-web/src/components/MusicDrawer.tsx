@@ -23,6 +23,7 @@ import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
 import { createUserExperience } from "../core/api";
+import { trackEvent } from "../core/analytics";
 
 interface Props {
   isOpen: boolean;
@@ -111,12 +112,30 @@ const MusicDrawer = ({
     audioRef.current && setDuration(audioRef.current.duration);
   };
 
-  const togglePlay = () => {
+  const togglePlay = (pressedPlay?: boolean) => {
     if (isPlaying) {
       audioRef.current?.pause();
+
+      // Amplitude track event
+      pressedPlay &&
+        trackEvent({
+          type: "Click Play Button",
+          journey_name: parentCourse.name,
+          experience_name: openedExperience.name,
+          play: false,
+        });
     } else {
       audioRef.current?.play();
       setShowText(false);
+
+      // Amplitude track event
+      pressedPlay &&
+        trackEvent({
+          type: "Click Play Button",
+          journey_name: parentCourse.name,
+          experience_name: openedExperience.name,
+          play: true,
+        });
     }
     setIsPlaying(!isPlaying);
   };
@@ -151,11 +170,27 @@ const MusicDrawer = ({
     if (audioRef.current) audioRef.current.currentTime = currentTime - 10;
     setCurrentTime(currentTime - 10);
     if (isPlaying) audioRef.current?.play();
+
+    // Amplitude track event
+    trackEvent({
+      type: "Click Rewind Button",
+      journey_name: parentCourse.name,
+      experience_name: openedExperience.name,
+      forward: false,
+    });
   };
 
   const forward = () => {
     if (audioRef.current) audioRef.current.currentTime = currentTime + 10;
     setCurrentTime(currentTime + 10);
+
+    // Amplitude track event
+    trackEvent({
+      type: "Click Rewind Button",
+      journey_name: parentCourse.name,
+      experience_name: openedExperience.name,
+      forward: true,
+    });
   };
 
   useEffect(() => {
@@ -171,6 +206,13 @@ const MusicDrawer = ({
     // if this is slow in production, add function to optimistically update
     if (isCompletedNewExp) await journeyMutate();
     onClose();
+
+    // Amplitude track event
+    trackEvent({
+      type: "Close Music Drawer",
+      journey_name: parentCourse.name,
+      experience_name: openedExperience.name,
+    });
   };
 
   const pictureVariants = {
@@ -392,7 +434,7 @@ const MusicDrawer = ({
               </Flex>
               <Flex
                 className="ios-disable-highlight"
-                onClick={togglePlay}
+                onClick={() => togglePlay(true)}
                 alignItems={"center"}
                 mb="1rem"
                 height="2rem"

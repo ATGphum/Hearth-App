@@ -6,6 +6,7 @@ import MusicDrawer from "../components/MusicDrawer";
 import ReactDOM from "react-dom";
 import { Experience, Journey } from "../core/types";
 import { useState } from "react";
+import { trackEvent } from "../core/analytics";
 
 interface Props {
   isOpen: boolean;
@@ -69,7 +70,17 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
             />
           )}
         </AnimatePresence>
-        <Flex onClick={onClose}>
+        <Flex
+          onClick={() => {
+            onClose();
+
+            // Amplitude track event
+            trackEvent({
+              type: "Close Page",
+              page_type: "Course/Experience Page",
+            });
+          }}
+        >
           <ArrowLeftIcon />
         </Flex>
         <Flex direction="column" textAlign={"center"} gridRowGap="1rem">
@@ -97,6 +108,12 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
                 onClick={() => {
                   setOpenedExperience(exp);
                   drawerOnOpen();
+
+                  // Amplitude track event
+                  trackEvent({
+                    type: "Click Experience",
+                    experience_name: exp.name,
+                  });
                 }}
                 opacity={exp.is_available ? 1 : 0.4}
                 pointerEvents={!exp.is_available ? "none" : undefined}
