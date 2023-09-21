@@ -33,6 +33,7 @@ interface ProviderProps {
 }
 
 const AppContextProviders = ({ children }: ProviderProps) => {
+  console.log(viteEnv.auth0.domain);
   return (
     <Auth0Provider
       domain={viteEnv.auth0.domain}
