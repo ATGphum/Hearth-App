@@ -10,6 +10,7 @@ function DesktopPage() {
       position="relative"
       overflow={"hidden"}
       justifyContent={"center"}
+      p="1rem"
     >
       <Flex direction="column" gridRowGap="4rem">
         <Flex direction="column" alignItems={"center"} gridRowGap="2rem">

@@ -1,7 +1,6 @@
 import { Flex, Input, Text } from "@chakra-ui/react";
-import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
+import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import FormButton from "../components/FormButton";
 import { patchUser } from "../core/api";
 import { useCurrentUserProfile } from "../core/apiHooks";
@@ -10,7 +9,6 @@ import { User } from "../core/types";
 const MotionFlex = m(Flex);
 
 function UserCreateForm() {
-  const navigate = useNavigate();
   const { data: user, mutate: userMutate } = useCurrentUserProfile();
   const [page, setPage] = useState(0);
 
@@ -36,11 +34,23 @@ function UserCreateForm() {
     };
 
     if (user) {
-      const newUser: User = { ...user, ...tempUser };
       // mutate current state
-      await userMutate(newUser, false);
       patchUser(user.id, tempUser);
       setPage(2);
+      //dont mutate until last page has been tapped!
+    }
+  };
+
+  const mutateUser = async () => {
+    if (user) {
+      const tempUser: Partial<User> = {
+        first_name: firstName,
+        last_name: lastName,
+        partner_first_name: partnerFirstName,
+        partner_last_name: partnerLastName,
+      };
+      const newUser: User = { ...user, ...tempUser };
+      await userMutate(newUser);
     }
   };
 
@@ -51,7 +61,7 @@ function UserCreateForm() {
       overflow={"hidden"}
       bg="linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
     >
-      <LazyMotion features={domAnimation}>
+      <LazyMotion features={domMax}>
         <MotionFlex
           animate={{ x: page !== 0 ? "-50%" : "0%" }}
           transition={{ damping: 300 }}
@@ -208,7 +218,7 @@ function UserCreateForm() {
       </LazyMotion>
       <AnimatePresence>
         {page > 0 && (
-          <LazyMotion features={domAnimation}>
+          <LazyMotion features={domMax}>
             <MotionFlex
               initial={{ x: "100%" }}
               animate={{ x: page > 0 ? "0%" : "100%" }}
@@ -301,7 +311,7 @@ function UserCreateForm() {
       </AnimatePresence>
       <AnimatePresence>
         {page === 2 && (
-          <LazyMotion features={domAnimation}>
+          <LazyMotion features={domMax}>
             <MotionFlex
               initial={{ opacity: 0 }}
               animate={{ opacity: page === 2 ? 1 : 0 }}
@@ -317,7 +327,7 @@ function UserCreateForm() {
               alignItems={"center"}
               gridRowGap="1rem"
               flexGrow={1}
-              onClick={() => navigate("/")}
+              onClick={mutateUser}
               color="accent.brown"
               zIndex={15}
               bg="background.fleshOpaque"
@@ -330,10 +340,11 @@ function UserCreateForm() {
                 justifyContent={"center"}
                 direction={"column"}
                 gridRowGap="2rem"
+                pb="4rem"
               >
                 <Text textStyle={"heading.h1XL"}>Welcome,</Text>
                 <Text textStyle="heading.h2XL" px="3rem">
-                  {user?.first_name} and {user?.partner_first_name}
+                  {firstName} and {partnerFirstName}
                 </Text>
               </Flex>
             </MotionFlex>

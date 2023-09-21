@@ -8,7 +8,7 @@ import {
   SliderTrack,
   Text,
 } from "@chakra-ui/react";
-import { LazyMotion, domAnimation, m } from "framer-motion";
+import { LazyMotion, domMax, m, useDragControls } from "framer-motion";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { UserContext } from "../context/UserContext";
@@ -57,6 +57,10 @@ const MusicDrawer = ({
   const { experienceToDo, journeyToDo } = useContext(UserContext);
 
   const { data: user } = useCurrentUserProfile();
+  //force audio to load on ios devices
+  useEffect(() => {
+    audioRef.current && audioRef.current.load();
+  }, []);
 
   if ("mediaSession" in navigator && journeyToDo) {
     navigator.mediaSession.metadata = new MediaMetadata({
@@ -193,11 +197,15 @@ const MusicDrawer = ({
     },
   };
 
+  const controls = useDragControls();
+
   const mounter = document.getElementById("mounter");
   if (!mounter) return null;
   return ReactDOM.createPortal(
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={domMax}>
       <MotionFlex
+        dragListener={false}
+        dragControls={controls}
         initial={{ y: "100%" }}
         animate={{
           y: isOpen ? "0%" : "100%",
@@ -227,60 +235,72 @@ const MusicDrawer = ({
         textAlign={"left"}
         zIndex={15}
       >
-        <Flex justifyContent={"flex-end"}>
-          <Flex
-            className="ios-disable-highlight"
-            onClick={closeFunction}
-            p="1rem"
-          >
-            <CrossIcon />
-          </Flex>
-        </Flex>
         <Flex
+          onPointerDown={(e) => controls.start(e)}
+          style={{ touchAction: "none" }}
           direction="column"
+          justifyContent={"space-between"}
+          flexGrow={1}
           flexShrink={1}
           minHeight={0}
-          alignItems={"center"}
-          p="1rem"
-          m="1rem"
-          bg={
-            isCompletedNewExp
-              ? `linear-gradient(167deg, ${journeyToDo?.color} 9.42%, rgba(240, 88, 252, 0.00) 100.4%)`
-              : "#ffffff00"
-          }
-          borderRadius="1.5625rem"
         >
-          <MotionFlex
-            minHeight={0}
-            flexShrink={1}
-            justifyContent={"center"}
-            initial="expanded"
-            animate={isCompletedNewExp ? "shrunk" : "expanded"}
-            variants={pictureVariants}
-          >
-            <Image
-              height="100%"
-              maxHeight={"100%"}
-              src={openedExperience.image_link}
-              objectFit={"contain"}
-            />
-          </MotionFlex>
-          {isCompletedNewExp && (
-            <MotionFlex
-              initial="hidden"
-              animate={isCompletedNewExp ? "visible" : "hidden"}
-              variants={textVariants}
-              transition={{ duration: 0.5 }}
-              textAlign={"center"}
+          <Flex justifyContent={"flex-end"}>
+            <Flex
+              className="ios-disable-highlight"
+              onClick={closeFunction}
+              p="1rem"
             >
-              <Text textStyle="heading.h1">Congratulations!</Text>
-              <Text textStyle="body" mt="0.5rem">
-                {isLastExpInJourney
-                  ? `You completed the ${journeyToDo?.name}!`
-                  : `You completed level ${experienceToDo?.level} of the ${journeyToDo?.name}!`}
-              </Text>
+              <CrossIcon />
+            </Flex>
+          </Flex>
+          <Flex
+            direction="column"
+            flexShrink={1}
+            minHeight={0}
+            alignItems={"center"}
+            justifyContent={"center"}
+            flexGrow={1}
+            p="1rem"
+            m="1rem"
+            bg={
+              isCompletedNewExp
+                ? `linear-gradient(167deg, ${journeyToDo?.color} 9.42%, rgba(240, 88, 252, 0.00) 100.4%)`
+                : "#ffffff00"
+            }
+            borderRadius="1.5625rem"
+          >
+            <MotionFlex
+              minHeight={0}
+              flexShrink={1}
+              justifyContent={"center"}
+              initial="expanded"
+              animate={isCompletedNewExp ? "shrunk" : "expanded"}
+              variants={pictureVariants}
+            >
+              <Image
+                height="100%"
+                maxHeight={"100%"}
+                src={openedExperience.image_link}
+                objectFit={"contain"}
+              />
             </MotionFlex>
-          )}
+            {isCompletedNewExp && (
+              <MotionFlex
+                initial="hidden"
+                animate={isCompletedNewExp ? "visible" : "hidden"}
+                variants={textVariants}
+                transition={{ duration: 0.5 }}
+                textAlign={"center"}
+              >
+                <Text textStyle="heading.h1">Congratulations!</Text>
+                <Text textStyle="body" mt="0.5rem">
+                  {isLastExpInJourney
+                    ? `You completed the ${journeyToDo?.name}!`
+                    : `You completed level ${experienceToDo?.level} of the ${journeyToDo?.name}!`}
+                </Text>
+              </MotionFlex>
+            )}
+          </Flex>
         </Flex>
         <Flex direction={"column"}>
           <Flex

@@ -1,5 +1,5 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
-import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
+import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import MusicDrawer from "../components/MusicDrawer";
@@ -29,7 +29,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
 
   if (!mounter) return null;
   return ReactDOM.createPortal(
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={domMax}>
       <MotionFlex
         initial={{ x: "100%" }}
         animate={{ x: isOpen ? "0%" : "100%" }}

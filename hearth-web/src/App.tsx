@@ -2,7 +2,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { ChakraBaseProvider } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import "./App.css";
-import RenderRoutes from "./Routes";
+import { Tree } from "./components/Tree";
 import viteEnv from "./config/vite-env";
 import { UserProvider } from "./context/UserContext";
 import { request } from "./core/api";
@@ -20,7 +20,7 @@ function App() {
   if (getInstallableStatus() === "installable") {
     return (
       <AppContextProviders>
-        <RenderRoutes />
+        <Tree />
       </AppContextProviders>
     );
   }
@@ -39,18 +39,19 @@ interface ProviderProps {
 }
 
 const AppContextProviders = ({ children }: ProviderProps) => {
+  console.log(viteEnv.auth0.domain);
   return (
-    <div className="scrollable-content">
-      <Auth0Provider
-        domain={viteEnv.auth0.domain}
-        clientId={viteEnv.auth0.hearthWeb.id}
-        authorizationParams={{
-          redirect_uri: window.location.origin,
-          audience: viteEnv.auth0.api.audience,
-          scope: viteEnv.auth0.scope,
-        }}
-        cacheLocation="localstorage"
-      >
+    <Auth0Provider
+      domain={viteEnv.auth0.domain}
+      clientId={viteEnv.auth0.hearthWeb.id}
+      authorizationParams={{
+        redirect_uri: window.location.origin,
+        audience: viteEnv.auth0.api.audience,
+        scope: viteEnv.auth0.scope,
+      }}
+      cacheLocation="localstorage"
+    >
+      <div className="unscrollable-content">
         <div className="scrollable-content">
           <ChakraBaseProvider theme={theme}>
             <SWRConfig
@@ -76,7 +77,7 @@ const AppContextProviders = ({ children }: ProviderProps) => {
             </SWRConfig>
           </ChakraBaseProvider>
         </div>
-      </Auth0Provider>
-    </div>
+      </div>
+    </Auth0Provider>
   );
 };
