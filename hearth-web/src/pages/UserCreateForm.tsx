@@ -344,7 +344,7 @@ function UserCreateForm() {
               >
                 <Text textStyle={"heading.h1XL"}>Welcome,</Text>
                 <Text textStyle="heading.h2XL" px="3rem">
-                  {user?.first_name} and {user?.partner_first_name}
+                  {firstName} and {partnerFirstName}
                 </Text>
               </Flex>
             </MotionFlex>
