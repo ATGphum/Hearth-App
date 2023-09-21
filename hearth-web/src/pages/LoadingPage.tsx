@@ -3,15 +3,14 @@ import { Flex, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 function LoadingPage() {
-  const { isAuthenticated, isLoading, loginWithPopup } = useAuth0();
+  const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
   const [imageLoaded, setImageLoaded] = useState(false);
   // login guard
   useEffect(() => {
     if (!isLoading && !isAuthenticated && imageLoaded) {
-      //loginWithRedirect().catch((e) => console.error("Error occurred", e));
-      loginWithPopup().catch((e) => console.error("Error occurred", e));
+      loginWithRedirect().catch((e) => console.error("Error occurred", e));
     }
-  }, [loginWithPopup, isLoading, isAuthenticated, imageLoaded]);
+  }, [loginWithRedirect, isLoading, isAuthenticated, imageLoaded]);
   const handleImageLoad = () => {
     setImageLoaded(true); // Set imageLoaded to true when the image has loaded
   };
