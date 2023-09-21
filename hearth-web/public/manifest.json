@@ -2,7 +2,7 @@
   "name": "Hearth",
   "short_name": "Hearth",
   "description": "Strengthen your connection to your partner, in only 10 minutes per day",
-  "start_url": "https://hearth-app-frontend-84b30cc01305.herokuapp.com",
+  "start_url": "https://app.hearthtogether.com",
   "display": "standalone",
   "background_color": "#FFBB79",
   "theme_color": "#FFBB79",
