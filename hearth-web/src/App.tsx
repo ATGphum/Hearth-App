@@ -14,7 +14,6 @@ import WrongBrowserPage from "./pages/WrongBrowserPage";
 function App() {
   const installable = getInstallableStatus();
   const isStandalone = IsStandalone();
-  console.log(isStandalone);
   if (installable === "installable") {
     if (isStandalone) {
       return (
