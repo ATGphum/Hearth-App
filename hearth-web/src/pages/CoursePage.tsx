@@ -88,7 +88,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
           <Text textStyle="body" textAlign="center">
             {openedCourse?.description}
           </Text>
-          <Flex direction="column" gridRowGap="0.5rem" mt="0.5rem">
+          <Flex direction="column" gridRowGap="0.5rem" my="0.5rem">
             {openedCourse?.experiences.map((exp) => (
               <>
                 {experienceToDo && experienceToDo.level + 1 === exp.level && (

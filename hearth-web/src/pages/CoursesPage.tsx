@@ -119,7 +119,7 @@ const Courses = ({
           />
           <Text textStyle="heading.h1">Connection Journeys</Text>
           <Text textStyle="body">Make connection time a meaningful habit.</Text>
-          <Flex direction="column" gridRowGap="0.5rem" mt="0.5rem">
+          <Flex direction="column" gridRowGap="0.5rem" my="0.5rem">
             {journeys?.map((journey) => (
               <Flex
                 key={journey.id}
