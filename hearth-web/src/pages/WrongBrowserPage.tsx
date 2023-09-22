@@ -18,7 +18,7 @@ function WrongBrowserPage() {
           To install the app, you need to add this website to your home screen.
         </Text>
         <Text textStyle="fieldInput" pb="10rem">
-          In your Safari browser meny, tap the Share icon and choose{" "}
+          In your Safari browser menu, tap the Share icon and choose{" "}
           <Text as="span" fontWeight={500}>
             Add to Home Screen
           </Text>{" "}
