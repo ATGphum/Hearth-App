@@ -9,7 +9,7 @@ function WrongBrowserPage() {
         flex={1}
         gridRowGap="2rem"
         justifyContent={"center"}
-        p="2rem"
+        p="0.5rem"
       >
         <Flex direction="column" alignItems={"center"}>
           <Text textStyle="heading.h1">Add to Home Screen</Text>
