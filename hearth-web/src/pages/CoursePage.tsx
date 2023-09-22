@@ -91,11 +91,13 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
           <Flex direction="column" gridRowGap="0.5rem" my="0.5rem">
             {openedCourse?.experiences.map((exp) => (
               <>
-                {experienceToDo && experienceToDo.level + 1 === exp.level && (
-                  <Text textStyle="body" py="0.5rem">
-                    Complete {experienceToDo.name} to access {exp.name}.
-                  </Text>
-                )}
+                {experienceToDo &&
+                  experienceToDo.level + 1 === exp.level &&
+                  !openedCourse.completed && (
+                    <Text textStyle="body" py="0.5rem">
+                      Complete {experienceToDo.name} to access {exp.name}.
+                    </Text>
+                  )}
                 <Flex
                   key={exp.id}
                   justifyContent={"space-between"}
