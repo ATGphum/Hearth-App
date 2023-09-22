@@ -297,7 +297,7 @@ const MusicDrawer = ({
                   {isLastExpInJourney
                     ? `You completed the ${journeyToDo?.name}!`
                     : experienceToDo?.level === 0
-                    ? `You have completed the introduction! of the ${journeyToDo?.name}`
+                    ? `You have completed the introduction of the ${journeyToDo?.name}`
                     : `You completed day ${experienceToDo?.level} of the ${journeyToDo?.name}!`}
                 </Text>
               </MotionFlex>
