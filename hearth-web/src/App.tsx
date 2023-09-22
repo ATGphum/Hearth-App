@@ -6,17 +6,28 @@ import { Tree } from "./components/Tree";
 import viteEnv from "./config/vite-env";
 import { UserProvider } from "./context/UserContext";
 import { request } from "./core/api";
-import { getInstallableStatus } from "./core/helpers";
+import { IsStandalone, getInstallableStatus } from "./core/helpers";
 import DesktopPage from "./pages/DesktopPage";
 import theme from "./theme/chakra-theme";
+import WrongBrowserPage from "./pages/WrongBrowserPage";
 
 function App() {
-  if (getInstallableStatus() === "installable") {
-    return (
-      <AppContextProviders>
-        <Tree />
-      </AppContextProviders>
-    );
+  const installable = getInstallableStatus();
+  const isStandalone = IsStandalone();
+  if (installable === "installable") {
+    if (isStandalone) {
+      return (
+        <AppContextProviders>
+          <Tree />
+        </AppContextProviders>
+      );
+    } else {
+      return (
+        <ChakraBaseProvider>
+          <WrongBrowserPage />
+        </ChakraBaseProvider>
+      );
+    }
   }
 
   return (
