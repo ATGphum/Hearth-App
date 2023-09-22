@@ -1,7 +1,6 @@
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy } from "react";
 import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
 import LoadingPage from "../pages/LoadingPage";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
 const UserCreateForm = lazy(() => import("../pages/HomePage"));
@@ -10,14 +9,6 @@ const Tree = () => {
   const { data: user } = useCurrentUserProfile();
 
   const { data: journeys } = useJourneys();
-
-  const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
-  // login guard
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      loginWithRedirect().catch((e) => console.error("Error occurred", e));
-    }
-  }, [loginWithRedirect, isLoading, isAuthenticated]);
 
   // show loading page while user data is retrieving or 2 seconds is up
   if (!user || !journeys) return <LoadingPage />;
