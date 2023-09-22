@@ -14,6 +14,7 @@ import WrongBrowserPage from "./pages/WrongBrowserPage";
 function App() {
   const installable = getInstallableStatus();
   const isStandalone = IsStandalone();
+  console.log(isStandalone);
   if (installable === "installable") {
     if (isStandalone) {
       return (
@@ -23,7 +24,7 @@ function App() {
       );
     } else {
       return (
-        <ChakraBaseProvider>
+        <ChakraBaseProvider theme={theme}>
           <WrongBrowserPage />
         </ChakraBaseProvider>
       );
@@ -44,7 +45,6 @@ interface ProviderProps {
 }
 
 const AppContextProviders = ({ children }: ProviderProps) => {
-  console.log(viteEnv.auth0.domain);
   return (
     <Auth0Provider
       domain={viteEnv.auth0.domain}

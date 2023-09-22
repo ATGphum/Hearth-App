@@ -96,8 +96,10 @@ function isAndroidBrowser() {
   return false; // It's not an Android device in a standard mobile browser
 }
 
-export function IsStandalone(): "standalone" | "browser" {
+export function IsStandalone(): boolean {
   if (window.matchMedia("(display-mode: standalone)").matches) {
-    return "standalone";
-  } else return "browser";
+    return true;
+  } else {
+    return false;
+  }
 }
