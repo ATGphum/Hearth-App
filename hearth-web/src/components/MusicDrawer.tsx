@@ -322,7 +322,13 @@ const MusicDrawer = ({
             {showText ? <DownIcon /> : <UpIcon />}
           </Flex>
           <Collapse in={showText}>
-            <Flex direction="column" p="0 1rem 1rem 1rem" gridRowGap="0.5rem">
+            <Flex
+              direction="column"
+              p="0 1rem 1rem 1rem"
+              gridRowGap="0.5rem"
+              maxHeight="12rem"
+              overflow="auto"
+            >
               <Text textStyle="bodySmall">Description</Text>
               <Text textStyle="body">{openedExperience.description}</Text>
               <Text textStyle="bodySmall">Activity type</Text>
