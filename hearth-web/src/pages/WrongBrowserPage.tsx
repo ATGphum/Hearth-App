@@ -1,42 +1,32 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
+import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
 
 function WrongBrowserPage() {
   return (
-    <Flex
-      direction="column"
-      alignItems="center"
-      background="linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
-      minHeight="100vh"
-      position="relative"
-      overflow={"hidden"}
-      justifyContent={"center"}
-      p="1rem"
-    >
-      <Flex direction="column" gridRowGap="4rem">
-        <Flex direction="column" alignItems={"center"} gridRowGap="2rem">
-          <Flex>
-            <Image
-              src={
-                "https://res.cloudinary.com/ddh1fblle/image/upload/v1694933705/Web_ilczox.svg"
-              }
-              alt="Hearth"
-            />
-          </Flex>
-          <Text>
-            Screen-free & feel-good experiences designed to help partners
-            connect & relax in just 10 minutes a day.
-          </Text>
+    <LayoutNoRedirect>
+      <Flex
+        direction="column"
+        flex={1}
+        gridRowGap="2rem"
+        justifyContent={"center"}
+        p="2rem"
+      >
+        <Flex direction="column" alignItems={"center"}>
+          <Text textStyle="heading.h1">Add to Home Screen</Text>
         </Flex>
-        <Flex direction="column" alignItems={"center"} gridRowGap="2rem">
-          <Text textStyle="action">
-            Visit app.hearthtogether on safari u ass
-          </Text>
-          <Text textStyle="fieldLabel" color="accent.grey">
-            Check out our privacy policy →
-          </Text>
-        </Flex>
+        <Text textStyle="action">
+          To install the app, you need to add this website to your home screen.
+        </Text>
+        <Text textStyle="fieldInput" pb="10rem">
+          In your Safari browser meny, tap the Share icon and choose{" "}
+          <Text as="span" fontWeight={500}>
+            Add to Home Screen
+          </Text>{" "}
+          in the options. Then open the app.hearthtogether app on your home
+          screen.
+        </Text>
       </Flex>
-    </Flex>
+    </LayoutNoRedirect>
   );
 }
 
