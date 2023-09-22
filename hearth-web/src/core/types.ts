@@ -14,7 +14,7 @@ export interface User {
 
 export interface Journey {
   id: number;
-  level: string;
+  level: number;
   name: string;
   description: string;
   color: string;
@@ -26,7 +26,7 @@ export interface Journey {
 
 export interface Experience {
   id: number;
-  level: string;
+  level: number;
   name: string;
   description: string;
   activity_type: string;
