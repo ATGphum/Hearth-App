@@ -1,6 +1,6 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { useJourneys } from "../core/apiHooks";
 import { Journey } from "../core/types";
@@ -24,6 +24,16 @@ const CoursesPage = ({ isOpen, onClose }: Props) => {
   const [openedJourney, setOpenedJourney] = useState<Journey | undefined>(
     undefined
   );
+
+  const { data: journeys } = useJourneys();
+
+  // update opened journeys state upon new experience completion and mutationg has occured
+  useEffect(() => {
+    if (openedJourney) {
+      const updatedJourney = journeys?.find((j) => j.id === openedJourney.id);
+      setOpenedJourney(updatedJourney);
+    }
+  }, [journeys]); //omit openedJourney as we just want it to run when journeys is revalidated
 
   return (
     <>
