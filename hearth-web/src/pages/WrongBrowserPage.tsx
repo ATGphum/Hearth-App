@@ -22,8 +22,7 @@ function WrongBrowserPage() {
           <Text as="span" fontWeight={500}>
             Add to Home Screen
           </Text>{" "}
-          in the options. Then open the app.hearthtogether app on your home
-          screen.
+          in the options. Then open the Hearth app on your home screen.
         </Text>
       </Flex>
     </LayoutNoRedirect>
