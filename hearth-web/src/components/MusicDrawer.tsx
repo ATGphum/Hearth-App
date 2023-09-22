@@ -62,28 +62,31 @@ const MusicDrawer = ({
     audioRef.current && audioRef.current.load();
   }, []);
 
-  if ("mediaSession" in navigator && journeyToDo) {
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: openedExperience.name,
-      artist: "Hearth",
-      album: journeyToDo?.name,
-      artwork: [
-        {
-          src: openedExperience.image_link,
-          sizes: "512x512",
-          type: "image/png",
-        },
-      ],
-    });
-    navigator.mediaSession.setActionHandler("play", () => {
-      setIsPlaying(true);
-      audioRef.current?.play();
-    });
-    navigator.mediaSession.setActionHandler("pause", () => {
-      setIsPlaying(false);
-      audioRef.current?.pause();
-    });
-  }
+  useEffect(() => {
+    if ("mediaSession" in navigator && journeyToDo) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: openedExperience.name,
+        artist: "Hearth",
+        album: journeyToDo.name,
+        artwork: [
+          {
+            src: openedExperience.image_link,
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      });
+      navigator.mediaSession.setActionHandler("play", () => {
+        setIsPlaying(true);
+        audioRef.current?.play();
+      });
+      navigator.mediaSession.setActionHandler("pause", () => {
+        setIsPlaying(false);
+        audioRef.current?.pause();
+      });
+    }
+  }, [journeyToDo, openedExperience.image_link, openedExperience.name]);
+
   // logic for when audio ends
   const handleAudioEnded = async () => {
     // if it is latest experience in progress, create new link
