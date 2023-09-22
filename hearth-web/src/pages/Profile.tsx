@@ -1,8 +1,8 @@
-import { Flex, Text, Image, useDisclosure } from "@chakra-ui/react";
+import { Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
+import SettingsDrawer from "../components/SettingsDrawer";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { formatDate } from "../core/helpers";
-import SettingsDrawer from "../components/SettingsDrawer";
 
 const MotionFlex = m(Flex);
 
@@ -47,12 +47,27 @@ function Profile() {
           p="1rem"
           pt="0rem"
           gridRowGap="1rem"
+          justifyContent={"center"}
         >
-          <Flex justifyContent={"space-between"} alignItems={"flex-start"}>
+          <Flex
+            flexDirection={"column"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            gridRowGap="2rem"
+          >
             {user && (
-              <Flex direction="column" textAlign={"left"} gridRowGap="0.5rem">
-                <Text textStyle="heading.h1">
-                  {user.first_name} & {user.partner_first_name}
+              <Flex direction="column" gridRowGap="0.5rem">
+                <Text
+                  textStyle="heading.h1XL"
+                  px="3rem"
+                  lineHeight={"3rem"}
+                  fontWeight={300}
+                >
+                  {user.first_name}{" "}
+                  <Text as="span" textStyle="heading.h2XL">
+                    and
+                  </Text>{" "}
+                  {user.partner_first_name}
                 </Text>
                 <Text textStyle="heading.h4">
                   Joined {formatDate(user.date_joined)}
@@ -63,13 +78,12 @@ function Profile() {
               onClick={settingsDrawerOnOpen}
               justifyContent={"center"}
               className="ios-disable-highlight"
+              flexDirection={"column"}
+              gridRowGap="0.3rem"
             >
-              <Image
-                src={
-                  "https://res.cloudinary.com/ddh1fblle/image/upload/v1694938037/Untitled_Artwork_43_2_ng62of.svg"
-                }
-                maxHeight={"2rem"}
-              />
+              <Flex bg="neutral.black" h="0.2rem" w="1.5rem" />
+              <Flex bg="neutral.black" h="0.2rem" w="1.5rem" />
+              <Flex bg="neutral.black" h="0.2rem" w="1.5rem" />
             </Flex>
           </Flex>
         </MotionFlex>
