@@ -37,7 +37,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
         initial={{ x: "100%" }}
         animate={{ x: isOpen ? "0%" : "100%" }}
         exit={{ x: "100%" }}
-        drag="x"
+        // drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={{ left: 0, right: 0.85 }}
         onDragEnd={(_, info) => {
