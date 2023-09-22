@@ -77,10 +77,10 @@ const Courses = ({
           x: courseDrawerIsOpen ? "-50%" : isOpen ? "0%" : "100%",
         }}
         exit={{ x: "100%" }}
-        // drag={"x"}
+        drag={"x"}
         dragDirectionLock
         dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={{ left: 0, right: 0.85 }}
+        dragElastic={{ left: 0, right: 0.5 }}
         onDragEnd={(_, info) => {
           if (
             info.velocity.x > 0 &&
