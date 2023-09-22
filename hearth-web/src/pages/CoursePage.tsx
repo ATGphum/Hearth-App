@@ -34,6 +34,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
   return ReactDOM.createPortal(
     <LazyMotion features={domMax}>
       <MotionFlex
+        dragDirectionLock
         initial={{ x: "100%" }}
         animate={{ x: isOpen ? "0%" : "100%" }}
         exit={{ x: "100%" }}

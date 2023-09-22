@@ -215,7 +215,7 @@ const MusicDrawer = ({
         }}
         exit={{ y: "100%" }}
         dragConstraints={{ top: 0, bottom: 0 }}
-        dragElastic={{ top: 0, bottom: 0.9 }}
+        dragElastic={{ top: 0, bottom: 0.5 }}
         onDragEnd={async (_, info) => {
           if (info.velocity.y > 20) {
             await closeFunction();
