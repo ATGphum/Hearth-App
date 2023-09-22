@@ -11,7 +11,14 @@ function HomePage() {
   const [page, setPage] = useState(0);
 
   return (
-    <LayoutNoRedirect hidePadding>
+    <LayoutNoRedirect
+      hidePadding
+      bg={
+        page === 1
+          ? "linear-gradient(175deg, #FFBE7E 3.42%, #F4D9BB 48.04%, #F0D5BA 96.64%)"
+          : undefined
+      }
+    >
       <Flex direction="column" flex="1" width="100%">
         {page === 0 && (
           <Flex direction="column" flex="1" width="100%">

@@ -5,7 +5,6 @@ import ReactDOM from "react-dom";
 import { useJourneys } from "../core/apiHooks";
 import { Journey } from "../core/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
-import ArrowRightIcon from "../icons/ArrowRightIcon";
 import CoursePage from "./CoursePage";
 
 interface Props {
@@ -124,9 +123,12 @@ const Courses = ({
             {journeys?.map((journey) => (
               <Flex
                 key={journey.id}
-                justifyContent={"space-between"}
                 p="1rem"
-                bg={journey.is_available ? journey.color : backgroundColor}
+                bg={
+                  journey.is_available
+                    ? `linear-gradient(156deg, ${journey.color} 15.57%, rgba(250, 251, 16, 0.00) 85.56%)`
+                    : backgroundColor
+                }
                 borderBottom="1px solid rgba(0, 0, 0, 0.60)"
                 borderRadius="2.75rem"
                 onClick={() => {
@@ -135,8 +137,26 @@ const Courses = ({
                 }}
                 opacity={journey.is_available ? 1 : 0.4}
                 pointerEvents={!journey.is_available ? "none" : undefined}
+                gridColumnGap={"1rem"}
+                alignItems={"center"}
               >
-                <Text>{journey.name}</Text> <ArrowRightIcon />
+                <Image
+                  height="4rem"
+                  src={
+                    "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
+                  }
+                  objectFit={"contain"}
+                />
+                <Flex direction="column" textAlign={"left"}>
+                  {journey.completed && (
+                    <Text textStyle={"detailText"}>Completed</Text>
+                  )}
+                  {journey.is_available && !journey.completed && (
+                    <Text textStyle={"detailText"}>In progress</Text>
+                  )}
+
+                  <Text textStyle="heading.h2">{journey.name}</Text>
+                </Flex>
               </Flex>
             ))}
           </Flex>

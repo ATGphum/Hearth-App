@@ -15,7 +15,7 @@ function App() {
   const installable = getInstallableStatus();
   const isStandalone = IsStandalone();
   if (installable === "installable") {
-    if (isStandalone) {
+    if (isStandalone || viteEnv.environment === "development") {
       return (
         <AppContextProviders>
           <Tree />

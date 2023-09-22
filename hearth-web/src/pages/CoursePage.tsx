@@ -5,7 +5,8 @@ import ArrowRightIcon from "../icons/ArrowRightIcon";
 import MusicDrawer from "../components/MusicDrawer";
 import ReactDOM from "react-dom";
 import { Experience, Journey } from "../core/types";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../context/UserContext";
 
 interface Props {
   isOpen: boolean;
@@ -24,6 +25,8 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
   const [openedExperience, setOpenedExperience] = useState<
     Experience | undefined
   >(undefined);
+
+  const { experienceToDo } = useContext(UserContext);
 
   const mounter = document.getElementById("mounter");
 
@@ -87,22 +90,29 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
           </Text>
           <Flex direction="column" gridRowGap="0.5rem" mt="0.5rem">
             {openedCourse?.experiences.map((exp) => (
-              <Flex
-                key={exp.id}
-                justifyContent={"space-between"}
-                p="1rem"
-                bg={exp.color}
-                borderBottom="1px solid rgba(0, 0, 0, 0.60)"
-                borderRadius="2.75rem"
-                onClick={() => {
-                  setOpenedExperience(exp);
-                  drawerOnOpen();
-                }}
-                opacity={exp.is_available ? 1 : 0.4}
-                pointerEvents={!exp.is_available ? "none" : undefined}
-              >
-                <Text>{exp.name}</Text> <ArrowRightIcon />
-              </Flex>
+              <>
+                {experienceToDo && experienceToDo.level + 1 === exp.level && (
+                  <Text textStyle="body" py="0.5rem">
+                    Complete {experienceToDo.name} to access {exp.name}.
+                  </Text>
+                )}
+                <Flex
+                  key={exp.id}
+                  justifyContent={"space-between"}
+                  p="1rem"
+                  bg={exp.is_available ? exp.color : openedCourse.color}
+                  borderBottom="1px solid rgba(0, 0, 0, 0.60)"
+                  borderRadius="2.75rem"
+                  onClick={() => {
+                    setOpenedExperience(exp);
+                    drawerOnOpen();
+                  }}
+                  opacity={exp.is_available ? 1 : 0.4}
+                  pointerEvents={!exp.is_available ? "none" : undefined}
+                >
+                  <Text>{exp.name}</Text> <ArrowRightIcon />
+                </Flex>
+              </>
             ))}
           </Flex>
         </Flex>
