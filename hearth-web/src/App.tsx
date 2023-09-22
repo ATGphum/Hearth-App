@@ -12,7 +12,7 @@ const AppContextProviders = lazy(() => import("./context/AppContextProviders"));
 function App() {
   const installable = getInstallableStatus();
   const isStandalone = IsStandalone();
-  if (installable === "installable") {
+  if (installable === "installable" || viteEnv.environment === "development") {
     if (isStandalone || viteEnv.environment === "development") {
       return (
         <Suspense fallback={<LoadingPage />}>
