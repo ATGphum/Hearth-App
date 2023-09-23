@@ -18,6 +18,7 @@ const fastifyEnv = {
     },
   },
   frontendHost: process.env.FRONTEND_HOST,
+  stripeSecretKey: process.env.STRIPE_SECRET_KEY,
 };
 
 export default fastifyEnv;

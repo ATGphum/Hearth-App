@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 import viteEnv from "../config/vite-env";
 import { User, UserExperience } from "./types";
 
-axios.defaults.baseURL = viteEnv.api_host;
+axios.defaults.baseURL = viteEnv.apiHost;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 const client = axios.create();

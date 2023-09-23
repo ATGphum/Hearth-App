@@ -23,6 +23,7 @@ import RewindBackIcon from "../icons/RewindBackIcon";
 import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
 import { createUserExperience } from "../core/api";
+import UnlockIcon from "../icons/UnlockIcon";
 
 interface Props {
   isOpen: boolean;
@@ -389,41 +390,59 @@ const MusicDrawer = ({
                 </Text>
               </Flex>
             </Flex>
-            <Flex width={"100%"} justifyContent={"space-around"}>
+            {parentCourse.subscription_required ? (
               <Flex
-                className="ios-disable-highlight"
-                height="3rem"
-                alignItems={"center"}
-                direction="column"
+                width={"100%"}
                 justifyContent={"center"}
-                onClick={rewind}
-              >
-                <RewindBackIcon />
-                <Text textStyle={"detailTextSmall"}>10 sec.</Text>
-              </Flex>
-              <Flex
-                className="ios-disable-highlight"
-                onClick={togglePlay}
+                gridColumnGap="0.5rem"
                 alignItems={"center"}
-                mb="1rem"
-                height="2rem"
-                width="2rem"
+                borderRadius="40px"
+                border="1px solid"
+                borderColor={"neutral.black"}
+                padding="0.625rem 1rem"
               >
-                {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                <UnlockIcon />
+                <Text textStyle="action" onClick={() => {}}>
+                  Subscribe to unlock.
+                </Text>
               </Flex>
+            ) : (
+              <Flex width={"100%"} justifyContent={"space-around"}>
+                <Flex
+                  className="ios-disable-highlight"
+                  height="3rem"
+                  alignItems={"center"}
+                  direction="column"
+                  justifyContent={"center"}
+                  onClick={rewind}
+                >
+                  <RewindBackIcon />
+                  <Text textStyle={"detailTextSmall"}>10 sec.</Text>
+                </Flex>
+                <Flex
+                  className="ios-disable-highlight"
+                  onClick={togglePlay}
+                  alignItems={"center"}
+                  mb="1rem"
+                  height="2rem"
+                  width="2rem"
+                >
+                  {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                </Flex>
 
-              <Flex
-                className="ios-disable-highlight"
-                height="3rem"
-                alignItems={"center"}
-                direction="column"
-                justifyContent={"center"}
-                onClick={forward}
-              >
-                <RewindFowardIcon />
-                <Text textStyle={"detailTextSmall"}>10 sec.</Text>
+                <Flex
+                  className="ios-disable-highlight"
+                  height="3rem"
+                  alignItems={"center"}
+                  direction="column"
+                  justifyContent={"center"}
+                  onClick={forward}
+                >
+                  <RewindFowardIcon />
+                  <Text textStyle={"detailTextSmall"}>10 sec.</Text>
+                </Flex>
               </Flex>
-            </Flex>
+            )}
           </Flex>
         </Flex>
       </MotionFlex>
