@@ -76,9 +76,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
           <Image
             m="1rem"
             height="8rem"
-            src={
-              "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
-            }
+            src={openedCourse.experiences[0].image_link}
             objectFit={"contain"}
           />
           <Text textStyle="heading.h1">{openedCourse?.name}</Text>

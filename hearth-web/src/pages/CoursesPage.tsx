@@ -152,9 +152,7 @@ const Courses = ({
               >
                 <Image
                   height="4rem"
-                  src={
-                    "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
-                  }
+                  src={journey.experiences[0].image_link}
                   objectFit={"contain"}
                 />
                 <Flex direction="column" textAlign={"left"}>
