@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 import viteEnv from "../config/vite-env";
-import { User, UserExperience } from "./types";
+import { SubscriptionDetail, User, UserExperience } from "./types";
 
 axios.defaults.baseURL = viteEnv.apiHost;
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -68,4 +68,11 @@ export const createUserExperience = (
   return request<User>(`/v1/courses/experiences${urlSuffix}`, "POST", {
     data: userExperience,
   });
+};
+
+export const CreatePaymentSubscription = (priceId: string) => {
+  return request<SubscriptionDetail>(
+    `/v1/payments/create-subscription?priceId=${priceId}`,
+    "GET"
+  );
 };

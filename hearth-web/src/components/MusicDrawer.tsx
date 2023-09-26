@@ -7,8 +7,15 @@ import {
   SliderThumb,
   SliderTrack,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { LazyMotion, domMax, m, useDragControls } from "framer-motion";
+import {
+  AnimatePresence,
+  LazyMotion,
+  domMax,
+  m,
+  useDragControls,
+} from "framer-motion";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { UserContext } from "../context/UserContext";
@@ -24,6 +31,7 @@ import RewindFowardIcon from "../icons/RewindForwardIcon";
 import UpIcon from "../icons/UpIcon";
 import { createUserExperience } from "../core/api";
 import UnlockIcon from "../icons/UnlockIcon";
+import SubscriptionsDrawer from "./SubscriptionsDrawer";
 
 interface Props {
   isOpen: boolean;
@@ -201,6 +209,12 @@ const MusicDrawer = ({
     },
   };
 
+  const {
+    isOpen: subscriptionsIsOpen,
+    onOpen: subscriptionsOnOpen,
+    onClose: subscriptionsOnClose,
+  } = useDisclosure();
+
   const controls = useDragControls();
 
   const mounter = document.getElementById("mounter");
@@ -239,6 +253,14 @@ const MusicDrawer = ({
         textAlign={"left"}
         zIndex={15}
       >
+        <AnimatePresence>
+          {subscriptionsIsOpen && (
+            <SubscriptionsDrawer
+              onClose={subscriptionsOnClose}
+              isOpen={subscriptionsIsOpen}
+            />
+          )}
+        </AnimatePresence>
         <Flex
           onPointerDown={(e) => controls.start(e)}
           style={{ touchAction: "none" }}
@@ -400,6 +422,7 @@ const MusicDrawer = ({
                 border="1px solid"
                 borderColor={"neutral.black"}
                 padding="0.625rem 1rem"
+                onClick={subscriptionsOnOpen}
               >
                 <UnlockIcon />
                 <Text textStyle="action" onClick={() => {}}>

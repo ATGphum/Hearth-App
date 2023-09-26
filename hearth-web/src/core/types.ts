@@ -1,3 +1,8 @@
+export enum SubscriptionType {
+  monthly,
+  yearly,
+}
+
 export interface User {
   id: number;
   username: string;
@@ -44,4 +49,9 @@ export interface UserExperience {
   experience_id: number;
   user_id: number;
   parent_course_id: number;
+}
+
+export interface SubscriptionDetail {
+  subscription_id: string;
+  client_secret: string;
 }
