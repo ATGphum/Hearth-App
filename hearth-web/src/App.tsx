@@ -1,83 +1,47 @@
-import { Auth0Provider } from "@auth0/auth0-react";
-import { ChakraBaseProvider } from "@chakra-ui/react";
-import { SWRConfig } from "swr";
+import { Suspense, lazy } from "react";
 import "./App.css";
-import { Tree } from "./components/Tree";
+import Tree from "./components/Tree";
 import viteEnv from "./config/vite-env";
-import { UserProvider } from "./context/UserContext";
-import { request } from "./core/api";
-import { getInstallableStatus } from "./core/helpers";
-import DesktopPage from "./pages/DesktopPage";
-import theme from "./theme/chakra-theme";
 import { useEffect } from "react";
 import { initialiseAnalytics } from "./core/analytics";
+import { IsStandalone, getInstallableStatus } from "./core/helpers";
+import LoadingPage from "./pages/LoadingPage";
+
+const DesktopPage = lazy(() => import("./pages/DesktopPage"));
+const WrongBrowserPage = lazy(() => import("./pages/WrongBrowserPage"));
+const AppContextProviders = lazy(() => import("./context/AppContextProviders"));
 
 function App() {
+  const installable = getInstallableStatus();
+  const isStandalone = IsStandalone();
+
   useEffect(() => {
     initialiseAnalytics();
   }, []);
 
-  if (getInstallableStatus() === "installable") {
-    return (
-      <AppContextProviders>
-        <Tree />
-      </AppContextProviders>
-    );
+  if (installable === "installable" || viteEnv.environment === "development") {
+    if (isStandalone || viteEnv.environment === "development") {
+      return (
+        <Suspense fallback={<LoadingPage />}>
+          <AppContextProviders>
+            <Tree />
+          </AppContextProviders>
+        </Suspense>
+      );
+    } else {
+      return (
+        <Suspense fallback={<LoadingPage />}>
+          <WrongBrowserPage />
+        </Suspense>
+      );
+    }
   }
 
   return (
-    <ChakraBaseProvider theme={theme}>
+    <Suspense fallback={<LoadingPage />}>
       <DesktopPage />
-    </ChakraBaseProvider>
+    </Suspense>
   );
 }
 
 export default App;
-
-interface ProviderProps {
-  children: React.ReactNode;
-}
-
-const AppContextProviders = ({ children }: ProviderProps) => {
-  console.log(viteEnv.auth0.domain);
-  return (
-    <Auth0Provider
-      domain={viteEnv.auth0.domain}
-      clientId={viteEnv.auth0.hearthWeb.id}
-      authorizationParams={{
-        redirect_uri: window.location.origin,
-        audience: viteEnv.auth0.api.audience,
-        scope: viteEnv.auth0.scope,
-      }}
-      cacheLocation="localstorage"
-    >
-      <div className="unscrollable-content">
-        <div className="scrollable-content">
-          <ChakraBaseProvider theme={theme}>
-            <SWRConfig
-              value={{
-                fetcher: async (url: string) => {
-                  return request<any>(url, "GET").then((res) => {
-                    if (res.status >= 300) {
-                      const error = new Error(
-                        "An error occurred while fetching the data."
-                      );
-                      // Attach extra info to the error object.
-                      // eslint-disable-next-line
-                      // @ts-ignore
-                      error.status = res.status;
-                      throw error;
-                    }
-                    return res.data;
-                  });
-                },
-              }}
-            >
-              <UserProvider>{children}</UserProvider>
-            </SWRConfig>
-          </ChakraBaseProvider>
-        </div>
-      </div>
-    </Auth0Provider>
-  );
-};

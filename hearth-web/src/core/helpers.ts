@@ -95,3 +95,11 @@ function isAndroidBrowser() {
 
   return false; // It's not an Android device in a standard mobile browser
 }
+
+export function IsStandalone(): boolean {
+  if (window.matchMedia("(display-mode: standalone)").matches) {
+    return true;
+  } else {
+    return false;
+  }
+}

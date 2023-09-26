@@ -225,13 +225,9 @@ function UserCreateForm() {
               exit={{ x: "100%" }}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={{ left: 0, right: 0.85 }}
+              dragElastic={{ left: 0, right: 0.5 }}
               onDragEnd={(_, info) => {
-                if (
-                  info.velocity.x > 0 &&
-                  info.offset.x > 50 &&
-                  Math.abs(info.offset.y) < 70
-                ) {
+                if (info.velocity.x > 20 && info.offset.x > 50) {
                   setPage(0);
                 }
               }}

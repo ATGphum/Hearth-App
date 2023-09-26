@@ -124,9 +124,7 @@ function Today() {
                 <Image
                   width="100%"
                   maxWidth={"100%"}
-                  src={
-                    "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
-                  }
+                  src={experienceToDo.image_link}
                   objectFit={"contain"}
                 />
               </Flex>

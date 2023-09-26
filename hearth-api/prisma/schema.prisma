@@ -58,6 +58,7 @@ model Experience {
    level Int
    name String @db.VarChar(255)
    description String 
+   study String? 
    activity_type String 
    duration String @db.VarChar(255)
    audio_link String

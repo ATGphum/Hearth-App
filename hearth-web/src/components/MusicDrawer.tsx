@@ -62,28 +62,31 @@ const MusicDrawer = ({
     audioRef.current && audioRef.current.load();
   }, []);
 
-  if ("mediaSession" in navigator && journeyToDo) {
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: openedExperience.name,
-      artist: "Hearth",
-      album: journeyToDo?.name,
-      artwork: [
-        {
-          src: openedExperience.image_link,
-          sizes: "512x512",
-          type: "image/png",
-        },
-      ],
-    });
-    navigator.mediaSession.setActionHandler("play", () => {
-      setIsPlaying(true);
-      audioRef.current?.play();
-    });
-    navigator.mediaSession.setActionHandler("pause", () => {
-      setIsPlaying(false);
-      audioRef.current?.pause();
-    });
-  }
+  useEffect(() => {
+    if ("mediaSession" in navigator && journeyToDo) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: openedExperience.name,
+        artist: "Hearth",
+        album: journeyToDo.name,
+        artwork: [
+          {
+            src: openedExperience.image_link,
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      });
+      navigator.mediaSession.setActionHandler("play", () => {
+        setIsPlaying(true);
+        audioRef.current?.play();
+      });
+      navigator.mediaSession.setActionHandler("pause", () => {
+        setIsPlaying(false);
+        audioRef.current?.pause();
+      });
+    }
+  }, [journeyToDo, openedExperience.image_link, openedExperience.name]);
+
   // logic for when audio ends
   const handleAudioEnded = async () => {
     // if it is latest experience in progress, create new link
@@ -212,9 +215,9 @@ const MusicDrawer = ({
         }}
         exit={{ y: "100%" }}
         dragConstraints={{ top: 0, bottom: 0 }}
-        dragElastic={{ top: 0, bottom: 0.9 }}
+        dragElastic={{ top: 0, bottom: 0.8 }}
         onDragEnd={async (_, info) => {
-          if (info.velocity.y > 0) {
+          if (info.velocity.y > 20) {
             await closeFunction();
           }
         }}
@@ -260,8 +263,7 @@ const MusicDrawer = ({
             alignItems={"center"}
             justifyContent={"center"}
             flexGrow={1}
-            p="1rem"
-            m="1rem"
+            pt={isCompletedNewExp ? "1rem" : undefined}
             bg={
               isCompletedNewExp
                 ? `linear-gradient(167deg, ${journeyToDo?.color} 9.42%, rgba(240, 88, 252, 0.00) 100.4%)`
@@ -296,7 +298,9 @@ const MusicDrawer = ({
                 <Text textStyle="body" mt="0.5rem">
                   {isLastExpInJourney
                     ? `You completed the ${journeyToDo?.name}!`
-                    : `You completed level ${experienceToDo?.level} of the ${journeyToDo?.name}!`}
+                    : experienceToDo?.level === 0
+                    ? `You have completed the introduction of the ${journeyToDo?.name}`
+                    : `You completed day ${experienceToDo?.level} of the ${journeyToDo?.name}!`}
                 </Text>
               </MotionFlex>
             )}
@@ -320,9 +324,16 @@ const MusicDrawer = ({
             {showText ? <DownIcon /> : <UpIcon />}
           </Flex>
           <Collapse in={showText}>
-            <Flex direction="column" p="0 1rem 1rem 1rem" gridRowGap="0.5rem">
+            <Flex
+              direction="column"
+              p="0 1rem 1rem 1rem"
+              gridRowGap="0.5rem"
+              maxHeight="12rem"
+              overflow="auto"
+            >
               <Text textStyle="bodySmall">Description</Text>
               <Text textStyle="body">{openedExperience.description}</Text>
+              <Text textStyle="detailText">{openedExperience.study}</Text>
               <Text textStyle="bodySmall">Activity type</Text>
               <Text textStyle="body">{openedExperience.activity_type}</Text>
             </Flex>
