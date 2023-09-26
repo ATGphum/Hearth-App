@@ -123,7 +123,7 @@ const Courses = ({
             m="1rem"
             height="8rem"
             src={
-              "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
+              "https://res.cloudinary.com/ddh1fblle/image/upload/v1695694083/JourneyPictures/JourneyMasterLogo_e56zlt.png"
             }
             objectFit={"contain"}
           />
