@@ -99,7 +99,11 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
                   key={exp.id}
                   justifyContent={"space-between"}
                   p="1rem"
-                  bg={exp.is_available ? exp.color : openedCourse.color}
+                  bg={
+                    exp.is_available
+                      ? "rgb(255 255 255 / 50%)"
+                      : openedCourse.color
+                  }
                   borderBottom="1px solid rgba(0, 0, 0, 0.60)"
                   borderRadius="2.75rem"
                   onClick={() => {
