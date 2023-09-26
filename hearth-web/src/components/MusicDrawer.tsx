@@ -263,8 +263,7 @@ const MusicDrawer = ({
             alignItems={"center"}
             justifyContent={"center"}
             flexGrow={1}
-            p="1rem"
-            m="1rem"
+            pt={isCompletedNewExp ? "1rem" : undefined}
             bg={
               isCompletedNewExp
                 ? `linear-gradient(167deg, ${journeyToDo?.color} 9.42%, rgba(240, 88, 252, 0.00) 100.4%)`
