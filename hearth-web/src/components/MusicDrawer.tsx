@@ -286,8 +286,7 @@ const MusicDrawer = ({
             alignItems={"center"}
             justifyContent={"center"}
             flexGrow={1}
-            p="1rem"
-            m="1rem"
+            pt={isCompletedNewExp ? "1rem" : undefined}
             bg={
               isCompletedNewExp
                 ? `linear-gradient(167deg, ${journeyToDo?.color} 9.42%, rgba(240, 88, 252, 0.00) 100.4%)`
@@ -357,6 +356,7 @@ const MusicDrawer = ({
             >
               <Text textStyle="bodySmall">Description</Text>
               <Text textStyle="body">{openedExperience.description}</Text>
+              <Text textStyle="detailText">{openedExperience.study}</Text>
               <Text textStyle="bodySmall">Activity type</Text>
               <Text textStyle="body">{openedExperience.activity_type}</Text>
             </Flex>

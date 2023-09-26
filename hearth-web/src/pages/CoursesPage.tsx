@@ -123,7 +123,7 @@ const Courses = ({
             m="1rem"
             height="8rem"
             src={
-              "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
+              "https://res.cloudinary.com/ddh1fblle/image/upload/t_JourneyMasterLogoShrinked/v1695694083/JourneyPictures/JourneyMasterLogo_e56zlt.png"
             }
             objectFit={"contain"}
           />
@@ -152,9 +152,7 @@ const Courses = ({
               >
                 <Image
                   height="4rem"
-                  src={
-                    "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
-                  }
+                  src={journey.experiences[0].image_link}
                   objectFit={"contain"}
                 />
                 <Flex direction="column" textAlign={"left"}>

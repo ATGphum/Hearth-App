@@ -76,9 +76,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
           <Image
             m="1rem"
             height="8rem"
-            src={
-              "https://seeklogo.com/images/E/ethereum-logo-EC6CDBA45B-seeklogo.com.png"
-            }
+            src={openedCourse.experiences[0].image_link}
             objectFit={"contain"}
           />
           <Text textStyle="heading.h1">{openedCourse?.name}</Text>
@@ -99,7 +97,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
                   key={exp.id}
                   justifyContent={"space-between"}
                   p="1rem"
-                  bg={exp.is_available ? exp.color : openedCourse.color}
+                  bg={exp.is_available ? "rgb(255 255 255 / 50%)" : "#E7D2BC"}
                   borderBottom="1px solid rgba(0, 0, 0, 0.60)"
                   borderRadius="2.75rem"
                   onClick={() => {

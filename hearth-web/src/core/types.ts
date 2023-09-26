@@ -34,6 +34,7 @@ export interface Experience {
   level: number;
   name: string;
   description: string;
+  study?: string;
   activity_type: string;
   duration: string;
   color: string;
