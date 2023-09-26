@@ -85,7 +85,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
           </Text>
           <Flex direction="column" gridRowGap="0.5rem" my="0.5rem">
             {openedCourse?.experiences.map((exp) => (
-              <Flex key={exp.id}>
+              <Flex key={exp.id} direction="column">
                 {experienceToDo &&
                   experienceToDo.level + 1 === exp.level &&
                   !openedCourse.completed && (
@@ -106,6 +106,11 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
                   }}
                   opacity={exp.is_available ? 1 : 0.4}
                   pointerEvents={!exp.is_available ? "none" : undefined}
+                  border={
+                    experienceToDo?.id === exp.id
+                      ? `3px solid ${exp.color}`
+                      : undefined
+                  }
                 >
                   <Text>{exp.name}</Text> <ArrowRightIcon />
                 </Flex>
