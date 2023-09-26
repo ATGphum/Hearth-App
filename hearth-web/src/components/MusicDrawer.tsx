@@ -334,6 +334,7 @@ const MusicDrawer = ({
             >
               <Text textStyle="bodySmall">Description</Text>
               <Text textStyle="body">{openedExperience.description}</Text>
+              <Text textStyle="detailText">{openedExperience.study}</Text>
               <Text textStyle="bodySmall">Activity type</Text>
               <Text textStyle="body">{openedExperience.activity_type}</Text>
             </Flex>
