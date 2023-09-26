@@ -125,6 +125,7 @@ async function main() {
     },
   ];
 
+  //   Create the experiences objects first
   let experiences_update = await Promise.all(
     experiences_3_days.map((experience) => {
       return prisma.experience.upsert({
