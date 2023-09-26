@@ -33,9 +33,10 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
           <BottomPopupDrawer
             onClose={closeDrawerOnClose}
             isOpen={closeDrawerIsOpen}
-            callback={() =>
-              logout({ logoutParams: { returnTo: window.location.origin } })
-            }
+            callback={() => {
+              logout({ logoutParams: { returnTo: window.location.origin } });
+              window.location.reload();
+            }}
           />
         )}
       </AnimatePresence>
