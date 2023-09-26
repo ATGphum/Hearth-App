@@ -85,7 +85,7 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
           </Text>
           <Flex direction="column" gridRowGap="0.5rem" my="0.5rem">
             {openedCourse?.experiences.map((exp) => (
-              <Flex key={exp.id} direction="column">
+              <Flex key={exp.id} direction="column" p="1rem">
                 {experienceToDo &&
                   experienceToDo.level + 1 === exp.level &&
                   !openedCourse.completed && (
@@ -96,7 +96,6 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
                 <Flex
                   flex={1}
                   justifyContent={"space-between"}
-                  p="1rem"
                   bg={exp.is_available ? "rgb(255 255 255 / 50%)" : "#E7D2BC"}
                   borderBottom="1px solid rgba(0, 0, 0, 0.60)"
                   borderRadius="2.75rem"
