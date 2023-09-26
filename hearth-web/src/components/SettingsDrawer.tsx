@@ -34,8 +34,9 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
             onClose={closeDrawerOnClose}
             isOpen={closeDrawerIsOpen}
             callback={() => {
-              logout({ logoutParams: { returnTo: window.location.origin } });
-              window.location.reload();
+              logout({
+                logoutParams: { returnTo: window.location.origin },
+              }).then(() => window.location.reload());
             }}
           />
         )}
