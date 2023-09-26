@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { CreatePaymentSubscription } from "../core/api";
 import { SubscriptionDetail } from "../core/types";
 import LoadingPage from "./LoadingPage";
+
 const stripePromise = loadStripe(viteEnv.stripePublishableKey);
 
 const MotionFlex = m(Flex);
@@ -125,7 +126,7 @@ const CheckoutForm = () => {
         boxShadow={"0px 4px 2px 0px rgba(0, 0, 0, 0.60)"}
         onClick={handleSubmit}
       >
-        <Text textStyle="action">Submit</Text>
+        {stripe && <Text textStyle="action">Submit</Text>}
       </Flex>
     </Flex>
   );
