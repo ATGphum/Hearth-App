@@ -2,6 +2,7 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 
 import Stripe from "stripe";
 import fastifyEnv from "../config/fastify-env.js";
+import { User } from "@prisma/client";
 
 const stripe = new Stripe(fastifyEnv.stripeSecretKey, { apiVersion: null });
 /**
@@ -20,14 +21,25 @@ export default async function PaymentsController(fastify: FastifyInstance) {
       Reply: FastifyReply
     ) => {
       const { priceId } = request.query;
+      const sub: string = request["user"]["sub"];
 
-      // if no customer id on user entry, create a new customer
-      const customer = await stripe.customers.create({
-        email: "jeremyvuong.dshs@gmail.com",
-        name: "Jeremy Vuong",
+      let user: User = await fastify.prisma.user.findUnique({
+        where: { username: sub },
       });
 
-      const customerId = customer.id;
+      if (!user.stripe_customer_id) {
+        // if no strip customer id on user entry, create a new customer
+        const customer = await stripe.customers.create({
+          email: "jeremyvuong.dshs@gmail.com",
+          name: "Jeremy Vuong",
+        });
+        user = await fastify.prisma.user.update({
+          where: { id: user.id },
+          data: { stripe_customer_id: customer.id },
+        });
+      }
+
+      const customerId = user.stripe_customer_id;
 
       try {
         // Create the subscription. Note we're expanding the Subscription's
@@ -46,6 +58,11 @@ export default async function PaymentsController(fastify: FastifyInstance) {
         });
         const invoice = subscription.latest_invoice as Stripe.Invoice;
         const paymentIntent = invoice.payment_intent as Stripe.PaymentIntent;
+
+        fastify.prisma.user.update({
+          where: { id: user.id },
+          data: { stripe_subscription_id: subscription.id },
+        });
 
         return {
           subscription_id: subscription.id,

@@ -12,6 +12,7 @@ const viteEnv = {
     },
   },
   stripePublishableKey: import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY,
+  host: import.meta.env.VITE_WEB_HOST,
 };
 
 export default viteEnv;

@@ -81,7 +81,9 @@ const Checkout = ({ isOpen, onClose, priceId }: Props) => {
                 appearance: { theme: "stripe" },
               }}
             >
-              <CheckoutForm />
+              <CheckoutForm
+                subscriptionId={subscriptionDetail.subscription_id}
+              />
             </Elements>
           </Flex>
         ) : (
@@ -94,7 +96,7 @@ const Checkout = ({ isOpen, onClose, priceId }: Props) => {
 
 export default Checkout;
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ subscriptionId }: { subscriptionId: string }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -109,7 +111,7 @@ const CheckoutForm = () => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: "http://localhost:5173",
+        return_url: viteEnv.host + "/?subscription_id=" + subscriptionId,
       },
     });
   };
