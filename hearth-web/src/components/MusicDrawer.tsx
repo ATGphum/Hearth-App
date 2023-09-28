@@ -57,6 +57,7 @@ const MusicDrawer = ({
   const { experienceToDo, journeyToDo } = useContext(UserContext);
 
   const { data: user } = useCurrentUserProfile();
+
   //force audio to load on ios devices
   useEffect(() => {
     audioRef.current && audioRef.current.load();
