@@ -17,7 +17,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "prisma": {
-    "seed": "tsx prisma/seed.ts"
+    "seed": "tsx src/data_seeding/seed.ts"
   },
   "dependencies": {
     "@fastify/cors": "^8.3.0",
