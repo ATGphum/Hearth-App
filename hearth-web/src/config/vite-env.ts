@@ -11,6 +11,7 @@ const viteEnv = {
       audience: import.meta.env.VITE_AUTH0_API_AUDIENCE,
     },
   },
+  amplitude_key: import.meta.env.VITE_AMPLITUDE_KEY,
 };
 
 export default viteEnv;

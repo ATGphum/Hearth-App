@@ -2,6 +2,8 @@ import { Suspense, lazy } from "react";
 import "./App.css";
 import Tree from "./components/Tree";
 import viteEnv from "./config/vite-env";
+import { useEffect } from "react";
+import { initialiseAnalytics } from "./core/analytics";
 import { IsStandalone, getInstallableStatus } from "./core/helpers";
 import LoadingPage from "./pages/LoadingPage";
 
@@ -12,6 +14,11 @@ const AppContextProviders = lazy(() => import("./context/AppContextProviders"));
 function App() {
   const installable = getInstallableStatus();
   const isStandalone = IsStandalone();
+
+  useEffect(() => {
+    initialiseAnalytics();
+  }, []);
+
   if (installable === "installable" || viteEnv.environment === "development") {
     if (isStandalone || viteEnv.environment === "development") {
       return (
