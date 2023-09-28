@@ -45,6 +45,12 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
         onDragEnd={(_, info) => {
           if (info.velocity.x > 20 && info.offset.x > 50) {
             onClose();
+
+            // Amplitude track event
+            trackEvent({
+              type: "Close Page",
+              page_type: "Course/Experience Page",
+            });
           }
         }}
         transition={{ damping: 0 }}

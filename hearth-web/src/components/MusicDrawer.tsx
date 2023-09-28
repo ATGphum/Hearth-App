@@ -108,6 +108,13 @@ const MusicDrawer = ({
           createUserExperience(userExperience);
         }
         setIsCompletedNewExp(true);
+
+        // Amplitude track event
+        trackEvent({
+          type: "Complete Experience",
+          journey_name: journeyToDo.name,
+          experience_name: experienceToDo?.name ?? "",
+        });
       }
     }
   };

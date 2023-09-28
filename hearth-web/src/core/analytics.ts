@@ -86,6 +86,10 @@ export interface Logout {
   type: "Logout";
 }
 
+export interface CompleteExperience extends JourneyExperience {
+  type: "Complete Experience";
+}
+
 export type AnalyticsEvent =
   | SignedUp
   | ViewToday
@@ -100,6 +104,7 @@ export type AnalyticsEvent =
   | ClosePage
   | ClickExperience
   | ClickMenuBar
+  | CompleteExperience
   | Logout;
 
 // Function to track the event to use across the app

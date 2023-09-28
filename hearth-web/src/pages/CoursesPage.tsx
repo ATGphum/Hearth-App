@@ -99,6 +99,12 @@ const Courses = ({
             // Math.abs(info.offset.y) < 70
           ) {
             onClose();
+
+            // Amplitude track event
+            trackEvent({
+              type: "Close Page",
+              page_type: "Courses/Journeys Page",
+            });
           }
         }}
         transition={{ damping: 0 }}
