@@ -333,9 +333,7 @@ const MusicDrawer = ({
               overflow="auto"
             >
               <Text textStyle="bodySmall">Description</Text>
-              <Text textStyle="body" whiteSpace="pre-line">
-                {openedExperience.description}
-              </Text>
+              <Text textStyle="body">{openedExperience.description}</Text>
               <Text textStyle="detailText">{openedExperience.study}</Text>
               <Text textStyle="bodySmall">Activity type</Text>
               <Text textStyle="body">{openedExperience.activity_type}</Text>
