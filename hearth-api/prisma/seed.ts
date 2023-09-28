@@ -155,7 +155,7 @@ async function main() {
       That’s what we will focus on today, practicing mindfulness and relaxing together.`,
       activity_type:
         "Passive - Find a quiet space where you can sit back or lay down comfortably.",
-      duration: "7",
+      duration: "5",
       audio_link:
         "https://res.cloudinary.com/ddh1fblle/video/upload/v1695705823/Journeys/3-Day%20Connection%20Challenge/3-Day_Connection_Challenge_-_1_-_Relaxation_cvbqr2.mp3",
       image_link:
@@ -174,11 +174,11 @@ async function main() {
         "Studies have shown that partners who practice active listening can significantly improve perceptions of spouses' attitudes and feelings*, but we don’t need studies to know that listening with attention and compassion to our partners can be an essential element to caring for our relationship. Today, we will focus on creating a gentle space to listen, with compassion. ",
       activity_type:
         "Active - There will be gentle interaction. Find a quiet space where you can comfortably face each other and speak. ",
-      duration: "11",
+      duration: "10",
       audio_link:
-        "https://res.cloudinary.com/ddh1fblle/video/upload/v1695705820/Journeys/3-Day%20Connection%20Challenge/3-Day_Connection_Challenge_-_2_-_Day_2_zzqz3d.mp3",
+        "https://res.cloudinary.com/ddh1fblle/video/upload/v1695705823/Journeys/3-Day%20Connection%20Challenge/3-Day_Connection_Challenge_-_2_-_Listening_ffvnoc.mp3",
       image_link:
-        "https://res.cloudinary.com/ddh1fblle/image/upload/t_JourneyMasterLogoShrinked/v1695693854/JourneyPictures/Journey2Logo_vzjg4s.png",
+        "https://res.cloudinary.com/ddh1fblle/image/upload/t_JourneyMasterLogoShrinked/v1695693854/JourneyPictures/Journey0Logo_e2xkup.png",
       color: "#7CE3F9",
       course_id: course_3_days.id,
       previous_experience_id: null,
@@ -193,11 +193,11 @@ async function main() {
       Sharing gratitude with your partner is a wonderful practice that can often inspire feelings of positivity and appreciation for both the sharer and the receiver. Let’s explore it!`,
       activity_type:
         "Active - There will be gentle interaction. Find a quiet space where you can comfortably face each other and speak. ",
-      duration: "5",
+      duration: "10",
       audio_link:
-        "https://res.cloudinary.com/ddh1fblle/video/upload/v1695705820/Journeys/3-Day%20Connection%20Challenge/3-Day_Connection_Challenge_-_2_-_Day_2_zzqz3d.mp3",
+        "https://res.cloudinary.com/ddh1fblle/video/upload/v1695705826/Journeys/3-Day%20Connection%20Challenge/3-Day_Connection_Challenge_-_3_-_Gratitude_bmeqiu.mp3",
       image_link:
-        "https://res.cloudinary.com/ddh1fblle/image/upload/t_JourneyMasterLogoShrinked/v1695693854/JourneyPictures/Journey2Logo_vzjg4s.png",
+        "https://res.cloudinary.com/ddh1fblle/image/upload/t_JourneyMasterLogoShrinked/v1695693854/JourneyPictures/Journey0Logo_e2xkup.png",
       color: "#7CE3F9",
       course_id: course_3_days.id,
       previous_experience_id: null,
@@ -332,7 +332,7 @@ async function main() {
         "Active - There will be gentle interaction. Find a quiet space where you can comfortably face each other and speak.",
       duration: "10",
       audio_link:
-        "https://res.cloudinary.com/ddh1fblle/video/upload/v1695706286/Journeys/18-Day%20Connection%20Journey%20-%20Level%201/18-Day_Connection_Journey_-_3_-_Relaxation_-_10min_autx5d.mp3",
+        "https://res.cloudinary.com/ddh1fblle/video/upload/v1695706295/Journeys/18-Day%20Connection%20Journey%20-%20Level%201/18-Day_Connection_Journey_-_4_-_Listening_pp56kn.mp3",
       image_link:
         "https://res.cloudinary.com/ddh1fblle/image/upload/t_JourneyMasterLogoShrinked/v1695693855/JourneyPictures/Journey1Logo_qlvdpb.png",
       color: "#9FF237",
@@ -350,7 +350,7 @@ async function main() {
         "Passive - There will be no interaction. Find a quiet space where you can sit back or lay down comfortably. ",
       duration: "7",
       audio_link:
-        "https://res.cloudinary.com/ddh1fblle/video/upload/v1695706295/Journeys/18-Day%20Connection%20Journey%20-%20Level%201/18-Day_Connection_Journey_-_4_-_Listening_pp56kn.mp3",
+        "https://res.cloudinary.com/ddh1fblle/video/upload/v1695706287/Journeys/18-Day%20Connection%20Journey%20-%20Level%201/18-Day_Connection_Journey_-_5_-_Gratitude_-_Self_drm19m.mp3",
       image_link:
         "https://res.cloudinary.com/ddh1fblle/image/upload/t_JourneyMasterLogoShrinked/v1695693855/JourneyPictures/Journey1Logo_qlvdpb.png",
       color: "#9FF237",
@@ -398,9 +398,9 @@ This practice can be helpful when dealing with stress because it offers a simple
 This audio experience is for informational purposes only and nothing is intended as professional or medical advice in any capacity. It is not intended to be a substitute for professional medical advice, diagnosis, or treatment.`,
       activity_type:
         "Passive - There will be no interaction. Find a quiet space where you can sit back or lay down comfortably. ",
-      duration: "10",
+      duration: "15",
       audio_link:
-        "https://res.cloudinary.com/ddh1fblle/video/upload/v1695706285/Journeys/18-Day%20Connection%20Journey%20-%20Level%201/18-Day_Connection_Journey_-_6_-_Love_-_Self_q4zvq3.mp3",
+        "https://res.cloudinary.com/ddh1fblle/video/upload/v1695706286/Journeys/18-Day%20Connection%20Journey%20-%20Level%201/18-Day_Connection_Journey_-_7_-_Stress_Conflict_eupope.mp3",
       image_link:
         "https://res.cloudinary.com/ddh1fblle/image/upload/t_JourneyMasterLogoShrinked/v1695693855/JourneyPictures/Journey1Logo_qlvdpb.png",
       color: "#9FF237",
