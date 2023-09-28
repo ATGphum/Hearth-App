@@ -3,6 +3,7 @@ import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import SettingsDrawer from "../components/SettingsDrawer";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { formatDate } from "../core/helpers";
+import { trackEvent } from "../core/analytics";
 
 const MotionFlex = m(Flex);
 
@@ -75,7 +76,12 @@ function Profile() {
               </Flex>
             )}
             <Flex
-              onClick={settingsDrawerOnOpen}
+              onClick={() => {
+                settingsDrawerOnOpen();
+
+                // Amplitude track event
+                trackEvent({ type: "Click Menu Bar" });
+              }}
               justifyContent={"center"}
               className="ios-disable-highlight"
               flexDirection={"column"}
