@@ -15,6 +15,8 @@ export interface User {
   instagram_username?: string;
   connection_time?: string;
   date_joined: string;
+  stripe_subscription_id: string;
+  stripe_customer_id: string;
 }
 
 export interface Journey {

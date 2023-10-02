@@ -74,4 +74,20 @@ export default async function PaymentsController(fastify: FastifyInstance) {
       }
     }
   );
+  fastify.post(
+    "/payments/link-subscription-to-user",
+    async (
+      request: FastifyRequest<{ Querystring: { subscriptionId: string } }>,
+      reply: FastifyReply
+    ) => {
+      console.log("hits");
+      const sub: string = request["user"]["sub"];
+      const { subscriptionId } = request.query;
+      await fastify.prisma.user.update({
+        where: { username: sub },
+        data: { stripe_subscription_id: subscriptionId },
+      });
+      return reply.send({ success: true });
+    }
+  );
 }

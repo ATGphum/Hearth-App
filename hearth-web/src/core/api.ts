@@ -76,3 +76,10 @@ export const CreatePaymentSubscription = (priceId: string) => {
     "GET"
   );
 };
+
+export const LinkStripeSubscriptionToUser = (subscriptionId: string) => {
+  return request(
+    `/v1/payments/link-subscription-to-user?subscriptionId=${subscriptionId}`,
+    "POST"
+  );
+};

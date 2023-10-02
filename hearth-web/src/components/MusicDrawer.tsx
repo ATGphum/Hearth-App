@@ -412,7 +412,8 @@ const MusicDrawer = ({
                 </Text>
               </Flex>
             </Flex>
-            {parentCourse.subscription_required ? (
+            {parentCourse.subscription_required &&
+            !user?.stripe_subscription_id ? (
               <Flex
                 width={"100%"}
                 justifyContent={"center"}

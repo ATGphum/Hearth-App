@@ -35,6 +35,12 @@ export const userResponseSchema = {
     date_joined: {
       type: "string",
     },
+    stripe_subscription_id: {
+      type: ["string", "null"],
+    },
+    stripe_customer_id: {
+      type: ["string", "null"],
+    },
   },
 };
 
