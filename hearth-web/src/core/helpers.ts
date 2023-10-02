@@ -33,11 +33,13 @@ export function getInstallableStatus():
   const userAgent = window.navigator.userAgent;
 
   // Check if the user agent contains "iPhone" but not "Safari" (non-Safari iOS browsers)
-  const isIOSNonSafari = /iPhone/i.test(userAgent) && !/Safari/.test(userAgent);
+  const isIOSNonSafari =
+    /(iPhone|iPod|iPad)/i.test(userAgent) && !/Safari/.test(userAgent);
   if (isIOSNonSafari) return "non-installable";
 
   // Check if the user agent contains "Safari" (Safari browser on iOS)
-  const isSafariIOS = /Safari/.test(userAgent) && /iPhone/i.test(userAgent);
+  const isSafariIOS =
+    /Safari/.test(userAgent) && /(iPhone|iPod|iPad)/i.test(userAgent);
   if (isSafariIOS) {
     if (isIOSWebView()) {
       return "non-installable";
