@@ -19,8 +19,8 @@ function App() {
     initialiseAnalytics();
   }, []);
 
-  if (installable === "installable" || viteEnv.environment === "production") {
-    if (isStandalone || viteEnv.environment === "production") {
+  if (installable === "installable" || viteEnv.environment === "development") {
+    if (isStandalone || viteEnv.environment === "development") {
       return (
         <Suspense fallback={<LoadingPage />}>
           <AppContextProviders>

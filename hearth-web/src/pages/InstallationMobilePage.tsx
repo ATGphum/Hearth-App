@@ -39,7 +39,7 @@ const IOSInstallPage = () => {
       <Flex direction="column" textAlign="left" gridRowGap="2rem">
         <Text textStyle="heading.h1">Add Hearth to your home screen.</Text>
         <Text textStyle="action">Using Safari as your browser:</Text>
-        <Box ml="1rem">
+        <Box ml="0.5rem">
           <OrderedList spacing={2}>
             <ListItem>
               <Text>
@@ -96,7 +96,7 @@ const AndroidInstallPage = () => {
       <Flex direction="column" textAlign="left" gridRowGap="2rem">
         <Text textStyle="heading.h1">Add Hearth to your home screen.</Text>
         <Text textStyle="action">Using Chrome as your browser:</Text>
-        <Box ml="1rem">
+        <Box ml="0.5rem">
           <OrderedList spacing={2}>
             <ListItem>
               <Text>
@@ -118,7 +118,7 @@ const AndroidInstallPage = () => {
           </OrderedList>
         </Box>
 
-        <Text pb="10rem">
+        <Text mb="10rem">
           You're all set. Now you'll see Hearth next to other apps on your home
           screen.
         </Text>
