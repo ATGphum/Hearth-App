@@ -54,13 +54,23 @@ const IOSInstallPage = () => {
             <ListItem>
               <Flex alignItems="center">
                 <Text>
-                  Find and tap "Add to Home Screen {<PlusSquareIcon />}
+                  Find and tap "
+                  <Text as="span" fontWeight={500}>
+                    Add to Home Screen
+                  </Text>{" "}
+                  {<PlusSquareIcon />}
                   ."
                 </Text>
               </Flex>
             </ListItem>
             <ListItem>
-              <Text>Tap "Add" to confirm.</Text>
+              <Text>
+                Tap "
+                <Text as="span" fontWeight={500}>
+                  Add
+                </Text>
+                " to confirm.
+              </Text>
             </ListItem>
           </OrderedList>
         </Box>
@@ -96,7 +106,13 @@ const AndroidInstallPage = () => {
             </ListItem>
             <ListItem>
               <Flex alignItems="center">
-                <Text>Tap "{<AddHomeButtonIcon />}Add to Home Screen."</Text>
+                <Text>
+                  Tap "{<AddHomeButtonIcon />}
+                  <Text as="span" fontWeight={500}>
+                    Add to Home Screen
+                  </Text>
+                  ."
+                </Text>
               </Flex>
             </ListItem>
           </OrderedList>
