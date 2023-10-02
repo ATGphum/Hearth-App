@@ -10,6 +10,8 @@ import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
 import theme from "../theme/chakra-theme";
 import ArrowUpWithTrayIcon from "../icons/ArrowUpWithTrayIcon";
 import PlusSquareIcon from "../icons/PlusSquareIcon";
+import ThreeDotsVerticalIcon from "../icons/ThreeDotsVerticalIcon";
+import AddHomeButtonIcon from "../icons/AddHomeButtonIcon";
 
 function InstallationMobilePage() {
   const userAgent = window.navigator.userAgent;
@@ -88,13 +90,13 @@ const AndroidInstallPage = () => {
           <OrderedList spacing={2}>
             <ListItem>
               <Text>
-                Tap the more options icon "{<ArrowUpWithTrayIcon />}
+                Tap the more options icon " {<ThreeDotsVerticalIcon />}
                 ."
               </Text>
             </ListItem>
             <ListItem>
               <Flex alignItems="center">
-                <Text>Tap "{<PlusSquareIcon />} Add to Home Screen."</Text>
+                <Text>Tap "{<AddHomeButtonIcon />}Add to Home Screen."</Text>
               </Flex>
             </ListItem>
           </OrderedList>
