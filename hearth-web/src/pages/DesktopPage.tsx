@@ -1,4 +1,5 @@
-import { ChakraBaseProvider, Flex, Image, Text, theme } from "@chakra-ui/react";
+import { Box, ChakraBaseProvider, Flex, Image, Text } from "@chakra-ui/react";
+import theme from "../theme/chakra-theme";
 
 function DesktopPage() {
   return (
@@ -13,27 +14,26 @@ function DesktopPage() {
         justifyContent={"center"}
         p="1rem"
       >
-        <Flex direction="column" gridRowGap="4rem">
+        <Flex direction="column" gridRowGap="3rem">
           <Flex direction="column" alignItems={"center"} gridRowGap="2rem">
-            <Flex>
+            <Box>
               <Image
+                sizes="xl"
                 src={
                   "https://res.cloudinary.com/ddh1fblle/image/upload/v1694933705/Web_ilczox.svg"
                 }
                 alt="Hearth"
+                style={{ fontSize: "3rem" }}
               />
-            </Flex>
-            <Text>
-              Screen-free & feel-good experiences designed to help partners
-              connect & relax in just 10 minutes a day.
-            </Text>
+            </Box>
           </Flex>
-          <Flex direction="column" alignItems={"center"} gridRowGap="2rem">
-            <Text textStyle="action">
-              Visit app.hearthtogether on a phone to install the app
+          <Flex direction="column" gridRowGap="1rem" textAlign="left">
+            <Text textStyle="heading.h1">
+              Use your mobile phone to access Hearth.
             </Text>
-            <Text textStyle="fieldLabel" color="accent.grey">
-              Check out our privacy policy →
+            <Text textStyle="heading.h2">Visit app.hearthtogether.com</Text>
+            <Text textStyle="heading.h3" color="accent.grey">
+              See you soon.
             </Text>
           </Flex>
         </Flex>
