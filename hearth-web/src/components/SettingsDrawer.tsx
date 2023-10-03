@@ -1,30 +1,35 @@
-import { Flex, useOutsideClick, Text, useDisclosure } from "@chakra-ui/react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Flex, Text, useDisclosure, useOutsideClick } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useRef } from "react";
 import ReactDOM from "react-dom";
 import BottomPopupDrawer from "./BottomPopupDrawer";
-import { useAuth0 } from "@auth0/auth0-react";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  subscriptionsOnOpen: () => void;
 }
 
 const MotionFlex = m(Flex);
 
-const SettingsDrawer = ({ isOpen, onClose }: Props) => {
+const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
   const { logout } = useAuth0();
   const ref = useRef<HTMLDivElement | null>(null);
+
   useOutsideClick({
     ref: ref,
     handler: onClose,
   });
+
   const {
     isOpen: closeDrawerIsOpen,
     onOpen: closeDrawerOnOpen,
     onClose: closeDrawerOnClose,
   } = useDisclosure();
+
   const mounter = document.getElementById("appContainer");
+
   if (!mounter) return null;
   return ReactDOM.createPortal(
     <LazyMotion features={domMax}>
@@ -90,8 +95,12 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
               p="0.75rem 1rem"
               borderBottom="1px solid"
               borderColor="divider.flesh"
+              onClick={() => {
+                onClose();
+                subscriptionsOnOpen();
+              }}
             >
-              Manage Subscriptions
+              Manage subscriptions
             </Text>
             <Text
               textStyle="action"
@@ -100,6 +109,14 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
               borderColor="divider.flesh"
             >
               Terms and conditions
+            </Text>
+            <Text
+              textStyle="action"
+              p="0.75rem 1rem"
+              borderBottom="1px solid"
+              borderColor="divider.flesh"
+            >
+              Privacy policy
             </Text>
             <Text
               textStyle="action"

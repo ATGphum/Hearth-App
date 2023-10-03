@@ -3,6 +3,7 @@ import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import SettingsDrawer from "../components/SettingsDrawer";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { formatDate } from "../core/helpers";
+import SubscriptionsDrawer from "../components/SubscriptionsDrawer";
 
 const MotionFlex = m(Flex);
 
@@ -11,6 +12,11 @@ function Profile() {
     isOpen: settingsDrawerIsOpen,
     onOpen: settingsDrawerOnOpen,
     onClose: settingsDrawerOnClose,
+  } = useDisclosure();
+  const {
+    isOpen: subscriptionsIsOpen,
+    onOpen: subscriptionsOnOpen,
+    onClose: subscriptionsOnClose,
   } = useDisclosure();
   const { data: user } = useCurrentUserProfile();
   return (
@@ -22,10 +28,19 @@ function Profile() {
       position={"relative"}
     >
       <AnimatePresence>
+        {subscriptionsIsOpen && (
+          <SubscriptionsDrawer
+            onClose={subscriptionsOnClose}
+            isOpen={subscriptionsIsOpen}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
         {settingsDrawerIsOpen && (
           <SettingsDrawer
             onClose={settingsDrawerOnClose}
             isOpen={settingsDrawerIsOpen}
+            subscriptionsOnOpen={subscriptionsOnOpen}
           />
         )}
       </AnimatePresence>

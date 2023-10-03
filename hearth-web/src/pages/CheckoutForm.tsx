@@ -6,9 +6,9 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import viteEnv from "../config/vite-env";
 import { LazyMotion, domMax, m } from "framer-motion";
 import { useEffect, useState } from "react";
+import viteEnv from "../config/vite-env";
 import { CreatePaymentSubscription } from "../core/api";
 import { SubscriptionDetail } from "../core/types";
 import LoadingPage from "./LoadingPage";
@@ -115,6 +115,7 @@ const CheckoutForm = ({ subscriptionId }: { subscriptionId: string }) => {
       },
     });
   };
+
   return (
     <Flex direction="column" gridRowGap="1rem">
       <PaymentElement />
@@ -128,7 +129,7 @@ const CheckoutForm = ({ subscriptionId }: { subscriptionId: string }) => {
         boxShadow={"0px 4px 2px 0px rgba(0, 0, 0, 0.60)"}
         onClick={handleSubmit}
       >
-        {stripe && <Text textStyle="action">Submit</Text>}
+        {stripe && elements && <Text textStyle="action">Submit</Text>}
       </Flex>
     </Flex>
   );

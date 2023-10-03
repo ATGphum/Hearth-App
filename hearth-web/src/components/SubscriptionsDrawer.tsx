@@ -11,6 +11,7 @@ import ImageLogo from "./ImageLogo";
 import { useState } from "react";
 import { SubscriptionType } from "../core/types";
 import Checkout from "../pages/CheckoutForm";
+import { useCurrentUserProfile } from "../core/apiHooks";
 
 interface Props {
   isOpen: boolean;
@@ -30,6 +31,8 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
     onOpen: checkoutOnOpen,
     onClose: checkoutOnClose,
   } = useDisclosure();
+
+  const { data: user } = useCurrentUserProfile();
 
   const mounter = document.getElementById("mounter");
   if (!mounter) return null;
@@ -97,7 +100,9 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
               <ImageLogo />
             </Flex>
             <Text textStyle="heading.h1" textAlign={"center"}>
-              Subscribe to Hearth.
+              {user?.stripe_subscription_id
+                ? "You are subscribed to Hearth."
+                : "Subscribe to Hearth."}
             </Text>
             <UnorderedList textStyle="body">
               <ListItem>Access all experienes.</ListItem>
@@ -165,18 +170,42 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
                 </Text>
               </Flex>
             </Flex>
-            <Flex
-              p="1rem"
-              width="100%"
-              bg="linear-gradient(79deg, #F89587 0%, rgba(248, 149, 135, 0.00) 39.05%), linear-gradient(262deg, #A1E0D5 1.43%, rgba(208, 216, 192, 0.00) 45.77%), #FFC89C"
-              justifyContent={"center"}
-              borderRadius="0.75rem"
-              border="1px solid #000"
-              boxShadow={"0px 4px 2px 0px rgba(0, 0, 0, 0.60)"}
-              onClick={checkoutOnOpen}
-            >
-              <Text textStyle="action">Confirm</Text>
-            </Flex>
+            {user?.stripe_subscription_id ? (
+              <Flex
+                p="1rem"
+                width="100%"
+                bg="linear-gradient(79deg, #F89587 0%, rgba(248, 149, 135, 0.00) 39.05%), linear-gradient(262deg, #A1E0D5 1.43%, rgba(208, 216, 192, 0.00) 45.77%), #FFC89C"
+                justifyContent={"center"}
+                borderRadius="0.75rem"
+                border="1px solid #000"
+                boxShadow={"0px 4px 2px 0px rgba(0, 0, 0, 0.60)"}
+                direction="column"
+                alignItems={"center"}
+              >
+                <Text textStyle="heading.h3">Your current plan</Text>
+              </Flex>
+            ) : (
+              <Flex
+                p="1rem"
+                width="100%"
+                bg="linear-gradient(79deg, #F89587 0%, rgba(248, 149, 135, 0.00) 39.05%), linear-gradient(262deg, #A1E0D5 1.43%, rgba(208, 216, 192, 0.00) 45.77%), #FFC89C"
+                justifyContent={"center"}
+                borderRadius="0.75rem"
+                border="1px solid #000"
+                boxShadow={"0px 4px 2px 0px rgba(0, 0, 0, 0.60)"}
+                onClick={checkoutOnOpen}
+                direction="column"
+                alignItems={"center"}
+              >
+                <Text textStyle="action">Start your 7-day free trial</Text>
+                <Text textStyle="fieldLabel">
+                  {selectedSubscription === SubscriptionType.monthly
+                    ? "14.95/month"
+                    : "104.95/year"}{" "}
+                  after 7 days
+                </Text>
+              </Flex>
+            )}
           </Flex>
         </Flex>
       </MotionFlex>
