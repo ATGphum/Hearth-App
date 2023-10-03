@@ -8,7 +8,7 @@ import { IsStandalone, getInstallableStatus } from "./core/helpers";
 import LoadingPage from "./pages/LoadingPage";
 
 const DesktopPage = lazy(() => import("./pages/DesktopPage"));
-const WrongBrowserPage = lazy(() => import("./pages/WrongBrowserPage"));
+const InstallationPage = lazy(() => import("./pages/InstallationMobilePage"));
 const AppContextProviders = lazy(() => import("./context/AppContextProviders"));
 
 function App() {
@@ -19,8 +19,8 @@ function App() {
     initialiseAnalytics();
   }, []);
 
-  if (installable === "installable" || viteEnv.environment === "development") {
-    if (isStandalone || viteEnv.environment === "development") {
+  if (installable === "installable" || viteEnv.environment === "prod") {
+    if (isStandalone || viteEnv.environment === "prod") {
       return (
         <Suspense fallback={<LoadingPage />}>
           <AppContextProviders>
@@ -31,7 +31,7 @@ function App() {
     } else {
       return (
         <Suspense fallback={<LoadingPage />}>
-          <WrongBrowserPage />
+          <InstallationPage />
         </Suspense>
       );
     }
