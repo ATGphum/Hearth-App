@@ -328,7 +328,7 @@ const PrivacyPolicyPage = ({ isOpen, onClose }: Props) => {
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">
-                Variation to the Terms and Services
+                Why do we collect personal information?
               </Text>
               <br />
               <Text textStyle="body">
@@ -369,9 +369,8 @@ const PrivacyPolicyPage = ({ isOpen, onClose }: Props) => {
               </UnorderedList>
             </ListItem>
             <ListItem>
-              <Text textStyle="heading.h2">
-                Why do we collect personal information?{" "}
-              </Text>
+              How do we collect this information?
+              <Text textStyle="heading.h2"> </Text>
             </ListItem>
             <ListItem
               as="div"
@@ -498,7 +497,7 @@ const PrivacyPolicyPage = ({ isOpen, onClose }: Props) => {
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">
-                How do we collect this information?{" "}
+                How do we disclose your personal information?
               </Text>
               <br />
               <Text textStyle="body">
@@ -580,7 +579,7 @@ const PrivacyPolicyPage = ({ isOpen, onClose }: Props) => {
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">
-                How do we disclose your personal information?
+                Transferring your information overseas
               </Text>
               <br />
               <Text textStyle="body">
@@ -604,9 +603,7 @@ const PrivacyPolicyPage = ({ isOpen, onClose }: Props) => {
               </Text>
             </ListItem>
             <ListItem>
-              <Text textStyle="heading.h2">
-                Transferring your information overseas
-              </Text>
+              <Text textStyle="heading.h2">Direct Marketing</Text>
               <br />
               <Text textStyle="body">
                 It is our aim to provide you with access to premium Services. To
@@ -651,201 +648,360 @@ const PrivacyPolicyPage = ({ isOpen, onClose }: Props) => {
               </Text>
             </ListItem>
             <ListItem>
-              <Text textStyle="heading.h2">Direct Marketing</Text>
-            </ListItem>
-            <ListItem>
               <Text textStyle="heading.h2">Accuracy of our information</Text>
+              <br />
+              <Text textStyle="body">
+                We will hold your personal information for a reasonable period
+                of time before we consider whether it is inaccurate,
+                out-of-date, incomplete, irrelevant or misleading (unless we are
+                informed otherwise).
+              </Text>
+              <br />
+              <Text textStyle="body">
+                If, having regard to the purpose for which it is held, we are
+                satisfied that personal information we hold is inaccurate,
+                out-of-date, incomplete, irrelevant or misleading, or if the
+                individual about whom the information relates makes a request,
+                we will take reasonable steps to correct the information.{" "}
+              </Text>
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">
                 How do we protect personal information?
               </Text>
-              <OrderedList
-                listStyleType="lower-alpha"
-                textStyle="body"
-                spacing="1rem"
-              >
+            </ListItem>
+            <ListItem
+              as="div"
+              textStyle="heading.h3"
+              position="relative"
+              _before={{
+                content: "'10.1'",
+                position: "absolute",
+                left: "-2rem",
+              }}
+            >
+              <Text textStyle="heading.h3" ml="0.25rem">
+                Information security measures
+              </Text>
+              <br />
+              <Text textStyle="body">
+                We may hold your personal information in either electronic or
+                physical form.{" "}
+              </Text>
+              <br />
+              <Text textStyle="body">
+                We take reasonable steps to protect your personal information
+                from misuse, interference and loss, as well as unauthorised
+                access, modification or disclosure. We will use a number of
+                physical, administrative, personnel and technical measures to
+                protect your personal information.
+              </Text>
+              <br />
+              <Text textStyle="body">
+                The processes and systems we use to safeguard personal are:
+              </Text>
+              <UnorderedList textStyle="body" spacing="1rem" ml="2rem">
                 <ListItem mt="1rem">
                   <Text textStyle="body">
-                    The Services uses cookies, tracking pixels and related
-                    technologies.
+                    limiting access to systems on which information is processed
+                    and stored and segregate user access as required to carry
+                    out their role;
                   </Text>
                 </ListItem>
                 <ListItem>
                   <Text textStyle="body">
-                    Cookies are small data files that are served by our platform
-                    and stored on your device. The Services uses cookies dropped
-                    by us or third parties for a variety of purposes including
-                    to operate and personalise the Services and Content. Also,
-                    cookies may be used to track how you use the Services to
-                    target ads to you on other websites.
+                    integrating data security measures into our risk management
+                    strategies;
                   </Text>
                 </ListItem>
                 <ListItem>
                   <Text textStyle="body">
-                    You can disable the use of the cookies by changing your web
-                    browser settings.
+                    integrating data security measures into our risk management
+                    strategies;
                   </Text>
                 </ListItem>
-              </OrderedList>
+                <ListItem>
+                  <Text textStyle="body">
+                    ensuring all external email communications sent from BCRC-WA
+                    are encrypted;{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    require all staff to periodically reset passwords;
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    use anti-virus protections and ensure operating systems,
+                    browsers and plugins are up-to-date with patches and fixes;
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    monitoring and regularly reviewing our third party providers
+                    (including cloud computing) to ensure compliance with
+                    Australian Privacy Law;{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    monitoring and regularly reviewing our information and
+                    communications technology systems (including hardware and
+                    software);{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    monitoring and regularly reviewing our practice against our
+                    own policies and against industry best practice.
+                  </Text>
+                </ListItem>
+              </UnorderedList>
+            </ListItem>
+            <ListItem
+              as="div"
+              textStyle="heading.h3"
+              position="relative"
+              _before={{
+                content: "'10.2'",
+                position: "absolute",
+                left: "-2rem",
+              }}
+            >
+              <Text textStyle="heading.h3" ml="0.25rem">
+                Cloud Storage
+              </Text>
+              <br />
+              <Text textStyle="body">
+                We may store your personal information with a third party cloud
+                storage provider. If we do, we will take reasonable steps to
+                ensure that the third party cloud storage provider protects your
+                personal information in accordance with Australian Privacy Law.{" "}
+              </Text>
+              <br />
+            </ListItem>
+            <ListItem
+              as="div"
+              textStyle="heading.h3"
+              position="relative"
+              _before={{
+                content: "'10.3'",
+                position: "absolute",
+                left: "-2rem",
+              }}
+            >
+              <Text textStyle="heading.h3" ml="0.25rem">
+                Deletion, destruction or archiving
+              </Text>
+              <br />
+              <Text textStyle="body">
+                Hearth ensures that your personal information is safely archived
+                (if necessary) and, if no longer required for our functions,
+                securely destroyed by using the services of professional
+                archival and document management companies.
+              </Text>
+            </ListItem>
+            <ListItem
+              as="div"
+              textStyle="heading.h3"
+              position="relative"
+              _before={{
+                content: "'10.4'",
+                position: "absolute",
+                left: "-2rem",
+              }}
+            >
+              <Text textStyle="heading.h3" ml="0.25rem">
+                Data breach
+              </Text>
+              <br />
+              <Text textStyle="body">
+                In the event personal information held by us has been accessed,
+                disclosed without authorisation, or is lost, we will take
+                immediate action to contain, assess and remediate the incident
+                in accordance with our Data Breach Response Plan.{" "}
+              </Text>
+              <br />
+              <Text textStyle="body">
+                Should we determine that a data breach is likely to cause
+                serious harm to an individual to whom the relevant information
+                relates, we will promptly notify the individual and the Office
+                of the Australian Information Commissioner about the breach
+                (unless the Law requires or authorises otherwise).{" "}
+              </Text>
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">
                 Can you get access to access and/or correct your personal
                 information?
               </Text>
-              <OrderedList
-                listStyleType="lower-alpha"
-                textStyle="body"
-                spacing="1rem"
-              >
+              <br />
+              <Text textStyle="body">
+                Generally, you have the right to know all the personal
+                information we hold about you. You can also request they we
+                correct any personal information we hold about you. You can
+                request access to view and/or correct this information by
+                contacting us directly.
+              </Text>
+              <br />
+              <Text textStyle="body">
+                We will respond to your request as within a reasonable period
+                (usually 30 days from the date the request was made), we will
+                provide the requestor access to the information in the manner
+                requested, if it is reasonable and practicable to do so and
+                subject to exceptions set out in the Australian Privacy Law.
+              </Text>
+              <br />
+              <Text textStyle="body">
+                We will only refuse to correct personal information in
+                accordance with our obligations under Australian Privacy Law.
+                Some examples of when you might be denied access are if:
+              </Text>
+              <UnorderedList textStyle="body" spacing="1rem" ml="2rem">
                 <ListItem mt="1rem">
                   <Text textStyle="body">
-                    The Services may contain links to other web sites (including
-                    banner advertisements and sponsored links) controlled by
-                    third parties and resources provided by third parties (
-                    <Text as="span" fontWeight={500}>
-                      Third Party Website and Resources
-                    </Text>
-                    ), these links are provided for your information only. Such
-                    links should not be interpreted as approved by us of those
-                    linked websites or information you may obtain from them.
+                    access will pose a threat to the life or health of someone;
                   </Text>
                 </ListItem>
                 <ListItem>
                   <Text textStyle="body">
-                    Hearth is not responsible for any content on, or in, Third
-                    Party Website and Resources. If you choose to visit, or use,
-                    a Third Party Website and Resources you do so at your own
-                    risk and subject to the terms and conditions of use of the
-                    Third Part Website and Resources. You should make your own
-                    enquiries before relying on any content contained on, or in,
-                    a Third Party Website and Resources.
+                    access would have an unreasonable impact on another person's
+                    privacy;
                   </Text>
                 </ListItem>
                 <ListItem>
                   <Text textStyle="body">
-                    Hearth makes no representations or warranties, whether
-                    express or implied, about the quality or accuracy of
-                    material available on, or in, a Third Party Website and
-                    Resources, or that such material does not infringe the
-                    intellectual property rights of a third party.{" "}
+                    information relates to anticipated or existing legal
+                    proceedings; or
                   </Text>
                 </ListItem>
-              </OrderedList>
+                <ListItem>
+                  <Text textStyle="body">giving access would be unlawful.</Text>
+                </ListItem>
+              </UnorderedList>
+              <br />
+              <Text textStyle="body">
+                Where we refuse a request to correct personal information we
+                will provide a written notice to the requestor setting out:
+              </Text>{" "}
+              <UnorderedList textStyle="body" spacing="1rem" ml="2rem">
+                <ListItem mt="1rem">
+                  <Text textStyle="body">
+                    the reasons for the refusal (except where it would be
+                    unreasonable to provide the reasons);
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    the mechanisms available to complain about the refusal;{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    offer to insert a statement into the relevant record
+                    identifying the requestor’s statement that the information
+                    is inaccurate, out-of-date, incomplete, irrelevant or
+                    misleading.
+                  </Text>
+                </ListItem>
+              </UnorderedList>
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">
                 What can you do if you have a complaint?
               </Text>
-              <OrderedList
-                listStyleType="lower-alpha"
-                textStyle="body"
-                spacing="1rem"
-              >
+              <br />
+              <Text textStyle="body">
+                If you believe that there has been a breach of privacy or you do
+                not agree with a decision we have made about your access to
+                personal information, you can make a complaint and we will
+                endeavour to resolve it by following our internal complaint
+                resolution process. You may provide the details of your
+                complaint either verbally or in writing to our Privacy Officer
+                using the details set out below:
+              </Text>
+              <UnorderedList textStyle="body" spacing="1rem" ml="2rem">
+                <ListItem mt="1rem">
+                  <Text textStyle="body">Telephone: +61 421824725 </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">Email: hello@hearthtogether.com</Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    Address: 191 St Georges Terrace, Level 6, Perth, WA, 6000,
+                    Australia{" "}
+                  </Text>
+                </ListItem>
+              </UnorderedList>
+              <br />
+              <Text textStyle="body">
+                Once we have received your complaint, we will take steps to
+                investigate the issues raised and endeavour to respond to you
+                within a reasonable period of time (usually 30 days).{" "}
+              </Text>
+              <br />
+              <Text textStyle="body">
+                In response to your complaint, our Privacy Officer (or other
+                relevant officer) will contact you by telephone or in writing
+                to:{" "}
+              </Text>
+              <UnorderedList textStyle="body" spacing="1rem" ml="2rem">
                 <ListItem mt="1rem">
                   <Text textStyle="body">
-                    The Services and the Content are protected by copyright laws
-                    and treaties around the world. All such rights are reserved.{" "}
+                    ask for more information about your complaint;
                   </Text>
                 </ListItem>
                 <ListItem>
                   <Text textStyle="body">
-                    You may print off one copy, and may download extracts, of
-                    any page(s) from the Services for your personal use and you
-                    may draw the attention of others to the Services or Content
-                    posted on the Services. You must not modify the paper or
-                    digital copies of any materials you have printed off or
-                    downloaded in any way, and you must not use any
-                    illustrations, photographs, video or audio sequences or any
-                    graphics separately from any accompanying text.{" "}
+                    notify you of the outcome of our investigation; or
                   </Text>
                 </ListItem>
                 <ListItem>
                   <Text textStyle="body">
-                    Our status (and that of any identified contributors) as the
-                    authors of the Services and Content must always be
-                    acknowledged.{" "}
+                    arrange to meet with you to discuss the complaint.
                   </Text>
+                </ListItem>
+              </UnorderedList>
+              <br />
+              <Text textStyle="body">
+                If the matter is not resolved to your satisfaction, it will be
+                referred to the relevant Manager, who will contact you within
+                five working days. If the complaint is still unresolved, it will
+                be referred to the General Manager, who will advise you of our
+                final decision within fifteen days of the date you first made
+                the complaint.
+              </Text>
+              <br />
+              <Text textStyle="body">
+                If you are not satisfied with our decision you can direct your
+                written complaint to the Australian Information Commissioner at:
+              </Text>
+              <UnorderedList textStyle="body" spacing="1rem" ml="2rem">
+                <ListItem mt="1rem">
+                  <Text textStyle="body">GPO Box 5218, Sydney NSW 2001 </Text>
                 </ListItem>
                 <ListItem>
-                  <Text textStyle="body">
-                    You must not use any part of the Content for commercial
-                    purposes without obtaining a licence to do so from us or our
-                    licensors.
-                  </Text>
+                  <Text textStyle="body">Phone toll free: 1300 363 992 </Text>
                 </ListItem>
                 <ListItem>
-                  <Text textStyle="body">
-                    If you print off, copy or download any part of the Services
-                    or the Content in breach of these Terms, your right to use
-                    the Services and the Content will cease immediately and you
-                    must, at our option, return or destroy any copies of the
-                    materials you have made.{" "}
-                  </Text>
+                  <Text textStyle="body">Email: enquiries@oaic.gov.au</Text>
                 </ListItem>
-                <ListItem>
-                  <Text textStyle="body">
-                    If we provide social media features such as the ability to
-                    share content, you may take such actions as are enabled by
-                    such features.{" "}
-                  </Text>
-                </ListItem>
-                <ListItem>
-                  <Text textStyle="body">
-                    You must not delete or alter any copyright, trade mark or
-                    other proprietary rights notices from copies of materials
-                    from the Services.{" "}
-                  </Text>
-                </ListItem>
-                <ListItem>
-                  <Text textStyle="body">
-                    You warrant and represent to Hearth that you are the owner
-                    of, or have a licence to use, Your Content and any and all
-                    images/documents that you upload to the Services (
-                    <Text as="span" fontWeight={500}>
-                      User Images
-                    </Text>
-                    ). You indemnify and keep harmless Hearth against any and
-                    all claims for loss, cost, liability or damage that Hearth
-                    may incur either directly or indirectly as a result of the
-                    use or publication of Your Content or of any uploaded image.{" "}
-                  </Text>
-                </ListItem>
-              </OrderedList>
+              </UnorderedList>
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">
                 What if this Privacy Policy is amended?
               </Text>
-              <OrderedList
-                listStyleType="lower-alpha"
-                textStyle="body"
-                spacing="1rem"
-              >
-                <ListItem mt="1rem">
-                  <Text textStyle="body">
-                    The trade marks and all related names, logos, product and
-                    service names, designs and slogans are our trade marks or
-                    the trade marks of our affiliates or licensors (whether or
-                    not registered).
-                  </Text>
-                </ListItem>
-                <ListItem>
-                  <Text textStyle="body">
-                    You must not use such marks without our prior written
-                    permission unless they are part of material you are using as
-                    per clause 12(b).{" "}
-                  </Text>
-                </ListItem>
-                <ListItem>
-                  <Text textStyle="body">
-                    Other names, logos, product and service names, designs and
-                    slogans on the Services are the trade marks of their
-                    respective owners and are used by us under licence.
-                  </Text>
-                </ListItem>
-              </OrderedList>
+              <br />
+              <Text textStyle="body">
+                This Policy will be reviewed and may be amended, from time to
+                time, to take account of new laws and technology, changes to our
+                operations, the operations of our related-entities and other
+                necessary developments. Updates will be publicised on our
+                website and made available upon request.{" "}
+              </Text>
             </ListItem>
           </OrderedList>
         </Flex>
