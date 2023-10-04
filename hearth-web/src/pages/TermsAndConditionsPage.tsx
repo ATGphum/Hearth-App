@@ -13,7 +13,7 @@ const MotionFlex = m(Flex);
 
 const TermsAndConditionsPage = ({ isOpen, onClose }: Props) => {
   const mounter = document.getElementById("mounter");
-  const backgroundColor = "#B694F7";
+  const backgroundColor = "#FFF9C4";
 
   if (!mounter) return null;
   return ReactDOM.createPortal(
