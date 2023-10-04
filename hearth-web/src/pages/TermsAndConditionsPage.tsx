@@ -1,4 +1,4 @@
-import { Flex, List, ListItem, OrderedList, Text } from "@chakra-ui/react";
+import { Flex, ListItem, OrderedList, Text } from "@chakra-ui/react";
 import { LazyMotion, domMax, m } from "framer-motion";
 import ReactDOM from "react-dom";
 import { trackEvent } from "../core/analytics";
