@@ -77,9 +77,16 @@ export const CreatePaymentSubscription = (priceId: string) => {
   );
 };
 
-export const LinkStripeSubscriptionToUser = (subscriptionId: string) => {
+export const LinkStripeSubscriptionToUser = (
+  subscriptionId: string,
+  frequency: string
+) => {
   return request(
-    `/v1/payments/link-subscription-to-user?subscriptionId=${subscriptionId}`,
+    `/v1/payments/link-subscription-to-user?subscriptionId=${subscriptionId}&frequency=${frequency}`,
     "POST"
   );
+};
+
+export const CancelStripeSubscription = () => {
+  return request(`/v1/payments/cancel-stripe-subscription`, "POST");
 };

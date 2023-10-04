@@ -1,6 +1,6 @@
 export enum SubscriptionType {
-  monthly,
-  yearly,
+  month = "month",
+  year = "year",
 }
 
 export interface User {
@@ -17,6 +17,7 @@ export interface User {
   date_joined: string;
   stripe_subscription_id: string;
   stripe_customer_id: string;
+  stripe_subscription_frequency: string;
 }
 
 export interface Journey {
@@ -57,4 +58,5 @@ export interface UserExperience {
 export interface SubscriptionDetail {
   subscription_id: string;
   client_secret: string;
+  frequency: string;
 }

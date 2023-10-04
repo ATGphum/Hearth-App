@@ -24,17 +24,23 @@ const PaymentGuard = ({ children }: Props) => {
   const subscriptionId = new URLSearchParams(window.location.search).get(
     "subscription_id"
   );
+  const frequency = new URLSearchParams(window.location.search).get(
+    "frequency"
+  );
 
   const [message, setMessage] = useState<string | undefined>();
   const [showMessage, setShowMessage] = useState(false);
 
-  const linkStripeSubscription = async (stripeSubscriptionId: string) => {
-    await LinkStripeSubscriptionToUser(stripeSubscriptionId);
+  const linkStripeSubscription = async (
+    stripeSubscriptionId: string,
+    frequency: string
+  ) => {
+    await LinkStripeSubscriptionToUser(stripeSubscriptionId, frequency);
     await userMutate();
   };
 
   useEffect(() => {
-    if (stripe && clientSecret && subscriptionId) {
+    if (stripe && clientSecret && subscriptionId && frequency) {
       // Retrieve the PaymentIntent
       stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
         // Inspect the PaymentIntent `status` to indicate the status of the payment
@@ -50,7 +56,7 @@ const PaymentGuard = ({ children }: Props) => {
               setMessage(
                 "Success! You now have full access to Hearth Experiences."
               );
-              linkStripeSubscription(subscriptionId);
+              linkStripeSubscription(subscriptionId, frequency);
               break;
             case "processing":
               setMessage(

@@ -41,6 +41,9 @@ export const userResponseSchema = {
     stripe_customer_id: {
       type: ["string", "null"],
     },
+    stripe_subscription_frequency: {
+      type: ["string", "null"],
+    },
   },
 };
 

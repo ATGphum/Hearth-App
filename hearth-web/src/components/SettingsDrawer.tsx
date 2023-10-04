@@ -37,6 +37,7 @@ const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
       <AnimatePresence>
         {closeDrawerIsOpen && (
           <BottomPopupDrawer
+            text={"Log out"}
             onClose={closeDrawerOnClose}
             isOpen={closeDrawerIsOpen}
             callback={() => {

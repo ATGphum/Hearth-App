@@ -28,6 +28,7 @@ model User {
   date_joined DateTime @default(now())
   stripe_customer_id String? @db.VarChar(255)
   stripe_subscription_id String? @db.VarChar(255)
+  stripe_subscription_frequency String? @db.VarChar(255)
 }
 
 enum ConnectionTimeChoices {

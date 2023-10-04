@@ -12,6 +12,8 @@ import { useState } from "react";
 import { SubscriptionType } from "../core/types";
 import Checkout from "../pages/CheckoutForm";
 import { useCurrentUserProfile } from "../core/apiHooks";
+import BottomPopupDrawer from "./BottomPopupDrawer";
+import { CancelStripeSubscription } from "../core/api";
 
 interface Props {
   isOpen: boolean;
@@ -21,10 +23,16 @@ interface Props {
 const MotionFlex = m(Flex);
 
 const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
+  const { data: user, mutate: userMutate } = useCurrentUserProfile();
   const yearlySubscriptionId = "price_1NtP9JGFPsayibi6odqpOHIl";
   const monthlySubscriptionid = "price_1NtP9JGFPsayibi6WqZ95p8u";
+
   const [selectedSubscription, setSelectedSubscription] =
-    useState<SubscriptionType>(SubscriptionType.monthly);
+    useState<SubscriptionType>(
+      user?.stripe_subscription_frequency === SubscriptionType.month.toString()
+        ? SubscriptionType.month
+        : SubscriptionType.year
+    );
 
   const {
     isOpen: checkoutIsOpen,
@@ -32,7 +40,11 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
     onClose: checkoutOnClose,
   } = useDisclosure();
 
-  const { data: user } = useCurrentUserProfile();
+  const {
+    isOpen: cancelDrawerIsOpen,
+    onOpen: cancelDrawerOnOpen,
+    onClose: cancelDrawerOnClose,
+  } = useDisclosure();
 
   const mounter = document.getElementById("mounter");
   if (!mounter) return null;
@@ -73,10 +85,23 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
               onClose={checkoutOnClose}
               isOpen={checkoutIsOpen}
               priceId={
-                selectedSubscription === SubscriptionType.monthly
+                selectedSubscription === SubscriptionType.month
                   ? monthlySubscriptionid
                   : yearlySubscriptionId
               }
+            />
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {cancelDrawerIsOpen && (
+            <BottomPopupDrawer
+              text="Cancel Subscription"
+              onClose={cancelDrawerOnClose}
+              isOpen={cancelDrawerIsOpen}
+              callback={async () => {
+                await CancelStripeSubscription();
+                userMutate();
+              }}
             />
           )}
         </AnimatePresence>
@@ -126,7 +151,7 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
                 bg="linear-gradient(180deg, #FFF964 0%, rgba(255, 249, 100, 0.00) 100%)"
                 border="1px solid #000"
                 borderWidth={
-                  selectedSubscription === SubscriptionType.yearly
+                  selectedSubscription === SubscriptionType.year
                     ? "3px"
                     : undefined
                 }
@@ -135,7 +160,7 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
                 borderRadius="0.75rem"
                 justifyContent={"center"}
                 maxH="10rem"
-                onClick={() => setSelectedSubscription(SubscriptionType.yearly)}
+                onClick={() => setSelectedSubscription(SubscriptionType.year)}
               >
                 <Text textStyle="heading.h3">Yearly</Text>
                 <Text textStyle="heading.h2">$104.95</Text>
@@ -149,7 +174,7 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
                 bg="linear-gradient(180deg, #FFF964 0%, rgba(255, 249, 100, 0.00) 100%)"
                 border="1px solid #000"
                 borderWidth={
-                  selectedSubscription === SubscriptionType.monthly
+                  selectedSubscription === SubscriptionType.month
                     ? "3px"
                     : undefined
                 }
@@ -158,9 +183,7 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
                 borderRadius="0.75rem"
                 justifyContent={"center"}
                 maxH="10rem"
-                onClick={() =>
-                  setSelectedSubscription(SubscriptionType.monthly)
-                }
+                onClick={() => setSelectedSubscription(SubscriptionType.month)}
               >
                 <Text textStyle="heading.h3">Monthly</Text>
                 <Text textStyle="heading.h2">$14.95</Text>
@@ -170,7 +193,28 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
                 </Text>
               </Flex>
             </Flex>
-            {user?.stripe_subscription_id ? (
+            {user?.stripe_subscription_id &&
+            user?.stripe_subscription_frequency !==
+              selectedSubscription.toString() ? (
+              <Flex
+                p="1rem"
+                width="100%"
+                bg="linear-gradient(79deg, #F89587 0%, rgba(248, 149, 135, 0.00) 39.05%), linear-gradient(262deg, #A1E0D5 1.43%, rgba(208, 216, 192, 0.00) 45.77%), #FFC89C"
+                justifyContent={"center"}
+                borderRadius="0.75rem"
+                border="1px solid #000"
+                boxShadow={"0px 4px 2px 0px rgba(0, 0, 0, 0.60)"}
+                direction="column"
+                alignItems={"center"}
+              >
+                <Text textStyle="heading.h3">
+                  Switch to{" "}
+                  {selectedSubscription === SubscriptionType.month
+                    ? "14.95/month"
+                    : "104.95/year"}
+                </Text>
+              </Flex>
+            ) : user?.stripe_subscription_id ? (
               <Flex
                 p="1rem"
                 width="100%"
@@ -199,12 +243,21 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
               >
                 <Text textStyle="action">Start your 7-day free trial</Text>
                 <Text textStyle="fieldLabel">
-                  {selectedSubscription === SubscriptionType.monthly
+                  {selectedSubscription === SubscriptionType.month
                     ? "14.95/month"
                     : "104.95/year"}{" "}
                   after 7 days
                 </Text>
               </Flex>
+            )}
+            {user?.stripe_subscription_id && (
+              <Text
+                textStyle="body"
+                color="brand.secondary"
+                onClick={cancelDrawerOnOpen}
+              >
+                Cancel your subscription
+              </Text>
             )}
           </Flex>
         </Flex>

@@ -67,6 +67,7 @@ export default async function PaymentsController(fastify: FastifyInstance) {
         return {
           subscription_id: subscription.id,
           client_secret: paymentIntent.client_secret,
+          frequency: subscription["plan"]["interval"],
         };
       } catch (error) {
         Reply.code(400).send({ error: { message: error.message } });
@@ -77,17 +78,47 @@ export default async function PaymentsController(fastify: FastifyInstance) {
   fastify.post(
     "/payments/link-subscription-to-user",
     async (
-      request: FastifyRequest<{ Querystring: { subscriptionId: string } }>,
+      request: FastifyRequest<{
+        Querystring: { subscriptionId: string; frequency: string };
+      }>,
       reply: FastifyReply
     ) => {
-      console.log("hits");
       const sub: string = request["user"]["sub"];
-      const { subscriptionId } = request.query;
+      const { subscriptionId, frequency } = request.query;
       await fastify.prisma.user.update({
         where: { username: sub },
-        data: { stripe_subscription_id: subscriptionId },
+        data: {
+          stripe_subscription_id: subscriptionId,
+          stripe_subscription_frequency: frequency,
+        },
       });
       return reply.send({ success: true });
+    }
+  );
+  fastify.post(
+    "/payments/cancel-stripe-subscription",
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const sub: string = request["user"]["sub"];
+
+      const user: User = await fastify.prisma.user.findUnique({
+        where: { username: sub },
+      });
+
+      if (user.stripe_subscription_id) {
+        await stripe.subscriptions.cancel(user.stripe_subscription_id);
+
+        await fastify.prisma.user.update({
+          where: { username: sub },
+          data: {
+            stripe_subscription_id: null,
+          },
+        });
+        return reply.send({ success: true });
+      }
+      return reply.send({
+        sucesss: false,
+        message: `User with id ${user.username} does not have subscription`,
+      });
     }
   );
 }
