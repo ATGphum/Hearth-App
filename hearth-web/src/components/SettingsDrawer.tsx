@@ -140,7 +140,7 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
               borderColor="divider.flesh"
               onClick={termsDrawerOnOpen}
             >
-              Terms and conditions
+              Terms and Conditions
             </Text>
             <Text
               textStyle="action"
