@@ -67,7 +67,7 @@ const TermsAndConditionsPage = ({ isOpen, onClose }: Props) => {
         >
           <ArrowLeftIcon />
         </Flex>
-        <Flex direction="column" gridRowGap="3rem" textAlign="left">
+        <Flex direction="column" gridRowGap="3rem" textAlign="left" mb="1rem">
           <Text textStyle="heading.h1" textAlign="center">
             Terms of Use
           </Text>
@@ -1015,31 +1015,284 @@ const TermsAndConditionsPage = ({ isOpen, onClose }: Props) => {
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">Trade Marks</Text>
+              <OrderedList
+                listStyleType="lower-alpha"
+                textStyle="body"
+                spacing="1rem"
+              >
+                <ListItem mt="1rem">
+                  <Text textStyle="body">
+                    The trade marks and all related names, logos, product and
+                    service names, designs and slogans are our trade marks or
+                    the trade marks of our affiliates or licensors (whether or
+                    not registered).
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    You must not use such marks without our prior written
+                    permission unless they are part of material you are using as
+                    per clause 12(b).{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    Other names, logos, product and service names, designs and
+                    slogans on the Services are the trade marks of their
+                    respective owners and are used by us under licence.
+                  </Text>
+                </ListItem>
+              </OrderedList>
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">
                 Do not rely on information on the Services
               </Text>
+              <OrderedList
+                listStyleType="lower-alpha"
+                textStyle="body"
+                spacing="1rem"
+              >
+                <ListItem mt="1rem">
+                  <Text textStyle="body">
+                    The Services and the Content is provided on an “as is” and
+                    “as available” basis, and to the extent permitted by law we
+                    make no guarantee, representations or warranties, express or
+                    implied, regarding the operations or availability of the
+                    Services or the Content (including but not limited to
+                    uninterrupted, timely, secure, or error-free use).{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    You acknowledge that any guidance, advice, comments and/or
+                    information provided by Hearth in the delivery of,
+                    associated to, or as part of its Service (
+                    <Text as="span" fontWeight={500}>
+                      Hearth Guidance
+                    </Text>
+                    ), is general information only, and to the extent permitted
+                    by law, Hearth makes no guarantee, representations,
+                    warranties, express or implies, regarding the accuracy and
+                    reliability of the Hearth Guidance.
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    The Content and the Hearth Guidance is provided for general
+                    information only and should not be relied upon or used as
+                    the sole basis for making decisions without consulting
+                    primary, more accurate, more complete, or more timely
+                    sources of information. Any reliance on the Content and/or
+                    the Hearth Together Guidance is at your own risk.{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    The Services may contain certain historical information,
+                    which of its own nature, is not current and is provided for
+                    your reference only. We reserve the right to modify the
+                    Contents and the Services at any time, but we have no
+                    obligation to update any information on the Services. You
+                    agree that it is your responsibility to monitor changes to
+                    the Services.{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    Although we make reasonable efforts to update the Services
+                    and the Content, to the extent permitted by law we make no
+                    representations, warranties or guarantees, whether express
+                    or implied, that the Services, the Content or the Hearth
+                    Guidance is accurate, complete or up-to-date.
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    All new, or updated, features or tools to the Services are
+                    subject to these Terms as soon as that new, or updated,
+                    feature or tool is available for access.{" "}
+                  </Text>
+                </ListItem>
+              </OrderedList>
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">Termination of use</Text>
+              <OrderedList
+                listStyleType="lower-alpha"
+                textStyle="body"
+                spacing="1rem"
+              >
+                <ListItem mt="1rem">
+                  <Text textStyle="body">
+                    You may stop using the Services at any time for any reason.
+                    You may cancel your Account at any time by sending an email
+                    to us at hello@hearthtogether.com.{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    You agree that your purchase of a Subscription or Additional
+                    Features (as applicable) is not contingent on the delivery
+                    of any future availability, or dependent on any oral or
+                    written public comments made by Health regarding future
+                    availability.
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    Hearth reserves the right in its absolute discretion to
+                    suspend or terminate at any time your access to the Services
+                    or your User Account without notice for any reason,
+                    including but not limited to a breach of these Terms. The
+                    suspension or termination shall not affect either party’s
+                    rights or liabilities.
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    Notwithstanding any other term of these Terms to the
+                    contrary, if you have paid for a Subscription and it is
+                    discontinued during the “term” of that Subscription we will
+                    provide you with at least 7 days’ notice of its
+                    discontinuance. If the Subscription has been purchased on a
+                    yearly or lifetime basis we will refund you a prorated part
+                    of the total payment for the Subscription (to take into
+                    account the period of time the Services have already been
+                    rendered).{" "}
+                  </Text>
+                </ListItem>
+              </OrderedList>
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">
                 Suspension of withdrawal of Services
               </Text>
+              <Text textStyle="body" mt="1rem">
+                Hearth does not guarantee that the Services or any Content, will
+                always be available, uninterrupted or be error-free. We may
+                suspend or withdraw or restrict availability of all or any part
+                of the Services for business and operational reasons. We will
+                try to give you reasonable notice of any suspension or
+                withdrawal.{" "}
+              </Text>
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">Limitation of liability</Text>
+              <OrderedList
+                listStyleType="lower-alpha"
+                textStyle="body"
+                spacing="1rem"
+              >
+                <ListItem mt="1rem">
+                  <Text textStyle="body">
+                    To the extent permitted by law, Hearth, its associated
+                    entities (as that term is defined in the Corporations Act
+                    2001 (Cth)), licensors, service providers and each of their
+                    respective officers, employees, contractors, agents,
+                    licensors, suppliers, successors and assigns (
+                    <Text as="span" fontWeight={500}>
+                      Affiliates
+                    </Text>
+                    ) are not liable for damages of any kind, under any law,
+                    arising out of or in connection with your use, or inability
+                    to use, the Services, any website linked to it, the Content
+                    or such other websites content or any services or items
+                    obtained through the Services, including the Hearth
+                    Guidance, or such other websites, including any direct,
+                    indirect, special, incidental, consequential or punitive
+                    damages, including but not limited to, personal injury, pain
+                    and suffering, emotional distress, loss of revenue, loss of
+                    goodwill, loss of data, and whether caused by tort
+                    (including negligence), breach of contract or otherwise,
+                    even if foreseeable.{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    Nothing in this clause affects any liability which cannot be
+                    excluded or limited under applicable law. Hearth and its
+                    Affiliates do not exclude or limit in any way our liability
+                    to you it would be unlawful to do so. This includes
+                    liability for death or personal injury caused by our
+                    negligence or the negligence of our employees, agents or
+                    subcontractors and for fraud or fraudulent
+                    misrepresentation.{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    Where Hearth and its Affiliates’ liability cannot be
+                    excluded, their liability is limit to the fullest extent
+                    permitted by the Australian Consumer Law.{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    You agree to defend, indemnify and hold Hearth and its
+                    Affiliates, harmless from and against any claims,
+                    liabilities, damages, judgments, awards, losses, costs,
+                    expenses or fees (including reasonable solicitors’ fees)
+                    arising out of or relating to your breach of the Terms or
+                    your use of the Services, including, but not limited to your
+                    use of any information obtained from the Services and any
+                    use of the Content, services and products other than as
+                    expressly authorised in these Terms and the User Images.
+                  </Text>
+                </ListItem>
+              </OrderedList>
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">Governing Law</Text>
+              <Text textStyle="body" mt="1rem">
+                These Terms are governed by the laws of Western Australia in
+                Australia, and any dispute in relation to these Terms or your
+                access or use of the Services and the Content will be subject to
+                the exclusive jurisdiction of the Courts of Western Australia.
+              </Text>
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">Miscellaneous</Text>
+              <OrderedList
+                listStyleType="lower-alpha"
+                textStyle="body"
+                spacing="1rem"
+              >
+                <ListItem mt="1rem">
+                  <Text textStyle="body">
+                    If any of these Terms are unenforceable or held to be
+                    invalid, the offending provision/s will be removed from
+                    these Terms and the amended Terms will remain in force.
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    Any failure by Hearth to act or enforce these Terms
+                    immediately will not be considered a waiver of Hearth’s
+                    right to take any such action.
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    The headings used in this document are included for
+                    convenience only and will not limit or otherwise affect
+                    these Terms.{" "}
+                  </Text>
+                </ListItem>
+                <ListItem>
+                  <Text textStyle="body">
+                    Any ambiguities in the interpretation of these Terms shall
+                    not be construed against the drafting party.
+                  </Text>
+                </ListItem>
+              </OrderedList>
             </ListItem>
             <ListItem>
               <Text textStyle="heading.h2">Contact us</Text>
+              <Text textStyle="body" mt="1rem">
+                If you have any questions or queries in relation to these Terms,
+                please contact us by emailing hello@hearthtogether.com.
+              </Text>
             </ListItem>
           </OrderedList>
         </Flex>
