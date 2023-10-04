@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 import { trackEvent } from "../core/analytics";
 import TermsAndConditionsPage from "../pages/TermsAndConditionsPage";
 import BottomPopupDrawer from "./BottomPopupDrawer";
+import PrivacyPolicyPage from "../pages/PrivacyPolicyPage";
 
 interface Props {
   isOpen: boolean;
@@ -30,9 +31,15 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
     onClose: termsDrawerOnClose,
   } = useDisclosure();
 
+  const {
+    isOpen: policyDrawerIsOpen,
+    onOpen: policyDrawerOnOpen,
+    onClose: policyDrawerOnClose,
+  } = useDisclosure();
+
   useOutsideClick({
     ref: ref,
-    handler: !termsDrawerIsOpen ? onClose : undefined,
+    handler: !termsDrawerIsOpen && !policyDrawerIsOpen ? onClose : undefined,
   });
 
   const mounter = document.getElementById("appContainer");
@@ -60,6 +67,14 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
           <TermsAndConditionsPage
             onClose={termsDrawerOnClose}
             isOpen={termsDrawerIsOpen}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {policyDrawerIsOpen && (
+          <PrivacyPolicyPage
+            isOpen={policyDrawerIsOpen}
+            onClose={policyDrawerOnClose}
           />
         )}
       </AnimatePresence>
@@ -126,6 +141,15 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
               onClick={termsDrawerOnOpen}
             >
               Terms and conditions
+            </Text>
+            <Text
+              textStyle="action"
+              p="0.75rem 1rem"
+              borderBottom="1px solid"
+              borderColor="divider.flesh"
+              onClick={policyDrawerOnOpen}
+            >
+              Privacy Policy
             </Text>
             <Text
               textStyle="action"
