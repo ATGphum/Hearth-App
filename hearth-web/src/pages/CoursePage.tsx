@@ -7,6 +7,7 @@ import ReactDOM from "react-dom";
 import { Experience, Journey } from "../core/types";
 import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
+import { trackEvent } from "../core/analytics";
 
 interface Props {
   isOpen: boolean;
@@ -44,6 +45,12 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
         onDragEnd={(_, info) => {
           if (info.velocity.x > 20 && info.offset.x > 50) {
             onClose();
+
+            // Amplitude track event
+            trackEvent({
+              type: "Close Page",
+              page_type: "Course/Experience Page",
+            });
           }
         }}
         transition={{ damping: 0 }}
@@ -69,7 +76,17 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
             />
           )}
         </AnimatePresence>
-        <Flex onClick={onClose}>
+        <Flex
+          onClick={() => {
+            onClose();
+
+            // Amplitude track event
+            trackEvent({
+              type: "Close Page",
+              page_type: "Course/Experience Page",
+            });
+          }}
+        >
           <ArrowLeftIcon />
         </Flex>
         <Flex direction="column" textAlign={"center"} gridRowGap="1rem">
@@ -85,16 +102,16 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
           </Text>
           <Flex direction="column" gridRowGap="0.5rem" my="0.5rem">
             {openedCourse?.experiences.map((exp) => (
-              <>
+              <Flex key={exp.id} direction="column">
                 {experienceToDo &&
                   experienceToDo.level + 1 === exp.level &&
                   !openedCourse.completed && (
-                    <Text textStyle="body" py="0.5rem">
+                    <Text textStyle="body" pt="0.5rem" pb="1rem">
                       Complete {experienceToDo.name} to access {exp.name}.
                     </Text>
                   )}
                 <Flex
-                  key={exp.id}
+                  flex={1}
                   justifyContent={"space-between"}
                   p="1rem"
                   bg={exp.is_available ? "rgb(255 255 255 / 50%)" : "#E7D2BC"}
@@ -103,13 +120,24 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
                   onClick={() => {
                     setOpenedExperience(exp);
                     drawerOnOpen();
+
+                    // Amplitude track event
+                    trackEvent({
+                      type: "Click Experience",
+                      experience_name: exp.name,
+                    });
                   }}
                   opacity={exp.is_available ? 1 : 0.4}
                   pointerEvents={!exp.is_available ? "none" : undefined}
+                  border={
+                    experienceToDo?.id === exp.id
+                      ? `3px solid ${exp.color}`
+                      : undefined
+                  }
                 >
                   <Text>{exp.name}</Text> <ArrowRightIcon />
                 </Flex>
-              </>
+              </Flex>
             ))}
           </Flex>
         </Flex>

@@ -4,6 +4,7 @@ import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useRef } from "react";
 import ReactDOM from "react-dom";
 import BottomPopupDrawer from "./BottomPopupDrawer";
+import { trackEvent } from "../core/analytics";
 
 interface Props {
   isOpen: boolean;
@@ -38,9 +39,12 @@ const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
           <BottomPopupDrawer
             onClose={closeDrawerOnClose}
             isOpen={closeDrawerIsOpen}
-            callback={() =>
-              logout({ logoutParams: { returnTo: window.location.origin } })
-            }
+            callback={() => {
+              logout({ logoutParams: { returnTo: window.location.origin } });
+
+              // Amplitude track event
+              trackEvent({ type: "Logout" });
+            }}
           />
         )}
       </AnimatePresence>

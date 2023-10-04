@@ -4,6 +4,7 @@ import CoursesPage from "./CoursesPage";
 import MusicDrawer from "../components/MusicDrawer";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { trackEvent } from "../core/analytics";
 
 const MotionFlex = m(Flex);
 
@@ -19,6 +20,19 @@ function Library() {
     onOpen: journeyDrawerOnOpen,
     onClose: journeyDrawerOnClose,
   } = useDisclosure();
+
+  const openMusicDrawer = (journeyName: string, experienceName: string) => {
+    musicDrawerOnOpen();
+
+    // Amplitude track event
+    trackEvent({
+      type: "Click Up Next",
+      journey_name: journeyName,
+      experience_name: experienceName,
+      from: "Library Page",
+    });
+  };
+
   return (
     <Flex
       direction="column"
@@ -73,7 +87,12 @@ function Library() {
               width="100%"
               borderRadius="2.75rem"
               borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-              onClick={musicDrawerOnOpen}
+              onClick={() =>
+                openMusicDrawer(
+                  journeyToDo?.name ?? "",
+                  experienceToDo?.name ?? ""
+                )
+              }
             >
               <Image
                 m="1rem"
