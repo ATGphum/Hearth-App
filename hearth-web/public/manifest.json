@@ -10,9 +10,9 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://res.cloudinary.com/ddh1fblle/image/upload/v1696501529/Logo/Logo_uteepe.svg",
-      "sizes": "any",
-      "type": "image/svg+xm1"
+      "src": "https://res.cloudinary.com/ddh1fblle/image/upload/v1696502884/Logo/Logo_ozshdn.png",
+      "sizes": "192x192",
+      "type": "image/png"
     }
   ]
 }
