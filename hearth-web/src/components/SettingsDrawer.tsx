@@ -4,43 +4,38 @@ import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useRef } from "react";
 import ReactDOM from "react-dom";
 import { trackEvent } from "../core/analytics";
-import TermsAndConditionsPage from "../pages/TermsAndConditionsPage";
 import BottomPopupDrawer from "./BottomPopupDrawer";
-import PrivacyPolicyPage from "../pages/PrivacyPolicyPage";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  subscriptionsOnOpen: () => void;
+  termsOnOpen: () => void;
+  policyOnOpen: () => void;
 }
 
 const MotionFlex = m(Flex);
 
-const SettingsDrawer = ({ isOpen, onClose }: Props) => {
+const SettingsDrawer = ({
+  isOpen,
+  onClose,
+  subscriptionsOnOpen,
+  termsOnOpen,
+  policyOnOpen,
+}: Props) => {
   const { logout } = useAuth0();
   const ref = useRef<HTMLDivElement | null>(null);
+
+  useOutsideClick({
+    ref: ref,
+    handler: onClose,
+  });
 
   const {
     isOpen: closeDrawerIsOpen,
     onOpen: closeDrawerOnOpen,
     onClose: closeDrawerOnClose,
   } = useDisclosure();
-
-  const {
-    isOpen: termsDrawerIsOpen,
-    onOpen: termsDrawerOnOpen,
-    onClose: termsDrawerOnClose,
-  } = useDisclosure();
-
-  const {
-    isOpen: policyDrawerIsOpen,
-    onOpen: policyDrawerOnOpen,
-    onClose: policyDrawerOnClose,
-  } = useDisclosure();
-
-  useOutsideClick({
-    ref: ref,
-    handler: !termsDrawerIsOpen && !policyDrawerIsOpen ? onClose : undefined,
-  });
 
   const mounter = document.getElementById("appContainer");
 
@@ -51,6 +46,7 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
       <AnimatePresence>
         {closeDrawerIsOpen && (
           <BottomPopupDrawer
+            text={"Log out"}
             onClose={closeDrawerOnClose}
             isOpen={closeDrawerIsOpen}
             callback={() => {
@@ -59,22 +55,6 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
               // Amplitude track event
               trackEvent({ type: "Logout" });
             }}
-          />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {termsDrawerIsOpen && (
-          <TermsAndConditionsPage
-            onClose={termsDrawerOnClose}
-            isOpen={termsDrawerIsOpen}
-          />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {policyDrawerIsOpen && (
-          <PrivacyPolicyPage
-            isOpen={policyDrawerIsOpen}
-            onClose={policyDrawerOnClose}
           />
         )}
       </AnimatePresence>
@@ -100,7 +80,7 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
         right="0"
         bottom="-20rem"
         left="0"
-        overflowY={termsDrawerIsOpen ? "hidden" : "auto"}
+        // overflowY={termsDrawerIsOpen ? "hidden" : "auto"}
         display="flex"
         background="background.fleshOpaque"
         p={0}
@@ -130,15 +110,22 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
               p="0.75rem 1rem"
               borderBottom="1px solid"
               borderColor="divider.flesh"
+              onClick={() => {
+                onClose();
+                subscriptionsOnOpen();
+              }}
             >
-              Manage Subscriptions
+              Manage subscriptions
             </Text>
             <Text
               textStyle="action"
               p="0.75rem 1rem"
               borderBottom="1px solid"
               borderColor="divider.flesh"
-              onClick={termsDrawerOnOpen}
+              onClick={() => {
+                onClose();
+                termsOnOpen();
+              }}
             >
               Terms and Conditions
             </Text>
@@ -147,7 +134,10 @@ const SettingsDrawer = ({ isOpen, onClose }: Props) => {
               p="0.75rem 1rem"
               borderBottom="1px solid"
               borderColor="divider.flesh"
-              onClick={policyDrawerOnOpen}
+              onClick={() => {
+                onClose();
+                policyOnOpen();
+              }}
             >
               Privacy Policy
             </Text>

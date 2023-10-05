@@ -5,6 +5,7 @@ import { SWRConfig } from "swr";
 import { request } from "../core/api";
 import { UserProvider } from "./UserContext";
 import theme from "../theme/chakra-theme";
+import PaymentGuard from "./PaymentGuard";
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -44,7 +45,9 @@ const AppContextProviders = ({ children }: ProviderProps) => {
                 },
               }}
             >
-              <UserProvider>{children}</UserProvider>
+              <UserProvider>
+                <PaymentGuard>{children}</PaymentGuard>
+              </UserProvider>
             </SWRConfig>
           </ChakraBaseProvider>
         </div>

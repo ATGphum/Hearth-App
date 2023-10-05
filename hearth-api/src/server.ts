@@ -10,6 +10,7 @@ import corsObj from "./config/fastify-cors.js";
 import fastifyEnv from "./config/fastify-env.js";
 import { PrismaClient } from "@prisma/client";
 import CoursesController from "./courses/courses-controller.js";
+import PaymentsController from "./payments/payments-controller.js";
 
 const prisma = new PrismaClient();
 
@@ -50,6 +51,7 @@ const globalRequestObject = { prefix: "/v1" };
 
 fastify.register(UserController, globalRequestObject);
 fastify.register(CoursesController, globalRequestObject);
+fastify.register(PaymentsController, globalRequestObject);
 
 fastify.listen(
   { port: fastifyEnv.port, host: "0.0.0.0" },

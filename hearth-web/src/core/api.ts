@@ -1,8 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 import viteEnv from "../config/vite-env";
-import { User, UserExperience } from "./types";
+import { SubscriptionDetail, User, UserExperience } from "./types";
 
-axios.defaults.baseURL = viteEnv.api_host;
+axios.defaults.baseURL = viteEnv.apiHost;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 const client = axios.create();
@@ -68,4 +68,35 @@ export const createUserExperience = (
   return request<User>(`/v1/courses/experiences${urlSuffix}`, "POST", {
     data: userExperience,
   });
+};
+
+export const CreatePaymentSubscription = (
+  priceId: string,
+  couponAdded: boolean
+) => {
+  return request<SubscriptionDetail>(
+    `/v1/payments/create-subscription?priceId=${priceId}&couponAdded=${couponAdded}`,
+    "GET"
+  );
+};
+
+export const LinkStripeSubscriptionToUser = (
+  subscriptionId: string,
+  frequency: string
+) => {
+  return request(
+    `/v1/payments/link-subscription-to-user?subscriptionId=${subscriptionId}&frequency=${frequency}`,
+    "POST"
+  );
+};
+
+export const CancelStripeSubscription = () => {
+  return request(`/v1/payments/cancel-stripe-subscription`, "POST");
+};
+
+export const CheckCouponCode = (coupon: string) => {
+  return request<{ isValid: boolean }>(
+    `/v1/payments/check-coupon-code?code=${coupon}`,
+    "GET"
+  );
 };

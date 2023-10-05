@@ -1,6 +1,6 @@
 const viteEnv = {
   environment: import.meta.env.VITE_ENV,
-  api_host: import.meta.env.VITE_API_HOST,
+  apiHost: import.meta.env.VITE_API_HOST,
   auth0: {
     domain: import.meta.env.VITE_AUTH0_DOMAIN ?? "",
     scope: import.meta.env.VITE_AUTH0_SCOPE ?? "",
@@ -11,6 +11,10 @@ const viteEnv = {
       audience: import.meta.env.VITE_AUTH0_API_AUDIENCE,
     },
   },
+  stripePublishableKey: import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY,
+  stripeMonthlyKey: import.meta.env.VITE_STRIPE_MONTHLY_KEY,
+  stripeYearlyKey: import.meta.env.VITE_STRIPE_YEARLY_KEY,
+  host: import.meta.env.VITE_WEB_HOST,
   amplitude_key: import.meta.env.VITE_AMPLITUDE_KEY,
 };
 

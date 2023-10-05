@@ -20,12 +20,23 @@ export default async function UserController(fastify: FastifyInstance) {
     },
     async (request: FastifyRequest) => {
       const sub: string = request["user"]["sub"];
+      const email: string =
+        request["user"]["https://app.hearthtogether.com/email"];
       let user: User = await fastify.prisma.user.findUnique({
         where: { username: sub },
       });
       if (!user) {
         fastify.log.info(`creating new user for user ${sub}`);
-        user = await fastify.prisma.user.create({ data: { username: sub } });
+        user = await fastify.prisma.user.create({
+          data: { username: sub, email: email },
+        });
+      }
+      //temporary code, remove a week after initial release
+      if (!user.email) {
+        await fastify.prisma.user.update({
+          where: { id: user.id },
+          data: { email: email },
+        });
       }
       return user;
     }

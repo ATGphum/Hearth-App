@@ -77,7 +77,12 @@ const PrivacyPolicyPage = ({ isOpen, onClose }: Props) => {
           <Text textStyle="heading.h1" textAlign="center">
             Privacy Policy
           </Text>
-          <OrderedList textStyle="heading.h2" spacing="3rem" ml="2.5rem">
+          <OrderedList
+            textStyle="heading.h2"
+            spacing="3rem"
+            ml="2rem"
+            mr="1rem"
+          >
             <ListItem>
               <Text textStyle="heading.h2">Purpose and objective</Text>
               <br />

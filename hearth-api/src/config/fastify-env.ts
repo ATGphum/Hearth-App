@@ -18,6 +18,8 @@ const fastifyEnv = {
     },
   },
   frontendHost: process.env.FRONTEND_HOST,
+  stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+  stripeCouponCode: process.env.STRIPE_COUPON_CODE,
 };
 
 export default fastifyEnv;

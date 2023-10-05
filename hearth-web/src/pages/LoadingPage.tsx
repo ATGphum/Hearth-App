@@ -2,7 +2,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Flex, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-function LoadingPage() {
+interface Props {
+  bg?: string;
+}
+
+const LoadingPage = ({ bg }: Props) => {
   const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
   const [imageLoaded, setImageLoaded] = useState(false);
   // login guard
@@ -18,7 +22,11 @@ function LoadingPage() {
     <Flex
       direction="column"
       alignItems="center"
-      background="linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
+      background={
+        bg
+          ? bg
+          : "linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
+      }
       height="100vh"
       position="relative"
       overflow={"hidden"}
@@ -33,6 +41,6 @@ function LoadingPage() {
       />
     </Flex>
   );
-}
+};
 
 export default LoadingPage;

@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import FormButton from "./FormButton";
 
 interface Props {
+  text: string;
   isOpen: boolean;
   onClose: () => void;
   description?: string;
@@ -14,7 +15,7 @@ interface Props {
 
 const MotionFlex = m(Flex);
 
-const BottomPopupDrawer = ({ isOpen, onClose, callback }: Props) => {
+const BottomPopupDrawer = ({ isOpen, onClose, callback, text }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null);
   useOutsideClick({
     ref: ref,
@@ -47,12 +48,12 @@ const BottomPopupDrawer = ({ isOpen, onClose, callback }: Props) => {
         background="#FFBB79"
         p={"2rem"}
         textAlign={"left"}
-        zIndex={15}
+        zIndex={25}
         borderTopRadius="3rem"
         alignItems="center"
       >
         <Flex width="100%" direction={"column"} textAlign="center">
-          <FormButton text="Log out" callback={callback} />
+          <FormButton text={text} callback={callback} />
         </Flex>
       </MotionFlex>
     </LazyMotion>,

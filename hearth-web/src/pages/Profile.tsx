@@ -3,7 +3,10 @@ import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import SettingsDrawer from "../components/SettingsDrawer";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { formatDate } from "../core/helpers";
+import SubscriptionsDrawer from "../components/SubscriptionsDrawer";
 import { trackEvent } from "../core/analytics";
+import TermsAndConditionsPage from "./TermsAndConditionsPage";
+import PrivacyPolicyPage from "./PrivacyPolicyPage";
 
 const MotionFlex = m(Flex);
 
@@ -12,6 +15,23 @@ function Profile() {
     isOpen: settingsDrawerIsOpen,
     onOpen: settingsDrawerOnOpen,
     onClose: settingsDrawerOnClose,
+  } = useDisclosure();
+  const {
+    isOpen: subscriptionsIsOpen,
+    onOpen: subscriptionsOnOpen,
+    onClose: subscriptionsOnClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: termsDrawerIsOpen,
+    onOpen: termsDrawerOnOpen,
+    onClose: termsDrawerOnClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: policyDrawerIsOpen,
+    onOpen: policyDrawerOnOpen,
+    onClose: policyDrawerOnClose,
   } = useDisclosure();
   const { data: user } = useCurrentUserProfile();
   return (
@@ -23,10 +43,37 @@ function Profile() {
       position={"relative"}
     >
       <AnimatePresence>
+        {subscriptionsIsOpen && (
+          <SubscriptionsDrawer
+            onClose={subscriptionsOnClose}
+            isOpen={subscriptionsIsOpen}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {termsDrawerIsOpen && (
+          <TermsAndConditionsPage
+            onClose={termsDrawerOnClose}
+            isOpen={termsDrawerIsOpen}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {policyDrawerIsOpen && (
+          <PrivacyPolicyPage
+            isOpen={policyDrawerIsOpen}
+            onClose={policyDrawerOnClose}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
         {settingsDrawerIsOpen && (
           <SettingsDrawer
             onClose={settingsDrawerOnClose}
             isOpen={settingsDrawerIsOpen}
+            subscriptionsOnOpen={subscriptionsOnOpen}
+            policyOnOpen={policyDrawerOnOpen}
+            termsOnOpen={termsDrawerOnOpen}
           />
         )}
       </AnimatePresence>
