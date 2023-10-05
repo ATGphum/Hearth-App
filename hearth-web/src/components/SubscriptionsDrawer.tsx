@@ -100,6 +100,7 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
               isOpen={cancelDrawerIsOpen}
               callback={async () => {
                 await CancelStripeSubscription();
+                cancelDrawerOnClose();
                 userMutate();
               }}
             />
@@ -241,9 +242,14 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
                 direction="column"
                 alignItems={"center"}
               >
-                <Text textStyle="action">Start your 7-day free trial</Text>
+                <Text textStyle="action">
+                  {user?.trial_completed
+                    ? "Subscribe now"
+                    : "Start your 7-day free trial"}
+                </Text>
                 <Text textStyle="fieldLabel">
-                  {selectedSubscription === SubscriptionType.month
+                  {selectedSubscription === SubscriptionType.month &&
+                  !user?.trial_completed
                     ? "14.95/month"
                     : "104.95/year"}{" "}
                   after 7 days

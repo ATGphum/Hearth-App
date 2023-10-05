@@ -45,6 +45,11 @@ export default async function PaymentsController(fastify: FastifyInstance) {
         // Create the subscription. Note we're expanding the Subscription's
         // latest invoice and that invoice's payment_intent
         // so we can pass it to the front end to confirm the payment
+
+        //if free trial has not been done before, provide it
+
+        let trialDays = 0;
+        if (!user.trial_completed) trialDays = 7;
         const subscription = await stripe.subscriptions.create({
           customer: customerId,
           items: [
@@ -55,20 +60,29 @@ export default async function PaymentsController(fastify: FastifyInstance) {
           payment_behavior: "default_incomplete",
           payment_settings: { save_default_payment_method: "on_subscription" },
           expand: ["latest_invoice.payment_intent"],
+          trial_period_days: trialDays,
+          coupon: "B1dx3BU5",
         });
         const invoice = subscription.latest_invoice as Stripe.Invoice;
-        const paymentIntent = invoice.payment_intent as Stripe.PaymentIntent;
-
-        fastify.prisma.user.update({
-          where: { id: user.id },
-          data: { stripe_subscription_id: subscription.id },
-        });
-
-        return {
+        const paymentIntent =
+          invoice.payment_intent as Stripe.PaymentIntent | null;
+        let paymentIntentSecret = "";
+        let mode = "payment";
+        if (!paymentIntent) {
+          // create setup intent
+          const setupIntent = await stripe.setupIntents.create();
+          paymentIntentSecret = setupIntent.client_secret;
+          mode = "setup";
+        } else {
+          paymentIntentSecret = paymentIntent.client_secret;
+        }
+        const resp = {
           subscription_id: subscription.id,
-          client_secret: paymentIntent.client_secret,
+          client_secret: paymentIntentSecret,
           frequency: subscription["plan"]["interval"],
+          mode: mode,
         };
+        return resp;
       } catch (error) {
         Reply.code(400).send({ error: { message: error.message } });
         return;
@@ -85,11 +99,14 @@ export default async function PaymentsController(fastify: FastifyInstance) {
     ) => {
       const sub: string = request["user"]["sub"];
       const { subscriptionId, frequency } = request.query;
+
+      //always set trial_completed to true upon first subscription creation or any subsequent subscription creation
       await fastify.prisma.user.update({
         where: { username: sub },
         data: {
           stripe_subscription_id: subscriptionId,
           stripe_subscription_frequency: frequency,
+          trial_completed: true,
         },
       });
       return reply.send({ success: true });

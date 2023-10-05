@@ -44,6 +44,9 @@ export const userResponseSchema = {
     stripe_subscription_frequency: {
       type: ["string", "null"],
     },
+    trial_completed: {
+      type: "boolean",
+    },
   },
 };
 

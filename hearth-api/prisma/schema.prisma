@@ -29,6 +29,7 @@ model User {
   stripe_customer_id String? @db.VarChar(255)
   stripe_subscription_id String? @db.VarChar(255)
   stripe_subscription_frequency String? @db.VarChar(255)
+  trial_completed Boolean @default(false)
 }
 
 enum ConnectionTimeChoices {

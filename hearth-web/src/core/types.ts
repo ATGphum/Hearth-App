@@ -3,6 +3,11 @@ export enum SubscriptionType {
   year = "year",
 }
 
+export enum paymentMode {
+  setup,
+  payment,
+}
+
 export interface User {
   id: number;
   username: string;
@@ -18,6 +23,7 @@ export interface User {
   stripe_subscription_id: string;
   stripe_customer_id: string;
   stripe_subscription_frequency: string;
+  trial_completed: boolean;
 }
 
 export interface Journey {
@@ -57,6 +63,7 @@ export interface UserExperience {
 
 export interface SubscriptionDetail {
   subscription_id: string;
-  client_secret: string;
+  client_secret?: string;
   frequency: string;
+  mode: paymentMode;
 }

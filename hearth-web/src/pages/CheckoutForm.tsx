@@ -10,7 +10,7 @@ import { LazyMotion, domMax, m } from "framer-motion";
 import { useEffect, useState } from "react";
 import viteEnv from "../config/vite-env";
 import { CreatePaymentSubscription } from "../core/api";
-import { SubscriptionDetail } from "../core/types";
+import { SubscriptionDetail, paymentMode } from "../core/types";
 import LoadingPage from "./LoadingPage";
 
 const stripePromise = loadStripe(viteEnv.stripePublishableKey);
@@ -109,18 +109,34 @@ const CheckoutForm = ({
       return;
     }
 
-    await stripe.confirmPayment({
-      //`Elements` instance that was used to create the Payment Element
-      elements,
-      confirmParams: {
-        return_url:
-          viteEnv.host +
-          "/?subscription_id=" +
-          subscription.subscription_id +
-          "&frequency=" +
-          subscription.frequency,
-      },
-    });
+    // it may be a setupIntent, not paymentIntent, try that
+    if (subscription.mode === paymentMode.payment) {
+      await stripe.confirmPayment({
+        //`Elements` instance that was used to create the Payment Element
+        elements,
+        confirmParams: {
+          return_url:
+            viteEnv.host +
+            "/?subscription_id=" +
+            subscription.subscription_id +
+            "&frequency=" +
+            subscription.frequency,
+        },
+      });
+    } else {
+      await stripe.confirmSetup({
+        //`Elements` instance that was used to create the Payment Element
+        elements,
+        confirmParams: {
+          return_url:
+            viteEnv.host +
+            "/?subscription_id=" +
+            subscription.subscription_id +
+            "&frequency=" +
+            subscription.frequency,
+        },
+      });
+    }
   };
 
   return (

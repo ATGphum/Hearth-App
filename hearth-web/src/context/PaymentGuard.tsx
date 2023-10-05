@@ -18,9 +18,12 @@ const PaymentGuard = ({ children }: Props) => {
 
   // Retrieve the "payment_intent_client_secret" query parameter appended to
   // your return_url by Stripe.js
-  const clientSecret = new URLSearchParams(window.location.search).get(
-    "payment_intent_client_secret"
-  );
+  const paymentIntentClientSecret = new URLSearchParams(
+    window.location.search
+  ).get("payment_intent_client_secret");
+  const setupIntentClientSecret = new URLSearchParams(
+    window.location.search
+  ).get("setup_intent_client_secret");
   const subscriptionId = new URLSearchParams(window.location.search).get(
     "subscription_id"
   );
@@ -40,41 +43,90 @@ const PaymentGuard = ({ children }: Props) => {
   };
 
   useEffect(() => {
-    if (stripe && clientSecret && subscriptionId && frequency) {
-      // Retrieve the PaymentIntent
-      stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-        // Inspect the PaymentIntent `status` to indicate the status of the payment
-        // to your customer.
-        //
-        // Some payment methods will [immediately succeed or fail][0] upon
-        // confirmation, while others will first enter a `processing` state.
-        //
-        // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
-        if (paymentIntent) {
-          switch (paymentIntent.status) {
-            case "succeeded":
-              setMessage(
-                "Success! You now have full access to Hearth Experiences."
-              );
-              linkStripeSubscription(subscriptionId, frequency);
-              break;
-            case "processing":
-              setMessage(
-                "Payment processing. Please check back in soon, and contact us if you have any queries"
-              );
-              break;
+    if (
+      stripe &&
+      (paymentIntentClientSecret || setupIntentClientSecret) &&
+      subscriptionId &&
+      frequency
+    ) {
+      if (paymentIntentClientSecret) {
+        // Retrieve the PaymentIntent
+        stripe
+          .retrievePaymentIntent(paymentIntentClientSecret)
+          .then(({ paymentIntent }) => {
+            // Inspect the PaymentIntent `status` to indicate the status of the payment
+            // to your customer.
+            //
+            // Some payment methods will [immediately succeed or fail][0] upon
+            // confirmation, while others will first enter a `processing` state.
+            //
+            // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
+            if (paymentIntent) {
+              switch (paymentIntent.status) {
+                case "succeeded":
+                  setMessage(
+                    "Success! You now have full access to Hearth Experiences."
+                  );
+                  linkStripeSubscription(subscriptionId, frequency);
+                  break;
+                case "processing":
+                  setMessage(
+                    "Payment processing. Please check back in soon, and contact us if you have any queries"
+                  );
+                  break;
 
-            case "requires_payment_method":
-              setMessage("Payment failed. Please try another payment method.");
-              break;
+                case "requires_payment_method":
+                  setMessage(
+                    "Payment failed. Please try another payment method."
+                  );
+                  break;
 
-            default:
-              setMessage("Something went wrong.");
-              break;
-          }
-          setShowMessage(true);
-        }
-      });
+                default:
+                  setMessage("Something went wrong.");
+                  break;
+              }
+              setShowMessage(true);
+            }
+          });
+      } else if (setupIntentClientSecret) {
+        stripe
+          .retrieveSetupIntent(setupIntentClientSecret)
+          .then(({ setupIntent }) => {
+            // Inspect the PaymentIntent `status` to indicate the status of the payment
+            // to your customer.
+            //
+            // Some payment methods will [immediately succeed or fail][0] upon
+            // confirmation, while others will first enter a `processing` state.
+            //
+            // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
+            if (setupIntent) {
+              switch (setupIntent.status) {
+                case "succeeded":
+                  setMessage(
+                    "Success! You now have full access to Hearth Experiences."
+                  );
+                  linkStripeSubscription(subscriptionId, frequency);
+                  break;
+                case "processing":
+                  setMessage(
+                    "Payment processing. Please check back in soon, and contact us if you have any queries"
+                  );
+                  break;
+
+                case "requires_payment_method":
+                  setMessage(
+                    "Payment failed. Please try another payment method."
+                  );
+                  break;
+
+                default:
+                  setMessage("Something went wrong.");
+                  break;
+              }
+              setShowMessage(true);
+            }
+          });
+      }
     }
   }, []);
 
