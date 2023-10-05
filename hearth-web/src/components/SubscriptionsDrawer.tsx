@@ -299,12 +299,19 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
                   textStyle="fieldInput"
                   placeholder="Enter coupon code"
                 />
-                <Flex onClick={async () => checkCouponValid(couponCode)}>
+                <Flex
+                  onClick={async () => checkCouponValid(couponCode)}
+                  className="ios-disable-highlight"
+                >
                   <ArrowRightIcon />
                 </Flex>
               </Flex>
             )}
-            {couponMessage && <Text textStyle={"body"}>{couponMessage}</Text>}
+            {couponMessage && (
+              <Text textStyle={"body"} textAlign={"center"}>
+                {couponMessage}
+              </Text>
+            )}
           </Flex>
         </Flex>
       </MotionFlex>
