@@ -16,11 +16,11 @@ export default async function PaymentsController(fastify: FastifyInstance) {
     "/payments/create-subscription",
     async (
       request: FastifyRequest<{
-        Querystring: { priceId: string };
+        Querystring: { priceId: string; couponAdded: string };
       }>,
       Reply: FastifyReply
     ) => {
-      const { priceId } = request.query;
+      const { priceId, couponAdded } = request.query;
       const sub: string = request["user"]["sub"];
 
       let user: User = await fastify.prisma.user.findUnique({
@@ -47,6 +47,8 @@ export default async function PaymentsController(fastify: FastifyInstance) {
         // so we can pass it to the front end to confirm the payment
 
         //if free trial has not been done before, provide it
+        const coupon =
+          couponAdded === "true" ? fastifyEnv.stripeCouponCode : undefined;
 
         let trialDays = 0;
         if (!user.trial_completed) trialDays = 7;
@@ -61,7 +63,7 @@ export default async function PaymentsController(fastify: FastifyInstance) {
           payment_settings: { save_default_payment_method: "on_subscription" },
           expand: ["latest_invoice.payment_intent"],
           trial_period_days: trialDays,
-          coupon: "B1dx3BU5",
+          coupon: coupon,
         });
         const invoice = subscription.latest_invoice as Stripe.Invoice;
         const paymentIntent =
@@ -138,4 +140,31 @@ export default async function PaymentsController(fastify: FastifyInstance) {
       });
     }
   );
+  // fastify.get(
+  //   "/payments/check-coupon-code",
+  //   async (
+  //     request: FastifyRequest<{ Querystring: { code: string } }>,
+  //     reply: FastifyReply
+  //   ) => {
+  //     const code = request.query.code;
+
+  //     try {
+  //       const coupon = await stripe.coupons.retrieve(code);
+  //       console.log(coupon);
+
+  //       if (coupon.valid) {
+  //         reply.send({ isValid: true, coupon });
+  //       } else {
+  //         reply.send({ isValid: false });
+  //       }
+  //     } catch (error) {
+  //       // Stripe throws an error if the coupon doesn't exist
+  //       if (error.type === "StripeInvalidRequestError") {
+  //         reply.send({ isValid: false });
+  //       } else {
+  //         reply.code(500).send({ error: "Internal Server Error" });
+  //       }
+  //     }
+  //   }
+  // );
 }

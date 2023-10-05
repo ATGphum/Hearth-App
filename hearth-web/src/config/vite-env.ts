@@ -12,6 +12,8 @@ const viteEnv = {
     },
   },
   stripePublishableKey: import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY,
+  stripeMonthlyKey: import.meta.env.VITE_STRIPE_MONTHLY_KEY,
+  stripeYearlyKey: import.meta.env.VITE_STRIPE_YEARLY_KEY,
   host: import.meta.env.VITE_WEB_HOST,
   amplitude_key: import.meta.env.VITE_AMPLITUDE_KEY,
 };

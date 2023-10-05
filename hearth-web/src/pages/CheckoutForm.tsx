@@ -21,19 +21,22 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   priceId: string;
+  couponAdded: boolean;
 }
 
-const Checkout = ({ isOpen, onClose, priceId }: Props) => {
+const Checkout = ({ isOpen, onClose, priceId, couponAdded }: Props) => {
   const bg =
     "linear-gradient(180deg, #FFF964 0%, rgba(255, 249, 100, 0.00) 90.67%), radial-gradient(41.92% 85.12% at 100% 68.31%, rgba(0, 240, 255, 0.20) 0%, rgba(0, 240, 255, 0.00) 100%), radial-gradient(48.49% 83.29% at 0% 100%, rgba(255, 199, 0, 0.50) 0%, rgba(255, 199, 0, 0.00) 100%), radial-gradient(55.85% 107.38% at 100% 0%, rgba(112, 0, 255, 0.30) 0%, rgba(0, 102, 255, 0.00) 100%), radial-gradient(50% 50% at 50% 50%, rgba(255, 0, 0, 0.32) 0%, rgba(216, 0, 0, 0.00) 100%), linear-gradient(0deg, rgba(252, 112, 68, 0.10) 0%, rgba(252, 112, 68, 0.10) 100%), linear-gradient(180deg, rgba(255, 190, 126, 0.80) 0%, rgba(255, 223, 192, 0.80) 100%)";
   const [subscriptionDetail, setSubscriptionDetail] = useState<
     SubscriptionDetail | undefined
   >();
+  console.log(subscriptionDetail);
 
   useEffect(() => {
     const createSubscription = async () => {
       const { data: subscriptionDetail } = await CreatePaymentSubscription(
-        priceId
+        priceId,
+        couponAdded
       );
       setSubscriptionDetail(subscriptionDetail);
     };

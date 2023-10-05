@@ -70,9 +70,12 @@ export const createUserExperience = (
   });
 };
 
-export const CreatePaymentSubscription = (priceId: string) => {
+export const CreatePaymentSubscription = (
+  priceId: string,
+  couponAdded: boolean
+) => {
   return request<SubscriptionDetail>(
-    `/v1/payments/create-subscription?priceId=${priceId}`,
+    `/v1/payments/create-subscription?priceId=${priceId}&couponAdded=${couponAdded}`,
     "GET"
   );
 };
@@ -89,4 +92,11 @@ export const LinkStripeSubscriptionToUser = (
 
 export const CancelStripeSubscription = () => {
   return request(`/v1/payments/cancel-stripe-subscription`, "POST");
+};
+
+export const CheckCouponCode = (coupon: string) => {
+  return request<{ isValid: boolean }>(
+    `/v1/payments/check-coupon-code?code=${coupon}`,
+    "GET"
+  );
 };

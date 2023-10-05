@@ -1,19 +1,22 @@
 import {
   Flex,
+  Input,
   ListItem,
   Text,
   UnorderedList,
   useDisclosure,
 } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
-import ReactDOM from "react-dom";
-import ImageLogo from "./ImageLogo";
 import { useState } from "react";
-import { SubscriptionType } from "../core/types";
-import Checkout from "../pages/CheckoutForm";
-import { useCurrentUserProfile } from "../core/apiHooks";
-import BottomPopupDrawer from "./BottomPopupDrawer";
+import ReactDOM from "react-dom";
 import { CancelStripeSubscription } from "../core/api";
+import { useCurrentUserProfile } from "../core/apiHooks";
+import { SubscriptionType } from "../core/types";
+import ArrowRightIcon from "../icons/ArrowRightIcon";
+import Checkout from "../pages/CheckoutForm";
+import BottomPopupDrawer from "./BottomPopupDrawer";
+import ImageLogo from "./ImageLogo";
+import viteEnv from "../config/vite-env";
 
 interface Props {
   isOpen: boolean;
@@ -24,8 +27,11 @@ const MotionFlex = m(Flex);
 
 const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
   const { data: user, mutate: userMutate } = useCurrentUserProfile();
-  const yearlySubscriptionId = "price_1NtP9JGFPsayibi6odqpOHIl";
-  const monthlySubscriptionid = "price_1NtP9JGFPsayibi6WqZ95p8u";
+  const yearlySubscriptionId = viteEnv.stripeYearlyKey;
+  const monthlySubscriptionid = viteEnv.stripeMonthlyKey;
+  const [coupon, setCoupon] = useState(false);
+  const [couponCode, setCouponCode] = useState("");
+  const [couponMessage, setCouponMessage] = useState<string | undefined>();
 
   const [selectedSubscription, setSelectedSubscription] =
     useState<SubscriptionType>(
@@ -47,6 +53,19 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
   } = useDisclosure();
 
   const mounter = document.getElementById("mounter");
+
+  const checkCouponValid = async (enteredCouponCode: string) => {
+    // const resp = await CheckCouponCode(coupon);
+    // const valid = resp.data.isValid;
+    const valid = enteredCouponCode === "EARLYUSER";
+    if (valid) {
+      setCoupon(true);
+      setCouponMessage("Success! Enjoy your membership, free for 6 months");
+    } else {
+      setCoupon(false);
+      setCouponMessage("Please enter a valid coupon!");
+    }
+  };
   if (!mounter) return null;
   return ReactDOM.createPortal(
     <LazyMotion features={domMax}>
@@ -89,6 +108,7 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
                   ? monthlySubscriptionid
                   : yearlySubscriptionId
               }
+              couponAdded={coupon}
             />
           )}
         </AnimatePresence>
@@ -248,15 +268,14 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
                     : "Start your 7-day free trial"}
                 </Text>
                 <Text textStyle="fieldLabel">
-                  {selectedSubscription === SubscriptionType.month &&
-                  !user?.trial_completed
+                  {selectedSubscription === SubscriptionType.month
                     ? "14.95/month"
-                    : "104.95/year"}{" "}
-                  after 7 days
+                    : "104.95/year"}
+                  {!user?.trial_completed && "  after 7 days"}
                 </Text>
               </Flex>
             )}
-            {user?.stripe_subscription_id && (
+            {user?.stripe_subscription_id ? (
               <Text
                 textStyle="body"
                 color="brand.secondary"
@@ -264,7 +283,28 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
               >
                 Cancel your subscription
               </Text>
+            ) : (
+              <Flex
+                borderBottom={"0.5px solid"}
+                borderColor={"accent.navy"}
+                px="0.5rem"
+                width="100%"
+                mt="1rem"
+              >
+                <Input
+                  className="ios-disable-highlight"
+                  onChange={(e) => setCouponCode(e.target.value)}
+                  width="100%"
+                  background="none"
+                  textStyle="fieldInput"
+                  placeholder="Enter coupon code"
+                />
+                <Flex onClick={async () => checkCouponValid(couponCode)}>
+                  <ArrowRightIcon />
+                </Flex>
+              </Flex>
             )}
+            {couponMessage && <Text textStyle={"body"}>{couponMessage}</Text>}
           </Flex>
         </Flex>
       </MotionFlex>
