@@ -151,11 +151,7 @@ const Courses = ({
               <Flex
                 key={journey.id}
                 p="1rem"
-                bg={
-                  journey.is_available
-                    ? `linear-gradient(156deg, ${journey.color} 15.57%, rgba(250, 251, 16, 0.00) 85.56%)`
-                    : backgroundColor
-                }
+                bg={`linear-gradient(156deg, ${journey.color} 15.57%, rgba(250, 251, 16, 0.00) 85.56%)`}
                 borderBottom="1px solid rgba(0, 0, 0, 0.60)"
                 borderRadius="2.75rem"
                 onClick={() => {
