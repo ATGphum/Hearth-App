@@ -140,7 +140,7 @@ const Courses = ({
             m="1rem"
             height="8rem"
             src={
-              "https://res.cloudinary.com/ddh1fblle/image/upload/t_JourneyMasterLogoShrinked/v1695694083/JourneyPictures/JourneyMasterLogo_e56zlt.png"
+              "https://res.cloudinary.com/ddh1fblle/image/upload/t_JourneyMasterLogoShrinked/v1695693855/JourneyPictures/JourneyMasterLogo_qlvdpb.png"
             }
             objectFit={"contain"}
           />
