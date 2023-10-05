@@ -3,18 +3,26 @@ import { Flex, Text, useDisclosure, useOutsideClick } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useRef } from "react";
 import ReactDOM from "react-dom";
-import BottomPopupDrawer from "./BottomPopupDrawer";
 import { trackEvent } from "../core/analytics";
+import BottomPopupDrawer from "./BottomPopupDrawer";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   subscriptionsOnOpen: () => void;
+  termsOnOpen: () => void;
+  policyOnOpen: () => void;
 }
 
 const MotionFlex = m(Flex);
 
-const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
+const SettingsDrawer = ({
+  isOpen,
+  onClose,
+  subscriptionsOnOpen,
+  termsOnOpen,
+  policyOnOpen,
+}: Props) => {
   const { logout } = useAuth0();
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -32,6 +40,7 @@ const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
   const mounter = document.getElementById("appContainer");
 
   if (!mounter) return null;
+
   return ReactDOM.createPortal(
     <LazyMotion features={domMax}>
       <AnimatePresence>
@@ -60,6 +69,7 @@ const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
         dragElastic={{ top: 0.3, bottom: 1 }}
         onDragEnd={(_, info) => {
           if (info.velocity.y > 0) {
+            console.log("closing");
             onClose();
           }
         }}
@@ -70,7 +80,7 @@ const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
         right="0"
         bottom="-20rem"
         left="0"
-        overflowY={"auto"}
+        // overflowY={termsDrawerIsOpen ? "hidden" : "auto"}
         display="flex"
         background="background.fleshOpaque"
         p={0}
@@ -112,16 +122,24 @@ const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
               p="0.75rem 1rem"
               borderBottom="1px solid"
               borderColor="divider.flesh"
+              onClick={() => {
+                onClose();
+                termsOnOpen();
+              }}
             >
-              Terms and conditions
+              Terms and Conditions
             </Text>
             <Text
               textStyle="action"
               p="0.75rem 1rem"
               borderBottom="1px solid"
               borderColor="divider.flesh"
+              onClick={() => {
+                onClose();
+                policyOnOpen();
+              }}
             >
-              Privacy policy
+              Privacy Policy
             </Text>
             <Text
               textStyle="action"
