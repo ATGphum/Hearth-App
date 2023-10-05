@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 
 import { Flex } from "@chakra-ui/react";
-import { loadStripe } from "@stripe/stripe-js";
+import { Stripe, loadStripe } from "@stripe/stripe-js";
 import viteEnv from "../config/vite-env";
 import { LinkStripeSubscriptionToUser } from "../core/api";
 import { useCurrentUserProfile } from "../core/apiHooks";
@@ -10,10 +10,17 @@ type Props = {
   children: ReactNode;
 };
 
-// Initialize Stripe.js using your publishable key
-const stripe = await loadStripe(viteEnv.stripePublishableKey);
-
 const PaymentGuard = ({ children }: Props) => {
+  // Initialize Stripe.js using your publishable key
+  const [stripe, setStripe] = useState<Stripe | null>(null);
+  useEffect(() => {
+    awaitStripe;
+  }, []);
+  const awaitStripe = async () => {
+    const stripeObj = await loadStripe(viteEnv.stripePublishableKey);
+    setStripe(stripeObj);
+  };
+
   const { mutate: userMutate } = useCurrentUserProfile();
 
   // Retrieve the "payment_intent_client_secret" query parameter appended to
