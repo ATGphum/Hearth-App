@@ -121,10 +121,9 @@ function Library() {
               alignItems={"center"}
               gridColumnGap="1rem"
               onClick={journeyDrawerOnOpen}
-              justifyContent={"center"}
             >
               <Image
-                h={"3rem"}
+                h={"4rem"}
                 src={
                   "https://res.cloudinary.com/ddh1fblle/image/upload/t_JourneyMasterLogoShrinked/v1695693855/JourneyPictures/JourneyMasterLogo_qlvdpb.png"
                 }
