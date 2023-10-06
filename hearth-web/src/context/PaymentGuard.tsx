@@ -31,6 +31,7 @@ const PaymentGuard = ({ children }: Props) => {
   const setupIntentClientSecret = new URLSearchParams(
     window.location.search
   ).get("setup_intent_client_secret");
+
   const subscriptionId = new URLSearchParams(window.location.search).get(
     "subscription_id"
   );
