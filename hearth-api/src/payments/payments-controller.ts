@@ -30,8 +30,8 @@ export default async function PaymentsController(fastify: FastifyInstance) {
       if (!user.stripe_customer_id) {
         // if no strip customer id on user entry, create a new customer
         const customer = await stripe.customers.create({
-          email: "jeremyvuong.dshs@gmail.com",
-          name: "Jeremy Vuong",
+          email: user.email,
+          name: user.first_name + " " + user.last_name,
         });
         user = await fastify.prisma.user.update({
           where: { id: user.id },
