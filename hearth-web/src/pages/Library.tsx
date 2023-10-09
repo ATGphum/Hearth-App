@@ -178,7 +178,9 @@ function Library() {
                     objectFit={"contain"}
                     my="1rem"
                   />
-                  <Text textStyle={"heading.h2"}>{category.name}</Text>
+                  <Text textStyle={"heading.h2"} textAlign={"center"}>
+                    {category.name}
+                  </Text>
                   <Text textStyle="body">
                     {category.experiences.length} Experiences
                   </Text>
