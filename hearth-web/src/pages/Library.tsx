@@ -173,7 +173,12 @@ function Library() {
                     categoryDrawerOnOpen();
                   }}
                 >
-                  <Flex py="2rem" />
+                  <Image
+                    height="4rem"
+                    src={category.experiences[0].image_link}
+                    objectFit={"contain"}
+                    my="1rem"
+                  />
                   <Text textStyle={"heading.h2"}>{category.name}</Text>
                   <Text textStyle="body">
                     {category.experiences.length} Experiences
