@@ -9,6 +9,9 @@ import LoadingPage from "./pages/LoadingPage";
 
 const DesktopPage = lazy(() => import("./pages/DesktopPage"));
 const InstallationPage = lazy(() => import("./pages/InstallationMobilePage"));
+const WrongBrowserInstructionPage = lazy(
+  () => import("./pages/WrongBrowserInstructionPage")
+);
 const AppContextProviders = lazy(() => import("./context/AppContextProviders"));
 
 function App() {
@@ -18,7 +21,6 @@ function App() {
   useEffect(() => {
     initialiseAnalytics();
   }, []);
-
   if (installable === "installable" || viteEnv.environment === "development") {
     if (isStandalone || viteEnv.environment === "development") {
       return (
@@ -35,6 +37,15 @@ function App() {
         </Suspense>
       );
     }
+  }
+  if (installable === "non-installable") {
+    return (
+      <Suspense fallback={<LoadingPage />}>
+        <AppContextProviders>
+          <WrongBrowserInstructionPage />
+        </AppContextProviders>
+      </Suspense>
+    );
   }
 
   return (
