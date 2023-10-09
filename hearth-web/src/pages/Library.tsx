@@ -81,7 +81,6 @@ function Library() {
       </AnimatePresence>
       <LazyMotion features={domMax}>
         <MotionFlex
-          drag={"y"}
           dragDirectionLock
           dragConstraints={{ top: 0, bottom: 0 }}
           animate={{ x: journeyDrawerIsOpen ? "-50%" : "0%" }}
@@ -91,7 +90,7 @@ function Library() {
           left="0"
           right="0"
           bottom="0"
-          overflowY={"scroll"}
+          overflowY={"auto"}
           direction="column"
           width="100%"
           flex="1"
