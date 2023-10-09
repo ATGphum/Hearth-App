@@ -104,7 +104,7 @@ const CategoryPage = ({ isOpen, onClose, openedCourse }: Props) => {
                   flex={1}
                   justifyContent={"space-between"}
                   p="1rem"
-                  bg={exp.is_available ? "rgb(255 255 255 / 50%)" : "#E7D2BC"}
+                  bg={"rgb(255 255 255 / 50%)"}
                   borderBottom="1px solid rgba(0, 0, 0, 0.60)"
                   borderRadius="2.75rem"
                   onClick={() => {
