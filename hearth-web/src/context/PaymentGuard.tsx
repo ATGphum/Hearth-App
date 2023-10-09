@@ -14,7 +14,7 @@ const PaymentGuard = ({ children }: Props) => {
   // Initialize Stripe.js using your publishable key
   const [stripe, setStripe] = useState<Stripe | null>(null);
   useEffect(() => {
-    awaitStripe;
+    awaitStripe();
   }, []);
   const awaitStripe = async () => {
     const stripeObj = await loadStripe(viteEnv.stripePublishableKey);
@@ -49,8 +49,11 @@ const PaymentGuard = ({ children }: Props) => {
     await LinkStripeSubscriptionToUser(stripeSubscriptionId, frequency);
     await userMutate();
   };
-
   useEffect(() => {
+    console.log(setupIntentClientSecret);
+    console.log(subscriptionId);
+    console.log(frequency);
+    console.log(stripe);
     if (
       stripe &&
       (paymentIntentClientSecret || setupIntentClientSecret) &&
@@ -107,6 +110,7 @@ const PaymentGuard = ({ children }: Props) => {
             // confirmation, while others will first enter a `processing` state.
             //
             // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
+            console.log("hit here");
             if (setupIntent) {
               switch (setupIntent.status) {
                 case "succeeded":
@@ -136,7 +140,7 @@ const PaymentGuard = ({ children }: Props) => {
           });
       }
     }
-  }, []);
+  }, [stripe]);
 
   return (
     <>
