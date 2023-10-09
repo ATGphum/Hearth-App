@@ -21,7 +21,7 @@ import ReactDOM from "react-dom";
 import { UserContext } from "../context/UserContext";
 import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
 import { formatTime } from "../core/helpers";
-import { Experience, Journey, UserExperience } from "../core/types";
+import { Category, Experience, Journey, UserExperience } from "../core/types";
 import CrossIcon from "../icons/CrossIcon";
 import DownIcon from "../icons/DownIcon";
 import PauseIcon from "../icons/PauseIcon";
@@ -38,7 +38,7 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   openedExperience: Experience;
-  parentCourse: Journey;
+  parentCourse: Journey | Category;
 }
 
 const MotionFlex = m(Flex);
@@ -117,14 +117,13 @@ const MusicDrawer = ({
           createUserExperience(userExperience);
         }
         setIsCompletedNewExp(true);
-
-        // Amplitude track event
-        trackEvent({
-          type: "Complete Experience",
-          journey_name: journeyToDo.name,
-          experience_name: experienceToDo?.name ?? "",
-        });
       }
+      // Amplitude track event
+      trackEvent({
+        type: "Complete Experience",
+        journey_name: parentCourse.name,
+        experience_name: experienceToDo?.name ?? "",
+      });
     }
   };
 

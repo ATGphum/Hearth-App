@@ -1,22 +1,22 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
-import ArrowLeftIcon from "../icons/ArrowLeftIcon";
-import ArrowRightIcon from "../icons/ArrowRightIcon";
-import MusicDrawer from "../components/MusicDrawer";
-import ReactDOM from "react-dom";
-import { Experience, Journey } from "../core/types";
 import { useContext, useState } from "react";
+import ReactDOM from "react-dom";
+import MusicDrawer from "../components/MusicDrawer";
 import { UserContext } from "../context/UserContext";
 import { trackEvent } from "../core/analytics";
+import { Category, Experience } from "../core/types";
+import ArrowLeftIcon from "../icons/ArrowLeftIcon";
+import ArrowRightIcon from "../icons/ArrowRightIcon";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  openedCourse: Journey;
+  openedCourse: Category;
 }
 
 const MotionFlex = m(Flex);
-const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
+const CategoryPage = ({ isOpen, onClose, openedCourse }: Props) => {
   const {
     isOpen: drawerIsOpen,
     onOpen: drawerOnOpen,
@@ -103,13 +103,6 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
           <Flex direction="column" gridRowGap="0.5rem" my="0.5rem">
             {openedCourse?.experiences.map((exp) => (
               <Flex key={exp.id} direction="column">
-                {experienceToDo &&
-                  experienceToDo.level + 1 === exp.level &&
-                  !openedCourse.completed && (
-                    <Text textStyle="body" pt="0.5rem" pb="1rem">
-                      Complete {experienceToDo.name} to access {exp.name}.
-                    </Text>
-                  )}
                 <Flex
                   flex={1}
                   justifyContent={"space-between"}
@@ -127,13 +120,6 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
                       experience_name: exp.name,
                     });
                   }}
-                  opacity={exp.is_available ? 1 : 0.4}
-                  pointerEvents={!exp.is_available ? "none" : undefined}
-                  border={
-                    experienceToDo?.id === exp.id
-                      ? `3px solid ${exp.color}`
-                      : undefined
-                  }
                 >
                   <Text>{exp.name}</Text> <ArrowRightIcon />
                 </Flex>
@@ -147,4 +133,4 @@ const CoursePage = ({ isOpen, onClose, openedCourse }: Props) => {
   );
 };
 
-export default CoursePage;
+export default CategoryPage;

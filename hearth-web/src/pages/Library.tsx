@@ -2,10 +2,13 @@ import { Flex, Image, SimpleGrid, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import CoursesPage from "./CoursesPage";
 import MusicDrawer from "../components/MusicDrawer";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { trackEvent } from "../core/analytics";
 import { useCategories } from "../core/apiHooks";
+import JourneyPage from "./JourneyPage";
+import { Category, CourseType } from "../core/types";
+import CategoryPage from "./CategoryPage";
 
 const MotionFlex = m(Flex);
 
@@ -22,8 +25,15 @@ function Library() {
     onOpen: journeyDrawerOnOpen,
     onClose: journeyDrawerOnClose,
   } = useDisclosure();
+  const {
+    isOpen: categoryDrawerIsOpen,
+    onOpen: categoryDrawerOnOpen,
+    onClose: categoryDrawerOnClose,
+  } = useDisclosure();
 
-  const flexString = "1 0 8.5rem";
+  const [selectedCategory, setSelectedCategory] = useState<
+    undefined | Category
+  >();
 
   const openMusicDrawer = (journeyName: string, experienceName: string) => {
     musicDrawerOnOpen();
@@ -50,6 +60,14 @@ function Library() {
           <CoursesPage
             onClose={journeyDrawerOnClose}
             isOpen={journeyDrawerIsOpen}
+          />
+        )}
+        {categoryDrawerIsOpen && selectedCategory && (
+          <CategoryPage
+            onClose={categoryDrawerOnClose}
+            isOpen={categoryDrawerIsOpen}
+            courseType={CourseType.category}
+            openedCourse={selectedCategory}
           />
         )}
       </AnimatePresence>
@@ -152,6 +170,10 @@ function Library() {
                   borderBottom="1px solid rgba(0, 0, 0, 0.40)"
                   p="1rem"
                   flex={"1 0 8.5rem"}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    categoryDrawerOnOpen();
+                  }}
                 >
                   <Flex py="2rem" />
                   <Text textStyle={"heading.h2"}>{category.name}</Text>
@@ -160,84 +182,6 @@ function Library() {
                   </Text>
                 </Flex>
               ))}
-              {/* <Flex
-                direction="column"
-                alignItems={"center"}
-                borderRadius="1.5rem"
-                background="linear-gradient(180deg, #BEE6FF 0%, rgba(190, 230, 255, 0.00) 100%)"
-                borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-                p="1rem"
-                flex={flexString}
-              >
-                <Flex py="2rem" />
-                <Text textStyle={"heading.h2"}>Category</Text>
-                <Text textStyle="body">:x: Experiences</Text>
-              </Flex>
-              <Flex
-                direction="column"
-                alignItems={"center"}
-                borderRadius="1.5rem"
-                background="linear-gradient(162deg, #CBE476 12.41%, rgba(203, 228, 118, 0.00) 83.23%)"
-                borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-                p="1rem"
-                flex={flexString}
-              >
-                <Flex py="2rem" />
-                <Text textStyle={"heading.h2"}>Category</Text>
-                <Text textStyle="body">:x: Experiences</Text>
-              </Flex>
-              <Flex
-                direction="column"
-                alignItems={"center"}
-                borderRadius="1.5rem"
-                background="linear-gradient(180deg, #D3F8A7 0%, rgba(211, 248, 167, 0.00) 100%)"
-                borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-                p="1rem"
-                flex={flexString}
-              >
-                <Flex py="2rem" />
-                <Text textStyle={"heading.h2"}>Category</Text>
-                <Text textStyle="body">:x: Experiences</Text>
-              </Flex>
-              <Flex
-                direction="column"
-                alignItems={"center"}
-                borderRadius="1.5rem"
-                background="linear-gradient(174deg, #D1A8FF 4.42%, rgba(209, 167, 255, 0.00) 96.51%)"
-                borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-                p="1rem"
-                flex={flexString}
-              >
-                <Flex py="2rem" />
-                <Text textStyle={"heading.h2"}>Category</Text>
-                <Text textStyle="body">:x: Experiences</Text>
-              </Flex>
-              <Flex
-                direction="column"
-                alignItems={"center"}
-                borderRadius="1.5rem"
-                background="linear-gradient(180deg, #E593DC 0%, rgba(232, 215, 255, 0.00) 100%)"
-                borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-                p="1rem"
-                flex={flexString}
-              >
-                <Flex py="2rem" />
-                <Text textStyle={"heading.h2"}>Category</Text>
-                <Text textStyle="body">:x: Experiences</Text>
-              </Flex>
-              <Flex
-                direction="column"
-                alignItems={"center"}
-                borderRadius="1.5rem"
-                background="linear-gradient(180deg, #51D8AE 0%, rgba(190, 230, 255, 0.00) 100%)"
-                borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-                p="1rem"
-                flex={flexString}
-              >
-                <Flex py="2rem" />
-                <Text textStyle={"heading.h2"}>Category</Text>
-                <Text textStyle="body">:x: Experiences</Text>
-              </Flex> */}
             </SimpleGrid>
           </Flex>
         </MotionFlex>

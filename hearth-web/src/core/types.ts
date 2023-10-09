@@ -26,6 +26,11 @@ export interface User {
   trial_completed: boolean;
 }
 
+export enum CourseType {
+  journey,
+  category,
+}
+
 export interface Journey {
   id: number;
   level: number;
