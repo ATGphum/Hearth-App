@@ -26,6 +26,11 @@ export interface User {
   trial_completed: boolean;
 }
 
+export enum CourseType {
+  journey,
+  category,
+}
+
 export interface Journey {
   id: number;
   level: number;
@@ -36,6 +41,15 @@ export interface Journey {
   experiences: Experience[];
   is_available: boolean;
   completed: boolean;
+}
+
+export interface Category {
+  id: number;
+  name: string;
+  description: string;
+  color: string;
+  subscription_required: boolean;
+  experiences: Experience[];
 }
 
 export interface Experience {

@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { useJourneys } from "../core/apiHooks";
 import { Journey } from "../core/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
-import CoursePage from "./CoursePage";
+import JourneyPage from "./JourneyPage";
 import { trackEvent } from "../core/analytics";
 
 interface Props {
@@ -40,7 +40,7 @@ const CoursesPage = ({ isOpen, onClose }: Props) => {
     <>
       <AnimatePresence>
         {courseDrawerIsOpen && openedJourney && (
-          <CoursePage
+          <JourneyPage
             onClose={courseDrawerOnClose}
             isOpen={courseDrawerIsOpen}
             openedCourse={openedJourney}

@@ -30,7 +30,6 @@ const Checkout = ({ isOpen, onClose, priceId, couponAdded }: Props) => {
   const [subscriptionDetail, setSubscriptionDetail] = useState<
     SubscriptionDetail | undefined
   >();
-  console.log(subscriptionDetail);
 
   useEffect(() => {
     const createSubscription = async () => {
