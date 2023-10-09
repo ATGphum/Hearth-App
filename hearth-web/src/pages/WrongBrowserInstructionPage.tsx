@@ -36,9 +36,7 @@ const IOSInstallPage = () => {
         </Text>
         <OrderedList spacing={2}>
           <ListItem>
-            <Text>
-              In the browser menu tap the share icon "{<ThreeDotsIcon />}".
-            </Text>
+            <Text>Tap the share icon "{<ThreeDotsIcon />}".</Text>
           </ListItem>
           <ListItem>
             <Text>Tap "Open in external browser"</Text>
@@ -66,9 +64,7 @@ const AndroidInstallPage = () => {
         </Text>
         <OrderedList spacing={2}>
           <ListItem>
-            <Text>
-              In the browser menu tap the share icon "{<ThreeDotsIcon />}".
-            </Text>
+            <Text>Tap the share icon "{<ThreeDotsIcon />}".</Text>
           </ListItem>
           <ListItem>
             <Text>Tap "Open in external browser"</Text>
