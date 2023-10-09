@@ -55,6 +55,7 @@ model Course {
 
 enum CourseCategoryChoices {
   journey
+  category
 }
 
 model Experience {

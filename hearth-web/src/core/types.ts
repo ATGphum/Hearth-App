@@ -38,6 +38,15 @@ export interface Journey {
   completed: boolean;
 }
 
+export interface Category {
+  id: number;
+  name: string;
+  description: string;
+  color: string;
+  subscription_required: boolean;
+  experiences: Experience[];
+}
+
 export interface Experience {
   id: number;
   level: number;

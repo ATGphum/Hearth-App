@@ -77,6 +77,19 @@ export default async function CoursesController(fastify: FastifyInstance) {
     return coursesMapped;
   });
 
+  // get category courses
+  fastify.get("/courses/categories", async () => {
+    const courses: ProgressCourse[] = await fastify.prisma.course.findMany({
+      orderBy: { name: "asc" },
+      where: { category: CourseCategoryChoices.category },
+      include: {
+        experiences: { orderBy: { level: "asc" } },
+      },
+    });
+
+    return courses;
+  });
+
   // Create a userExperience entry for the provided user_id and experience_id
   // If the experience is the last experience in the course, also create a userCourse entry
   fastify.post(
