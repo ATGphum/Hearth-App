@@ -1,5 +1,5 @@
 import { Flex, Image, SimpleGrid, Text, useDisclosure } from "@chakra-ui/react";
-import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
+import { AnimatePresence, LazyMotion, domMax } from "framer-motion";
 import { useContext, useState } from "react";
 import MusicDrawer from "../components/MusicDrawer";
 import { UserContext } from "../context/UserContext";
@@ -8,8 +8,6 @@ import { useCategories } from "../core/apiHooks";
 import { Category } from "../core/types";
 import CategoryPage from "./CategoryPage";
 import CoursesPage from "./CoursesPage";
-
-const MotionFlex = m(Flex);
 
 function Library() {
   const { experienceToDo, journeyToDo } = useContext(UserContext);
@@ -80,11 +78,7 @@ function Library() {
         )}
       </AnimatePresence>
       <LazyMotion features={domMax}>
-        <MotionFlex
-          dragDirectionLock
-          dragConstraints={{ top: 0, bottom: 0 }}
-          animate={{ x: journeyDrawerIsOpen ? "-50%" : "0%" }}
-          transition={{ damping: 300 }}
+        <Flex
           position="absolute"
           top="0"
           left="0"
@@ -188,7 +182,7 @@ function Library() {
               ))}
             </SimpleGrid>
           </Flex>
-        </MotionFlex>
+        </Flex>
       </LazyMotion>
     </Flex>
   );
