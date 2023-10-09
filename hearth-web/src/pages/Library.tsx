@@ -1,14 +1,13 @@
 import { Flex, Image, SimpleGrid, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
-import CoursesPage from "./CoursesPage";
-import MusicDrawer from "../components/MusicDrawer";
 import { useContext, useState } from "react";
+import MusicDrawer from "../components/MusicDrawer";
 import { UserContext } from "../context/UserContext";
 import { trackEvent } from "../core/analytics";
 import { useCategories } from "../core/apiHooks";
-import JourneyPage from "./JourneyPage";
-import { Category, CourseType } from "../core/types";
+import { Category } from "../core/types";
 import CategoryPage from "./CategoryPage";
+import CoursesPage from "./CoursesPage";
 
 const MotionFlex = m(Flex);
 
@@ -66,7 +65,6 @@ function Library() {
           <CategoryPage
             onClose={categoryDrawerOnClose}
             isOpen={categoryDrawerIsOpen}
-            courseType={CourseType.category}
             openedCourse={selectedCategory}
           />
         )}
