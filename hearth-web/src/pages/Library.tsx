@@ -91,7 +91,7 @@ function Library() {
           left="0"
           right="0"
           bottom="0"
-          overflowY={"auto"}
+          overflowY={"scroll"}
           direction="column"
           width="100%"
           flex="1"
