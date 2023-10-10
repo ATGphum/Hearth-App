@@ -69,7 +69,6 @@ const SettingsDrawer = ({
         dragElastic={{ top: 0.3, bottom: 1 }}
         onDragEnd={(_, info) => {
           if (info.velocity.y > 0) {
-            console.log("closing");
             onClose();
           }
         }}
