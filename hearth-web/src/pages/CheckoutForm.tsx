@@ -12,6 +12,7 @@ import viteEnv from "../config/vite-env";
 import { CreatePaymentSubscription } from "../core/api";
 import { SubscriptionDetail, paymentMode } from "../core/types";
 import LoadingPage from "./LoadingPage";
+import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 
 const stripePromise = loadStripe(viteEnv.stripePublishableKey);
 
@@ -75,7 +76,10 @@ const Checkout = ({ isOpen, onClose, priceId, couponAdded }: Props) => {
         minHeight={"100vh"}
       >
         {subscriptionDetail ? (
-          <Flex h="100%" w="100%" p="1rem" bg={bg} justifyContent={"center"}>
+          <Flex h="100%" w="100%" p="1rem" bg={bg} direction="column">
+            <Flex onClick={onClose}>
+              <ArrowLeftIcon />
+            </Flex>
             <Elements
               stripe={stripePromise}
               options={{
@@ -103,6 +107,9 @@ const CheckoutForm = ({
 }) => {
   const stripe = useStripe();
   const elements = useElements();
+  console.log(subscription.mode === paymentMode.payment);
+  console.log(subscription.mode.toString());
+  console.log(paymentMode.payment.toString());
 
   const handleSubmit = async () => {
     if (!stripe || !elements) {
@@ -111,9 +118,11 @@ const CheckoutForm = ({
       return;
     }
 
+    setIsSubmitted(true);
+
     // it may be a setupIntent, not paymentIntent, try that
     if (subscription.mode === paymentMode.payment) {
-      await stripe.confirmPayment({
+      const { error } = await stripe.confirmPayment({
         //`Elements` instance that was used to create the Payment Element
         elements,
         confirmParams: {
@@ -125,8 +134,9 @@ const CheckoutForm = ({
             subscription.frequency,
         },
       });
+      if (error) setIsSubmitted(false);
     } else {
-      await stripe.confirmSetup({
+      const { error } = await stripe.confirmSetup({
         //`Elements` instance that was used to create the Payment Element
         elements,
         confirmParams: {
@@ -138,8 +148,11 @@ const CheckoutForm = ({
             subscription.frequency,
         },
       });
+      if (error) setIsSubmitted(false);
     }
   };
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   return (
     <Flex direction="column" gridRowGap="1rem">
@@ -154,7 +167,10 @@ const CheckoutForm = ({
         boxShadow={"0px 4px 2px 0px rgba(0, 0, 0, 0.60)"}
         onClick={handleSubmit}
       >
-        {stripe && elements && <Text textStyle="action">Submit</Text>}
+        {stripe && elements && !isSubmitted && (
+          <Text textStyle="action">Submit</Text>
+        )}
+        {isSubmitted && <Text textStyle="action">Processing...</Text>}
       </Flex>
     </Flex>
   );

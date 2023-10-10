@@ -50,10 +50,6 @@ const PaymentGuard = ({ children }: Props) => {
     await userMutate();
   };
   useEffect(() => {
-    console.log(setupIntentClientSecret);
-    console.log(subscriptionId);
-    console.log(frequency);
-    console.log(stripe);
     if (
       stripe &&
       (paymentIntentClientSecret || setupIntentClientSecret) &&
@@ -110,7 +106,6 @@ const PaymentGuard = ({ children }: Props) => {
             // confirmation, while others will first enter a `processing` state.
             //
             // [0]: https://stripe.com/docs/payments/payment-methods#payment-notification
-            console.log("hit here");
             if (setupIntent) {
               switch (setupIntent.status) {
                 case "succeeded":

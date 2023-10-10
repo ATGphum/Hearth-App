@@ -4,8 +4,8 @@ export enum SubscriptionType {
 }
 
 export enum paymentMode {
-  setup,
-  payment,
+  setup = "setup",
+  payment = "payment",
 }
 
 export interface User {
