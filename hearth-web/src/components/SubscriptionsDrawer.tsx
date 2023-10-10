@@ -302,6 +302,7 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
                   background="none"
                   textStyle="fieldInput"
                   placeholder="Enter coupon code"
+                  spellCheck={false}
                 />
                 <Flex
                   onClick={async () => checkCouponValid(couponCode)}
