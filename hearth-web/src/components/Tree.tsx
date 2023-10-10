@@ -16,7 +16,8 @@ const Tree = () => {
   const { data: categories } = useCategories();
 
   // show loading page while user data is retrieving or 2 seconds is up
-  if (!user || !journeys || !categories) return <LoadingPage />;
+  // essentially load the categries into cache but no active need to hide them behind LoadingPage
+  if (!user || !journeys || (!categories && categories)) return <LoadingPage />;
 
   // show user form if essential fields are not present
   if (
