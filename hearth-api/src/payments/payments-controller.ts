@@ -124,8 +124,11 @@ export default async function PaymentsController(fastify: FastifyInstance) {
       });
 
       if (user.stripe_subscription_id) {
-        await stripe.subscriptions.cancel(user.stripe_subscription_id);
-
+        try {
+          await stripe.subscriptions.cancel(user.stripe_subscription_id);
+        } catch (err) {
+          fastify.log.error(err);
+        }
         await fastify.prisma.user.update({
           where: { username: sub },
           data: {
