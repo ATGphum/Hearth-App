@@ -11,6 +11,7 @@ import fastifyEnv from "./config/fastify-env.js";
 import { PrismaClient } from "@prisma/client";
 import CoursesController from "./courses/courses-controller.js";
 import PaymentsController from "./payments/payments-controller.js";
+import WebhooksController from "./webhooks/webhooks-controller.js";
 
 const prisma = new PrismaClient();
 
@@ -37,6 +38,10 @@ fastify.register(fastifyAuth0Verify, {
 fastify.addHook(
   "onRequest",
   async (request: FastifyRequest, reply: FastifyReply) => {
+    // ignore validation if webhook is hit
+    if (request.url.startsWith("/v1/webhook")) {
+      return;
+    }
     try {
       // Verify the JWT token using the decorator
       await request.jwtVerify();
@@ -49,6 +54,7 @@ fastify.addHook(
 
 const globalRequestObject = { prefix: "/v1" };
 
+fastify.register(WebhooksController, globalRequestObject);
 fastify.register(UserController, globalRequestObject);
 fastify.register(CoursesController, globalRequestObject);
 fastify.register(PaymentsController, globalRequestObject);
