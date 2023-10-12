@@ -223,7 +223,7 @@ const MusicDrawer = ({
   const closeFunction = async () => {
     if (isPlaying) togglePlay();
     // if this is slow in production, add function to optimistically update
-    if (isCompletedNewExp) await journeyMutate();
+    if (isCompletedNewExp) journeyMutate();
     onClose();
 
     // Amplitude track event
