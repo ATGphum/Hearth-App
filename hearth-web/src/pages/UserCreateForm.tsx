@@ -1,4 +1,4 @@
-import { Flex, Input, Text } from "@chakra-ui/react";
+import { Flex, Input, Link, Text } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useState } from "react";
 import FormButton from "../components/FormButton";
@@ -214,6 +214,23 @@ function UserCreateForm() {
               }}
             />
           </Flex>
+          <Text textStyle="body" mt="0.5rem">
+            By clicking Continue, you agree to our{" "}
+            <Link
+              textDecoration={"underline"}
+              href="https://www.hearthtogether.com/terms-and-conditions"
+            >
+              Terms
+            </Link>{" "}
+            and acknowledge that you have read our{" "}
+            <Link
+              textDecoration={"underline"}
+              href="https://www.hearthtogether.com/privacy-policy"
+            >
+              Privacy Policy
+            </Link>
+            , which explains how to opt out of offers and promos.
+          </Text>
         </MotionFlex>
       </LazyMotion>
       <AnimatePresence>
