@@ -134,7 +134,7 @@ const MusicDrawer = ({
     setIsMusicLoaded(true);
   };
 
-  const togglePlay = (pressedPlay?: boolean) => {
+  const togglePlay = (isPlaying: boolean, pressedPlay?: boolean) => {
     if (isPlaying) {
       audioRef.current?.pause();
 
@@ -224,7 +224,7 @@ const MusicDrawer = ({
   }, [isOpen, handleSeekEnd]);
 
   const closeFunction = async () => {
-    if (isPlaying) togglePlay();
+    if (isPlaying) togglePlay(isPlaying);
     // if this is slow in production, add function to optimistically update
     if (isCompletedNewExp) journeyMutate();
     onClose();
@@ -503,7 +503,7 @@ const MusicDrawer = ({
                 )}
                 <Flex
                   className="ios-disable-highlight"
-                  onClick={() => isMusicLoaded && togglePlay()}
+                  onClick={() => isMusicLoaded && togglePlay(isPlaying)}
                   alignItems={"center"}
                   mb="1rem"
                   height="2rem"
