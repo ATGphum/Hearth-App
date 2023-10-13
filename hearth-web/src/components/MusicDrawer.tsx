@@ -360,6 +360,7 @@ const MusicDrawer = ({
                 maxHeight={"100%"}
                 src={openedExperience.image_link}
                 objectFit={"contain"}
+                className="musicImage"
               />
             </MotionFlex>
             {isCompletedNewExp && (
