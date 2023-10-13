@@ -10,19 +10,11 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   subscriptionsOnOpen: () => void;
-  termsOnOpen: () => void;
-  policyOnOpen: () => void;
 }
 
 const MotionFlex = m(Flex);
 
-const SettingsDrawer = ({
-  isOpen,
-  onClose,
-  subscriptionsOnOpen,
-  termsOnOpen,
-  policyOnOpen,
-}: Props) => {
+const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
   const { logout } = useAuth0();
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -51,7 +43,6 @@ const SettingsDrawer = ({
             isOpen={closeDrawerIsOpen}
             callback={() => {
               logout({ logoutParams: { returnTo: window.location.origin } });
-              window.location.href = window.location.origin;
               // Amplitude track event
               trackEvent({ type: "Logout" });
             }}
@@ -123,7 +114,9 @@ const SettingsDrawer = ({
               borderColor="divider.flesh"
               onClick={() => {
                 onClose();
-                termsOnOpen();
+                window.open(
+                  "https://www.hearthtogether.com/terms-and-conditions"
+                );
               }}
             >
               Terms and Conditions
@@ -135,7 +128,7 @@ const SettingsDrawer = ({
               borderColor="divider.flesh"
               onClick={() => {
                 onClose();
-                policyOnOpen();
+                window.open("https://www.hearthtogether.com/privacy-policy");
               }}
             >
               Privacy Policy
