@@ -499,7 +499,7 @@ const MusicDrawer = ({
                 </Flex>
                 <Flex
                   className="ios-disable-highlight"
-                  onClick={() => togglePlay()}
+                  onClick={() => isMusicLoaded && togglePlay()}
                   alignItems={"center"}
                   mb="1rem"
                   height="2rem"
