@@ -115,3 +115,7 @@ button:focus-visible {
     transform: rotate(360deg);
   }
 }
+
+.musicImagePaused {
+  animation-play-state: paused;
+}
