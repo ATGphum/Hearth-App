@@ -113,7 +113,6 @@ const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
               borderBottom="1px solid"
               borderColor="divider.flesh"
               onClick={() => {
-                onClose();
                 window.open(
                   "https://www.hearthtogether.com/terms-and-conditions"
                 );
@@ -127,7 +126,6 @@ const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
               borderBottom="1px solid"
               borderColor="divider.flesh"
               onClick={() => {
-                onClose();
                 window.open("https://www.hearthtogether.com/privacy-policy");
               }}
             >
