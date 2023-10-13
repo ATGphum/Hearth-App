@@ -1,6 +1,6 @@
 import { Flex, Input, Link, Text } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FormButton from "../components/FormButton";
 import { patchUser } from "../core/api";
 import { useCurrentUserProfile } from "../core/apiHooks";
@@ -54,19 +54,6 @@ function UserCreateForm() {
       await userMutate(newUser);
     }
   };
-
-  useEffect(() => {
-    if (page === 2) {
-      const timerId = setTimeout(() => {
-        mutateUser();
-      }, 3000); // 5000ms = 5s
-
-      // Cleanup on unmount
-      return () => {
-        clearTimeout(timerId);
-      };
-    }
-  }, [page]);
 
   return (
     <Flex
