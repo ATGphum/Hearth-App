@@ -13,6 +13,7 @@ import { CreatePaymentSubscription } from "../core/api";
 import { SubscriptionDetail, paymentMode } from "../core/types";
 import LoadingPage from "./LoadingPage";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
+import Spinner from "../components/Spinner";
 
 const stripePromise = loadStripe(viteEnv.stripePublishableKey);
 
@@ -170,7 +171,7 @@ const CheckoutForm = ({
         {stripe && elements && !isSubmitted && (
           <Text textStyle="action">Submit</Text>
         )}
-        {isSubmitted && <Text textStyle="action">Processing...</Text>}
+        {isSubmitted && <Spinner />}
       </Flex>
     </Flex>
   );
