@@ -344,6 +344,7 @@ const MusicDrawer = ({
                 ? `linear-gradient(167deg, ${journeyToDo?.color} 9.42%, rgba(240, 88, 252, 0.00) 100.4%)`
                 : "#ffffff00"
             }
+            m={isCompletedNewExp ? "2rem" : undefined}
             borderRadius="1.5625rem"
           >
             <MotionFlex
