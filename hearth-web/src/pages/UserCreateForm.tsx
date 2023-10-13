@@ -1,10 +1,11 @@
 import { Flex, Input, Link, Text } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FormButton from "../components/FormButton";
 import { patchUser } from "../core/api";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { User } from "../core/types";
+import ArrowRightIcon from "../icons/ArrowRightIcon";
 
 const MotionFlex = m(Flex);
 
@@ -53,6 +54,19 @@ function UserCreateForm() {
       await userMutate(newUser);
     }
   };
+
+  useEffect(() => {
+    if (page === 2) {
+      const timerId = setTimeout(() => {
+        mutateUser();
+      }, 3000); // 5000ms = 5s
+
+      // Cleanup on unmount
+      return () => {
+        clearTimeout(timerId);
+      };
+    }
+  }, [page]);
 
   return (
     <Flex
@@ -365,6 +379,10 @@ function UserCreateForm() {
                 <Text textStyle="heading.h2XL" px="3rem">
                   {firstName} and {partnerFirstName}
                 </Text>
+                <Flex gridColumnGap="0.5rem" alignItems="center">
+                  <Text textStyle="body">Tap to continue</Text>
+                  <ArrowRightIcon />
+                </Flex>
               </Flex>
             </MotionFlex>
           </LazyMotion>
