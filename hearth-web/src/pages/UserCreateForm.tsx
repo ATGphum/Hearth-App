@@ -218,14 +218,20 @@ function UserCreateForm() {
             By clicking Continue, you agree to our{" "}
             <Link
               textDecoration={"underline"}
-              href="https://www.hearthtogether.com/terms-and-conditions"
+              onClick={() =>
+                window.open(
+                  "https://www.hearthtogether.com/terms-and-conditions"
+                )
+              }
             >
               Terms
             </Link>{" "}
             and acknowledge that you have read our{" "}
             <Link
               textDecoration={"underline"}
-              href="https://www.hearthtogether.com/privacy-policy"
+              onClick={() =>
+                window.open("https://www.hearthtogether.com/privacy-policy")
+              }
             >
               Privacy Policy
             </Link>
