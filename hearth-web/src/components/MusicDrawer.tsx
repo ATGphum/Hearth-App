@@ -33,6 +33,7 @@ import { createUserExperience } from "../core/api";
 import UnlockIcon from "../icons/UnlockIcon";
 import SubscriptionsDrawer from "./SubscriptionsDrawer";
 import { trackEvent } from "../core/analytics";
+import Spinner from "./Spinner";
 
 interface Props {
   isOpen: boolean;
@@ -56,6 +57,7 @@ const MusicDrawer = ({
   const [isLastExpInJourney, setIsLastExpInJourney] = useState(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMusicLoaded, setIsMusicLoaded] = useState(false);
   // isToggling only used to determine if dragging is being undergone
   // to protect from pausing the music when it is being dragged in app
   // as when the music is paused from ios controls we need to update
@@ -129,6 +131,7 @@ const MusicDrawer = ({
 
   const handleLoadedData = () => {
     audioRef.current && setDuration(audioRef.current.duration);
+    setIsMusicLoaded(true);
   };
 
   const togglePlay = (pressedPlay?: boolean) => {
@@ -502,7 +505,13 @@ const MusicDrawer = ({
                   height="2rem"
                   width="2rem"
                 >
-                  {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                  {!isMusicLoaded ? (
+                    <Spinner />
+                  ) : isPlaying ? (
+                    <PauseIcon />
+                  ) : (
+                    <PlayIcon />
+                  )}
                 </Flex>
 
                 <Flex
