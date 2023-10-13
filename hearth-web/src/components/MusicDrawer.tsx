@@ -357,7 +357,7 @@ const MusicDrawer = ({
             >
               <Image
                 height="100%"
-                maxHeight={"100%"}
+                maxHeight={"90vw"}
                 src={openedExperience.image_link}
                 objectFit={"contain"}
                 className={`musicImage ${!isPlaying ? "musicImagePaused" : ""}`}
