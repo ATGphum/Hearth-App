@@ -370,7 +370,7 @@ const MusicDrawer = ({
                 textAlign={"center"}
               >
                 <Text textStyle="heading.h1">Congratulations!</Text>
-                <Text textStyle="body" mt="0.5rem">
+                <Text textStyle="body" p="0.5rem 1rem 1rem 1rem">
                   {isLastExpInJourney
                     ? `You completed the ${journeyToDo?.name}!`
                     : experienceToDo?.level === 0
