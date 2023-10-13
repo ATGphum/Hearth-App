@@ -27,7 +27,7 @@ export default defineConfig({
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}", ""],
         runtimeCaching: [
           getCache({
-            pattern: /^https:\/\/res.cloudinary.com/,
+            pattern: /^https:\/\/res.cloudinary.com\/.*\.(png|jpg|jpeg|svg)$/,
             name: "hearth-images",
           }),
         ],
