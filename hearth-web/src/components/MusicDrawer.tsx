@@ -486,17 +486,19 @@ const MusicDrawer = ({
               </Flex>
             ) : (
               <Flex width={"100%"} justifyContent={"space-around"}>
-                <Flex
-                  className="ios-disable-highlight"
-                  height="3rem"
-                  alignItems={"center"}
-                  direction="column"
-                  justifyContent={"center"}
-                  onClick={rewind}
-                >
-                  <RewindBackIcon />
-                  <Text textStyle={"detailTextSmall"}>10 sec.</Text>
-                </Flex>
+                {isMusicLoaded && (
+                  <Flex
+                    className="ios-disable-highlight"
+                    height="3rem"
+                    alignItems={"center"}
+                    direction="column"
+                    justifyContent={"center"}
+                    onClick={rewind}
+                  >
+                    <RewindBackIcon />
+                    <Text textStyle={"detailTextSmall"}>10 sec.</Text>
+                  </Flex>
+                )}
                 <Flex
                   className="ios-disable-highlight"
                   onClick={() => isMusicLoaded && togglePlay()}
@@ -513,18 +515,19 @@ const MusicDrawer = ({
                     <PlayIcon />
                   )}
                 </Flex>
-
-                <Flex
-                  className="ios-disable-highlight"
-                  height="3rem"
-                  alignItems={"center"}
-                  direction="column"
-                  justifyContent={"center"}
-                  onClick={forward}
-                >
-                  <RewindFowardIcon />
-                  <Text textStyle={"detailTextSmall"}>10 sec.</Text>
-                </Flex>
+                {isMusicLoaded && (
+                  <Flex
+                    className="ios-disable-highlight"
+                    height="3rem"
+                    alignItems={"center"}
+                    direction="column"
+                    justifyContent={"center"}
+                    onClick={forward}
+                  >
+                    <RewindFowardIcon />
+                    <Text textStyle={"detailTextSmall"}>10 sec.</Text>
+                  </Flex>
+                )}
               </Flex>
             )}
           </Flex>
