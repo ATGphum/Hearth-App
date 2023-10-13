@@ -51,7 +51,7 @@ const SettingsDrawer = ({
             isOpen={closeDrawerIsOpen}
             callback={() => {
               logout({ logoutParams: { returnTo: window.location.origin } });
-
+              window.location.href = window.location.origin;
               // Amplitude track event
               trackEvent({ type: "Logout" });
             }}
