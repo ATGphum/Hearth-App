@@ -40,17 +40,17 @@ body {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
-  min-height: 100vh; /* fall-back */
+  min-height: 100dvh; /* fall-back */
   min-height: -moz-available;
   min-height: -webkit-fill-available;
   min-height: fill-available;
 }
 
 .appFrame {
-  min-height: 100vh; /* fall-back */
-  min-height: -moz-available;
+  min-height: 100dvh; /* fall-back */
+  /* min-height: -moz-available;
   min-height: -webkit-fill-available;
-  min-height: fill-available;
+  min-height: fill-available; */
 }
 
 html {
