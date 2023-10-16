@@ -61,7 +61,9 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
     const valid = enteredCouponCode === "EARLYUSER";
     if (valid) {
       setCoupon(true);
-      setCouponMessage("6 Month free subscription code applied successfully");
+      setCouponMessage(
+        "6 Month free subscription code applied successfully! Please proceed to checkout"
+      );
     } else {
       setCoupon(false);
       setCouponMessage("Please enter a valid coupon");
