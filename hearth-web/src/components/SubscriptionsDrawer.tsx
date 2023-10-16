@@ -306,12 +306,12 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
                   placeholder="Enter coupon code"
                   spellCheck={false}
                 />
-                <Flex
+                <Text
                   onClick={async () => checkCouponValid(couponCode)}
                   className="ios-disable-highlight"
                 >
-                  <ArrowRightIcon />
-                </Flex>
+                  APPLY
+                </Text>
               </Flex>
             )}
             {couponMessage && (
