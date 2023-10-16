@@ -12,6 +12,8 @@ import ArrowUpWithTrayIcon from "../icons/ArrowUpWithTrayIcon";
 import PlusSquareIcon from "../icons/PlusSquareIcon";
 import ThreeDotsVerticalIcon from "../icons/ThreeDotsVerticalIcon";
 import AddHomeButtonIcon from "../icons/AddHomeButtonIcon";
+import { useEffect } from "react";
+import { trackEvent } from "../core/analytics";
 
 function InstallationMobilePage() {
   const userAgent = window.navigator.userAgent;
@@ -28,6 +30,11 @@ function InstallationMobilePage() {
 }
 
 const IOSInstallPage = () => {
+  useEffect(() => {
+    trackEvent({
+      type: "Land on IOS Safari Browser",
+    });
+  }, []);
   return (
     <Flex
       direction="column"
@@ -85,6 +92,11 @@ const IOSInstallPage = () => {
 };
 
 const AndroidInstallPage = () => {
+  useEffect(() => {
+    trackEvent({
+      type: "Land on Android Chrome Browser",
+    });
+  }, []);
   return (
     <Flex
       direction="column"

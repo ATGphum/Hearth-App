@@ -57,6 +57,7 @@ const MusicDrawer = ({
   const [isLastExpInJourney, setIsLastExpInJourney] = useState(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [firstPlayTriggered, setFirstPlayTriggered] = useState(false);
   const [isMusicLoaded, setIsMusicLoaded] = useState(false);
   // isToggling only used to determine if dragging is being undergone
   // to protect from pausing the music when it is being dragged in app
@@ -120,11 +121,16 @@ const MusicDrawer = ({
         }
         setIsCompletedNewExp(true);
       }
-      // Amplitude track event
+
       trackEvent({
         type: "Complete Experience",
         journey_name: parentCourse.name,
         experience_name: experienceToDo?.name ?? "",
+        user_id: user.id,
+        email: user.email,
+        name: user.first_name ?? "" + user.last_name ?? "",
+        partner_name:
+          user.partner_first_name ?? "" + user.partner_last_name ?? "",
       });
     }
   };
@@ -140,6 +146,20 @@ const MusicDrawer = ({
     } else {
       audioRef.current?.play();
       setShowText(false);
+
+      if (!firstPlayTriggered && user) {
+        setFirstPlayTriggered(true);
+        trackEvent({
+          type: "Start Experience",
+          journey_name: parentCourse.name,
+          experience_name: experienceToDo?.name ?? "",
+          user_id: user.id,
+          email: user.email,
+          name: user.first_name ?? "" + user.last_name ?? "",
+          partner_name:
+            user.partner_first_name ?? "" + user.partner_last_name ?? "",
+        });
+      }
     }
     setIsPlaying(!isPlaying);
   };

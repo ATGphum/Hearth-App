@@ -86,25 +86,77 @@ export interface SignedUp {
 //   type: "Logout";
 // }
 
+export interface LandOnIOSPopupBrowser {
+  type: "Land on IOS popup browser";
+}
+
+export interface LandOnAndroidPopupBrowser {
+  type: "Land on Android popup browser";
+}
+
+export interface LandOnSafariBrowser {
+  type: "Land on IOS Safari Browser";
+}
+
+export interface LandOnChromeBrowser {
+  type: "Land on Android Chrome Browser";
+}
+
+export interface LandOnDesktopBrowser {
+  type: "Land on Desktop browser";
+}
+
+export interface SubmittedUserInformationForm {
+  type: "Submitted user information form";
+  user_id: number;
+  email: string;
+  name: string;
+  partner_name: string;
+}
+
+export interface StartExperience extends JourneyExperience {
+  type: "Start Experience";
+  user_id: number;
+  email: string;
+  name: string;
+  partner_name: string;
+}
+
 export interface CompleteExperience extends JourneyExperience {
   type: "Complete Experience";
+  user_id: number;
+  email: string;
+  name: string;
+  partner_name: string;
+}
+
+export interface Subscribe {
+  type: "Subscribe to hearth";
+  plan: "month" | "year";
 }
 
 export type AnalyticsEvent =
-  | SignedUp
-  // | ViewToday
-  // | ViewLibrary
-  // | ViewProfile
-  // | ClickUpNext
-  // | CloseMusicDrawer
-  // | ClickPlayButton
-  // | ClickRewindButton
-  // | ClickConnectionJourneys
-  // | ClickJourney
-  // | ClosePage
-  // | ClickExperience
-  // | ClickMenuBar
-  | CompleteExperience;
+  | StartExperience
+  | CompleteExperience
+  | LandOnIOSPopupBrowser
+  | LandOnAndroidPopupBrowser
+  | LandOnSafariBrowser
+  | LandOnChromeBrowser
+  | LandOnDesktopBrowser
+  | SubmittedUserInformationForm
+  | Subscribe;
+// | ViewToday
+// | ViewLibrary
+// | ViewProfile
+// | ClickUpNext
+// | CloseMusicDrawer
+// | ClickPlayButton
+// | ClickRewindButton
+// | ClickConnectionJourneys
+// | ClickJourney
+// | ClosePage
+// | ClickExperience
+// | ClickMenuBar
 // | Logout;
 
 // Function to track the event to use across the app

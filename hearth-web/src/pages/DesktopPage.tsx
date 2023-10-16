@@ -1,7 +1,14 @@
 import { Box, ChakraBaseProvider, Flex, Image, Text } from "@chakra-ui/react";
 import theme from "../theme/chakra-theme";
+import { useEffect } from "react";
+import { trackEvent } from "../core/analytics";
 
 function DesktopPage() {
+  useEffect(() => {
+    trackEvent({
+      type: "Land on Desktop browser",
+    });
+  }, []);
   return (
     <ChakraBaseProvider theme={theme}>
       <Flex

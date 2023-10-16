@@ -6,6 +6,7 @@ import { patchUser } from "../core/api";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { User } from "../core/types";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
+import { trackEvent } from "../core/analytics";
 
 const MotionFlex = m(Flex);
 
@@ -39,6 +40,13 @@ function UserCreateForm() {
       patchUser(user.id, tempUser);
       setPage(2);
       //dont mutate until last page has been tapped!
+      trackEvent({
+        type: "Submitted user information form",
+        name: firstName ?? "" + lastName ?? "",
+        partner_name: partnerFirstName ?? "" + partnerLastName ?? "",
+        user_id: user.id,
+        email: user.email,
+      });
     }
   };
 
