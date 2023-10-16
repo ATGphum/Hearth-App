@@ -67,7 +67,7 @@ html {
   margin: 0;
   display: flex;
   place-items: center;
-  min-height: 100vh;
+  min-height: 100dvh;
   position: fixed;
   overflow: hidden;
   width: 100%;
