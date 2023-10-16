@@ -26,8 +26,8 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-height: 100vh;
+  /* place-items: center; */
+  /* min-height: 100vh; */
   position: fixed;
   overflow: hidden;
   width: 100%;
@@ -40,6 +40,15 @@ body {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+body {
+  min-height: 100vh;
+  min-height: fill-available;
+  min-height: -webkit-fill-available;
+}
+html {
+  height: fill-available;
+  height: -webkit-fill-available;
 }
 
 .ios-disable-highlight {
