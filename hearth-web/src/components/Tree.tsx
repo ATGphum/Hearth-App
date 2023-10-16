@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import {
   useCategories,
   useCurrentUserProfile,
+  useDailyQuote,
   useJourneys,
 } from "../core/apiHooks";
 import LoadingPage from "../pages/LoadingPage";
@@ -15,9 +16,12 @@ const Tree = () => {
   const { data: journeys } = useJourneys();
   const { data: categories } = useCategories();
 
+  const { data: dailyQuote } = useDailyQuote();
+
   // show loading page while user data is retrieving or 2 seconds is up
   // essentially load the categries into cache but no active need to hide them behind LoadingPage
-  if (!user || !journeys || (!categories && categories)) return <LoadingPage />;
+  if (!user || !journeys || !dailyQuote || (!categories && categories))
+    return <LoadingPage />;
 
   // show user form if essential fields are not present
   if (
