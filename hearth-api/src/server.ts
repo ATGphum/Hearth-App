@@ -8,13 +8,12 @@ import fastifyAuth0Verify from "fastify-auth0-verify";
 import cors from "@fastify/cors";
 import corsObj from "./config/fastify-cors.js";
 import fastifyEnv from "./config/fastify-env.js";
-import { PrismaClient } from "@prisma/client";
 import CoursesController from "./courses/courses-controller.js";
 import PaymentsController from "./payments/payments-controller.js";
 import WebhooksController from "./webhooks/webhooks-controller.js";
 import QuotesController from "./quotes/quotes-controller.js";
-
-const prisma = new PrismaClient();
+import prisma from "./prisma.js";
+import "./quotes/quotes-cron.js";
 
 /**
  * @type {import('fastify').FastifyInstance} Instance of Fastify
