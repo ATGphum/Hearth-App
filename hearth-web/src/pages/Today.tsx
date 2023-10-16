@@ -6,6 +6,7 @@ import { UserContext } from "../context/UserContext";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import DownIcon from "../icons/DownIcon";
 import UpIcon from "../icons/UpIcon";
+import { useDailyQuote } from "../core/apiHooks";
 
 const MotionFlex = m(Flex);
 
@@ -18,6 +19,8 @@ function Today() {
   } = useDisclosure();
 
   const { experienceToDo, journeyToDo } = useContext(UserContext);
+
+  const { data: dailyQuote } = useDailyQuote();
 
   const openMusicDrawer = () => {
     drawerOnOpen();
@@ -69,11 +72,8 @@ function Today() {
           </Flex>
           <Collapse in={showQuote} animateOpacity>
             <Flex direction="column" textAlign={"left"}>
-              <Text textStyle="quote">
-                "To love someone is to learn the song in their heart and sing it
-                to them when they have forgotten.”
-              </Text>
-              <Text>- Arne Garborg</Text>
+              <Text textStyle="quote">"{dailyQuote?.quote_text}”</Text>
+              <Text>- {dailyQuote?.author}</Text>
             </Flex>
           </Collapse>
         </MotionFlex>

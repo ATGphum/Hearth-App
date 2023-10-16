@@ -26,6 +26,13 @@ export interface User {
   trial_completed: boolean;
 }
 
+export interface Quote {
+  id: number;
+  quote_text: string;
+  author: string;
+  todays_quote: boolean;
+}
+
 export enum CourseType {
   journey,
   category,

@@ -12,6 +12,7 @@ import { PrismaClient } from "@prisma/client";
 import CoursesController from "./courses/courses-controller.js";
 import PaymentsController from "./payments/payments-controller.js";
 import WebhooksController from "./webhooks/webhooks-controller.js";
+import QuotesController from "./quotes/quotes-controller.js";
 
 const prisma = new PrismaClient();
 
@@ -58,6 +59,7 @@ fastify.register(WebhooksController, globalRequestObject);
 fastify.register(UserController, globalRequestObject);
 fastify.register(CoursesController, globalRequestObject);
 fastify.register(PaymentsController, globalRequestObject);
+fastify.register(QuotesController, globalRequestObject);
 
 fastify.listen(
   { port: fastifyEnv.port, host: "0.0.0.0" },

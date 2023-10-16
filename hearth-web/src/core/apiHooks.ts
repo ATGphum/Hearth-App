@@ -1,8 +1,12 @@
 import useSWR from "swr";
-import { Category, Journey, User } from "./types";
+import { Category, Journey, Quote, User } from "./types";
 
 export function useCurrentUserProfile() {
   return useSWR<User>(`/v1/users/current-user`);
+}
+
+export function useDailyQuote() {
+  return useSWR<Quote>(`/v1/quotes/get-daily-quote`);
 }
 
 // no automatic revalidation as latest experience hook

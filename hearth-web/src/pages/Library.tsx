@@ -7,6 +7,7 @@ import { useCategories } from "../core/apiHooks";
 import { Category } from "../core/types";
 import CategoryPage from "./CategoryPage";
 import CoursesPage from "./CoursesPage";
+import Spinner from "../components/Spinner";
 
 function Library() {
   const { experienceToDo, journeyToDo } = useContext(UserContext);
@@ -34,6 +35,20 @@ function Library() {
   const openMusicDrawer = () => {
     musicDrawerOnOpen();
   };
+
+  if (!categories)
+    return (
+      <Flex
+        width="100%"
+        flex="1"
+        overflow={"hidden"}
+        position={"relative"}
+        justifyContent={"center"}
+        alignItems="center"
+      >
+        <Spinner />
+      </Flex>
+    );
 
   return (
     <Flex
