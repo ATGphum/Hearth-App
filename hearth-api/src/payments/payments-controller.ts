@@ -69,6 +69,8 @@ export default async function PaymentsController(fastify: FastifyInstance) {
         const paymentIntent =
           invoice.payment_intent as Stripe.PaymentIntent | null;
         let paymentIntentSecret = "";
+        let amountInCents = 0;
+        let currency = "usd";
         let mode = "payment";
         if (!paymentIntent) {
           // create setup intent
@@ -77,12 +79,16 @@ export default async function PaymentsController(fastify: FastifyInstance) {
           mode = "setup";
         } else {
           paymentIntentSecret = paymentIntent.client_secret;
+          amountInCents = paymentIntent.amount;
+          currency = paymentIntent.currency;
         }
         const resp = {
           subscription_id: subscription.id,
           client_secret: paymentIntentSecret,
           frequency: subscription["plan"]["interval"],
           mode: mode,
+          amount_in_cents: amountInCents,
+          currency: currency,
         };
         return resp;
       } catch (error) {
