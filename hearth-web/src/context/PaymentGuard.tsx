@@ -5,6 +5,7 @@ import { Stripe, loadStripe } from "@stripe/stripe-js";
 import viteEnv from "../config/vite-env";
 import { LinkStripeSubscriptionToUser } from "../core/api";
 import { useCurrentUserProfile } from "../core/apiHooks";
+import { trackEvent } from "../core/analytics";
 
 type Props = {
   children: ReactNode;
@@ -21,7 +22,7 @@ const PaymentGuard = ({ children }: Props) => {
     setStripe(stripeObj);
   };
 
-  const { mutate: userMutate } = useCurrentUserProfile();
+  const { data: user, mutate: userMutate } = useCurrentUserProfile();
 
   // Retrieve the "payment_intent_client_secret" query parameter appended to
   // your return_url by Stripe.js
@@ -134,6 +135,16 @@ const PaymentGuard = ({ children }: Props) => {
             }
           });
       }
+      if (user)
+        trackEvent({
+          type: "Subscribe to hearth",
+          plan: frequency,
+          user_id: user.id,
+          email: user.email,
+          name: user.first_name ?? "" + user.last_name ?? "",
+          partner_name:
+            user.partner_first_name ?? "" + user.partner_last_name ?? "",
+        });
     }
   }, [stripe]);
 

@@ -132,7 +132,11 @@ export interface CompleteExperience extends JourneyExperience {
 
 export interface Subscribe {
   type: "Subscribe to hearth";
-  plan: "month" | "year";
+  plan: string;
+  user_id: number;
+  email: string;
+  name: string;
+  partner_name: string;
 }
 
 export type AnalyticsEvent =
