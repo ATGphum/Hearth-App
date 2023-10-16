@@ -80,4 +80,6 @@ export interface SubscriptionDetail {
   client_secret?: string;
   frequency: string;
   mode: paymentMode;
+  amount_in_cents: number;
+  currency: string;
 }

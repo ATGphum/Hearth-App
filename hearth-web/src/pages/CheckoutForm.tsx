@@ -77,9 +77,23 @@ const Checkout = ({ isOpen, onClose, priceId, couponAdded }: Props) => {
         minHeight={"100vh"}
       >
         {subscriptionDetail ? (
-          <Flex h="100%" w="100%" p="1rem" bg={bg} direction="column">
+          <Flex
+            h="100%"
+            w="100%"
+            p="1rem"
+            bg={bg}
+            direction="column"
+            gridRowGap="2rem"
+          >
             <Flex onClick={onClose}>
               <ArrowLeftIcon />
+            </Flex>
+            <Flex direction="column">
+              <Text textStyle="heading.h1XL">Today's amount</Text>
+              <Text textStyle="heading.h2XL">
+                ${subscriptionDetail.amount_in_cents / 100}{" "}
+                {subscriptionDetail.currency.toUpperCase()}
+              </Text>
             </Flex>
             <Elements
               stripe={stripePromise}
@@ -108,9 +122,6 @@ const CheckoutForm = ({
 }) => {
   const stripe = useStripe();
   const elements = useElements();
-  console.log(subscription.mode === paymentMode.payment);
-  console.log(subscription.mode.toString());
-  console.log(paymentMode.payment.toString());
 
   const handleSubmit = async () => {
     if (!stripe || !elements) {

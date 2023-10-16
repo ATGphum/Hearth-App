@@ -68,7 +68,6 @@ export default async function WebhooksController(fastify: FastifyInstance) {
         case "checkout.session.completed":
           // Payment is successful and the subscription is created.
           // You should provision the subscription and save the customer ID to your database.
-          console.log("don't hit");
           break;
         case "invoice.paid":
           // Continue to provision the subscription as payments continue to be made.
@@ -90,7 +89,6 @@ export default async function WebhooksController(fastify: FastifyInstance) {
             });
           } catch (error) {
             fastify.log.error(error);
-            console.log(error);
           }
           break;
         }
