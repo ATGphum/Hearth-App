@@ -74,7 +74,8 @@ const Checkout = ({ isOpen, onClose, priceId, couponAdded }: Props) => {
         flexDirection="column"
         background={"background.fleshOpaque"}
         zIndex={25}
-        minHeight={"100vh"}
+        // minHeight="100vh"
+        minHeight="100%"
       >
         {subscriptionDetail ? (
           <Flex

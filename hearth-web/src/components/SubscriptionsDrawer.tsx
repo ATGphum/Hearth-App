@@ -96,7 +96,8 @@ const SubscriptionsDrawer = ({ isOpen, onClose }: Props) => {
         justifyContent={"space-between"}
         bg="background.fleshOpaque"
         p={0}
-        minHeight={"100vh"}
+        // minHeight="100vh"
+        minHeight="100%"
         textAlign={"left"}
         zIndex={20}
       >

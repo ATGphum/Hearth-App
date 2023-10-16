@@ -16,7 +16,8 @@ export const LayoutNoRedirect = ({ children, hidePadding, bg }: Props) => {
           ? bg
           : "linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
       }
-      minHeight="100vh"
+      // minHeight="100vh"
+      minHeight="100%"
       padding={hidePadding ? "0rem" : "1rem"}
       id="mounter"
       position="relative"

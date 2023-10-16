@@ -65,7 +65,8 @@ function UserCreateForm() {
 
   return (
     <Flex
-      minHeight="100vh"
+      // minHeight="100vh"
+      minHeight="100%"
       position="relative"
       overflow={"hidden"}
       bg="linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
@@ -84,7 +85,8 @@ function UserCreateForm() {
           width="100%"
           flex="1"
           p="1rem"
-          height="100vh"
+          // minHeight="100vh"
+          minHeight="100%"
           background="linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
           zIndex={5}
         >
@@ -270,7 +272,8 @@ function UserCreateForm() {
               bottom="0"
               left="0"
               zIndex={10}
-              height="100vh"
+              // height="100vh"
+              height="100%"
               background="linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
               p="1rem"
               display={"flex"}
@@ -350,7 +353,8 @@ function UserCreateForm() {
               bottom="0"
               left="0"
               direction="column"
-              height="100vh"
+              // height="100vh"
+              height="100%"
               width={"100%"}
               alignItems={"center"}
               gridRowGap="1rem"

@@ -27,7 +27,8 @@ const LoadingPage = ({ bg }: Props) => {
           ? bg
           : "linear-gradient(180deg, #FFBB79 2.78%, #FFDEC0 31.35%, #FFDEC0 98.99%, #FFDEC0 98.99%)"
       }
-      height="100vh"
+      // minHeight="100vh"
+      minHeight="100%"
       position="relative"
       overflow={"hidden"}
       justifyContent={"center"}
