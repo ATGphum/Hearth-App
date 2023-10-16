@@ -103,7 +103,7 @@ button:focus-visible {
   }
 }
 
-.musicImage {
+/* .musicImage {
   animation: rotate 50s linear infinite;
 }
 
@@ -118,4 +118,4 @@ button:focus-visible {
 
 .musicImagePaused {
   animation-play-state: paused;
-}
+} */
