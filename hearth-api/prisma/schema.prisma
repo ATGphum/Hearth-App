@@ -22,7 +22,6 @@ model User {
   email_reminders Boolean? @default(false)
   instagram_username String? @db.VarChar(255)
   connection_time ConnectionTimeChoices? 
-  subscription_status Boolean @default(false)
   user_course UserCourse[]
   user_experience UserExperience[]
   date_joined DateTime @default(now())
@@ -93,4 +92,11 @@ model UserExperience {
      experience_id Int
      user User @relation(fields: [user_id], references: [id])
      user_id Int
+}
+
+model Quote {
+   id Int @id @default(autoincrement()) 
+   quote_text String
+   author String @db.VarChar(255)
+   todays_quote Boolean @default(false)
 }

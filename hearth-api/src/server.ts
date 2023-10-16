@@ -8,12 +8,12 @@ import fastifyAuth0Verify from "fastify-auth0-verify";
 import cors from "@fastify/cors";
 import corsObj from "./config/fastify-cors.js";
 import fastifyEnv from "./config/fastify-env.js";
-import { PrismaClient } from "@prisma/client";
 import CoursesController from "./courses/courses-controller.js";
 import PaymentsController from "./payments/payments-controller.js";
 import WebhooksController from "./webhooks/webhooks-controller.js";
-
-const prisma = new PrismaClient();
+import QuotesController from "./quotes/quotes-controller.js";
+import prisma from "./prisma.js";
+import "./quotes/quotes-cron.js";
 
 /**
  * @type {import('fastify').FastifyInstance} Instance of Fastify
@@ -58,6 +58,7 @@ fastify.register(WebhooksController, globalRequestObject);
 fastify.register(UserController, globalRequestObject);
 fastify.register(CoursesController, globalRequestObject);
 fastify.register(PaymentsController, globalRequestObject);
+fastify.register(QuotesController, globalRequestObject);
 
 fastify.listen(
   { port: fastifyEnv.port, host: "0.0.0.0" },
