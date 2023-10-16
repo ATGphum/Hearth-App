@@ -1,12 +1,11 @@
 import { Collapse, Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
+import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useContext, useState } from "react";
 import MusicDrawer from "../components/MusicDrawer";
 import { UserContext } from "../context/UserContext";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
 import DownIcon from "../icons/DownIcon";
 import UpIcon from "../icons/UpIcon";
-import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
-import { trackEvent } from "../core/analytics";
 
 const MotionFlex = m(Flex);
 
@@ -20,16 +19,8 @@ function Today() {
 
   const { experienceToDo, journeyToDo } = useContext(UserContext);
 
-  const openMusicDrawer = (journeyName: string, experienceName: string) => {
+  const openMusicDrawer = () => {
     drawerOnOpen();
-
-    // Amplitude track event
-    trackEvent({
-      type: "Click Up Next",
-      journey_name: journeyName,
-      experience_name: experienceName,
-      from: "Today Page",
-    });
   };
 
   return (
@@ -105,12 +96,7 @@ function Today() {
             borderTopRadius="3rem"
             gridRowGap="0.5rem"
             background={`linear-gradient(171deg, ${experienceToDo?.color} 6.76%, rgba(248, 231, 96, 0.00) 93.7%)`}
-            onClick={() =>
-              openMusicDrawer(
-                journeyToDo?.name ?? "",
-                experienceToDo?.name ?? ""
-              )
-            }
+            onClick={() => openMusicDrawer()}
           >
             <Flex
               justifyContent={"space-between"}

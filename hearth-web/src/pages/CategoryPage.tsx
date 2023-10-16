@@ -3,7 +3,6 @@ import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useState } from "react";
 import ReactDOM from "react-dom";
 import MusicDrawer from "../components/MusicDrawer";
-import { trackEvent } from "../core/analytics";
 import { Category, Experience } from "../core/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
@@ -42,12 +41,6 @@ const CategoryPage = ({ isOpen, onClose, openedCourse }: Props) => {
         onDragEnd={(_, info) => {
           if (info.velocity.x > 20 && info.offset.x > 50) {
             onClose();
-
-            // Amplitude track event
-            trackEvent({
-              type: "Close Page",
-              page_type: "Course/Experience Page",
-            });
           }
         }}
         transition={{ damping: 0 }}
@@ -76,12 +69,6 @@ const CategoryPage = ({ isOpen, onClose, openedCourse }: Props) => {
         <Flex
           onClick={() => {
             onClose();
-
-            // Amplitude track event
-            trackEvent({
-              type: "Close Page",
-              page_type: "Course/Experience Page",
-            });
           }}
         >
           <ArrowLeftIcon />
@@ -110,12 +97,6 @@ const CategoryPage = ({ isOpen, onClose, openedCourse }: Props) => {
                   onClick={() => {
                     setOpenedExperience(exp);
                     drawerOnOpen();
-
-                    // Amplitude track event
-                    trackEvent({
-                      type: "Click Experience",
-                      experience_name: exp.name,
-                    });
                   }}
                 >
                   <Text>{exp.name}</Text> <ArrowRightIcon />

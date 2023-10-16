@@ -1,13 +1,12 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
+import { useContext, useState } from "react";
+import ReactDOM from "react-dom";
+import MusicDrawer from "../components/MusicDrawer";
+import { UserContext } from "../context/UserContext";
+import { Experience, Journey } from "../core/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import ArrowRightIcon from "../icons/ArrowRightIcon";
-import MusicDrawer from "../components/MusicDrawer";
-import ReactDOM from "react-dom";
-import { Experience, Journey } from "../core/types";
-import { useContext, useState } from "react";
-import { UserContext } from "../context/UserContext";
-import { trackEvent } from "../core/analytics";
 
 interface Props {
   isOpen: boolean;
@@ -45,12 +44,6 @@ const JourneyPage = ({ isOpen, onClose, openedCourse }: Props) => {
         onDragEnd={(_, info) => {
           if (info.velocity.x > 20 && info.offset.x > 50) {
             onClose();
-
-            // Amplitude track event
-            trackEvent({
-              type: "Close Page",
-              page_type: "Course/Experience Page",
-            });
           }
         }}
         transition={{ damping: 0 }}
@@ -79,12 +72,6 @@ const JourneyPage = ({ isOpen, onClose, openedCourse }: Props) => {
         <Flex
           onClick={() => {
             onClose();
-
-            // Amplitude track event
-            trackEvent({
-              type: "Close Page",
-              page_type: "Course/Experience Page",
-            });
           }}
         >
           <ArrowLeftIcon />
@@ -120,12 +107,6 @@ const JourneyPage = ({ isOpen, onClose, openedCourse }: Props) => {
                   onClick={() => {
                     setOpenedExperience(exp);
                     drawerOnOpen();
-
-                    // Amplitude track event
-                    trackEvent({
-                      type: "Click Experience",
-                      experience_name: exp.name,
-                    });
                   }}
                   opacity={exp.is_available ? 1 : 0.4}
                   pointerEvents={!exp.is_available ? "none" : undefined}
