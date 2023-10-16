@@ -3,7 +3,6 @@ import { Flex, Text, useDisclosure, useOutsideClick } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useRef } from "react";
 import ReactDOM from "react-dom";
-import { trackEvent } from "../core/analytics";
 import BottomPopupDrawer from "./BottomPopupDrawer";
 
 interface Props {
@@ -43,8 +42,6 @@ const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
             isOpen={closeDrawerIsOpen}
             callback={() => {
               logout({ logoutParams: { returnTo: window.location.origin } });
-              // Amplitude track event
-              trackEvent({ type: "Logout" });
             }}
           />
         )}

@@ -6,7 +6,6 @@ import { useJourneys } from "../core/apiHooks";
 import { Journey } from "../core/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import JourneyPage from "./JourneyPage";
-import { trackEvent } from "../core/analytics";
 
 interface Props {
   isOpen: boolean;
@@ -99,12 +98,6 @@ const Courses = ({
             // Math.abs(info.offset.y) < 70
           ) {
             onClose();
-
-            // Amplitude track event
-            trackEvent({
-              type: "Close Page",
-              page_type: "Courses/Journeys Page",
-            });
           }
         }}
         transition={{ damping: 0 }}
@@ -125,12 +118,6 @@ const Courses = ({
         <Flex
           onClick={() => {
             onClose();
-
-            // Amplitude track event
-            trackEvent({
-              type: "Close Page",
-              page_type: "Courses/Journeys Page",
-            });
           }}
         >
           <ArrowLeftIcon />
@@ -157,12 +144,6 @@ const Courses = ({
                 onClick={() => {
                   setOpenedJourney(journey);
                   courseDrawerOnOpen();
-
-                  // Amplitude track event
-                  trackEvent({
-                    type: "Click Journey",
-                    journey_name: journey.name,
-                  });
                 }}
                 opacity={journey.is_available ? 1 : 0.4}
                 pointerEvents={!journey.is_available ? "none" : undefined}

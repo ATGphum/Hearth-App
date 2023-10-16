@@ -3,7 +3,6 @@ import { AnimatePresence, LazyMotion, domMax } from "framer-motion";
 import { useContext, useState } from "react";
 import MusicDrawer from "../components/MusicDrawer";
 import { UserContext } from "../context/UserContext";
-import { trackEvent } from "../core/analytics";
 import { useCategories } from "../core/apiHooks";
 import { Category } from "../core/types";
 import CategoryPage from "./CategoryPage";
@@ -32,16 +31,8 @@ function Library() {
     undefined | Category
   >();
 
-  const openMusicDrawer = (journeyName: string, experienceName: string) => {
+  const openMusicDrawer = () => {
     musicDrawerOnOpen();
-
-    // Amplitude track event
-    trackEvent({
-      type: "Click Up Next",
-      journey_name: journeyName,
-      experience_name: experienceName,
-      from: "Library Page",
-    });
   };
 
   return (
@@ -100,12 +91,7 @@ function Library() {
               width="100%"
               borderRadius="2.75rem"
               borderBottom="1px solid rgba(0, 0, 0, 0.40)"
-              onClick={() =>
-                openMusicDrawer(
-                  journeyToDo?.name ?? "",
-                  experienceToDo?.name ?? ""
-                )
-              }
+              onClick={() => openMusicDrawer()}
             >
               <Image
                 m="1rem"

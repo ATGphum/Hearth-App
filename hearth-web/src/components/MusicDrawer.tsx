@@ -57,6 +57,7 @@ const MusicDrawer = ({
   const [isLastExpInJourney, setIsLastExpInJourney] = useState(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [firstPlayTriggered, setFirstPlayTriggered] = useState(false);
   const [isMusicLoaded, setIsMusicLoaded] = useState(false);
   // isToggling only used to determine if dragging is being undergone
   // to protect from pausing the music when it is being dragged in app
@@ -120,11 +121,16 @@ const MusicDrawer = ({
         }
         setIsCompletedNewExp(true);
       }
-      // Amplitude track event
+
       trackEvent({
         type: "Complete Experience",
         journey_name: parentCourse.name,
         experience_name: experienceToDo?.name ?? "",
+        user_id: user.id,
+        email: user.email,
+        name: user.first_name ?? "" + user.last_name ?? "",
+        partner_name:
+          user.partner_first_name ?? "" + user.partner_last_name ?? "",
       });
     }
   };
@@ -134,30 +140,26 @@ const MusicDrawer = ({
     setIsMusicLoaded(true);
   };
 
-  const togglePlay = (pressedPlay?: boolean) => {
+  const togglePlay = () => {
     if (isPlaying) {
       audioRef.current?.pause();
-
-      // Amplitude track event
-      pressedPlay &&
-        trackEvent({
-          type: "Click Play Button",
-          journey_name: parentCourse.name,
-          experience_name: openedExperience.name,
-          play: false,
-        });
     } else {
       audioRef.current?.play();
       setShowText(false);
 
-      // Amplitude track event
-      pressedPlay &&
+      if (!firstPlayTriggered && user) {
+        setFirstPlayTriggered(true);
         trackEvent({
-          type: "Click Play Button",
+          type: "Start Experience",
           journey_name: parentCourse.name,
-          experience_name: openedExperience.name,
-          play: true,
+          experience_name: experienceToDo?.name ?? "",
+          user_id: user.id,
+          email: user.email,
+          name: user.first_name ?? "" + user.last_name ?? "",
+          partner_name:
+            user.partner_first_name ?? "" + user.partner_last_name ?? "",
         });
+      }
     }
     setIsPlaying(!isPlaying);
   };
@@ -192,27 +194,11 @@ const MusicDrawer = ({
     if (audioRef.current) audioRef.current.currentTime = currentTime - 10;
     setCurrentTime(currentTime - 10);
     if (isPlaying) audioRef.current?.play();
-
-    // Amplitude track event
-    trackEvent({
-      type: "Click Rewind Button",
-      journey_name: parentCourse.name,
-      experience_name: openedExperience.name,
-      forward: false,
-    });
   };
 
   const forward = () => {
     if (audioRef.current) audioRef.current.currentTime = currentTime + 10;
     setCurrentTime(currentTime + 10);
-
-    // Amplitude track event
-    trackEvent({
-      type: "Click Rewind Button",
-      journey_name: parentCourse.name,
-      experience_name: openedExperience.name,
-      forward: true,
-    });
   };
 
   useEffect(() => {
@@ -228,13 +214,6 @@ const MusicDrawer = ({
     // if this is slow in production, add function to optimistically update
     if (isCompletedNewExp) journeyMutate();
     onClose();
-
-    // Amplitude track event
-    trackEvent({
-      type: "Close Music Drawer",
-      journey_name: parentCourse.name,
-      experience_name: openedExperience.name,
-    });
   };
 
   const pictureVariants = {

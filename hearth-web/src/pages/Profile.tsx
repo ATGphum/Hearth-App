@@ -2,7 +2,6 @@ import { Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import SettingsDrawer from "../components/SettingsDrawer";
 import SubscriptionsDrawer from "../components/SubscriptionsDrawer";
-import { trackEvent } from "../core/analytics";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { formatDate } from "../core/helpers";
 
@@ -94,9 +93,6 @@ function Profile() {
             <Flex
               onClick={() => {
                 settingsDrawerOnOpen();
-
-                // Amplitude track event
-                trackEvent({ type: "Click Menu Bar" });
               }}
               justifyContent={"center"}
               className="ios-disable-highlight"

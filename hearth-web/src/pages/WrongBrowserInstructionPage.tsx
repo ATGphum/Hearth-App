@@ -7,6 +7,8 @@ import {
 } from "@chakra-ui/react";
 import { LayoutNoRedirect } from "../components/LayoutNoRedirect";
 import theme from "../theme/chakra-theme";
+import { useEffect } from "react";
+import { trackEvent } from "../core/analytics";
 
 function WrongBrowserInstructionPage() {
   const userAgent = window.navigator.userAgent;
@@ -22,6 +24,11 @@ function WrongBrowserInstructionPage() {
 }
 
 const IOSInstallPage = () => {
+  useEffect(() => {
+    trackEvent({
+      type: "Land on IOS popup browser",
+    });
+  }, []);
   return (
     <Flex
       direction="column"
@@ -50,6 +57,11 @@ const IOSInstallPage = () => {
 };
 
 const AndroidInstallPage = () => {
+  useEffect(() => {
+    trackEvent({
+      type: "Land on Android popup browser",
+    });
+  }, []);
   return (
     <Flex
       direction="column"
