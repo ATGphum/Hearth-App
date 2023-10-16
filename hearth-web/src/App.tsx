@@ -3,6 +3,7 @@ import "./App.css";
 import Tree from "./components/Tree";
 import { initialiseAnalytics } from "./core/analytics";
 import LoadingPage from "./pages/LoadingPage";
+import { Flex } from "@chakra-ui/react";
 
 // const DesktopPage = lazy(() => import("./pages/DesktopPage"));
 // const InstallationPage = lazy(() => import("./pages/InstallationMobilePage"));
@@ -19,11 +20,13 @@ function App() {
     initialiseAnalytics();
   }, []);
   return (
-    <Suspense fallback={<LoadingPage />}>
-      <AppContextProviders>
-        <Tree />
-      </AppContextProviders>
-    </Suspense>
+    <Flex className="appFrame">
+      <Suspense fallback={<LoadingPage />}>
+        <AppContextProviders>
+          <Tree />
+        </AppContextProviders>
+      </Suspense>
+    </Flex>
   );
   // if (installable === "installable" || viteEnv.environment === "development") {
   //   if (isStandalone || viteEnv.environment === "development") {

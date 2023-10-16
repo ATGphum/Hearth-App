@@ -31,7 +31,7 @@ body {
   position: fixed;
   overflow: hidden;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   /* prevent text selection */
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -40,12 +40,19 @@ body {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
-}
-body {
-  min-height: 100vh;
-  min-height: fill-available;
+  min-height: 100vh; /* fall-back */
+  min-height: -moz-available;
   min-height: -webkit-fill-available;
+  min-height: fill-available;
 }
+
+.appFrame {
+  min-height: 100vh; /* fall-back */
+  min-height: -moz-available;
+  min-height: -webkit-fill-available;
+  min-height: fill-available;
+}
+
 html {
   height: fill-available;
   height: -webkit-fill-available;
