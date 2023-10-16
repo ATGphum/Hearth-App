@@ -9,15 +9,14 @@ import {
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useState } from "react";
 import ReactDOM from "react-dom";
+import viteEnv from "../config/vite-env";
 import { CancelStripeSubscription } from "../core/api";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { SubscriptionType } from "../core/types";
-import ArrowRightIcon from "../icons/ArrowRightIcon";
+import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import Checkout from "../pages/CheckoutForm";
 import BottomPopupDrawer from "./BottomPopupDrawer";
 import ImageLogo from "./ImageLogo";
-import viteEnv from "../config/vite-env";
-import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 
 interface Props {
   isOpen: boolean;
