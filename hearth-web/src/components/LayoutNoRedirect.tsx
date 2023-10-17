@@ -1,5 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import TextLogo from "./TextLogo";
+import { IsStandalone } from "../core/helpers";
 
 interface Props {
   children: React.ReactNode;
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export const LayoutNoRedirect = ({ children, hidePadding, bg }: Props) => {
+  const isStandalone = IsStandalone();
   return (
     <Flex
       direction="column"
@@ -24,14 +26,18 @@ export const LayoutNoRedirect = ({ children, hidePadding, bg }: Props) => {
       position="relative"
       overflow={"hidden"}
     >
-      <Flex
-        direction="column"
-        justifyContent={"center"}
-        pb="1rem"
-        pt={hidePadding ? "1rem" : "0rem"}
-      >
-        <TextLogo />
-      </Flex>
+      {isStandalone ? (
+        <Flex
+          direction="column"
+          justifyContent={"center"}
+          pb="1rem"
+          pt={hidePadding ? "1rem" : "0rem"}
+        >
+          <TextLogo />
+        </Flex>
+      ) : (
+        <Flex p="0.5rem" />
+      )}
       <Flex
         direction="column"
         flex="1"

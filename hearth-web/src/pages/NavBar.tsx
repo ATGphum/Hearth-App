@@ -2,6 +2,7 @@ import { Flex, Image } from "@chakra-ui/react";
 import ProfileIcon from "../svg/ProfileIcon.svg";
 import TodayIcon from "../svg/TodayIcon.svg";
 import LibraryIcon from "../svg/LibraryIcon.svg";
+import { IsStandalone } from "../core/helpers";
 
 interface navProps {
   tabChange: (pageNumber: number) => void;
@@ -9,6 +10,7 @@ interface navProps {
 }
 
 const NavBar = ({ tabChange, selectedPage }: navProps) => {
+  const isStandalone = IsStandalone();
   return (
     <Flex
       width="100%"
@@ -18,7 +20,7 @@ const NavBar = ({ tabChange, selectedPage }: navProps) => {
       maxW="40rem"
       alignSelf={"flex-start"}
       alignItems={"center"}
-      pb="1.5rem"
+      pb={isStandalone ? "1.5rem" : 0}
     >
       <Flex
         p="0.75rem"
