@@ -14,14 +14,13 @@ const Tree = () => {
   const { data: user } = useCurrentUserProfile();
 
   const { data: journeys } = useJourneys();
-  const { data: categories } = useCategories();
 
-  const { data: dailyQuote } = useDailyQuote();
+  //prefetch data
+  useCategories();
 
-  // show loading page while user data is retrieving or 2 seconds is up
-  // essentially load the categries into cache but no active need to hide them behind LoadingPage
-  if (!user || !journeys || !dailyQuote || (!categories && categories))
-    return <LoadingPage />;
+  useDailyQuote();
+
+  if (!user || !journeys) return <LoadingPage />;
 
   // show user form if essential fields are not present
   if (

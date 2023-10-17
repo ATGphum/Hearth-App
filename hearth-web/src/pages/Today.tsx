@@ -7,6 +7,7 @@ import ArrowRightIcon from "../icons/ArrowRightIcon";
 import DownIcon from "../icons/DownIcon";
 import UpIcon from "../icons/UpIcon";
 import { useDailyQuote } from "../core/apiHooks";
+import Spinner from "../components/Spinner";
 
 const MotionFlex = m(Flex);
 
@@ -62,20 +63,28 @@ function Today() {
           right="0"
           bottom="0"
         >
-          <Flex
-            width="100%"
-            justifyContent={"space-between"}
-            onClick={() => setShowQuote(!showQuote)}
-          >
-            <Text textStyle="heading.h2">Daily quote</Text>
-            <Flex>{showQuote ? <UpIcon /> : <DownIcon />}</Flex>
-          </Flex>
-          <Collapse in={showQuote} animateOpacity>
-            <Flex direction="column" textAlign={"left"}>
-              <Text textStyle="quote">"{dailyQuote?.quote_text}”</Text>
-              <Text>- {dailyQuote?.author}</Text>
+          {!dailyQuote ? (
+            <Flex justifyContent={"center"}>
+              <Spinner />
             </Flex>
-          </Collapse>
+          ) : (
+            <>
+              <Flex
+                width="100%"
+                justifyContent={"space-between"}
+                onClick={() => setShowQuote(!showQuote)}
+              >
+                <Text textStyle="heading.h2">Daily quote</Text>
+                <Flex>{showQuote ? <UpIcon /> : <DownIcon />}</Flex>
+              </Flex>
+              <Collapse in={showQuote} animateOpacity>
+                <Flex direction="column" textAlign={"left"}>
+                  <Text textStyle="quote">"{dailyQuote?.quote_text}”</Text>
+                  <Text>- {dailyQuote?.author}</Text>
+                </Flex>
+              </Collapse>
+            </>
+          )}
         </MotionFlex>
       </LazyMotion>
       {experienceToDo && (
