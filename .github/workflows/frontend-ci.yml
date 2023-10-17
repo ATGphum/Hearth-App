@@ -61,5 +61,5 @@ jobs:
           HD_VITE_ENV: production
           HD_VITE_AUTH0_DOMAIN: auth.hearthtogether.com
           HD_VITE_AUTH0_WEB_ID: ${{secrets.VITE_AUTH0_WEB_ID}}
-          HD_VITE_AUTH0_API_AUDIENCE: https://hearth.au.auth0.com/api/v2/
+          HD_VITE_AUTH0_API_AUDIENCE: https://hearth-management-api
           HD_VITE_AUTH0_SCOPE: read:current_user openid email offline_access
