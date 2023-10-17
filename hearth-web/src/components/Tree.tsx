@@ -20,14 +20,13 @@ const Tree = () => {
 
   useDailyQuote();
 
-  if (!user || !journeys) return <LoadingPage />;
-
   // show user form if essential fields are not present
   if (
-    !user.first_name ||
-    !user.last_name ||
-    !user.partner_first_name ||
-    !user.partner_last_name
+    user &&
+    (!user.first_name ||
+      !user.last_name ||
+      !user.partner_first_name ||
+      !user.partner_last_name)
   ) {
     return (
       <Suspense fallback={<LoadingPage />}>
@@ -35,6 +34,9 @@ const Tree = () => {
       </Suspense>
     );
   }
+
+  if (!user || !journeys) return <LoadingPage />;
+
   return (
     <Suspense fallback={<LoadingPage />}>
       <HomePage />
