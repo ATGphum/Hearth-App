@@ -1,11 +1,12 @@
 import { Flex, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { useJourneys } from "../core/apiHooks";
 import { Journey } from "../core/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import JourneyPage from "./JourneyPage";
+import { UserContext } from "../context/UserContext";
 
 interface Props {
   isOpen: boolean;
@@ -78,6 +79,8 @@ const Courses = ({
   const { data: journeys } = useJourneys();
   const backgroundColor = "#B694F7";
 
+  const { journeyToDo } = useContext(UserContext);
+
   if (!mounter) return null;
   return ReactDOM.createPortal(
     <LazyMotion features={domMax}>
@@ -135,37 +138,45 @@ const Courses = ({
           <Text textStyle="body">Make connection time a meaningful habit.</Text>
           <Flex direction="column" gridRowGap="0.5rem" my="0.5rem">
             {journeys?.map((journey) => (
-              <Flex
-                key={journey.id}
-                p="1rem"
-                bg={`linear-gradient(156deg, ${journey.color} 15.57%, rgba(250, 251, 16, 0.00) 85.56%)`}
-                borderBottom="1px solid rgba(0, 0, 0, 0.60)"
-                borderRadius="2.75rem"
-                onClick={() => {
-                  setOpenedJourney(journey);
-                  courseDrawerOnOpen();
-                }}
-                opacity={journey.is_available ? 1 : 0.4}
-                pointerEvents={!journey.is_available ? "none" : undefined}
-                gridColumnGap={"1rem"}
-                alignItems={"center"}
-              >
-                <Image
-                  height="4rem"
-                  src={journey.experiences[0].image_link}
-                  objectFit={"contain"}
-                />
-                <Flex direction="column" textAlign={"left"}>
-                  {journey.completed && (
-                    <Text textStyle={"detailText"}>Completed</Text>
-                  )}
-                  {journey.is_available && !journey.completed && (
-                    <Text textStyle={"detailText"}>In progress</Text>
-                  )}
+              <>
+                {" "}
+                {journeyToDo && journeyToDo.level + 1 === journey.level && (
+                  <Text textStyle="body" pt="0.5rem" pb="1rem">
+                    Complete {journeyToDo.name} to access {journey.name}.
+                  </Text>
+                )}
+                <Flex
+                  key={journey.id}
+                  p="1rem"
+                  bg={`linear-gradient(156deg, ${journey.color} 15.57%, rgba(250, 251, 16, 0.00) 85.56%)`}
+                  borderBottom="1px solid rgba(0, 0, 0, 0.60)"
+                  borderRadius="2.75rem"
+                  onClick={() => {
+                    setOpenedJourney(journey);
+                    courseDrawerOnOpen();
+                  }}
+                  opacity={journey.is_available ? 1 : 0.4}
+                  pointerEvents={!journey.is_available ? "none" : undefined}
+                  gridColumnGap={"1rem"}
+                  alignItems={"center"}
+                >
+                  <Image
+                    height="4rem"
+                    src={journey.experiences[0].image_link}
+                    objectFit={"contain"}
+                  />
+                  <Flex direction="column" textAlign={"left"}>
+                    {journey.completed && (
+                      <Text textStyle={"detailText"}>Completed</Text>
+                    )}
+                    {journey.is_available && !journey.completed && (
+                      <Text textStyle={"detailText"}>In progress</Text>
+                    )}
 
-                  <Text textStyle="heading.h2">{journey.name}</Text>
+                    <Text textStyle="heading.h2">{journey.name}</Text>
+                  </Flex>
                 </Flex>
-              </Flex>
+              </>
             ))}
           </Flex>
         </Flex>
