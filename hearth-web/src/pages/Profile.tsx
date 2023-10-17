@@ -4,6 +4,7 @@ import SettingsDrawer from "../components/SettingsDrawer";
 import SubscriptionsDrawer from "../components/SubscriptionsDrawer";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { formatDate } from "../core/helpers";
+import InstructionsDrawer from "../components/InstructionsDrawer";
 
 const MotionFlex = m(Flex);
 
@@ -17,6 +18,11 @@ function Profile() {
     isOpen: subscriptionsIsOpen,
     onOpen: subscriptionsOnOpen,
     onClose: subscriptionsOnClose,
+  } = useDisclosure();
+  const {
+    isOpen: instructionsIsOpen,
+    onOpen: instructionsOnOpen,
+    onClose: instructionsOnClose,
   } = useDisclosure();
 
   const { data: user } = useCurrentUserProfile();
@@ -42,6 +48,15 @@ function Profile() {
             onClose={settingsDrawerOnClose}
             isOpen={settingsDrawerIsOpen}
             subscriptionsOnOpen={subscriptionsOnOpen}
+            instructionsOnOpen={instructionsOnOpen}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {instructionsIsOpen && (
+          <InstructionsDrawer
+            onClose={instructionsOnClose}
+            isOpen={instructionsIsOpen}
           />
         )}
       </AnimatePresence>
