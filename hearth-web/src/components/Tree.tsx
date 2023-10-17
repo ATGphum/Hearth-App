@@ -16,9 +16,7 @@ const Tree = () => {
   const { data: journeys } = useJourneys();
 
   //prefetch data
-  useCategories();
-
-  useDailyQuote();
+  // useCategories();
 
   // show user form if essential fields are not present
   if (
