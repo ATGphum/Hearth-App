@@ -26,10 +26,20 @@ export default async function UserController(fastify: FastifyInstance) {
         where: { username: sub },
       });
       if (!user) {
-        fastify.log.info(`creating new user for user ${sub}`);
-        user = await fastify.prisma.user.create({
-          data: { username: sub, email: email },
+        const searchUser: User = await fastify.prisma.user.findUnique({
+          where: { email: email },
         });
+        if (!searchUser) {
+          fastify.log.info(`creating new user for user ${sub}`);
+          user = await fastify.prisma.user.create({
+            data: { username: sub, email: email },
+          });
+        } else {
+          await fastify.prisma.user.update({
+            where: { id: searchUser.id },
+            data: { username: sub },
+          });
+        }
       }
       //temporary code, remove a week after initial release
       if (!user.email) {
