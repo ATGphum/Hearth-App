@@ -4,16 +4,23 @@ import { AnimatePresence, LazyMotion, domMax, m } from "framer-motion";
 import { useRef } from "react";
 import ReactDOM from "react-dom";
 import BottomPopupDrawer from "./BottomPopupDrawer";
+import { IsStandalone } from "../core/helpers";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   subscriptionsOnOpen: () => void;
+  instructionsOnOpen: () => void;
 }
 
 const MotionFlex = m(Flex);
 
-const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
+const SettingsDrawer = ({
+  isOpen,
+  onClose,
+  subscriptionsOnOpen,
+  instructionsOnOpen,
+}: Props) => {
   const { logout } = useAuth0();
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -29,6 +36,8 @@ const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
   } = useDisclosure();
 
   const mounter = document.getElementById("appContainer");
+
+  const isStandalone = IsStandalone();
 
   if (!mounter) return null;
 
@@ -128,6 +137,21 @@ const SettingsDrawer = ({ isOpen, onClose, subscriptionsOnOpen }: Props) => {
             >
               Privacy Policy
             </Text>
+            {!isStandalone && (
+              <Text
+                textStyle="action"
+                p="0.75rem 1rem"
+                borderBottom="1px solid"
+                borderColor="divider.flesh"
+                onClick={() => {
+                  onClose();
+                  instructionsOnOpen();
+                }}
+              >
+                Install App
+              </Text>
+            )}
+
             <Text
               textStyle="action"
               p="0.75rem 1rem"
