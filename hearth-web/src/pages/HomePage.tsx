@@ -6,9 +6,13 @@ import Library from "./Library";
 import NavBar from "./NavBar";
 import Profile from "./Profile";
 import Today from "./Today";
+import { useCategories } from "../core/apiHooks";
 
 function HomePage() {
   const [page, setPage] = useState(0);
+
+  //prefetch data
+  useCategories();
 
   return (
     <LayoutNoRedirect
