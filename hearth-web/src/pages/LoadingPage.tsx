@@ -12,7 +12,9 @@ const LoadingPage = ({ bg }: Props) => {
   // login guard
   useEffect(() => {
     if (!isLoading && !isAuthenticated && imageLoaded) {
-      loginWithRedirect().catch((e) => console.error("Error occurred", e));
+      loginWithRedirect({
+        authorizationParams: { screen_hint: "signup" },
+      }).catch((e) => console.error("Error occurred", e));
     }
   }, [loginWithRedirect, isLoading, isAuthenticated, imageLoaded]);
   const handleImageLoad = () => {
