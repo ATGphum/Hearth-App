@@ -26,14 +26,17 @@ export const LayoutNoRedirect = ({ children, hidePadding, bg }: Props) => {
       position="relative"
       overflow={"hidden"}
     >
-      {isStandalone && (
+      {isStandalone ? (
         <Flex
           direction="column"
           justifyContent={"center"}
           pt={hidePadding ? "1rem" : "0rem"}
+          pb="1rem"
         >
           <TextLogo />
         </Flex>
+      ) : (
+        <Flex pb="1rem" />
       )}
       <Flex
         direction="column"

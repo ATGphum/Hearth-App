@@ -95,6 +95,7 @@ function Library() {
           width="100%"
           flex="1"
           p="1rem"
+          pt={0}
           gridRowGap="2rem"
         >
           {experienceToDo && (

@@ -56,6 +56,7 @@ function Today() {
           direction="column"
           width="100%"
           padding="2rem"
+          pt="1rem"
           gridRowGap="1rem"
           position="absolute"
           top="0"
