@@ -20,8 +20,8 @@ const LoadingPage = ({ bg }: Props) => {
   };
   return (
     <Flex
-      flex={1}
       direction="column"
+      flex={1}
       alignItems="center"
       background={
         bg

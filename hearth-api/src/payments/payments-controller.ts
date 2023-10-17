@@ -90,6 +90,7 @@ export default async function PaymentsController(fastify: FastifyInstance) {
           amount_in_cents: amountInCents,
           currency: currency,
         };
+
         return resp;
       } catch (error) {
         Reply.code(400).send({ error: { message: error.message } });
