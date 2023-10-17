@@ -1,10 +1,5 @@
 import { Suspense, lazy } from "react";
-import {
-  useCategories,
-  useCurrentUserProfile,
-  useDailyQuote,
-  useJourneys,
-} from "../core/apiHooks";
+import { useCurrentUserProfile, useJourneys } from "../core/apiHooks";
 import LoadingPage from "../pages/LoadingPage";
 
 const HomePage = lazy(() => import("../pages/HomePage"));
