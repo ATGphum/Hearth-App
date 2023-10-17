@@ -48,6 +48,7 @@ body {
 
 .appFrame {
   min-height: 100dvh; /* fall-back */
+  min-width: 100dvw;
   /* min-height: -moz-available;
   min-height: -webkit-fill-available;
   min-height: fill-available; */
