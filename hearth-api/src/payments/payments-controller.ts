@@ -65,6 +65,7 @@ export default async function PaymentsController(fastify: FastifyInstance) {
           trial_period_days: trialDays,
           coupon: coupon,
         });
+
         const invoice = subscription.latest_invoice as Stripe.Invoice;
         const paymentIntent =
           invoice.payment_intent as Stripe.PaymentIntent | null;
@@ -72,6 +73,7 @@ export default async function PaymentsController(fastify: FastifyInstance) {
         let amountInCents = 0;
         let currency = "usd";
         let mode = "payment";
+
         if (!paymentIntent) {
           // create setup intent
           const setupIntent = await stripe.setupIntents.create();
@@ -82,7 +84,9 @@ export default async function PaymentsController(fastify: FastifyInstance) {
           amountInCents = paymentIntent.amount;
           currency = paymentIntent.currency;
         }
+
         const resp = {
+          customer_id: customerId,
           subscription_id: subscription.id,
           client_secret: paymentIntentSecret,
           frequency: subscription["plan"]["interval"],
@@ -142,6 +146,45 @@ export default async function PaymentsController(fastify: FastifyInstance) {
             stripe_subscription_id: null,
           },
         });
+        return reply.send({ success: true });
+      }
+      return reply.send({
+        sucesss: false,
+        message: `User with id ${user.username} does not have subscription`,
+      });
+    }
+  );
+  fastify.post(
+    "/payments/update-stripe-subscription",
+    async (
+      request: FastifyRequest<{
+        Querystring: { subscriptionId: string; paymentMethodId: string };
+      }>,
+      reply: FastifyReply
+    ) => {
+      const sub: string = request["user"]["sub"];
+      const { subscriptionId, paymentMethodId } = request.query;
+
+      const user: User = await fastify.prisma.user.findUnique({
+        where: { username: sub },
+      });
+
+      if (user.stripe_subscription_id) {
+        try {
+          const customerId = user.stripe_customer_id;
+
+          // Attach the payment method to the customer first
+          await stripe.paymentMethods.attach(paymentMethodId, {
+            customer: customerId,
+          });
+
+          // Update the subscription to use this payment method
+          await stripe.subscriptions.update(subscriptionId, {
+            default_payment_method: paymentMethodId,
+          });
+        } catch (err) {
+          fastify.log.error(err);
+        }
         return reply.send({ success: true });
       }
       return reply.send({

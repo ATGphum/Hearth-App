@@ -90,6 +90,16 @@ export const LinkStripeSubscriptionToUser = (
   );
 };
 
+export const UpdateStripeSubscription = (
+  subscriptionId: string,
+  paymentMethodId: string
+) => {
+  return request(
+    `/v1/payments/update-stripe-subscription?subscriptionId=${subscriptionId}&paymentMethodId=${paymentMethodId}`,
+    "POST"
+  );
+};
+
 export const CancelStripeSubscription = () => {
   return request(`/v1/payments/cancel-stripe-subscription`, "POST");
 };

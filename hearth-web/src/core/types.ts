@@ -83,6 +83,7 @@ export interface UserExperience {
 }
 
 export interface SubscriptionDetail {
+  customer_id: string;
   subscription_id: string;
   client_secret?: string;
   frequency: string;

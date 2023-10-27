@@ -3,7 +3,10 @@ import { ReactNode, useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/react";
 import { Stripe, loadStripe } from "@stripe/stripe-js";
 import viteEnv from "../config/vite-env";
-import { LinkStripeSubscriptionToUser } from "../core/api";
+import {
+  LinkStripeSubscriptionToUser,
+  UpdateStripeSubscription,
+} from "../core/api";
 import { useCurrentUserProfile } from "../core/apiHooks";
 import { trackEvent } from "../core/analytics";
 
@@ -50,6 +53,24 @@ const PaymentGuard = ({ children }: Props) => {
     await LinkStripeSubscriptionToUser(stripeSubscriptionId, frequency);
     await userMutate();
   };
+
+  const handleUpdatePaymentMethod = async () => {
+    if (stripe) {
+      // The setup was confirmed successfully, retrieve the setup intent
+      const { setupIntent } = await stripe.retrieveSetupIntent(
+        setupIntentClientSecret ?? ""
+      );
+      const paymentMethodId = setupIntent?.payment_method;
+
+      await UpdateStripeSubscription(
+        subscriptionId ?? "",
+        typeof paymentMethodId === "string"
+          ? paymentMethodId
+          : paymentMethodId?.id ?? ""
+      );
+    }
+  };
+
   useEffect(() => {
     if (
       stripe &&
@@ -133,6 +154,8 @@ const PaymentGuard = ({ children }: Props) => {
               }
               setShowMessage(true);
             }
+
+            handleUpdatePaymentMethod();
           });
       }
       if (user)

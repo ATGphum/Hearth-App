@@ -8,12 +8,12 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import { LazyMotion, domMax, m } from "framer-motion";
 import { useEffect, useState } from "react";
+import Spinner from "../components/Spinner";
 import viteEnv from "../config/vite-env";
 import { CreatePaymentSubscription } from "../core/api";
 import { SubscriptionDetail, paymentMode } from "../core/types";
-import LoadingPage from "./LoadingPage";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
-import Spinner from "../components/Spinner";
+import LoadingPage from "./LoadingPage";
 
 const stripePromise = loadStripe(viteEnv.stripePublishableKey);
 
@@ -133,11 +133,24 @@ const CheckoutForm = ({
 
     setIsSubmitted(true);
 
+    // Submit the payment details entered by the customer
+    const { error: submitError } = await elements.submit();
+
+    if (submitError) {
+      console.error(
+        "An error occurred when validating card details",
+        submitError
+      );
+      setIsSubmitted(false);
+      return;
+    }
+
     // it may be a setupIntent, not paymentIntent, try that
     if (subscription.mode === paymentMode.payment) {
       const { error } = await stripe.confirmPayment({
         //`Elements` instance that was used to create the Payment Element
         elements,
+        clientSecret: subscription.client_secret ?? "",
         confirmParams: {
           return_url:
             viteEnv.host +
@@ -152,6 +165,7 @@ const CheckoutForm = ({
       const { error } = await stripe.confirmSetup({
         //`Elements` instance that was used to create the Payment Element
         elements,
+        clientSecret: subscription.client_secret ?? "",
         confirmParams: {
           return_url:
             viteEnv.host +
@@ -161,7 +175,11 @@ const CheckoutForm = ({
             subscription.frequency,
         },
       });
-      if (error) setIsSubmitted(false);
+
+      if (error) {
+        console.error(error);
+        setIsSubmitted(false);
+      }
     }
   };
 
