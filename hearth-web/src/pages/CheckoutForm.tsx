@@ -1,5 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import {
+  AddressElement,
   Elements,
   PaymentElement,
   useElements,
@@ -10,7 +11,7 @@ import { LazyMotion, domMax, m } from "framer-motion";
 import { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
 import viteEnv from "../config/vite-env";
-import { CreatePaymentSubscription } from "../core/api";
+import { CreatePaymentSubscription, UpdateCustomerAddress } from "../core/api";
 import { SubscriptionDetail, paymentMode } from "../core/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import LoadingPage from "./LoadingPage";
@@ -28,20 +29,22 @@ interface Props {
 
 const Checkout = ({ isOpen, onClose, priceId, couponAdded }: Props) => {
   const bg =
-    "linear-gradient(180deg, #FFF964 0%, rgba(255, 249, 100, 0.00) 90.67%), radial-gradient(41.92% 85.12% at 100% 68.31%, rgba(0, 240, 255, 0.20) 0%, rgba(0, 240, 255, 0.00) 100%), radial-gradient(48.49% 83.29% at 0% 100%, rgba(255, 199, 0, 0.50) 0%, rgba(255, 199, 0, 0.00) 100%), radial-gradient(55.85% 107.38% at 100% 0%, rgba(112, 0, 255, 0.30) 0%, rgba(0, 102, 255, 0.00) 100%), radial-gradient(50% 50% at 50% 50%, rgba(255, 0, 0, 0.32) 0%, rgba(216, 0, 0, 0.00) 100%), linear-gradient(0deg, rgba(252, 112, 68, 0.10) 0%, rgba(252, 112, 68, 0.10) 100%), linear-gradient(180deg, rgba(255, 190, 126, 0.80) 0%, rgba(255, 223, 192, 0.80) 100%)";
+    "linear-gradient(180deg, #FFF964 0%, rgba(255, 249, 100, 0) 90.67%), radial-gradient(41.92% 85.12% at 100% 68.31%, rgba(0, 240, 255, 0.20) 0%, rgba(0, 240, 255, 0.00) 100%), radial-gradient(48.49% 83.29% at 0% 100%, rgba(255, 199, 0, 0.50) 0%, rgba(255, 199, 0, 0.00) 100%), radial-gradient(55.85% 107.38% at 100% 0%, rgba(112, 0, 255, 0.30) 0%, rgba(0, 102, 255, 0.00) 100%), radial-gradient(50% 50% at 50% 50%, rgba(255, 0, 0, 0.32) 0%, rgba(216, 0, 0, 0.00) 100%), linear-gradient(0deg, rgba(252, 112, 68, 0.10) 0%, rgba(252, 112, 68, 0.10) 100%), linear-gradient(180deg, rgba(255, 190, 126, 0.80) 0%, rgb(249, 225, 193) 100%)";
   const [subscriptionDetail, setSubscriptionDetail] = useState<
     SubscriptionDetail | undefined
   >();
 
   useEffect(() => {
-    const createSubscription = async () => {
-      const { data: subscriptionDetail } = await CreatePaymentSubscription(
-        priceId,
-        couponAdded
-      );
-      setSubscriptionDetail(subscriptionDetail);
-    };
-    createSubscription();
+    if (!subscriptionDetail) {
+      const createSubscription = async () => {
+        const { data: subscriptionDetail } = await CreatePaymentSubscription(
+          priceId,
+          couponAdded
+        );
+        setSubscriptionDetail(subscriptionDetail);
+      };
+      createSubscription();
+    }
   }, []);
 
   return (
@@ -72,17 +75,16 @@ const Checkout = ({ isOpen, onClose, priceId, couponAdded }: Props) => {
         width="100%"
         display="flex"
         flexDirection="column"
-        background={"background.fleshOpaque"}
+        // background={"background.fleshOpaque"}
         zIndex={25}
-        // minHeight="100vh"
-        minHeight="100%"
+        bg={bg}
       >
         {subscriptionDetail ? (
           <Flex
-            h="100%"
+            height="fit-content"
             w="100%"
             p="1rem"
-            bg={bg}
+            // bg={bg}
             direction="column"
             gridRowGap="2rem"
           >
@@ -145,42 +147,57 @@ const CheckoutForm = ({
       return;
     }
 
-    // it may be a setupIntent, not paymentIntent, try that
-    if (subscription.mode === paymentMode.payment) {
-      const { error } = await stripe.confirmPayment({
-        //`Elements` instance that was used to create the Payment Element
-        elements,
-        clientSecret: subscription.client_secret ?? "",
-        confirmParams: {
-          return_url:
-            viteEnv.host +
-            "/?subscription_id=" +
-            subscription.subscription_id +
-            "&frequency=" +
-            subscription.frequency,
-        },
-      });
-      if (error) setIsSubmitted(false);
-    } else {
-      const { error } = await stripe.confirmSetup({
-        //`Elements` instance that was used to create the Payment Element
-        elements,
-        clientSecret: subscription.client_secret ?? "",
-        confirmParams: {
-          return_url:
-            viteEnv.host +
-            "/?subscription_id=" +
-            subscription.subscription_id +
-            "&frequency=" +
-            subscription.frequency,
-        },
-      });
+    const addressElement = elements.getElement("address");
 
-      if (error) {
-        console.error(error);
-        setIsSubmitted(false);
-      }
-    }
+    addressElement?.getValue().then(async (response1) => {
+      // Add the address to the customer first before paying
+      await UpdateCustomerAddress(
+        response1.value.address,
+        subscription.subscription_id
+      ).then(async (response2) => {
+        if (response2.status === 200) {
+          // it may be a setupIntent, not paymentIntent, try that
+          if (subscription.mode === paymentMode.payment) {
+            const { error } = await stripe.confirmPayment({
+              //`Elements` instance that was used to create the Payment Element
+              elements,
+              clientSecret: subscription.client_secret ?? "",
+              confirmParams: {
+                return_url:
+                  viteEnv.host +
+                  "/?subscription_id=" +
+                  subscription.subscription_id +
+                  "&frequency=" +
+                  subscription.frequency,
+              },
+            });
+            if (error) setIsSubmitted(false);
+          } else {
+            const { error } = await stripe.confirmSetup({
+              //`Elements` instance that was used to create the Payment Element
+              elements,
+              clientSecret: subscription.client_secret ?? "",
+              confirmParams: {
+                return_url:
+                  viteEnv.host +
+                  "/?subscription_id=" +
+                  subscription.subscription_id +
+                  "&frequency=" +
+                  subscription.frequency,
+              },
+            });
+
+            if (error) {
+              console.error(error);
+              setIsSubmitted(false);
+            }
+          }
+        } else {
+          console.error("Error updating address", response2.status);
+          setIsSubmitted(false);
+        }
+      });
+    });
   };
 
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -188,7 +205,9 @@ const CheckoutForm = ({
   return (
     <Flex direction="column" gridRowGap="1rem">
       <PaymentElement />
+      <AddressElement options={{ mode: "billing" }} />
       <Flex
+        mt="1rem"
         p="0.5rem"
         width="100%"
         bg="linear-gradient(79deg, #F89587 0%, rgba(248, 149, 135, 0.00) 39.05%), linear-gradient(262deg, #A1E0D5 1.43%, rgba(208, 216, 192, 0.00) 45.77%), #FFC89C"
