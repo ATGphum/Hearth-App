@@ -1,5 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import {
+  AddressElement,
   Elements,
   PaymentElement,
   useElements,
@@ -10,7 +11,7 @@ import { LazyMotion, domMax, m } from "framer-motion";
 import { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
 import viteEnv from "../config/vite-env";
-import { CreatePaymentSubscription } from "../core/api";
+import { CreatePaymentSubscription, UpdateCustomerAddress } from "../core/api";
 import { SubscriptionDetail, paymentMode } from "../core/types";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import LoadingPage from "./LoadingPage";
@@ -74,18 +75,10 @@ const Checkout = ({ isOpen, onClose, priceId, couponAdded }: Props) => {
         flexDirection="column"
         background={"background.fleshOpaque"}
         zIndex={25}
-        // minHeight="100vh"
         minHeight="100%"
       >
         {subscriptionDetail ? (
-          <Flex
-            h="100%"
-            w="100%"
-            p="1rem"
-            bg={bg}
-            direction="column"
-            gridRowGap="2rem"
-          >
+          <Flex w="100%" p="1rem" bg={bg} direction="column" gridRowGap="2rem">
             <Flex onClick={onClose}>
               <ArrowLeftIcon />
             </Flex>
@@ -145,42 +138,57 @@ const CheckoutForm = ({
       return;
     }
 
-    // it may be a setupIntent, not paymentIntent, try that
-    if (subscription.mode === paymentMode.payment) {
-      const { error } = await stripe.confirmPayment({
-        //`Elements` instance that was used to create the Payment Element
-        elements,
-        clientSecret: subscription.client_secret ?? "",
-        confirmParams: {
-          return_url:
-            viteEnv.host +
-            "/?subscription_id=" +
-            subscription.subscription_id +
-            "&frequency=" +
-            subscription.frequency,
-        },
-      });
-      if (error) setIsSubmitted(false);
-    } else {
-      const { error } = await stripe.confirmSetup({
-        //`Elements` instance that was used to create the Payment Element
-        elements,
-        clientSecret: subscription.client_secret ?? "",
-        confirmParams: {
-          return_url:
-            viteEnv.host +
-            "/?subscription_id=" +
-            subscription.subscription_id +
-            "&frequency=" +
-            subscription.frequency,
-        },
-      });
+    const addressElement = elements.getElement("address");
 
-      if (error) {
-        console.error(error);
-        setIsSubmitted(false);
-      }
-    }
+    addressElement?.getValue().then(async (response1) => {
+      // Add the address to the customer first before paying
+      await UpdateCustomerAddress(
+        response1.value.address,
+        subscription.subscription_id
+      ).then(async (response2) => {
+        if (response2.status === 200) {
+          // it may be a setupIntent, not paymentIntent, try that
+          if (subscription.mode === paymentMode.payment) {
+            const { error } = await stripe.confirmPayment({
+              //`Elements` instance that was used to create the Payment Element
+              elements,
+              clientSecret: subscription.client_secret ?? "",
+              confirmParams: {
+                return_url:
+                  viteEnv.host +
+                  "/?subscription_id=" +
+                  subscription.subscription_id +
+                  "&frequency=" +
+                  subscription.frequency,
+              },
+            });
+            if (error) setIsSubmitted(false);
+          } else {
+            const { error } = await stripe.confirmSetup({
+              //`Elements` instance that was used to create the Payment Element
+              elements,
+              clientSecret: subscription.client_secret ?? "",
+              confirmParams: {
+                return_url:
+                  viteEnv.host +
+                  "/?subscription_id=" +
+                  subscription.subscription_id +
+                  "&frequency=" +
+                  subscription.frequency,
+              },
+            });
+
+            if (error) {
+              console.error(error);
+              setIsSubmitted(false);
+            }
+          }
+        } else {
+          console.error("Error updating address", response2.status);
+          setIsSubmitted(false);
+        }
+      });
+    });
   };
 
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -188,7 +196,9 @@ const CheckoutForm = ({
   return (
     <Flex direction="column" gridRowGap="1rem">
       <PaymentElement />
+      <AddressElement options={{ mode: "billing" }} />
       <Flex
+        mt="1rem"
         p="0.5rem"
         width="100%"
         bg="linear-gradient(79deg, #F89587 0%, rgba(248, 149, 135, 0.00) 39.05%), linear-gradient(262deg, #A1E0D5 1.43%, rgba(208, 216, 192, 0.00) 45.77%), #FFC89C"
