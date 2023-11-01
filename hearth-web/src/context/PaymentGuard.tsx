@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 
 import { Flex } from "@chakra-ui/react";
-import { Stripe, loadStripe } from "@stripe/stripe-js";
+import { PaymentMethod, Stripe, loadStripe } from "@stripe/stripe-js";
 import viteEnv from "../config/vite-env";
 import {
   LinkStripeSubscriptionToUser,
@@ -56,11 +56,15 @@ const PaymentGuard = ({ children }: Props) => {
 
   const handleUpdatePaymentMethod = async () => {
     if (stripe) {
+      let paymentMethodId: string | PaymentMethod = "";
+
       // The setup was confirmed successfully, retrieve the setup intent
-      const { setupIntent } = await stripe.retrieveSetupIntent(
-        setupIntentClientSecret ?? ""
-      );
-      const paymentMethodId = setupIntent?.payment_method;
+      if (setupIntentClientSecret) {
+        const { setupIntent } = await stripe.retrieveSetupIntent(
+          setupIntentClientSecret ?? ""
+        );
+        paymentMethodId = setupIntent?.payment_method ?? "";
+      }
 
       await UpdateStripeSubscription(
         subscriptionId ?? "",

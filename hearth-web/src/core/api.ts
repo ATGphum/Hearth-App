@@ -1,6 +1,11 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 import viteEnv from "../config/vite-env";
-import { SubscriptionDetail, User, UserExperience } from "./types";
+import {
+  AddressElement,
+  SubscriptionDetail,
+  User,
+  UserExperience,
+} from "./types";
 
 axios.defaults.baseURL = viteEnv.apiHost;
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -97,6 +102,19 @@ export const UpdateStripeSubscription = (
   return request(
     `/v1/payments/update-stripe-subscription?subscriptionId=${subscriptionId}&paymentMethodId=${paymentMethodId}`,
     "POST"
+  );
+};
+
+export const UpdateCustomerAddress = (
+  addressElement: Partial<AddressElement>,
+  subscriptionId: string
+) => {
+  return request(
+    `/v1/payments/update-billing-address?subscriptionId=${subscriptionId}`,
+    "POST",
+    {
+      data: addressElement,
+    }
   );
 };
 

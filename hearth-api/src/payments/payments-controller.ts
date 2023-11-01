@@ -3,6 +3,7 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import Stripe from "stripe";
 import fastifyEnv from "../config/fastify-env.js";
 import { User } from "@prisma/client";
+import { addressElementSchema } from "./payments-serializers.js";
 
 const stripe = new Stripe(fastifyEnv.stripeSecretKey, { apiVersion: null });
 /**
@@ -52,6 +53,12 @@ export default async function PaymentsController(fastify: FastifyInstance) {
 
         let trialDays = 0;
         if (!user.trial_completed) trialDays = 7;
+
+        // Below checks if the customer has an address on file. If there is, we enable automatic tax calculation
+        const customerObject = await stripe.customers.retrieve(customerId);
+        const address =
+          "address" in customerObject ? customerObject.address : null;
+
         const subscription = await stripe.subscriptions.create({
           customer: customerId,
           items: [
@@ -59,6 +66,7 @@ export default async function PaymentsController(fastify: FastifyInstance) {
               price: priceId,
             },
           ],
+          automatic_tax: { enabled: address !== null },
           payment_behavior: "default_incomplete",
           payment_settings: { save_default_payment_method: "on_subscription" },
           expand: ["latest_invoice.payment_intent"],
@@ -173,14 +181,93 @@ export default async function PaymentsController(fastify: FastifyInstance) {
         try {
           const customerId = user.stripe_customer_id;
 
-          // Attach the payment method to the customer first
-          await stripe.paymentMethods.attach(paymentMethodId, {
-            customer: customerId,
-          });
+          if (paymentMethodId !== "") {
+            // Attach the payment method to the customer first
+            await stripe.paymentMethods.attach(paymentMethodId, {
+              customer: customerId,
+            });
+          }
+
+          // Grab the subscription details first before updating
+          const subscription =
+            await stripe.subscriptions.retrieve(subscriptionId);
+
+          // Enable automatic tax calculation if not enabled
+          if (!subscription.automatic_tax.enabled) {
+            await stripe.subscriptions.update(subscriptionId, {
+              automatic_tax: {
+                enabled: true,
+              },
+            });
+          }
 
           // Update the subscription to use this payment method
+          if (!subscription.default_payment_method) {
+            await stripe.subscriptions.update(subscriptionId, {
+              default_payment_method: paymentMethodId,
+            });
+          }
+        } catch (err) {
+          fastify.log.error(err);
+        }
+        return reply.send({ success: true });
+      }
+      return reply.send({
+        sucesss: false,
+        message: `User with id ${user.username} does not have subscription`,
+      });
+    }
+  );
+  fastify.post(
+    "/payments/update-billing-address",
+    {
+      schema: {
+        body: addressElementSchema,
+      },
+    },
+    async (
+      request: FastifyRequest<{
+        Querystring: { subscriptionId: string };
+        Body: {
+          name: string;
+          city: string;
+          country: string;
+          line1: string;
+          line2: string;
+          postal_code: string;
+          state: string;
+        };
+      }>,
+      reply: FastifyReply
+    ) => {
+      const sub: string = request["user"]["sub"];
+      const { subscriptionId } = request.query;
+
+      const user: User = await fastify.prisma.user.findUnique({
+        where: { username: sub },
+      });
+
+      if (subscriptionId) {
+        try {
+          const customerId = user.stripe_customer_id;
+
+          // Update the address of a customer object in stripe
+          await stripe.customers.update(customerId, {
+            address: {
+              city: request.body.city,
+              country: request.body.country,
+              line1: request.body.line1,
+              line2: request.body.line2,
+              postal_code: request.body.postal_code,
+              state: request.body.state,
+            },
+          });
+
+          // Enable automatic tax calculation if not enabled
           await stripe.subscriptions.update(subscriptionId, {
-            default_payment_method: paymentMethodId,
+            automatic_tax: {
+              enabled: true,
+            },
           });
         } catch (err) {
           fastify.log.error(err);
